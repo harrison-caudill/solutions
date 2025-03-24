@@ -53,7 +53,7 @@ clean:
 images:
 	for f in $(find . -type f -name *.dxf | grep -v _trimmed.png$) ; do n=$(BUILD)/`echo $f | sed -e 's/.dxf$/.png/'` ; echo make $n ; done
 
-jackson: .dummy_builddir images
+jackson: .dummy_builddir
 	bin/qcad_export.py -s jackson -d $(BUILD)
 	echo "\def\\\\bookName{jackson}" > $(BUILD)/bookParams.tex
 	echo "\def\\\\buildPath{$(BUILD)}" >> $(BUILD)/bookParams.tex
