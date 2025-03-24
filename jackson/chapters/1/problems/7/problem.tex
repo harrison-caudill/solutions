@@ -6,7 +6,7 @@ radius. Show that the capacitance per unit length is given
 approximately by
 
 \begin{equation}
-  C \approx \pi \epsilon_0 \left( ln \frac d a \right)^{-1}
+  \frac C L \approx \pi \epsilon_0 \left( ln \frac d a \right)^{-1}
 \end{equation}
 
 
@@ -23,9 +23,7 @@ the text of the question, that the \emph{centers} of the condutors
 will be separated by a distance $d$ rather than the conductors
 themselves being separated by a distance $d$.
 
-\begin{figure}
-  \label{fig::1::7::setup}
-
+\begin{figure}[h]
   \begin{center}
 
     \includegraphics[width=\linewidth]{setup.png}
@@ -36,5 +34,119 @@ themselves being separated by a distance $d$.
       surfaces can be drawn around each conductor to determine E-Field
       strength arising from each conductor's charge.}
 
+    \label{fig::1::7::setup}
+
   \end{center}
 \end{figure}
+
+Starting with the characteristic equation for a capacitor
+\begin{equation}
+  C = \frac q V
+\end{equation}
+
+then with the definition of $V$
+
+\begin{equation}
+    V \equiv \int_P \vec{E} \cdot d\vec{l}
+\end{equation}
+
+We know from the physics of the problem that the Electric field
+effects from both conductors are additive.  Youc an provie this to
+yourself by drawing two Gaussian surfaces and being mindful of the
+signs of both the charge and the field direction.  Once you are
+sufficiently convinced that the effects are additive, we can begin the
+integral to find $V_1$ and $V_2$ (with $V$ of course being equal to
+$V_1 + V_2$).
+
+\begin{figure}[h]
+  \begin{center}
+
+    \includegraphics[width=\linewidth]{surfaces.png}
+
+    \caption{Gaussian surfaces can be drawn along the length of the
+      conductors to find the E-field contribution from each conductor.
+      Each integral is valid from the boundary of one condutor to the
+      boundary of the other.}
+
+    \label{fig::1::7::gauss}
+
+  \end{center}
+\end{figure}
+
+
+Starting with Gauss' law (eq 1.9 in the book)
+
+\begin{equation}
+  \oint_S \vec{E} \cdot d\vec{a} = \frac{q_{enc}}{\epsilon_0}
+\end{equation}
+
+\begin{equation}
+  \label{eq::1::7::e}
+  2 \pi r L E = \frac{q_{enc}}{\epsilon_0}
+  \Rightarrow E = \frac{q_{enc}}{2 \pi L \epsilon_0} \frac 1 r
+\end{equation}
+
+\begin{equation}
+  \label{eq::1::7::v1}
+  V_1 = \int_{a_1}^{d-a_2}{\vec{E} \cdot d\vec{l}}
+  = \frac{q}{2 \pi L \epsilon_0} \int_{a_1}^{d-a_2}{\frac{dr}{r}}
+  = \frac{q}{2 \pi L \epsilon_0} \left( ln(d-a_2) - ln(a_1)\right)
+  = \frac{q}{2 \pi L \epsilon_0} ln\left( \frac{d-a_2}{a_1} \right)
+\end{equation}
+
+Subsituting in the variables for $V_2$, we get
+
+\begin{equation}
+  \label{eq::1::7::v2}
+  V_2 = \int_{a_2}^{d-a_1}{\vec{E} \cdot d\vec{l}}
+  = \frac{q}{2 \pi L \epsilon_0} \int_{a_2}^{d-a_1}{\frac{dr}{r}}
+  = \frac{q}{2 \pi L \epsilon_0} \left( ln(d-a_1) - ln(a_2y)\right)
+  = \frac{q}{2 \pi L \epsilon_0} ln\left( \frac{d-a_1}{a_2} \right)
+\end{equation}
+
+Solving for $V$, we find that
+
+\begin{equation}
+  V = V_1 + V+2
+  = \frac{q}{2 \pi L \epsilon_0} \left[ ln\left( \frac{d-a_2}{a_1} \right) + ln\left( \frac{d-a_1}{a_2} \right) \right]
+  = \frac{q}{2 \pi L \epsilon_0} ln\left( \frac{(d-a_2)(d-a_1)}{a_1a_2} \right)
+\end{equation}
+
+Substituting in the geometric mean of $a_1$ and $a_2$ we get
+
+\begin{equation}
+  a = (a_1a_2)^{(1/2)}
+  \Rightarrow V = \frac{q}{2 \pi L \epsilon_0} ln\left( \frac{(d-a_2)(d-a_1)}{a^2} \right)
+\end{equation}
+
+Since the problem specifies that $d \gg a_1$ and $d \gg a_2$, we can
+simplify the expression for $V$ to
+
+\begin{equation}
+  V \approx \frac{q}{2 \pi L \epsilon_0} ln\left( \frac{(d)(d)}{a^2} \right)
+\end{equation}
+
+Moving the $\frac 1 2$ into the ln, we see that
+
+\begin{equation}
+  V \approx \frac{q}{\pi L \epsilon_0} ln\left( \frac{d}{a} \right)
+\end{equation}
+
+Subsituting our expression for $V$ into the definition of $C$ and we get
+
+\begin{equation}
+  C = \frac q V
+  \approx \frac{q}{\frac{q}{\pi L \epsilon_0} ln\left( \frac d a \right)}
+  = \pi L \epsilon_0 ln\left( \frac d a \right)^{-1}
+\end{equation}
+
+Pulling out the factor of L, we find that
+
+\begin{equation}
+  \frac C L
+  \approx \pi \epsilon_0 \left( ln \frac d a \right)^{-1}_\blacksquare
+\end{equation}
+
+
+
+
