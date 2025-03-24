@@ -1,0 +1,93 @@
+%%\documentclass[12pt]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Packages                                                                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\usepackage{fullpage}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\usepackage{tikz}
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{hyphenat}       % exercise some control over hyphenations
+\usepackage{fancyhdr}       % Header/Footer control
+\usepackage{etoc}           % We need Tables of Contents in Volumes
+\usepackage[table]{xcolor}  % Alternate row shading in tables
+\usepackage{acronym}        % We use a lot of these
+\usepackage{longtable}      % We want a multi-page table
+\usepackage{fancyref}       % Internal references with Figure/Section/...
+\usepackage{ragged2e}       % Be nice to have some control on alignment
+\usepackage[absolute]{textpos}        % classified markers on the edges
+\usepackage{rotating}       % classified markers should be vertical
+\usepackage{calc}
+\usepackage{transparent}
+\usepackage{xfrac}
+\usepackage{hyperref}
+
+
+\usepackage{geometry}
+\usepackage{changepage}
+\usepackage{wasysym}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title Page                                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatletter
+\def\subtitle#1{\gdef\@subtitle{#1}}
+\def\@subtitle{\@latex@error{No \noexpand\subtitle given}\@ehc}
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BigTable                                                                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{bigTable}[1]{
+  \begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \rowcolors{2}{gray!25}{white}
+    \begin{longtable}{#1}
+}{
+    \end{longtable}
+    \renewcommand{\arraystretch}{1}
+  \end{center}
+}
+
+\newcommand{\headerCell}[1]{
+  \multicolumn{1}{c}{
+    {\bf #1}
+  }
+}
+
+\newcommand{\multiRowCell}[1]{
+  \begin{center}
+    {\bf #1}
+  \end{center}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Document Configuration                                                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\geometry{
+  letterpaper,
+  top=.75in,
+  bottom=.75in,
+  left=.75in,
+  right=.75in,
+}
+
+\widowpenalty=600
+\clubpenalty=200
