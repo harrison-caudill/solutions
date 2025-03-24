@@ -1,0 +1,617 @@
+#!/bin/bash
+
+###############################################################################
+# Functions                                                                   #
+###############################################################################
+
+if [ -d "${HOME}/.local" ] && [ -e "${HOME}/.local/func.${USER}.${hostname}" ] ; then
+    source "${HOME}/.local/func.${USER}.${hostname}" > /dev/null 2>&1
+fi
+
+if [ -d "${HOME}/.local" ] && [ -e "${HOME}/.local/func.all" ] ; then
+  source "${HOME}/.local/func.all" > /dev/null 2>&1
+fi
+
+function random_bytes {
+    local help=0
+    local usage=0
+    local OPTARG=
+    local OPTIND=
+    local args="b:huw:"
+
+    local bytes=16
+    local width=0
+    local dev="/dev/random"
+
+    while getopts "${args}" option ; do
+	case $option in 
+	    b) bytes="${OPTARG}" ;;
+	    h) help=1 ;;
+	    u) dev="/dev/urandom" ;;
+	    w) width="${OPTARG}" ;;
+	esac
+    done
+
+    if [ ${help} -eq 0 ] ; then
+	if [ 0 -ge ${bytes} -o 0 -gt ${width} ] ; then
+	    echo "The Bytes (${bytes}) and Width (${width}) fields"
+	    echo "MUST be non-negative, and Bytes must be positive"
+	    usage=1
+	fi
+    fi
+
+    if [ ${help} -eq 1 -o ${usage} -eq 1 ]  ; then
+	cat << USAGE
+
+${FUNCNAME} [ -h ] [ -b <bytes> ] [ -w <width> ]
+
+  Generates random bytes as a single string.
+
+  -b <bytes>: defaults to 16
+  -h: print this usage statement
+  -u: use the non-blocking urandom device
+  -w <width>: prints in a block of width <width> (0 means one-line)
+
+USAGE
+    [ ${help} -eq 1 ] && return 0 || return -1
+  fi
+
+    # gather the raw bytes
+    local bpl=16
+    local lines=$(( ${bytes}/${bpl} ))
+    local rem=$(( ${bytes}%${bpl} ))
+    [ ${rem} -ne 0 ] && (( lines++ ))
+    local l_a="$((${lines}+1))"
+    local l_b="$((${lines}+2))"
+    local hex="$(dd if=${dev} bs=${bytes} count=1 2>/dev/null | hexdump -C | sed -e ${l_a},${l_b}\ d | cut -b 10-58 | tr '\n' ' ' | sed -e 's/ //g')"
+
+    if [ ${width} -eq 0 ] ; then
+	echo ${hex}
+    else
+	while [ -n "${hex}" ] ; do
+	    local part="$(echo ${hex} | dd bs=${width} count=1 2>/dev/null)"
+	    echo "${part}"
+	    hex="$(echo ${hex} | dd bs=1 skip=${width} 2>/dev/null)"
+	done
+    fi
+}
+
+function mk {
+  if [ -n "$2" ] ; then
+    awk -F$2 "{print \$$1}"
+  else
+    awk "{print \$$1}"
+  fi
+}
+
+function clean {
+  local backup=1
+  local python=0
+  local error=1
+  local help=0
+  local print=1
+  local noexec=0
+  local path="."
+  local recursive=0
+  local usage=0
+  local OPTARG=
+  local OPTIND=
+  local args="behnP:pqr"
+
+  while getopts "${args}" option ; do
+    case $option in 
+      b) error=0 ;;
+      e) backup=0 ;;
+      h) help=1 ;;
+      n) noexec=1 ;;
+      P) path="${OPTARG}" ;;
+      p) python=1 ;;
+      q) print=0 ;;
+      r) recursive=1 ;;
+    esac
+  done
+
+  if [ ${help} -ne 1 ] ; then
+    if [ ${noexec} -eq 1 -a ${print} -ne 1 ] ; then
+      echo "Quiet and Print-Only cannot be used at the same time."
+      usage=1
+    fi
+    if [ ${error} -ne 1 -a ${backup} -ne 1 ] ; then
+      echo "Error-Only and Backup-Only cannot be used at the same time."
+      usage=1
+    fi
+    if [ ! -d ${path} ] ; then
+      echo "Path does not exist."
+      usage=1
+    fi
+  fi
+
+  if [ ${help} -eq 1 -o ${usage} -eq 1 ]  ; then
+    cat << USAGE
+
+${FUNCNAME} [ -q ] [ -p ] [ -h ] [ -r ] [ -e ] [ -b ] [ -n ] [ -P <path> ]
+
+  Cleans the emacs backup and error files.
+
+  -b: backup files only
+  -e: error files only
+  -h: print this usage statement
+  -p: clean up python files as well
+  -n: do not execute, just print
+  -P <path>: Use the specified path (defaults to '.')
+  -q: execute only, do not print
+  -r: recursively clean
+
+USAGE
+    [ ${help} -eq 1 ] && return 0 || return -1
+  fi
+
+  local cmd=(find "${path}")
+  if [ ${recursive} -ne 1 ] ; then
+    cmd+=(-maxdepth 1)
+  fi
+  cmd+=(-type f)
+
+
+
+  regex="^"
+
+  if [ ${backup} -eq 1 -a ${error} -eq 1 ] ; then
+    regex="${regex}.*~|#.*#"
+  elif [ ${backup} -eq 1 ] ; then
+    regex="${regex}.*~"
+  else
+    regex="${regex}#.*#"
+  fi
+
+  if [ ${python} -eq 1 ] ; then
+    regex="${regex}$|.*\.pyc$|.*\.pyo$"
+  fi
+
+  IFS=$'\n'
+  local files="$(${cmd[@]})"
+  for f in $files ; do
+     [ $(echo "${f}" | egrep "${regex}") ] || continue
+     if [ ${print} -eq 1 ] ; then
+       echo "${f}"
+     fi
+     if [ ${noexec} -ne 1 ] ; then
+       yes | /bin/rm -f "${f}" > /dev/null 2>&1
+     fi
+   done
+
+  return 0
+}
+
+function sanitize_verbosity {
+  local verb=$1
+  case "${verb}" in 
+    0) verb=0 ;;
+    1) verb=1 ;;
+    2) verb=2 ;;
+    *) verb=1 ;;
+  esac
+  [ -n "${__g_verb}" ] && verb="${__g_verb}"
+  echo ${verb}
+}
+
+function fulldir {
+  local start=$1
+  local dir="$(dirname ${start})"
+  if [ -z "${dir}" ] ; then
+    pwd
+  elif [ "${dir:0:1}" == "/" ] ; then
+    echo "${dir}"
+  else
+    echo "$(pwd)/${dir}"
+  fi
+  return 0
+}
+
+function do_exec_start {
+  local msg=$1
+  local verb="$(sanitize_verbosity $2)"
+  if [ ${verb} -ge 2 ] ; then
+      printf "  %s" "${msg}"
+  elif [ ${verb} -gt 0 ] ; then
+      printf "  %s..." "${msg}"
+  fi
+}
+
+function do_exec_success {
+  printf "Success\n"
+}
+
+function do_exec_failure {
+  printf "Failure\n"
+}
+
+function do_exec_end {
+  local ret=$1
+  local verb="$(sanitize_verbosity $2)"
+  if [ ${ret} -eq 0 ] ; then
+    [ ${verb} -gt 0 ] && do_exec_success
+    return 0
+  else
+    [ ${verb} -gt 0 ] && do_exec_failure
+    return 1
+  fi
+}
+
+function do_exec {
+  local cmd=$1
+  local msg=$2
+  local verb="$(sanitize_verbosity $3)"
+
+  do_exec_start "${msg}" ${verb}
+  if [ ${verb} -ge 2 ] ; then
+      echo -n " (${cmd})..."
+      if [ ${verb} -ge 3 ] ; then
+          ${cmd}
+      else
+          ${cmd} > /dev/null 2>&1
+      fi
+  else
+    ${cmd} > /dev/null 2>&1
+  fi
+  do_exec_end $? ${verb}
+
+  return $?
+}
+
+function n_threads {
+  local n="$(cat /proc/cpuinfo | grep ^processor | wc -l)"
+  [ $? -eq 0 ] || return 1
+
+  (( n = (n * 2) + 1 ))
+
+  echo "${n}"
+
+  return 0
+}
+
+function is_64 {
+  if [ -n "$(uname -a | grep -i x86_64)" ] ; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+function rand_bytes {
+
+    # GetOpt vars
+    local help=0
+    local usage=0
+    local OPTARG=
+    local OPTIND=
+    local args="b:dhrw:"
+
+    # input vars
+    local bytes=4
+    local width=8
+    local decimal=0 # unimplemented
+    local dev="/dev/urandom"
+
+    while getopts "${args}" option ; do
+	case $option in 
+	    b) bytes="${OPTARG}" ;;
+	    d) decimal=1 ;;
+	    h) help=1 ;;
+	    r) dev="/dev/random" ;;
+	    w) width="${OPTARG}" ;;
+	esac
+    done
+
+    if [ ${help} -ne 1 ] ; then
+	if [ ${decimal} -eq 1 ] ; then
+	    echo "We don't currently support the decimal-only version"
+	    usage=1
+	fi
+
+	if [ ${width} -lt 0 ] ; then
+	    echo "Widths should be positive"
+	    usage=1
+	fi
+
+	if [ ${bytes} -lt 0 ] ; then
+	    echo "Bytes should be positive"
+	    usage=1
+	fi
+
+    fi
+
+    if [ ${help} -eq 1 -o ${usage} -eq 1 ]  ; then
+	cat << USAGE
+
+${FUNCNAME}
+  [ -b <n-bytes> ]
+  [ -d ]
+  [ -h ]
+  [ -r ]
+  [ -w <width> ]
+
+  Displays <n-bytes> random bytes to the screen, <width> bytes per line.
+
+    -b <n-bytes>: default is 4
+    -d: not-implemented (decimal)
+    -h: displays this help message
+    -w <width>: default is 8
+    -r: use /dev/random rather than /dev/urandom
+
+USAGE
+	[ ${help} -eq 1 ] && return 0 || return -1
+    fi
+
+    # gather the raw hex data
+    local raw_lines=$(dd if=/dev/urandom bs=${bytes} count=1 2>/dev/null | hexdump -C | sed -e 's/ //g' | awk -F\| '{print $1}' | cut -b 9-40)
+    local raw=""
+    for line in $raw_lines ; do
+	raw="${raw}${line}"
+    done
+
+    # format the output
+    if [ ${width} -eq 0 ] ; then
+	echo "${raw}"
+    else
+	while [ -n "${raw}" ] ; do
+	    echo "${raw}" | cut -b 1-${width}
+	    local start=$(( ${width}+1 ))
+	    local end=$(( ${bytes}*2  ))
+	    if [ ${start} -lt ${end} ] ; then
+		raw="$(echo ${raw} | cut -b ${start}-${end})"
+	    else
+		raw=""
+	    fi
+	done
+    fi
+}
+
+if [ -f "${HOME}/.git.sh" ] ; then
+    . "${HOME}/.git.sh"
+fi
+
+function _optcomplete()
+{
+    COMPREPLY=(                           \
+        $(                                \
+            COMP_LINE=$COMP_LINE          \
+            COMP_POINT=$COMP_POINT        \
+            COMP_WORDS="${COMP_WORDS[*]}" \
+            COMP_CWORD=$COMP_CWORD        \
+            OPTPARSE_AUTO_COMPLETE=1      \
+            $1                            \
+        )                                 \
+    )
+}
+complete -F _optcomplete ec2
+
+function uuid()
+{
+    echo 'require "securerandom" ; SecureRandom.uuid' | irb  | tail -n 2 | head -n 1 | sed -e 's/"//g'
+}
+
+function canon_dirname {
+
+    # if we pass in nothing, spit out nothing
+    [ -z "${1}" ] && return
+    
+    # dirname isn't smart enough to check if the argument is already a
+    # directory, it just gives you one up (unless you give it /, of
+    # course)
+    local dir=$(dirname "$1")
+
+    # initially, we assume that the argument is a file path, not a
+    # directory path.  We therefore assume that we will have to change
+    # to the dirname from above to discover the canonical directory
+    # path
+    local tgt="${dir}"
+
+    # if we are proven wrong, and have been passed a directory, then
+    # the target is adjusted accordingly
+    if [ -d "${1}" ] ; then
+        tgt="$1"
+    fi
+
+    # now that we know where to go, we go there, echo the canonical
+    # path, and go back
+    pushd "${tgt}" > /dev/null 2>&1
+    pwd
+    popd > /dev/null 2>&1
+}
+
+function canon_dirname {
+
+    # if we pass in nothing, spit out nothing
+    [ -z "${1}" ] && return
+    
+    # dirname isn't smart enough to check if the argument is already a
+    # directory, it just gives you one up (unless you give it /, of
+    # course)
+    local dir=$(dirname "$1")
+    local base=$(basename "$1")
+
+    # initially, we assume that the argument is a file path, not a
+    # directory path.  We therefore assume that we will have to change
+    # to the dirname from above to discover the canonical directory
+    # path
+    local tgt="${dir}"
+
+    # if we are proven wrong, and have been passed a directory, then
+    # the target is adjusted accordingly
+    if [ -d "${1}" ] ; then
+        tgt="$1"
+    fi
+
+    # now that we know where to go, we go there, echo the canonical
+    # path, and go back
+    pushd "${tgt}" > /dev/null 2>&1
+    pwd
+    popd > /dev/null 2>&1
+}
+
+function canon_path {
+    if [ -d "$1" ] ; then
+        canon_dirname "$@"
+    else
+        echo $(canon_dirname "$@")/$(basename "$@")
+    fi
+}
+
+function read_y_n {
+    local result=1
+    while true ; do
+        read -p "$1 [Yy/Nn]? " -n 1
+        echo
+        if [[ $REPLY =~ ^[YyNn]$ ]] ; then
+            [[ $REPLY =~ ^[Yy]$ ]] && result=0
+            break
+        else
+            echo "Please respond with [YyNn]"
+        fi
+    done
+
+    [ ${result} -eq 0 ] && return 0 || return 1
+}
+
+function sd_flash {
+    local help=0
+    local usage=0
+    local OPTARG=
+    local OPTIND=
+    local args="h"
+
+    while getopts "${args}" option ; do
+	case $option in
+	    h) help=1 ;;
+	esac
+    done
+
+    # Gather the image and device arguments
+    local img="${@:$OPTIND:1}"
+    shift 1
+    local dev="${@:$OPTIND:1}"
+
+    [ -n "${dev}" ] && dev="$(canon_path ${dev})"
+
+    if [ ${help} -eq 0 ] ; then
+	if [ ! -e "${dev}" ] ; then
+	    echo "Missing valid device: >${dev}<"
+	    usage=1
+	fi
+
+	if [ ! -f "${img}" ] ; then
+	    echo "Missing valid image: >${img}<"
+	    usage=1
+	fi
+
+        local root_dev="$(mount | grep ' / ' | fmt -1 | head -n 1)"
+
+        # just in case we're on mac and using rdisk instead of disk
+        local test_dev="$(echo ${dev} | sed -e 's/rdisk/disk/g')"
+
+        echo ${root_dev} | grep -q ${test_dev}
+        if [ $? -eq 0 ] ; then
+            echo "DANGER BILL WILLIAMSON"
+            echo "Refusing to flash what looks like the root dev"
+            echo "Root FS Dev: ${root_dev}"
+            usage=1
+        fi
+
+        # If we're on mac, make sure we're using rdisk, not disk
+        echo $OSTYPE | grep -q darwin*
+        if [ $? -eq 0 ] ; then
+            if [ -n "${dev}" ] ; then
+                if [[ "$(basename ${dev})" != "rdisk*" ]] ; then
+                    echo "${dev}" | egrep -q '^/dev/rdisk[0-9]+$'
+                    if [ $? -ne 0 ] ; then
+                        echo "You look like you're on a MAC, but not using /dev/rdisk*"
+                        usage=1
+                    fi
+                fi
+            fi
+        fi
+    fi
+
+    if [ ${help} -eq 1 -o ${usage} -eq 1 ]  ; then
+	cat << USAGE
+
+${FUNCNAME} [ -h ] <image> <device>
+
+  Flashes an SD Card
+
+  -h: print this usage statement
+
+USAGE
+        [ ${help} -eq 1 ] && return 0 || return -1
+    fi
+
+    # get sudo
+    echo "  Obtaining sudo"
+    sudo echo -n
+    [ $? -eq 0 ] || return
+
+    # umount everything
+    echo "  Unmounting Partitions"
+    while mount | grep -q "^${test_dev}" ; do
+        if [ $? -eq 0 ] ; then
+            local mnt=$(mount \
+                        | $(which grep) "^${test_dev}" \
+                        | awk -F\( {'print $1'} \
+                        | cut -f 3- -d\  \
+                        | sed -e 's/[[:space:]]*$//' \
+                        | head -n 1 \
+                        | rev \
+                        | cut -f 3- -d\  \
+                        | rev)
+            echo "FS Currently Mounted on Target Disk: " $mnt
+            read_y_n "Unmount and Continue"
+            if [ $? -eq 0 ] ; then
+                case ${OSTYPE} in
+
+                    darwin*)
+                        diskutil umount "${mnt}"
+                    ;;
+
+                    *)
+                        sudo umount "${mnt}"
+                    ;;
+                esac
+                [ $? -ne 0 ] && return 1
+            else
+                echo "Aborting"
+                return 0
+            fi
+        fi
+    done
+
+    echo "  Flashing Image"
+    sudo dd if=${img} of=${dev} bs=$((2**20))
+}
+
+function ccount {
+    file="$1"
+
+    local color="$(gs -o - -sDEVICE=inkcov $1 | grep -v "^ 0.00000  0.00000  0.00000" | grep "^ " | wc -l)"
+    local total="$(pdfinfo $1 | grep Pages:)"
+    printf "%4d / %-4d Color Pages" "${color}" "{total}"
+    
+    # for page in $(identify -density 12 -format '%p ' "$file") ; do
+    #     if convert "$file[$((page-1))]" -colorspace RGB -unique-colors txt:- | sed -e 1d | egrep -q -v ': \(\s*([0-9]*),\s*\1,\s*\1' ; then
+    #         echo $page
+    #     fi
+    # done
+}
+
+function enscripty {
+    local n=${#@}
+    local e=$((${n} - 2))
+    local s=$((${n} - 1))
+    local last=${@:${n}:1}
+    echo "${last}" | grep -q pdf$
+    if [ $? -eq 0 ] ; then
+        enscript ${@:1:${e}} -o - | ps2pdf - ${last}
+    else
+        enscript ${@:1:${e}} -o - | ps2pdf - - | lp -d ${last}
+    fi
+}
