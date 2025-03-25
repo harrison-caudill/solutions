@@ -1,0 +1,137 @@
+\begin{question}
+Use Gauss's theorem [and (1.21) if necessary] to prove the following:
+
+  \begin{enumerate}[label=\alph*]
+
+    \item Any excess charge placed on a conductor must lie entirely on
+      its surface. (A conductor by definition contains charges capable
+      of moving freely under the action of applied electric fields.)
+
+    \item A closed, hollow conductor shields its interior from fields
+      due to charges outside, but does not shield its exterior from
+      the fields due to charges placed inside it.
+
+    \item The electric field at the surface of a conductor is normal
+      to the surface and has a magnitude $\sigma / \epsilon_0$, where
+      $\sigma$ is the charge density per unit area on the surface.
+
+  \end{enumerate}
+
+\end{question}
+
+These problems seem trivial at first glance, but really aren't.  To
+understand why, let us first examine Gauss' law:
+\begin{equation}
+  \oint_S \vec{E} \cdot d\vec{a} = \frac{q_{enc}}{\epsilon_0}
+\end{equation}
+
+While Gauss' law does provide insight into E fields from charges
+within the surface, it does not provide any insight into E field
+magnitudes from charges outside of the surface.
+
+\subsubsection*{a) Charges on the Surface}
+
+\begin{quote}
+Any excess charge placed on a conductor must lie entirely on its
+surface. (A conductor by definition contains charges capable of moving
+freely under the action of applied electric fields.)
+\end{quote}
+
+Starting with equation 1.1
+
+\begin{equation}
+\vec{F} = q\vec{E}
+\end{equation}
+
+If a Gaussian surface were to be drawn anywhere entirely within the
+conductor (e.g. \emph{just} inside) then it would imply a non-zero
+E-field contained within the conductor.  Since a conductor, by
+definition, permits charges to move freely in response to the presence
+of an E field, we know that any correct arrangement will involve
+stationary charges in equilibrium.
+
+With that stipulation, there are, then, exctly two scencarios (and one
+superposition) to consider: all of the charges concentrated on the
+interior surface and the charges concentrated on the exterior surface.
+
+If we draw a Gaussian surface \emph{just} inside the conductor so as
+to just encompass the inner surface, then any charge would result in a
+net E field right at the inner surface.  Since all of the excess
+charges would, by definition, be the same they wold repel each other.
+This mutual repulsion will force the charges to move into the middle.
+
+Since the middle of the conductor has already been shown to be
+unavailable, that leaves only the external surface.  A Gaussian
+surface drawn just under the exterior surface would have no charge
+within, and thus the E field would be implying no forces on the
+charges.
+
+\subsubsection*{b) Hollow Conductor Charge Shielding}
+
+\begin{quote}
+A closed, hollow conductor shields its interior from fields due to
+charges outside, but does not shield its exterior from the fields due
+to charges placed inside it.
+\end{quote}
+
+While Gauss' law very specifically \emph{does not} provide information
+about external E fields, it \emph{does} allow us to show (as in part a
+above) that the charges lie entirely on the surface.  Because the
+charges would be under acceleration in the presence of a net force,
+and we stipulate that the system is in equilibrium, we know that the
+net force on the charges is 0, therefor we know that the local E field
+around the charges on the surface is 0.  With a local field of
+approximately 0, and no enclosed charge, we know that the interiror
+field will be 0.
+
+The second part is easy to show.  Any Gaussian surface drawn inside
+the shell and around the enclosed charge will be non-zero and thus the
+shell would fail to shield against any enclosed charge.
+
+\subsubsection*{c) Local E Field is Perpendicular to the Surface}
+
+\begin{quote}
+The electric field at the surface of a conductor is normal to the
+surface and has a magnitude $\sigma / \epsilon_0$, where $\sigma$ is
+the charge density per unit area on the surface.
+\end{quote}
+
+We start by drawing a small loop intersecting the surface of a charged
+conductor, as showin in figure \ref{fig:1:1:loopy}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=4in]{perpendicular.png}
+  \caption{A closed loop intersecting the exterior surface of a
+    charged conductor.}
+\label{fig:1:1:loopy}
+\end{figure}
+
+Using Equation 1.21
+
+\begin{equation}
+  \oint_S \vec{E} \cdot d\vec{l} = 0
+\end{equation}
+
+we can see that the loop integral in figure \ref{fig:1:1:loopy} must
+evaluate to 0.  Since the E field inside the conductor is 0, we know
+that the integral along the segment C is 0.  Since the loop can be
+drawn arbitrarily small, we can use local linearity to show that B and
+D are equal in magnitude and opposite in sign.  For the loop integral
+as a whole to evaluate to 0, then, the A segment must also be 0.
+Since the A and C segments are necessarily 0, then the E field must be
+perpendicular to the surface.
+
+To show the magnitude of the E field, we once again use Gauss' law.  A
+Gaussian surface with upper surface area $A$.  In that case
+
+\begin{equation}
+  \oint_S{\vec{E} \cdot d\vec{A} = q_{enc} / \epsilon_0}
+  \Rightarrow E = \frac{q_{enc}}{A} \frac{1}{\epsilon_0}
+\end{equation}
+
+Since $q = \sigma A$ we can rewrite it as
+
+\begin{equation}
+  E = \frac{\sigma}{\epsilon_0} _\blacksquare
+\end{equation}
