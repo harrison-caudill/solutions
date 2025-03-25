@@ -37,11 +37,17 @@ class Converter(object):
         dstpath = os.path.realpath(dstpath)
 
         extant = os.path.isfile(dstpath)
-        if extant and self.overwrite:
-            print(f'  Overwriting: {relpath}')
-        elif extant and not self.overwrite:
-            print(f'  Skipping: {relpath}')
-            return
+
+        if extant:
+            srcstat = os.stat(srcpath)
+            dststat = os.stat(dstpath)
+            if srcstat.st_mtime > dststat.st_mtime:
+                print(f'  Updating: {relpath}')
+            elif self.overwrite:
+                print(f'  Overwriting: {relpath}')
+            else:
+                print(f'  Skipping: {relpath}')
+                return
         else:
             print(f'  Converting: {relpath}')
 
