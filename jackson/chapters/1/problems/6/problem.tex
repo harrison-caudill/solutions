@@ -30,3 +30,261 @@
 
 
 
+\subsubsection*{a) Capacitance of Parallel Plates}
+\begin{quote}
+  Using Gauss's law, calculate the capacitance of two large, flat,
+  conducting sheets of area $A$, separated by a small distance $d$
+\end{quote}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=2in]{a_setup}
+    \caption{Two parallel plates of area $A$ and separated by a
+      distance $d$ where $A^{1/2} \gg d$}
+    \label{fig:1:6:a:setup}
+  \end{center}
+\end{figure}
+
+In a parallel plate capacitor with a small separation relative to
+sizes of the plates (as shown in figure \ref{fig:1:6:a:setup}) one can
+ignore boundary effects.  Under the assumption that the E field
+between the plates is uniform, we then employ Gauss' law (eq 1.9 in
+the book) and as shown in figure \ref{fig:1:6:a:gauss}
+
+\begin{equation}
+  \oint_S \vec{E} \cdot d\vec{a} = \frac{q_{enc}}{\epsilon_0}
+\end{equation}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[height=2in]{a_gauss}
+    \caption{Gaussian surfaces can be drawn around each plate to
+      determine the magnitude of the E field between the plates.}
+    \label{fig:1:6:a:gauss}
+  \end{center}
+\end{figure}
+
+Since the field is uniform, we can infer that
+
+\begin{equation}
+  \oint_S \vec{E} \cdot d\vec{a}
+  = 2EA
+  = \frac{q_{enc}}{\epsilon_0}
+  \Rightarrow E_1 = \frac{q}{2A\epsilon_0}
+\end{equation}
+
+Making note that the E field is from both plates, we see that
+
+\begin{equation}
+E = E_1 + E_2 = \frac{q}{A\epsilon_0}
+\end{equation}
+
+Going back to our objective
+
+\begin{equation}
+  C = \frac q V
+\end{equation}
+
+\begin{equation}
+  V
+  = \int{\vec{E} \cdot d\vec{l}}
+  = d * E
+  = d\frac{q}{A\epsilon_0}
+\end{equation}
+
+Substituting that into our definition of C gives us
+
+\begin{equation}
+  C
+  = \frac q V
+  = \frac{A\epsilon_0}{d}_\blacksquare
+\end{equation}
+
+
+\subsubsection*{b) Capacitance of Concentric Spheres}
+
+\disputed{My solution disagrees with other external solutions in that
+  I have a factor of 2 in there for the E field contribution from the
+  outer shell's charge.  If you look in figure \ref{fig:1:6:b_wonky},
+  you'll see 3 gaussian surfaces: A, B, and C.  Gaussian surface C
+  tells us that the E-field outside of the outer shell is 0 because
+  the total inner charge is 0.  Surface A tells us the E field
+  contributed by the inner shell, but \emph{does not} tell us anything
+  about the E field from any charges outside of it.  That brings us to
+  surface B.  This one is, topologically, a sphere that surrounds the
+  +q charge on the outer shell.  By noting that the surface integral
+  of this one is going to effectively be C - A (the negative on A's
+  integral is because the direction of dA is opposite) shows us that
+  we get 0 - A.  That means that we get the contribution from both the
+  inner and the outer shells.  When you play that out, I get a factor
+  of 2 that results in a $2\pi$ at the end, whereas all published
+  solutions manuals I can find say it results in $4\pi$.  Everyone
+  else's solution involves only the charges in the middle.  It's fine
+  to use Gauss' law to determine the E field from that central sphere,
+  but it neglects the E field from anythinge else...like the outer
+  sphere.}
+
+\begin{quote}
+  Using Gauss's law, calculate the capacitance of two concentric
+  conducting spheres with radii $a$, $b$ where ($b > a$)
+\end{quote}
+
+As in part (a), computing the capacitance starts by computing $V$
+which involves solving for $E$.  To compute $E$, we first turn to a
+series of Gaussian surfaces shown in figure \ref{fig:1:6:b_wonky}.
+
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[width=\linewidth]{b_wonky}
+    \caption{This figure contains two charged spheres of radius $a$
+      and $b$ and three Gaussian surfaces (A, B, and C).  Gaussian
+      surface A is a simple sphere between the inner and outer shells;
+      this shell captures the E field from the inner sphere only.
+      Gaussian surface C is a simple sphere surrounding the outer
+      sphere; it captures the E field from both surfaces combined.
+      Gaussian surface B surrounds the outer shell, but also goes
+      through an infinitesimal pinhole in the outer surface to then
+      surround the inside of the outer shell.  This geometry allows
+      this Gaussian surface to capture the E field contributions from
+      the outer shell alone.}
+    \label{fig:1:6:b_wonky}
+  \end{center}
+\end{figure}
+
+\begin{equation}
+1 = 2
+\end{equation}
+
+We can compute the E field contributed by the inner sphere quite
+simply as
+
+\begin{equation}
+  \oint_S{\vec{E}\cdot d\vec{a}}
+    = 4\pi r^2E
+    = \frac{q}{\epsilon_0}
+    \Rightarrow E_{inner} = \frac{q}{4\pi\epsilon_0}\frac{1}{r^2}
+\end{equation}
+
+To compute the E field contribution from the outer sphere, we first
+differentiate the E field from the outer sphere inside the shell vs
+outside the shell.  Applying Gauss' law to surface C in figure
+\ref{fig:1:6:b_wonky} we find that:
+
+\begin{equation}
+  \oint_S{\vec{E}\cdot d\vec{a}} = \frac{q + -q}{\epsilon_0} = 0
+    \Rightarrow \vec{E} = 0
+\end{equation}
+
+With that in mind, we can then examine Gaussian surface B which is a
+combination of the inner and outer surfaces of the outer shell.  Since
+we already know that the outer surface is 0, any E field from the
+charge must be concentrated on the inside surface.
+
+\begin{equation}
+  \oint_S{\vec{E}\cdot d\vec{a}}
+    = 4\pi r^2 E = \frac{q}{\epsilon_0}
+    \Rightarrow E_{outer} = \frac{q}{4 \pi \epsilon_0} \frac{1}{r^2}
+\end{equation}
+
+Just as in the previous problem, we can easily show that the E fields
+reenforce one another making their magnitudes additive:
+
+\begin{equation}
+  E(r) = E_{outer} + E_{inner}
+  = \frac{q}{2 \pi \epsilon_0} \frac{1}{r^2}
+\end{equation}
+
+We then integrate the E field between the spheres to determine the
+Voltage potential
+
+\begin{equation}
+  \begin{array}{lcl}
+    V & = & \int \vec{E} \cdot d\vec{l}\\
+    & = & \frac{q}{2 \pi \epsilon_0} \int_{a}^{b} \frac{1}{r^2}\\
+    & = & - \frac{q}{2 \pi \epsilon_0} \left( \frac 1 b - \frac 1 a \right)\\
+    & = & \frac{q}{2 \pi \epsilon_0} \left( \frac 1 a - \frac 1 b \right) \\ 
+    & = & \frac{q}{2 \pi \epsilon_0} \left( \frac{b - a}{ab} \right) \\
+  \end{array}
+\end{equation}
+
+Substituting V into our equation for capacitance we get
+
+\begin{equation}
+  C = \frac q V
+  = \frac{2 \pi \epsilon_0}{\frac{b - a}{ab}}
+  = 2 \pi \epsilon_0 \frac{ab}{b - a}
+\end{equation}
+
+\subsubsection*{c) Capacitance of Concentric Cylinders}
+
+\disputed{This one is disputed for the same reason as (b)}
+
+\begin{quote}
+  Using Gauss's law, calculate the capacitance of two concentric
+  conducting cylinders of length $L$, large compared to their radii
+  $a$, $b$ where ($b > a$)
+\end{quote}
+
+Yet again, turning our eyes to Gauss' law:
+
+\begin{equation}
+  \oint_S \vec{E} \cdot d\vec{a} = \frac{q_{enc}}{\epsilon_0}
+\end{equation}
+
+In this case, we can draw Gaussian surfaces around the inner and outer
+portions to determine the E field contributions.  Imagining the
+cross-section shown in figure \ref{fig:1:6:b_wonky} to be for a
+cylinder rather than for a sphere, and we can compute the E fields
+just as we did in part (b) only for a cylinder.  The field at surface
+A being computed as follows:
+
+\begin{equation}
+  \begin{array}{lcl}
+    \oint_S \vec{E} \cdot d\vec{a}
+    &=&\frac{q_{enc}}{\epsilon_0} \\
+    &=& 2 \pi r L E(r) \\
+    \Rightarrow E_{A}(r) &=& \frac{q}{2 \pi L \epsilon_0} \frac 1 r
+  \end{array}
+\end{equation}
+
+As in part (b), the field at surface C is 0, meaning that the E field
+contribution from the outer conductor is entirely on the interior
+portion of surface B resulting in
+
+\begin{equation}
+  \begin{array}{lcl}
+    \oint_S \vec{E} \cdot d\vec{a}
+    &=&\frac{q_{enc}}{\epsilon_0} \\
+    &=& 2 \pi r L E(r)\\
+    \Rightarrow E_{B}(r) &=& -\frac{-q}{2 \pi L \epsilon_0} \frac 1 r\\
+     &=& \frac{q}{2 \pi L \epsilon_0} \frac 1 r\\
+     &=& E_{A}(r)
+  \end{array}
+\end{equation}
+
+\begin{equation}
+  E = E_A + E_B = 2E_A = \frac{q}{\pi L \epsilon_0} \frac 1 r
+\end{equation}
+
+Integrating to find the voltage, we see that
+
+\begin{equation}
+  V = \int_a^b{\vec{E}\cdot d\vec{l}}
+    = \frac{q}{\pi L \epsilon_0} \int_a^b{\frac 1 r}
+    = \frac{q}{\pi L \epsilon_0} (ln(b)-ln(a))
+    = \frac{q}{\pi L \epsilon_0} ln \left(\frac b a\right)
+\end{equation}
+
+Solving then for C, we find that
+
+\begin{equation}
+C = \frac q v = \pi L \epsilon_0 \left(ln \frac b a \right)^{-1}
+\end{equation}
+
+\subsubsection*{d) Conductor Size}
+
+\disputed{This one is disputed for the same reason as (b)}
+
+Plugging in the numbers (with the 2 in there) you get a few mm vs a
+hundred kilometers...it's pretty sensitive to the desired capacitance
+assuming air as the dielectric material.
