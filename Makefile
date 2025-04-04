@@ -50,8 +50,11 @@ clean:
 	bash -c '. .shlib ; clean -pr'
 	yes | rm -rf $(BUILD)
 
-images:
-	for f in $(find . -type f -name *.dxf | grep -v _trimmed.png$) ; do n=$(BUILD)/`echo $f | sed -e 's/.dxf$/.png/'` ; echo make $n ; done
+ref: .dummy_builddir
+	bin/qcad_export.py -s ref -d $(BUILD)
+	echo "\def\\\\bookName{ref}" > $(BUILD)/bookParams.tex
+	echo "\def\\\\buildPath{$(BUILD)}" >> $(BUILD)/bookParams.tex
+	make ref/ref.pdf
 
 jackson: .dummy_builddir
 	bin/qcad_export.py -s jackson -d $(BUILD)
