@@ -1,0 +1,78 @@
+\documentclass{article}
+
+\input{packages}
+
+\geometry{
+  letterpaper,
+  top=.75in,
+  bottom=.75in,
+  left=.75in,
+  right=.75in,
+  paperwidth=7in,
+  paperheight=10in
+}
+
+
+\begin{document}
+
+\input{BUILD/bookParams}
+\graphicspath{{\buildPath/\bookName}}
+
+
+\title{Quick Reference}
+\author{Harrison Caudill}
+\date{}
+\maketitle
+
+\section{Jackson's Emag}
+
+\begin{figure}
+  \begin{center}
+  \includegraphics[width=5in]{coordinates_diagram}
+  \caption{Spherical coordinates on the left, cylindrical on the
+    right.}
+  \end{center}
+  \label{fig:coordinate-diagrams}
+\end{figure}
+
+\subsection{Spherical Integration}
+
+See figure \ref{fig:coordinate-diagrams} for a vector diagram.
+
+\begin{itemize}
+
+\item \textbf{$Azimuth (\varphi)$:} We use $0 - 2\pi$ instead of
+  $-\pi - \pi$
+
+\item \textbf{$Elevation (\theta)$:} Jackson uses $0 - \pi$ which
+  means that it's from $+z$ instead of being from the $xy$ plane.
+  Gotta remember to use $sin(\theta)$ instead of $cos(\theta)$.
+
+\end{itemize}
+
+\begin{equation}
+  \int\limits_{r=0}^R \int\limits_{\theta=0}^{\pi} \int\limits_{\varphi=0}^{2\pi}
+  f(r, \theta, \varphi)\ r^2sin(\theta)\ dr\ d\varphi\ d\theta
+\end{equation}
+
+
+\subsection{Cylindrical Integration}
+
+See figure \ref{fig:coordinate-diagrams} for a vector diagram.
+
+\begin{itemize}
+
+\item \textbf{$Azimuth (\varphi)$:} We use $0 - 2\pi$ instead of
+  $-\pi - \pi$
+
+\item \textbf{$Radial Distance (\rho)$:} Typical $r$ in polar
+  coordinates.
+
+\end{itemize}
+
+\begin{equation}
+  \int\limits_{\rho=0}^R \int\limits_{\varphi=0}^{2\pi} \int\limits_{z=0}^{Z}
+  f(\rho, \varphi, z)\ \rho\ d\rho\ d\varphi\ dz
+\end{equation}
+
+\end{document}
