@@ -1,5 +1,6 @@
 
 BUILD
+jackson/ext
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
