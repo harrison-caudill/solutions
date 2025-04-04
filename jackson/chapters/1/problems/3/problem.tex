@@ -6,7 +6,7 @@
   \begin{enumerate}[label=\alph*]
 
     \item In spherical coordinates, a charge $Q$ uniformly distributed
-      over a cylindrical surface of radius $b$.
+      over a spherical surface of radius $R$.
 
     \item In cylindrical coordinates, a charge $\lambda$ per unit
       length uniformly distributed over a cylindrical surface of
@@ -20,3 +20,285 @@
   \end{enumerate}
 
 \end{question}
+
+
+This problem is essentially looking for the appropriate $\rho$ so that
+$\iiint_V \rho d\vec{V} = q$ in the chosen coordinate system.  In each
+case, we're working with a uniform charge distribution so our first
+step will be to ensure that the integral of some constant (usually
+$\rho_0$, $\lambda_0$, or $\sigma_0$) multiplied by the physical
+description of the charge (using delta and step functions) works out
+as we'd expect.
+
+
+\subsubsection*{a) Spherical Shell in Spherical Coordinates}
+
+With a spherical shell, we're working with a surface charge density:
+
+\begin{equation}
+  \sigma = \frac{Q}{4\pi{}R^2}
+\end{equation}
+
+Physically describing a spherical shell in spherical coordinates yields:
+
+\begin{equation}
+  \delta(r-R)
+\end{equation}
+
+We now run a test integral to make sure our physical description of
+the shell works out to the area of a shell.
+
+\begin{equation}
+  \int\limits_0^\infty \int\limits_0^\pi \int\limits_0^{2\pi}
+  \delta(r-R) r^2sin(\theta)\, dr\, d\theta\, d\varphi
+\end{equation}
+
+Separating out our separable terms, we see that
+
+\begin{equation}
+  \int\limits_0^\infty r^2\delta(r-R) dr
+  \int\limits_0^\pi sin(\theta) d\theta
+  \int\limits_0^{2\pi} d\varphi
+  = R^2 \cdot 2 \cdot 2\pi
+  = 4\pi{}R^2
+\end{equation}
+
+Combining our charge density with our delta function we get
+
+\begin{equation}
+  \rho(r, \theta, \varphi) = \sigma\delta(r-R) = \frac{Q}{4\pi{}R^2}\delta(r-R)
+  \ _\blacksquare
+\end{equation}
+
+\subsubsection*{b) Cylinderical Shell in Cylindrical Coordinates}
+
+Note that we're using $r$ instead of $\rho$ so as not to have two
+$\rho's$ in the same equation.  This problem works with a linear
+charge density $\lambda$.  Converting that into a surface charge
+density $\sigma$ we get
+
+\begin{equation}
+  \sigma = \frac{\lambda}{2 \pi{} b}
+\end{equation}
+
+Describing the charge shape, we propose that
+
+\begin{equation}
+  \rho = \sigma \cdot \delta(r - b)
+\end{equation}
+
+Taking our integral to ensure it works out, we have
+
+\begin{equation}
+  \int\limits_0^\infty
+  \int\limits_0^{2\pi}
+  \int\limits_0^L
+  \sigma \delta(r-b)
+  r
+  \,dr
+  \,d\varphi
+  \,dz
+\end{equation}
+
+Once again separating out the components
+
+\begin{equation}
+  Q =
+  \sigma
+  \int\limits_0^\infty \delta(r-b)r\,dr
+  \int\limits_0^{2\pi} d\varphi
+  \int\limits_0^L dz
+  = \sigma \cdot b \cdot 2\pi \cdot L
+\end{equation}
+
+Substituting in the value of sigma, we get
+
+\begin{equation}
+  Q = \frac{\lambda}{2 \pi{} b} \cdot b \cdot 2\pi \cdot L = \lambda L
+  \ _\blacksquare
+\end{equation}
+
+
+\subsubsection*{c) Disc in Cylindrical Coordinates}
+
+Same note as above about $r$ vs $\rho$, and once again, we're working
+with a surface charge density $\sigma$
+
+\begin{equation}
+  \sigma = \frac{Q}{\pi R^2}
+\end{equation}
+
+We then guess the obvious configuration.  Note that the step function
+is $U(R-r)$ as opposed to the more typical $U(r-R)$.  We do this so
+that it's high and drops low at $R$ instead of starting low and going
+high.
+
+\begin{equation}
+  \rho(r) = \delta(z) U(R-r)
+\end{equation}
+
+Taking our integral to check our results
+
+\begin{equation}
+  Q =
+  \int\limits_0^\infty
+  \int\limits_0^{2\pi}
+  \int\limits_0^\infty
+  \sigma \delta(z) U(R-r)
+  r
+  \,dr
+  \,d\varphi
+  \,dz
+\end{equation}
+
+Separating out our variables, and using the step function to restrict
+the upper bound of the integration of the radius to $R$
+
+\begin{equation}
+  Q =
+  \sigma
+  \int\limits_0^R
+  r
+  \,dr
+  \int\limits_0^{2\pi}
+  \,d\varphi
+  \int\limits_0^\infty
+  \delta(z)
+  \,dz
+  = \sigma \cdot \frac{R^2}{2} \cdot 2\pi \cdot 1
+  = \sigma \pi R^2
+  \ _\blacksquare
+\end{equation}
+
+
+\subsubsection*{d) Disc in Spherical Coordinates}
+
+This is the only one where we find a variable dependence.  As with the
+others, we start with a charge density $\sigma$
+
+\begin{equation}
+  \sigma = \frac{Q}{\pi R^2}
+\end{equation}
+
+Using our charge density we posit a distribution function based upon
+the geometry of the problem (once again using $R-r$ instead of $r-R$)
+
+\begin{equation}
+  \rho = \sigma \delta(\theta - \frac \pi 2) U(R - r)
+\end{equation}
+
+Setting up our integral, and crossing our fingers for a $Q$ at the end
+
+\begin{equation}
+  Q =
+  \int\limits_0^\infty
+  \int\limits_0^\pi
+  \int\limits_0^{2\pi}
+  \sigma \delta(\theta - \frac \pi 2) U(R - r)
+  r^2sin(\theta)
+  \, dr
+  \, d\theta
+  \, d\varphi
+\end{equation}
+
+Separating out our variables and using the step function to limit the
+bounds of integration
+
+\begin{equation}
+  Q =
+  \sigma
+  \int\limits_0^R
+  r^2
+  \, dr
+  \int\limits_0^\pi
+  sin(\theta)
+  \delta(\theta - \frac \pi 2)
+  \, d\theta
+  \int\limits_0^{2\pi}
+  \, d\varphi
+  = \sigma \cdot \frac{R^3}{3} \cdot 1 \cdot 2\pi
+  \neq \sigma \pi R^2
+\end{equation}
+
+Clearly, something isn't right.  There are a few ways to approach this one:
+
+\begin{enumerate}
+  \item We can look more closely at how the delta function interacts
+    with the d$\theta$.
+
+  \item We can use the known appropriate result $\sigma 4 \pi R^2$ to
+    find the correct distribution.
+
+  \item We can guess the solution (most people do it this way)
+
+  \item Some crazy reasoning that I'm not sure I understand/agree with
+    that you'll find in one of the other solution manuals out there.
+\end{enumerate}
+
+Starting with point 1, our integral from earlier can be rewritten as 
+
+\begin{equation}
+  Q =
+  \sigma
+  \int\limits_0^R
+  \int\limits_0^\pi
+  \int\limits_0^{2\pi}
+  \delta(\theta - \frac \pi 2)
+  \,r sin(\theta) \, d\varphi
+  \,r \, d\theta
+  \, dr
+\end{equation}
+
+Recalling the volume element for spherical integration
+
+\begin{equation}
+  dV = r\,sin(\theta)\,d\varphi r\,d\theta\ dr
+\end{equation}
+
+Conceptually, there's a factor of $r$ in there which, when constrained
+with a $\delta$ function leaves an excess $r$ in the result.  Adding
+$\frac 1 r$ eliminates the problem (as we'll show soon).
+
+The next easy way (point 2) to do this is to start with the known
+surface area of a disc and work backwards -- you'll find the same
+result.
+
+Plugging in the new factor
+
+\begin{equation}
+  \rho = \sigma \frac{\delta(\theta - \frac \pi 2)}{r} U(R - r)
+\end{equation}
+
+Setting up our integral, and crossing our fingers for a $Q$ at the end
+
+\begin{equation}
+  Q =
+  \int\limits_0^\infty
+  \int\limits_0^\pi
+  \int\limits_0^{2\pi}
+  \sigma \frac{\delta(\theta - \frac \pi 2)}{r} U(R - r)
+  r^2sin(\theta)
+  \, dr
+  \, d\theta
+  \, d\varphi
+\end{equation}
+
+Separating out our variables and using the step function to limit the
+bounds of integration
+
+\begin{equation}
+  Q =
+  \sigma
+  \int\limits_0^R
+  r
+  \, dr
+  \int\limits_0^\pi
+  sin(\theta)
+  \delta(\theta - \frac \pi 2)
+  \, d\theta
+  \int\limits_0^{2\pi}
+  \, d\varphi
+  = \sigma \cdot \frac{R^2}{2} \cdot 1 \cdot 2\pi
+  = \sigma \pi R^2
+  \ _\blacksquare
+\end{equation}
