@@ -18,3 +18,116 @@
   for the third with $n = -2, +2$
 
 \end{question}
+
+All of these problems will use Gauss' law
+\begin{equation}
+  \oint_S \vec{E} \cdot d\vec{a} = \frac{q_{enc}}{\epsilon_0}
+\end{equation}
+
+
+\subsubsection*{a) Conducting Sphere with Radius $a$}
+
+The field inside the sphere is 0 and the field outside the sphere is
+easily computed using Gauss' law:
+
+\begin{equation}
+  \frac{Q}{\epsilon_0}
+  = \oint_S \vec{E} \cdot d\vec{a}
+  = E \,4 \pi a^2
+  \Rightarrow \vec{E} = \left. \frac{Q}{4 \pi \epsilon_0 r^2} \hat{r}\, \right|_{r>a\ \blacksquare}
+\end{equation}
+
+
+
+\subsubsection*{b) Non-Conducting Sphere with Radius $a$}
+
+The field outside the sphere is easily computed with Gauss' law just
+as it was for part (a).  The field inside the sphere is also easily
+computed, but since only the charge inside of the surface contributes
+to the E field, we must first compute that charge.
+
+\begin{equation}
+  q
+  = Q \frac{V_{enc}}{V_{total}}
+  = Q \frac{^4/_3 \pi r^3}{^4/_3 \pi a^3}
+  = Q \frac{r^3}{a^3}
+\end{equation}
+
+Substituting our new value of the enclosed charge into our previous
+equation, we have
+
+\begin{equation}
+  \vec{E} = \left. Q \frac{r^3}{a^3}\frac{1}{4 \pi \epsilon_0 r^2} \hat{r}\, \right|_{r \leq a}
+  = \left. Q \frac{r}{a^3}\frac{1}{4 \pi \epsilon_0} \hat{r}\, \right|_{r \leq a\ \blacksquare}
+\end{equation}
+
+
+\subsubsection*{c) Non-Conducting Sphere with Radius $a$ and Non-Uniform $\rho$}
+
+The field outside the sphere is easily computed with Gauss' law just
+as it was for part (a).  Similarly to part (b), the field inside the
+sphere can be easily computed by first computing the contained charge
+as a function of radius:
+
+\begin{equation}
+  Q
+  = \rho_0
+  \int\limits_0^a
+  \int\limits_0^\pi
+  \int\limits_0^{2\pi}
+  r^n
+  r^2\,sin(\theta)
+  \,dr
+  \,d\theta
+  \,d\varphi
+  = \rho_0
+  \int\limits_0^a
+  \int\limits_0^\pi
+  \int\limits_0^{2\pi}
+  r^{n+2}
+  sin(\theta)
+  \,dr
+  \,d\theta
+  \,d\varphi
+\end{equation}
+
+Separating out our variables
+
+\begin{equation}
+  Q
+  = \rho_0
+  \int\limits_0^a
+  r^{n+2}
+  \,dr
+  \int\limits_0^\pi
+  sin(\theta)
+  \,d\theta
+  \int\limits_0^{2\pi}
+  \,d\varphi
+  = \frac{a^{n+3}}{n+3} \cdot 2 \cdot 2\pi
+  = \frac{4\pi}{n+3} a^{n+3}
+\end{equation}
+
+From this we find an expression for our constant $\rho_0$
+
+\begin{equation}
+  \rho_0 = Q \frac{n+3}{4\pi a^{n+3}}
+\end{equation}
+
+Using our expression for $\rho_0$, we compute the enclosed charge as a
+function of radius to be
+
+\begin{equation}
+  q
+  = \rho_0 \frac{r^{n+3}}{n+3} \cdot 2 \cdot 2\pi
+  = Q \frac{n+3}{4\pi a^{n+3}} \frac{r^{n+3}}{n+3} \cdot 4\pi
+  = Q \frac{r^{n+3}}{a^{n+3}}
+\end{equation}
+
+Now that we have an expression for the contained charge, we sub that
+into Gauss' law
+
+\begin{equation}
+  \vec{E}
+  = \left. Q \frac{r}{a}^{n+3} \frac{1}{4 \pi \epsilon_0 r^2} \hat{r}\, \right|_{r \leq a\ \blacksquare}
+\end{equation}
