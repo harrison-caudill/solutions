@@ -249,15 +249,19 @@ Starting with point 1, our integral from earlier can be rewritten as
   \, dr
 \end{equation}
 
-Recalling the volume element for spherical integration
+The salient point there is moving one of the factors of $r$ to just in
+front of the $d\theta$.  Recalling the volume element for spherical
+integration
 
 \begin{equation}
   dV = r\,sin(\theta)\,d\varphi r\,d\theta\ dr
 \end{equation}
 
-Conceptually, there's a factor of $r$ in there which, when constrained
-with a $\delta$ function leaves an excess $r$ in the result.  Adding
-$\frac 1 r$ eliminates the problem (as we'll show soon).
+Conceptually, there's a factor of $r$ in there on the $d\theta$ term
+to account for the radial dependence on the volume element when
+sweeping along $\theta$. When constrained with a $\delta$ function
+that excess factor of $r$ remains in the result.  Adding $\frac 1 r$
+eliminates the problem (as we'll show soon).
 
 The next easy way (point 2) to do this is to start with the known
 surface area of a disc and work backwards -- you'll find the same
