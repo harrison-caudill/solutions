@@ -1,0 +1,247 @@
+\begin{question}
+
+For the spin $\frac{1}{2}$ state $\ket{S_x; +}$ (referred to as
+$\ket{x+}$ for brevity), evaluate both sides of the inequality
+(1.146), that is
+
+\begin{equation*}
+  \dispersion{A}\dispersion{B} \ge \frac{1}{4} \qty|\expval{[A,B]}|^2
+\end{equation*}
+
+\begin{enumerate}[label=\alph*)]
+
+\item for the operators $A=S_x$ and $B=S_y$, and show that the
+  inequality is satisfied and\\
+
+\item for the operators $A=S_z$ and $B=S_y$\\
+
+\end{enumerate}
+
+\end{question}
+
+Start with a few basic equations from the book:
+
+\begin{equation*}
+  1.146: \dispersion{A}\dispersion{B} \ge \frac{1}{4} \qty|\expval{[A,B]}|^2
+\end{equation*}
+
+\begin{equation*}
+  1.144: \dispersion{A} = \expval{A^2} - \expval{A}^2
+\end{equation*}
+
+
+Since our objective is to manually compute the dispersions and
+commutations of $S_x, S_y, \& S_z$ before comparing to the expectation
+of the commutation, we'll start by computing the squares of the
+expecation and the expectation of the square.  We'll start with a few
+definitions:
+
+\begin{equation*}
+  1.111a: S_x = \frac{\hbar}{2} [\ket - \bra + + \ket + \bra - ]
+\end{equation*}
+
+\begin{equation*}
+  1.111b: S_y = i \frac{\hbar}{2} [\ket - \bra + - \ket + \bra - ]
+\end{equation*}
+
+\begin{equation*}
+  S_z = \frac{\hbar}{2} [\ket + \bra + - \ket - \bra - ]
+\end{equation*}
+
+\begin{equation*}
+  \begin{split}
+    1.110a: \ket{x\pm} &= \frac{1}{\sqrt{2}} [\ket + \pm \ket -]\\
+    &=> \ket{x+} = \frac{1}{\sqrt{2}} [\ket + + \ket -]
+  \end{split}
+\end{equation*}
+
+
+Because the question takes place using $\ket{x+}$:
+
+\begin{equation}
+  \begin{split}
+  \inlabel{exp-x}
+  \expval{S_x} &= \ev{S_x}{\psi}\\
+  &= \ev{S_x}{x+}\\
+  &= \frac{\hbar}{2}\braket{x+}\\
+  &= \frac{\hbar}{2}
+  \end{split}
+\end{equation}
+
+and
+
+\begin{equation}
+  \inlabel{exp-y}
+  \begin{split}
+    \expval{S_y} &= \ev{S_y}{x+}\\
+    &= \frac{1}{\sqrt{2}}(\bra + + \bra -) S_y \frac{1}{\sqrt{2}}(\ket + + \ket -)\\
+    &= \frac{1}{2} \left[ (\bra + + \bra -)
+      i \frac{\hbar}{2} [\ket - \bra + - \ket + \bra - ]
+      (\ket + + \ket -)
+      \right]\\
+    &= i \frac{\hbar}{4} \left[ \cancel{\braket{-}}\bra{+} - \cancel{\braket{+}}\bra{-} \right]\left[ \ket + + \ket - \right]\\
+    &= i \frac{\hbar}{4} \left[ \bra{+} - \bra{-} \right]\left[ \ket + + \ket - \right]\\
+    &= i \frac{\hbar}{4} \left[ \braket{+} - \braket{-} \right]\\
+    &= i \frac{\hbar}{4} \left[ 0 \right]\\
+    &= 0\\
+  \end{split}
+\end{equation}
+
+and
+
+\begin{equation}
+  \inlabel{exp-z}
+  \begin{split}
+    \expval{S_z} &= \ev{S_z}{\psi}\\
+    &= \ev{S_z}{x+}\\
+    &= \frac{1}{\sqrt{2}}(\bra + + \bra -) S_z \frac{1}{\sqrt{2}}(\ket + + \ket -)\\
+    &= \frac{1}{\sqrt{2}}(\bra + + \bra -) (\frac{\hbar}{2} [\Lambda_+ - \Lambda_-]) \frac{1}{\sqrt{2}}(\ket + + \ket -)\\
+    &= \frac{\hbar}{4}(\bra + + \bra -)(\Lambda_+ - \Lambda_-)(\ket + + \ket -)\\
+    &= \frac{\hbar}{4}(\bra + + \bra -)(\ket + - \ket -)\\
+    &= \frac{\hbar}{4}(\braket + - \braket -)\\
+    &= \frac{\hbar}{4}(0)\\
+    &= 0\\
+  \end{split}
+\end{equation}
+
+
+The expectations of the square are easier to compute and all come out
+the same:
+
+\begin{equation}
+  \inlabel{exp-x2}
+  \expval{S_x^2} = \sum{P_i \cdot x_i^2} = \frac{\hbar^2}{4} \sum{P_i} =
+  \frac{\hbar^2}{4}
+\end{equation}
+
+\begin{equation}
+  \inlabel{exp-y2}
+  \expval{S_y^2} = \sum{P_i \cdot x_i^2} = \frac{\hbar^2}{4} \sum{P_i} =
+  \frac{\hbar^2}{4}
+\end{equation}
+
+\begin{equation}
+  \inlabel{exp-z2}
+  \expval{S_z^2} = \sum{P_i \cdot x_i^2} = \frac{\hbar^2}{4} \sum{P_i} =
+  \frac{\hbar^2}{4}
+\end{equation}
+
+
+Using our previous efforts, we can produce a utility table of
+definitions.
+
+\begin{figure}
+  \begin{center}
+    \begin{tabular}{ccc}
+      {\bfseries Item} & {\bfseries Eq} & {\bfseries Value} \\
+      $\expval{S_x}^2$   & \inref{exp-x}  & $\frac{\hbar^2}{4}$ \\
+      $\expval{S_y}^2$   & \inref{exp-y}  & $0$ \\
+      $\expval{S_z}^2$   & \inref{exp-z}  & $0$ \\
+      $\expval{S_x^2}$ & \inref{exp-x2} & $\frac{\hbar^2}{4}$ \\
+      $\expval{S_y^2}$ & \inref{exp-y2} & $\frac{\hbar^2}{4}$ \\
+      $\expval{S_z^2}$ & \inref{exp-z2} & $\frac{\hbar^2}{4}$ \\
+    \end{tabular}
+  \end{center}
+  \caption{The physical interpretation shouldn't be lost here.  The
+    expectation value for the angular momentum in the $\ne x$ axis
+    should be 0 if you're starting with an $\ket{x+}$ state.  Its spin
+    along any other axis is a coin-toss, so the expectation value
+    really should be 0.}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                              Part a                                       %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{qpart}{Evaluate the inequality for $A=S_x$ and $B=S_y$}
+
+  Evaluating the dispersion, we see that:
+
+  \begin{equation}
+    \begin{split}
+      \dispersion{S_x}\dispersion{S_y} &= (\expval{S_x^2} - \expval{S_x}^2)(\expval{S_y^2} - \expval{S_y}^2)\\
+      &= (\frac{\hbar^2}{4} - \frac{\hbar^2}{4})(\frac{\hbar^2}{4} - 0)\\
+      &= (0)(\frac{\hbar^2}{4})\\
+      &= 0
+    \end{split}
+  \end{equation}
+
+  Evaluating the commutation then, we find that
+
+  \begin{equation}
+    \begin{split}
+      \frac{1}{4} \qty|\expval{[S_x,S_y]}|^2 &=
+      \frac{1}{4} \left( \ev{S_xS_y}{x+} - \ev{S_yS_x}{x+} \right)\\
+      &= \frac{1}{4} \frac{\hbar^2}{4} \left( \ev{S_y}{x+} - \ev{S_y}{x+} \right)\\
+      &= \frac{1}{4} \frac{\hbar^2}{4} \left( 0 \right)\\
+      &= 0
+    \end{split}
+  \end{equation}
+
+  Putting it all together, we have $0 \ge 0$
+  $\qed$
+\end{qpart}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                              Part b                                       %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{qpart}{Evaluate the inequality for $A=S_z$ and $B=S_y$}
+
+  \begin{equation}
+    \begin{split}
+      \dispersion{S_z}\dispersion{S_y} &= (\expval{S_z^2} - \expval{S_z}^2)(\expval{S_y^2} - \expval{S_y}^2)\\
+      &= (\frac{\hbar^2}{4} - 0)(\frac{\hbar^2}{4} - 0)\\
+      &= (\frac{\hbar^2}{4} - 0)(\frac{\hbar^2}{4} - 0)\\
+      &= \frac{\hbar^4}{16}
+    \end{split}
+  \end{equation}
+
+  We're going to evaluate a few more things for use later:
+
+  \begin{equation}
+    \begin{split}
+      S_z\ket{x+} &= \frac{\hbar}{2}(\Lambda_+ - \Lambda_-)(\frac{1}{\sqrt{2}} [\ket + + \ket -])\\
+      &= \frac{\hbar}{2}\frac{1}{\sqrt{2}}(\Lambda_+ - \Lambda_-)(\ket + + \ket -)\\
+      &= \frac{\hbar}{2}\frac{1}{\sqrt{2}}(\ket + - \ket -)\\
+      &= \frac{\hbar}{2}\ket{x-}\\
+    \end{split}
+  \end{equation}
+    
+  \begin{equation}
+    \begin{split}
+      S_y\ket{x+} &= (i \frac{\hbar}{2} [\ket - \bra + - \ket + \bra - ])(\frac{1}{\sqrt{2}} [\ket + + \ket -])\\
+      &= i \frac{\hbar}{2}\frac{1}{\sqrt{2}} (\ket - \bra + - \ket + \bra - )(\ket + + \ket -)\\
+      &= i \frac{\hbar}{2}\frac{1}{\sqrt{2}} (\ket - - \ket +)\\
+      &= - i \frac{\hbar}{2} \ket{x-}\\
+      &= -i S_z\ket{x+}
+    \end{split}
+  \end{equation}
+  
+  We're going to need to remember the dual space as well
+
+  \begin{equation}
+    \bra{x+}S_y = i \frac{\hbar}{2} \bra{x-}
+  \end{equation}
+    
+  Evaluating the commutation then, we find that
+
+  \begin{equation}
+    \begin{split}
+      \frac{1}{4} \qty|\expval{[S_z,S_y]}|^2 &=
+      \frac{1}{4} \qty|\left( \ev{S_zS_y}{x+} - \ev{S_yS_z}{x+} \right)|^2 \\
+      &= \frac{1}{4} \qty|((\frac{\hbar}{2}\bra{x-})(-i\frac{\hbar}{2}\ket{x-}) - (i\frac{\hbar}{2}\bra{x-})(\frac{\hbar}{2}\ket{x-}))|^2 \\
+      &= \frac{1}{4} \qty|\frac{\hbar^2}{4}((\bra{x-})(-i\ket{x-}) - (i\bra{x-})(\ket{x-}))|^2 \\
+      &= \frac{1}{4} \qty|\frac{\hbar^2}{4}(-i\braket{x-} - i\braket{x-}|^2 \\
+      &= \frac{1}{4} \qty|-\frac{\hbar^2}{4}2i|^2 \\
+      &= \frac{1}{4} \frac{\hbar^4}{16} 4 \\
+      &= \frac{\hbar^4}{16} \\
+    \end{split}
+  \end{equation}
+
+  Putting it all together, we have $\frac{\hbar^4}{16} \ge \frac{\hbar^4}{16}$
+  $\qed$
+
+\end{qpart}
