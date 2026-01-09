@@ -1,0 +1,188 @@
+\begin{question}
+
+Suppose a 2x2 matrix $X$ (not necessarily Hermitian, nor unitary) is
+written as:
+
+\begin{equation*}
+  X = a_0 + \vec{\sigma} \cdot \vec{a}
+\end{equation*}
+
+where the matrices $\vec{\sigma}$ are given in (3.50) and $a_0$ and
+$a_{1,2,3}$ are numbers.
+
+\begin{questionpart}
+  \item How are $a_0$ and $a_k$(k=1,2,3) related to $tr(X)$ and
+    $tr(\sigma_kX)$?\\
+
+  \item Obtain $a_0$ and $a_k$ in terms of the matrix elements $X_{ij}$
+\end{questionpart}
+
+
+\end{question}
+
+\begin{equation*}
+  \tag{3.50}
+  \sigma_1 =
+  \begin{pmatrix}
+    0 & 1 \\
+    1 & 0 \\
+  \end{pmatrix},
+  \sigma_2 =
+  \begin{pmatrix}
+    0 & -i \\
+    i &  0 \\
+  \end{pmatrix},
+  \sigma_3 =
+  \begin{pmatrix}
+    1 &  0 \\
+    0 & -1 \\
+  \end{pmatrix}
+\end{equation*}
+
+\begin{equation*}
+  \tag{3.56}
+  \begin{split}
+    \vec{\sigma} \cdot \vec{a} &\equiv \sum_k a_k \sigma_k \\
+    &= \begin{pmatrix}
+      a_3        & a_1 - ia_2 \\
+      a_1 + ia_2 & -a_3 \\
+    \end{pmatrix}
+  \end{split}
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                              Part a                                       %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{answerpart}{}
+
+  \begin{equation}
+    \begin{split}
+      tr(X)
+      &= tr(a_0 \cdot I) + tr\left( \sum_i a_i \sigma_i \right) \\
+      &= 2a_0 + \sum_i a_i tr(\sigma_i) \\
+      &= 2a_0 + \sum_i a_i \cdot 0 \\
+      &= 2a_0
+      \qed
+    \end{split}
+  \end{equation}
+
+  \begin{equation}
+    \forall_k \  tr(\sigma_k) = 0
+  \end{equation}
+  
+  \begin{equation}
+    \inlabel{a-start}
+    \begin{split}
+      tr(\sigma_k X)
+      &= tr\left( a_0\sigma_k + \sum_i{a_i\sigma_i\sigma_k} \right) \\
+      &= a_0tr(\sigma_k) + tr\left( \sum_i{a_i\sigma_i\sigma_k} \right) \\
+      &= tr\left( \sum_i{a_i\sigma_i\sigma_k} \right) \\
+      &= \sum_i{tr(a_i\sigma_i\sigma_k)} \\
+    \end{split}
+  \end{equation}
+
+  Let's look at the various options for $\sigma_i\sigma_j$.  For
+  $i=j$, we recall equation equation 3.51a:
+
+  \begin{equation*}
+    \tag{3.51a}
+    \sigma_i^2 = I
+  \end{equation*}
+
+  \begin{equation}
+    tr(\sigma_i\sigma_i) = tr(I) = 2
+  \end{equation}
+
+  \begin{equation*}
+    \tag{1.172a}
+    tr(XY) = tr(YX)
+  \end{equation*}
+
+  There are, in principle, 9 combinations.  3 of those are for $i=j$.
+  Of the remaining 6, 3 are equivalent to the other 3 via equation
+  1.172a (e.g. $\sigma_x\sigma_y = \sigma_y\sigma_x$).  Of the
+  remaining 3, two of them involve $\sigma_z$ ($\sigma_z\sigma_x$ and
+  $\sigma_z\sigma_y$) both of which are trivially 0 owing to the fact
+  that $\sigma_z$ is diagonal and $\sigma_x/\sigma_y$ are both
+  anti-diagonal.
+
+  The final case is $\sigma_x\sigma_y$:
+  \begin{equation}
+    \begin{split}
+      tr(\sigma_x\sigma_y)
+      &=
+      tr\left(
+      \begin{bmatrix}
+        0 & 1\\
+        1 & 0\\
+      \end{bmatrix}
+      \begin{bmatrix}
+        0 & -i\\
+        i & 0\\
+      \end{bmatrix} \right)\\
+      &=
+      tr\left(\begin{bmatrix}
+        i & 0\\
+        0 & -i\\
+      \end{bmatrix} \right)\\
+      &= 0
+    \end{split}
+  \end{equation}
+
+  That allows us to generalize the results with:
+  
+  \begin{equation}
+    tr(\sigma_i\sigma_j) = 2\delta_{ij}
+  \end{equation}
+
+  Substituting our new identity into equation \inref{a-start}
+  
+  \begin{equation}
+    \begin{split}
+      tr(\sigma_k X)
+      &= \sum_i{tr(a_i\sigma_i\sigma_k)} \\
+      &= \sum_i{2a_i\delta_{ik}} \\
+      &= 2a_k
+      \qed
+    \end{split}
+  \end{equation}
+
+\end{answerpart}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                              Part b                                       %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{answerpart}{}
+
+  This is mostly already provided in the book in eqaution 3.56
+
+  \begin{equation*}
+    \tag{3.56}
+    \begin{split}
+      \vec{\sigma} \cdot \vec{a} &\equiv \sum_k a_k \sigma_k \\
+      &= \begin{pmatrix}
+        a_3        & a_1 - ia_2 \\
+        a_1 + ia_2 & -a_3 \\
+      \end{pmatrix}
+    \end{split}
+  \end{equation*}
+
+  Adding in $a_0$
+  
+  \begin{equation*}
+    \tag{3.56}
+    \begin{split}
+      \vec{\sigma} \cdot \vec{a} &\equiv \sum_k a_k \sigma_k \\
+      &= \begin{pmatrix}
+        a_0 + a_3  & a_1 - ia_2 \\
+        a_1 + ia_2 & a_0 - a_3 \\
+      \end{pmatrix}
+      \qed
+    \end{split}
+  \end{equation*}
+
+\end{answerpart}
