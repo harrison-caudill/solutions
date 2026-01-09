@@ -1,0 +1,85 @@
+\begin{question}
+
+A beam of silver atoms is created by heating a vapor in an oven to
+1000C, and selecting atoms with a velocity close to the mean of the
+thermal distribution. The beam moves through a one-meter long magnetic
+field with a vertical gradient 10 Bohr magnetons, and impinges a
+screen one meter downstream of the end of the magnet. Assuming the
+silver atom has spin $\frac 1 2$ with a magnetic moment of one Bohr
+magneton, find the separation distance in millimeters of the two
+states on the screen.
+
+\end{question}
+
+
+\begin{given}
+
+\begin{equation}
+\frac{\partial}{\partial x}B = 10 \frac T m
+\end{equation}
+
+\begin{equation}
+T_0 = 1000C
+\end{equation}
+
+\begin{equation}
+  x_0 = 1m
+\end{equation}
+
+\begin{equation}
+  \mu = 1 \frac J T
+\end{equation}
+
+\end{given}
+
+From basic Newtonian physics, we have
+
+\begin{equation}
+\begin{split}
+  S &= \frac 1 2 a t^2 \\
+  &= \frac 1 2 a \frac{x_0^2}{v^2} \\
+  &= \frac 1 2 \frac F m \frac{x_0^2}{v^2} \\
+\end{split}
+\end{equation}
+
+This leaves us with an equation that requires a Force and a velocity.
+The temperature provides the energy which can be employed to solve for
+the velocity
+
+\begin{equation}
+\begin{split}
+  E &= \frac 3 2 K_bT \\
+  &= \frac{p^2}{2m} \\
+  &= \frac 1 2 m v^2
+\end{split}
+\end{equation}
+
+Solving for v, we find that
+
+\begin{equation}
+  v = \left(\frac{3 K_b T}{m}\right)^\frac{1}{2}
+\end{equation}
+
+Substituting our expression for the velocity in, we find that:
+
+\begin{equation}
+\begin{split}
+  S &= \frac 1 2 \frac F m \frac{x_0^2}{v^2} \\
+  &= \frac 1 2 \frac F m x_0^2 \frac{m}{3K_bT} \\
+  &= \frac{F x_0^2}{6K_bT}
+\end{split}
+\end{equation}
+
+The force ($F_0$) can be determined by using the magnetic field
+gradient:
+
+\begin{equation}
+  F = \nabla(\vec{\mu} \cdot \vec{B}) = 10 \cdot \mu_B \approx 9.275\cdot 10^{-23} N
+\end{equation}
+
+Armed with the force and velocity we can now solve for
+the displacement:
+
+\begin{equation}
+  S = \frac{F_0 x_0^2}{6K_bT} \approx 0.88mm
+\end{equation}

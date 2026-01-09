@@ -1,5 +1,19 @@
 \begin{question}
 
+  This problem is a bit tricky.  To properly solve this problem,
+  you'll need Real Analysis.  Specifically, you'll need to understand
+  Distribution Theory.  Because the coordinate system itself breaks
+  down at $r=0$ (where you no longer have the concept of orthogonality
+  since $\varphi$ and $\theta$ don't really exist), the partial
+  derivatives also break down.  Solving this sort of problem requires
+  Distribution Theory to take Weak Derivatives (or something like that
+  anyway).
+
+  Putting a pin in this one since I don't have the requisite knowledge
+  of Distribution Theory to solve this one at the moment.
+
+
+  
 The time-averaged potential of a neutral hydrogen atom is given by
 
 \begin{equation}
@@ -13,3 +27,434 @@ a_0/2$, $a_0$ being the Bohr radius. Find the distribution of charge
 interpret your result physically.
 
 \end{question}
+
+
+We start with equation 1.28 from the book
+
+\begin{equation}
+  \nabla^2 \Phi = -\rho/\epsilon_0
+\end{equation}
+
+Since we're given $\Phi$, we can apply this relation to get $\rho$.
+
+\begin{equation}
+  \nabla^2 \Phi
+  = -\rho/\epsilon_0
+  = \nabla^2 \frac{q}{4\pi\epsilon_0} \frac{e^{-\alpha r}}{r} \left( 1 +
+  \frac{\alpha r}{2} \right)
+\end{equation}
+
+Looking at the Laplacian in spherical coordinates, for the inside
+cover, we find that the radial components are
+
+\begin{equation}
+  \nabla^2 \psi
+  = \frac{1}{r^2}
+  \frac{\partial}{\partial r}
+  \left(r^2 \frac{\partial}{r}\psi \right)
+\end{equation}
+
+Applying that to our Electric potential we have
+
+\begin{equation}
+  -\frac{\rho}{\epsilon_0}
+  = \frac{1}{r^2}
+  \frac{\partial}{\partial r}
+  \left\{
+  r^2 \frac{\partial}{r}
+  \frac{q}{4\pi\epsilon_0} \frac{e^{-\alpha r}}{r} \left( 1 +
+  \frac{\alpha r}{2} \right)  
+  \right\}
+\end{equation}
+
+Cleaning up a few things
+
+\begin{equation}
+  \rho
+  = -\frac{q}{4\pi}
+  \frac{1}{r^2}
+  \frac{\partial}{\partial r}
+  \left\{
+  r^2 \frac{\partial}{r}
+  \frac{e^{-\alpha r}}{r} \left( 1 + \frac{\alpha r}{2} \right)
+  \right\}
+\end{equation}
+
+And diving right in
+
+\begin{equation}
+  \rho
+  = -\frac{q}{4\pi}
+  \frac{1}{r^2}
+  \frac{\partial}{\partial r}
+  \left\{
+  r^2 \frac{\partial}{r}
+  \frac{e^{-\alpha r}}{r}
+  + r^2 \frac{\partial}{r}
+  e^{-\alpha r}\frac{\alpha}{2}
+  \right\}
+\end{equation}
+
+Evaluate the two derivatives
+
+\begin{equation}
+  \rho
+  = -\frac{q}{4\pi}
+  \frac{1}{r^2}
+  \frac{\partial}{\partial r}
+  \left\{
+  r^2 \left(
+  e^{-\alpha r}
+  \frac{\partial}{\partial r}  
+  \left(\frac{1}{r}\right)
+  - \alpha \frac{e^{-\alpha r}}{r}
+  \right)
+  + r^2 \left(
+  - \frac{\alpha^2}{2}
+  e^{-\alpha r}
+  \right)
+  \right\}
+\end{equation}
+
+Separate the partial we can't take because spherical coordinates are
+annoying.
+
+\begin{equation}
+  \rho
+  = -\frac{q}{4\pi}
+  \frac{1}{r^2}
+  \frac{\partial}{\partial r}
+  \left\{
+  -\alpha r e^{-\alpha r}
+  - \frac{r^2\alpha^2}{2}
+  e^{-\alpha r}
+  \right\}
+  -\frac{q}{4\pi}  
+  \frac{1}{r^2}
+  \frac{\partial}{\partial r}
+  \left\{
+  r^2
+  e^{-\alpha r}
+  \frac{\partial}{\partial r}  
+  \left(\frac{1}{r}\right)
+  \right\}
+\end{equation}
+
+Cleaning up a bit
+
+\begin{equation}
+  \rho
+  = \frac{q}{4\pi}
+  \frac{1}{r^2}
+  \frac{\partial}{\partial r}
+  \left\{
+  e^{-\alpha r}
+  \left(
+  \alpha r
+  + \frac{r^2\alpha^2}{2}
+  \right)
+  \right\}
+  -\frac{q}{4\pi}  
+  \frac{1}{r^2}
+  \frac{\partial}{\partial r}
+  \left\{
+  r^2
+  e^{-\alpha r}
+  \frac{\partial}{\partial r}  
+  \left(\frac{1}{r}\right)
+  \right\}
+\end{equation}
+
+Taking the next partial on the left
+
+\begin{equation}
+  \rho
+  = \frac{q}{4\pi}
+  \frac{1}{r^2}
+  \left\{
+  -\alpha e^{-\alpha r}
+  \left(
+  \alpha r
+  + \frac{r^2\alpha^2}{2}
+  \right)
+  + e^{-\alpha r}
+  \left(
+  \alpha
+  + \alpha^2 r
+  \right)
+  \right\}
+  -\frac{q}{4\pi}  
+  \frac{1}{r^2}
+  \frac{\partial}{\partial r}
+  \left\{
+  r^2
+  e^{-\alpha r}
+  \frac{\partial}{\partial r}  
+  \left(\frac{1}{r}\right)
+  \right\}
+\end{equation}
+
+Distributing our terms
+
+\begin{equation}
+  \rho
+  = \frac{q}{4\pi}
+  \frac{1}{r^2}
+  e^{-\alpha r}
+  \left\{
+  -\alpha^2 r
+  - \frac{r^2\alpha^3}{2}
+  + \alpha
+  + \alpha^2 r
+  \right\}
+  -\frac{q}{4\pi}  
+  \frac{1}{r^2}
+  \frac{\partial}{\partial r}
+  \left\{
+  r^2
+  e^{-\alpha r}
+  \frac{\partial}{\partial r}  
+  \left(\frac{1}{r}\right)
+  \right\}
+\end{equation}
+
+Buttoning up the left side
+
+\begin{equation}
+  \rho
+  = \frac{q}{4\pi}
+  e^{-\alpha r}
+  \left(
+  - \frac{\alpha^3}{2}
+  + \frac{\alpha}{r^2}
+  \right)
+  -\frac{q}{4\pi}  
+  \frac{1}{r^2}
+  \frac{\partial}{\partial r}
+  \left\{
+  r^2
+  e^{-\alpha r}
+  \frac{\partial}{\partial r}  
+  \left(\frac{1}{r}\right)
+  \right\}
+\end{equation}
+
+Because we've worked this problem already, we know that we need to
+pull a Laplacian out of it so we can prevent it from becoming singular
+at $r=0$.  To angle towards that, let's first take note of what the
+Laplacian of $1/r$ looks like
+
+\begin{equation}
+  \nabla^2 \left(\frac{1}{r}\right)
+  = \frac{1}{r^2} \frac{\partial}{\partial r}
+  \left(r^2 \frac{\partial}{\partial r}\left(\frac{1}{r}\right) \right)
+  = \frac{1}{r^2} \left(
+  2r\frac{\partial}{\partial r}\left(\frac{1}{r}\right)
+  + r^2\frac{\partial^2}{\partial r^2}\left(\frac{1}{r}\right)
+  \right)
+\end{equation}
+
+So now let's try to make our equation look like that.  First, we'll
+have a derivatve at hand for reference
+
+\begin{equation}
+  \frac{\partial}{\partial r}
+  r^2
+  e^{-\alpha r}
+  = 2r\,e^{-\alpha r}
+  - \alpha r^2\,e^{-\alpha r}
+  = e^{-\alpha r} \left( 2r - \alpha r^2 \right)
+\end{equation}
+
+Using that formulation, we can take our last derivative to find
+
+\begin{equation}
+  \rho
+  = \frac{q}{4\pi}
+  e^{-\alpha r}
+  \left(
+  - \frac{\alpha^3}{2}
+  + \frac{\alpha}{r^2}
+  \right)
+  -\frac{q}{4\pi}  
+  \frac{1}{r^2}
+  e^{-\alpha r}
+  \left\{
+  r^2
+  \frac{\partial^2}{\partial r^2}(\frac{1}{r})
+  + \left( 2r - \alpha r^2 \right)
+  \frac{\partial}{\partial r}\left(\frac{1}{r}\right)
+  \right\}
+\end{equation}
+
+Cleaning things up a bit, we find that
+
+\begin{equation}
+  \rho
+  = \frac{q}{4\pi}
+  e^{-\alpha r}
+  \left(
+  - \frac{\alpha^3}{2}
+  + \frac{\alpha}{r^2}
+  \right)
+  -\frac{q}{4\pi}  
+  e^{-\alpha r}
+  \left[
+  \frac{1}{r^2}
+  \left\{
+  r^2 \frac{\partial^2}{\partial r^2}(\frac{1}{r})
+  + 2r \frac{\partial}{\partial r}\left(\frac{1}{r}\right)
+  \right\}
+  \right]
+  -\frac{q}{4\pi}  
+  e^{-\alpha r}
+  \left(-\alpha \frac{\partial}{\partial r}\left(\frac{1}{r}\right) \right)
+\end{equation}
+
+This allows us to pull out the Laplacian in the middle...but we're not
+going to do that...not yet.  First, let's evaluate that lone
+derivative on the right.
+
+\begin{equation}
+  \rho
+  = \frac{q}{4\pi}
+  e^{-\alpha r}
+  \left(
+  - \frac{\alpha^3}{2}
+  + \frac{\alpha}{r^2}
+  \right)
+  -\frac{q}{4\pi}  
+  e^{-\alpha r}
+  \left[
+  \frac{1}{r^2}
+  \left\{
+  r^2 \frac{\partial^2}{\partial r^2}(\frac{1}{r})
+  + 2r \frac{\partial}{\partial r}\left(\frac{1}{r}\right)
+  \right\}
+  \right]
+  -\frac{q}{4\pi}  
+  e^{-\alpha r}
+  \frac{\alpha}{r^2}
+\end{equation}
+
+Noting that the newly evaluated term cancels out one on the left, we have
+
+\begin{equation}
+  \rho
+  = - \frac{q}{8\pi}
+  e^{-\alpha r}
+  \alpha^3
+  -\frac{q}{4\pi}  
+  e^{-\alpha r}
+  \left[
+  \frac{1}{r^2}
+  \left\{
+  r^2 \frac{\partial^2}{\partial r^2}(\frac{1}{r})
+  + 2r \frac{\partial}{\partial r}\left(\frac{1}{r}\right)
+  \right\}
+  \right]
+\end{equation}
+
+Now, instead of pulling out a laplacian, we're going to evaluate the
+derivatives
+
+\begin{equation}
+  \rho
+  = - \frac{q}{8\pi}
+  e^{-\alpha r}
+  \alpha^3
+  -\frac{q}{4\pi}  
+  e^{-\alpha r}
+  \left[
+  \frac{1}{r^2}
+  \left\{
+  r^2 \frac{\partial}{\partial r}(\frac{-1}{r^2})
+  + 2r \frac{-1}{r^2}
+  \right\}
+  \right]
+\end{equation}
+
+Cleaning up and evaluating the final derivative, we get
+
+\begin{equation}
+  \rho
+  = - \frac{q}{8\pi}
+  e^{-\alpha r}
+  \alpha^3
+  -\frac{q}{4\pi}  
+  e^{-\alpha r}
+  \left[
+  \frac{1}{r^2}
+  \left\{
+  r^2 (\frac{2}{r^3})
+  - \frac{2}{r}
+  \right\}
+  \right]
+\end{equation}
+
+Which cleans up finally to
+
+\begin{equation}
+  \rho
+  = - \frac{q}{8\pi}
+  e^{-\alpha r}
+  \alpha^3
+\end{equation}
+
+
+
+
+
+
+
+
+\begin{equation}
+  \rho
+  = \frac{q}{4\pi}
+  e^{-\alpha r}
+  \left(
+  - \frac{\alpha^3}{2}
+  + \frac{\alpha}{r^2}
+  \right)
+  -\frac{q}{4\pi}  
+  e^{-\alpha r}
+  \nabla^2 \left(\frac{1}{r}\right)
+  -\frac{q}{4\pi}  
+  e^{-\alpha r}
+  \left(-\alpha \frac{\partial}{\partial r}\left(\frac{1}{r}\right) \right)
+\end{equation}
+
+Evaluating the final partial derivative and combining with the terms
+on the left, we get
+
+\begin{equation}
+  \rho
+  = \frac{q}{4\pi}
+  e^{-\alpha r}
+  \left(
+  - \frac{\alpha^3}{2}
+  + \frac{\alpha}{r^2}
+  - \frac{\alpha}{r^2}
+  \right)
+  -\frac{q}{4\pi}  
+  e^{-\alpha r}
+  \nabla^2 \left(\frac{1}{r}\right)
+\end{equation}
+
+Since the partial derivative on the right cancels out the term on the
+left, we can remove that and substitute in $-4\pi\delta(r)$ for our
+Laplacian, leaving us with our final answer:
+
+\begin{equation}
+  \rho
+  = q\delta(r)
+  - \frac{q}{8\pi}
+  e^{-\alpha r}
+  \alpha^3
+\end{equation}
+
+
+Here we show a positive charge as a delta function at $r=0$
+representing the proton in the Hydrogen atom followed by an
+exponentially decaying spherical shell of negative charge for our
+lonely little electron.
