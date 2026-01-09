@@ -21,10 +21,16 @@
 \end{quote}
 }
 
-\newenvironment{qpart}[1]{%
+\newenvironment{answerpart}[1]{%
 \subsubsection{#1}
 }{%
 }
+\newenvironment{questionpart}{%
+\begin{enumerate}[label=\alph*)]
+}{%
+\end{enumerate}
+}
+
 
 \newenvironment{given}{%
 Drawing upon the problem, we can surmise that:
