@@ -62,3 +62,20 @@ jackson: .dummy_builddir
 	echo "\def\\\\buildPath{$(BUILD)}" >> $(BUILD)/bookParams.tex
 	make jackson/manual.pdf
 	mv $(BUILD)/manual.pdf $(BUILD)/jackson.pdf
+
+sak: .dummy_builddir
+	bin/qcad_export.py -s sakurai -d $(BUILD)
+	echo "\def\\\\bookName{sakurai}" > $(BUILD)/bookParams.tex
+	echo "\def\\\\buildPath{$(BUILD)}" >> $(BUILD)/bookParams.tex
+	make sakurai/manual.pdf
+	mv $(BUILD)/manual.pdf $(BUILD)/sakurai.pdf
+
+problem: .dummy_builddir
+	echo "\def\\\\bookName{$(bookName)}" > $(BUILD)/problemParams.tex
+	echo "\def\\\\chapterNum{$(chapterNum)}" >> $(BUILD)/problemParams.tex
+	echo "\def\\\\problemNum{$(problemNum)}" >> $(BUILD)/problemParams.tex
+	echo "\def\\\\buildPath{$(BUILD)}" >> $(BUILD)/problemParams.tex
+	$(PDFTEX) \
+	-jobname $(bookName)-$(chapterNum)-$(problemNum) \
+	problem.tex \
+	$(BUILD)/$(bookName)-$(chapterNum)-$(problemNum).pdf

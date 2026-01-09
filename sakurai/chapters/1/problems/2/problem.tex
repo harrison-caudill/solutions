@@ -1,0 +1,52 @@
+\begin{question}
+
+  Prove
+
+  \begin{equation*}
+    [AB,CD] = -AC\{D,B\} + A\{C,B\}D - C\{D,A\}B + \{C,A\}DB
+  \end{equation*}
+
+\end{question}
+
+Just grind it out
+
+\begin{equation*}
+  \begin{split}
+    [AB,CD] &= -AC\{D,B\} + A\{C,B\}D - C\{D,A\}B + \{C,A\}DB \\
+    \\
+    &= -AC(DB+BD) \\
+    &+ +A(CB+BC)D \\
+    &+ -C(DA+AD)B \\
+    &+ (CA+AC)DB \\
+    \\
+    &= -ACDB - ACBD \\
+    &+ ACBD + ABCD \\
+    &+ -CDAB - CADB \\
+    &+ CADB + ACDB \\
+    \\
+    &= \cancel{-ACDB} - ACBD \\
+    &+ ACBD + ABCD \\
+    &+ -CDAB - CADB \\
+    &+ CADB + \cancel{ACDB} \\
+    \\
+    &= \cancel{-ACDB} - \cancel{ACBD} \\
+    &+ \cancel{ACBD} + ABCD \\
+    &+ -CDAB - CADB \\
+    &+ CADB + \cancel{ACDB} \\
+    \\
+    &= \cancel{-ACDB} - \cancel{ACBD} \\
+    &+ \cancel{ACBD} + ABCD \\
+    &+ -CDAB - \cancel{CADB} \\
+    &+ \cancel{CADB} + \cancel{ACDB} \\
+\end{split}
+\end{equation*}
+
+Finally, that leaves
+
+\begin{equation}
+  \begin{split}
+    [AB,CD] &= -AC\{D,B\} + A\{C,B\}D - C\{D,A\}B + \{C,A\}DB \\
+    &= ABCD - CDAB \\
+    &= [AB,CD]
+  \end{split}
+\end{equation}

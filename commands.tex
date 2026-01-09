@@ -21,14 +21,51 @@
 \end{quote}
 }
 
+\newenvironment{qpart}[1]{%
+\subsubsection{#1}
+}{%
+}
+
+\newenvironment{given}{%
+Drawing upon the problem, we can surmise that:
+}{%
+}
+
+% Set up section/subsection/subsubsection numbering to account for
+% problem naming
+\renewcommand{\thesubsubsection}{\thesubsection.\alph{subsubsection}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% General Utility                                                           %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\NewDocumentCommand{\disputed}{m}{%
-\begin{center}
-\Huge Disputed
-\end{center}
-
-#1
+% Generates a label that is prefixed with the subsection, that way we
+% can reference equations across problems if we want, but also can
+% safely have namespace collisions between sections.
+\newcommand{\inlabel}[1]{%
+  \label{\thesubsection:#1}%
 }%
+
+% The corresponding ref command for the \inlabel command
+\newcommand{\inref}[1]{%
+  \ref{\thesubsection:#1}%
+}%
+
+\NewDocumentCommand{\disputed}{m}{%
+\begin{center}%
+\Huge Disputed%
+\end{center}%
+%
+#1%
+}%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Physicsy Shortcuts                                                        %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\dispersion}[1]{%
+  \expval{(\Delta #1)^2}
+}%
+
+\newcommand{\qed}{\ _\blacksquare}

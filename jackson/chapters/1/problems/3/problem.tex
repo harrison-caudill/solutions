@@ -3,7 +3,7 @@
   the following charge distributions as three-dimensional charge
   densities p(x).
 
-  \begin{enumerate}[label=\alph*]
+  \begin{enumerate}[label=(\alph*)]
 
     \item In spherical coordinates, a charge $Q$ uniformly distributed
       over a spherical surface of radius $R$.
@@ -50,14 +50,14 @@ the shell works out to the area of a shell.
 
 \begin{equation}
   \int\limits_0^\infty \int\limits_0^\pi \int\limits_0^{2\pi}
-  \delta(r-R) r^2sin(\theta)\, dr\, d\theta\, d\varphi
+  \delta(r-R) r^2\sin{\theta}\, dr\, d\theta\, d\varphi
 \end{equation}
 
 Separating out our separable terms, we see that
 
 \begin{equation}
   \int\limits_0^\infty r^2\delta(r-R) dr
-  \int\limits_0^\pi sin(\theta) d\theta
+  \int\limits_0^\pi \sin{\theta} d\theta
   \int\limits_0^{2\pi} d\varphi
   = R^2 \cdot 2 \cdot 2\pi
   = 4\pi{}R^2
@@ -195,7 +195,7 @@ Setting up our integral, and crossing our fingers for a $Q$ at the end
   \int\limits_0^\pi
   \int\limits_0^{2\pi}
   \sigma \delta(\theta - \frac \pi 2) U(R - r)
-  r^2sin(\theta)
+  r^2\sin{\theta}
   \, dr
   \, d\theta
   \, d\varphi
@@ -211,7 +211,7 @@ bounds of integration
   r^2
   \, dr
   \int\limits_0^\pi
-  sin(\theta)
+  \sin{\theta}
   \delta(\theta - \frac \pi 2)
   \, d\theta
   \int\limits_0^{2\pi}
@@ -244,7 +244,7 @@ Starting with point 1, our integral from earlier can be rewritten as
   \int\limits_0^\pi
   \int\limits_0^{2\pi}
   \delta(\theta - \frac \pi 2)
-  \,r sin(\theta) \, d\varphi
+  \,r \sin{\theta} \, d\varphi
   \,r \, d\theta
   \, dr
 \end{equation}
@@ -254,7 +254,7 @@ front of the $d\theta$.  Recalling the volume element for spherical
 integration
 
 \begin{equation}
-  dV = r\,sin(\theta)\,d\varphi r\,d\theta\ dr
+  dV = r\,\sin{\theta}\,d\varphi r\,d\theta\ dr
 \end{equation}
 
 Conceptually, there's a factor of $r$ in there on the $d\theta$ term
@@ -281,7 +281,7 @@ Setting up our integral, and crossing our fingers for a $Q$ at the end
   \int\limits_0^\pi
   \int\limits_0^{2\pi}
   \sigma \frac{\delta(\theta - \frac \pi 2)}{r} U(R - r)
-  r^2sin(\theta)
+  r^2\sin{\theta}
   \, dr
   \, d\theta
   \, d\varphi
@@ -297,7 +297,7 @@ bounds of integration
   r
   \, dr
   \int\limits_0^\pi
-  sin(\theta)
+  \sin{\theta}
   \delta(\theta - \frac \pi 2)
   \, d\theta
   \int\limits_0^{2\pi}
