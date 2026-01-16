@@ -1,0 +1,37 @@
+\begin{question}
+
+  Suppose $\ket{i}$ and $\ket{j}$ are eigenkets of some Hermitian
+  operator $A$. Under what condition can we conclude that $\ket{i} +
+  \ket{j}$ is also an eigenket of $A$? Justify your answer.
+
+\end{question}
+
+\begin{answer}
+
+  A is hermitian, therefore
+  
+  \begin{equation}
+    \begin{split}
+      &A\ket{a_i} = a_i\ket{a_i}\\
+      &A\ket{a_j} = a_j\ket{a_j}\\
+      &\bra{a_i}A = a_i\bra{a_i}\\
+      &\bra{a_j}A = a_j\bra{a_j}\\
+    \end{split}
+  \end{equation}
+
+  The characteristic relationship of Eigenkets must be respected, so
+  we know that:
+
+  \begin{equation}
+    \begin{split}
+      A(\ket{a_i} + \ket{a_j})
+      &= A\ket{a_i} + A\ket{a_j}\\
+      &= a_i\ket{a_i} + a_j\ket{a_j}\\
+      &= a_k(\ket{a_i} + \ket{a_j})\\
+    \end{split}
+  \end{equation}
+
+  The only way for this characteristic equation to be respected is
+  if $a_i = a_j$ implying degeneracy.
+  
+\end{answer}
