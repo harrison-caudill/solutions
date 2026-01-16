@@ -17,20 +17,34 @@
 
 \newenvironment{question}{%
 \begin{quote}
+\noindent
 }{%
 \end{quote}
 }
+
+\newenvironment{answer}{%
+}{%
+}%
 
 \newenvironment{answerpart}[1]{%
 \subsubsection{#1}
 }{%
 }
-\newenvironment{questionpart}{%
-\begin{enumerate}[label=\alph*)]
-}{%
-\end{enumerate}
-}
 
+\newenvironment{questionpart}{%
+    \refstepcounter{qpart}
+    \list{\textbf{\alph{qpart})}}{%
+        \setlength{\leftmargin}{2em}   % Indentation of the text
+        \setlength{\labelwidth}{1.5em} % Width of the "a)" part
+        \setlength{\labelsep}{0.5em}   % Space between "a)" and text
+        \setlength{\topsep}{0.5em}     % Vertical space above this part
+        \setlength{\parsep}{0pt}
+    }%
+    \item \relax % Create the item
+    %% \textbf{\alph{qpart})}\ 
+}{%
+    \endlist%
+}
 
 \newenvironment{given}{%
 Drawing upon the problem, we can surmise that:

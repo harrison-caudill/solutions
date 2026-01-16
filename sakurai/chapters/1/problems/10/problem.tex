@@ -1,0 +1,210 @@
+\begin{question}
+
+  Using the orthonormality of $\ket +$ and $\ket -$, prove
+
+  \begin{questionpart}
+    $[S_i, S_j] = i \epsilon_{ijk} \hbar S_k$
+  \end{questionpart}
+
+  \begin{questionpart}
+    ${S_i, S_j} = \left( \frac{\hbar^2}{2} \right) \delta_{ij}$
+  \end{questionpart}
+
+  \noindent where
+
+  \begin{equation}
+    \tag{1.111a}
+    S_x = \frac \hbar 2 (\ket - \bra + + \ket + \bra -)
+  \end{equation}
+
+  \begin{equation}
+    \tag{1.111b}
+    S_y = i \frac \hbar 2 (\ket - \bra + - \ket + \bra -)
+  \end{equation}
+  
+  \begin{equation}
+    \tag{1.90}
+    S_z = \frac \hbar 2 (\Lambda_+ - \Lambda_-) = (\ket + \bra + - \ket - \bra -)
+  \end{equation}
+\end{question}
+
+\begin{answer}
+
+  Strictly speaking, we'll need to show that all 9 permutations of
+  $ijk$ for each part.
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%                              Part a                                       %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \begin{answerpart}{Commutation}
+
+    Starting with the case of $i=j$, it's pretty easy to see that
+
+    \begin{equation}
+      [S_i, S_i] = S_i^2 - S_i^2 = 0
+    \end{equation}
+
+    Next we examine the $i \ne j$ cases, of which there are 6:
+    \begin{tabular}{ccc}
+      $x, y$ & $y, z$ & $z, x$\\
+      $y, x$ & $z, y$ & $x, z$\\
+    \end{tabular}
+
+    Since $[X, Y] = -[Y, X]$, we can trivially show that if the even (or
+    cyclic) permutations are correct, then the odd (or anticyclic)
+    permutations are also correct owing to the negative value
+    associated with the odd (or anticyclic) terms in the Levi-Civita
+    operator.
+
+    Unfortunately, I don't see any way to, in general, show this
+    result using the material available in Chapter 1.  So...let's
+    crank it out.  For the 3 cyclic cases listed above, we'll need to show that:
+
+    \begin{equation}
+      [S_i, S_j] = i \hbar S_k |_{(i, j, k) \in \{(x, y, z),  (y, z, x),  (z, x, y)\}}
+    \end{equation}
+    
+    Starting with $x$ and $y$:
+    \begin{equation}
+      \inlabel{a-xy}
+      \begin{split}
+        [S_x, S_y]
+        &= S_xS_y - S_yS_x \\
+        &= [\frac \hbar 2 (\ket - \bra + + \ket + \bra -)][i \frac \hbar 2 (\ket - \bra + - \ket + \bra -)] - [i \frac \hbar 2 (\ket - \bra + - \ket + \bra -)][\frac \hbar 2 (\ket - \bra + + \ket + \bra -)] \\
+        &= i \frac{\hbar^2}{4} \{ [(\ket - \bra + + \ket + \bra -)][(\ket - \bra + - \ket + \bra -)] - [(\ket - \bra + - \ket + \bra -)][(\ket - \bra + + \ket + \bra -)]\}\\
+        &= i \frac{\hbar^2}{4} \{ (-\Lambda_- + \Lambda_+) - (\Lambda_- - \Lambda_+) \} \\
+        &= i \frac{\hbar^2}{4} \{ (-\Lambda_- + \Lambda_+) + (-\Lambda_- + \Lambda_+) \} \\
+        &= i \frac{\hbar^2}{4} \{ 2 (\Lambda_+ - \Lambda_-) \} \\
+        &= i \hbar \{ \frac{\hbar}{2} (\Lambda_+ - \Lambda_-) \} \\
+        &= i \hbar S_z \qed{}\\
+      \end{split}
+    \end{equation}
+
+    Next up to bat is $y$ and $z$:
+    \begin{equation}
+      \inlabel{a-yz}
+      \begin{split}
+        [S_y, S_z]
+        &= S_yS_z - S_zS_y \\
+        &= [i \frac \hbar 2 (\ket - \bra + - \ket + \bra -)][\frac \hbar 2 (\Lambda_+ - \Lambda_-)] - [\frac \hbar 2 (\Lambda_+ - \Lambda_-)][i \frac \hbar 2 (\ket - \bra + - \ket + \bra -)]\\
+        &= i \frac{\hbar^2}{4} \{ [(\ket - \bra + - \ket + \bra -)][(\Lambda_+ - \Lambda_-)] - [(\Lambda_+ - \Lambda_-)][(\ket - \bra + - \ket + \bra -)] \}\\
+        &= i \frac{\hbar^2}{4} \{ (\ket - \bra + + \ket + \bra -) - (-\ket - \bra + - \ket + \bra -) \}\\
+        &= i \frac{\hbar^2}{4} \{ (\ket - \bra + + \ket + \bra -) + (\ket - \bra + + \ket + \bra -) \}\\
+        &= i \frac{\hbar^2}{4} \{ 2(\ket - \bra + + \ket + \bra -) \}\\
+        &= i \hbar \{ \frac{\hbar}{2} (\ket - \bra + + \ket + \bra -) \}\\
+        &= i \hbar S_x \qed\\
+      \end{split}
+    \end{equation}
+
+    Finally, we have $z$ and $x$:
+    \begin{equation}
+      \inlabel{a-zx}
+      \begin{split}
+        [S_z, S_x]
+        &= S_zS_x - S_xS_z \\
+        &= [\frac \hbar 2 (\Lambda_+ - \Lambda_-)][\frac \hbar 2 (\ket - \bra + + \ket + \bra -)] - [\frac \hbar 2 (\ket - \bra + + \ket + \bra -)][\frac \hbar 2 (\Lambda_+ - \Lambda_-)]\\
+        &= \frac{\hbar^2}{4} \{ [(\Lambda_+ - \Lambda_-)][(\ket - \bra + + \ket + \bra -)] - [(\ket - \bra + + \ket + \bra -)][(\Lambda_+ - \Lambda_-)]\\
+        &= \frac{\hbar^2}{4} \{ (-\ket - \bra + + \ket + \bra -) - (\ket - \bra + - \ket + \bra -) \}\\
+        &= \frac{\hbar^2}{4} \{ 2(-\ket - \bra + + \ket + \bra -) \}\\
+        &= \hbar \{ \frac{-1}{i}S_y \}\\
+        &= i \hbar S_y \qed\\
+      \end{split}
+    \end{equation}
+
+    In equations \inref{a-xy}, \inref{a-yz}, and \inref{a-zx} we
+    showed that the cyclic scenarios are correct and the anti-cyclic
+    scenarios were also shown to be correct if the cyclic scenarios
+    are.
+    
+  \end{answerpart}
+
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%                              Part b                                       %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \begin{answerpart}{Anticommutation}
+
+    In equations \inref{a-xy}, \inref{a-yz}, and \inref{a-zx} we can
+    see that each has an intermediate step in which $x - (-x)
+    \Rightarrow 2x$ occurs.  Since the anticommutation would change
+    that to become $x + (-x) \Rightarrow 0$ it is trivial to show that
+    all scenarios in which $i \ne j$ result in 0.
+
+    Examining, then the cases of $i=j$ we see that
+    \begin{equation}
+      \begin{split}
+        S_z^2 &= \frac{\hbar^2}{4} (\Lambda_+ - \Lambda_-)^2\\
+        &= \frac{\hbar^2}{4} (\Lambda_+ + \Lambda_-)\\
+        &= \frac{\hbar^2}{4} I\\
+      \end{split}
+    \end{equation}
+
+    \begin{equation}
+      \begin{split}
+        S_x^2 &= \left( \frac \hbar 2 (\ket - \bra + + \ket + \bra -) \right)^2\\
+        &= \frac{\hbar^2}{4}(\braket{-} + \braket{+})\\
+        &= \frac{\hbar^2}{4}(\Lambda_- + \Lambda_+)\\
+        &= \frac{\hbar^2}{4}\\
+        &= S_z^2\\
+      \end{split}
+    \end{equation}
+
+    \begin{equation}
+      \begin{split}
+        S_y^2 &= \left( i \frac \hbar 2 (\ket - \bra + - \ket + \bra -) \right)^2\\
+        &= - \frac{\hbar^2}{4}(-\braket - - \braket + +)\\
+        &= \frac{\hbar^2}{4} (\Lambda_- + \Lambda_+) \\
+        &= \frac{\hbar^2}{4} I\\
+        &= S_z^2\\
+      \end{split}
+    \end{equation}
+
+    Putting it all together, we see that
+
+    \begin{equation}
+      \begin{split}
+        \{S_i, S_i\}
+        &= S_i^2 + S_i^2\\
+        &= 2S_i^2\\
+        &= 2\frac{\hbar^2}{4}\\
+        &= \frac{\hbar^2}{2} \qed\\
+      \end{split}
+    \end{equation}
+
+    While not strictly necessary for this problem, I had these notes
+    laying around so I've included them.  Add them together (as in eq
+    1.116) and we have rederived equation 1.117 from the book:
+
+    \begin{equation}
+      \tag{1.116}
+      S^2 \equiv S_x^2 + S_y^2 + S_z^2
+    \end{equation}
+    
+    \begin{equation}
+      \tag{1.117}
+      S^2 = \left(\frac 3 4\right) \hbar^2
+    \end{equation}
+
+    Importantly, this outcome MUST be the case.  When applied with a
+    test-bra/ket ($\ket \psi$), we find that:
+
+    \begin{equation}
+      \begin{split}
+        \expval{S_i^{2}}{\psi}
+        &= (\bra \psi S_i ) (S_i \ket \psi)\\
+        &= (\alpha^* \bra{\psi'}) (\alpha \ket{\psi'})\\
+        &= |\alpha^2| \braket{\psi'} \\
+        &= |\alpha^2|\\
+      \end{split}
+    \end{equation}
+
+    Since the magnitude of a spin-operator acting on a spin-state is
+    $\frac \hbar 2$, we can quickly see that a magnitude $\frac \hbar
+    2$ bra acting on its own hermitian adjoint ket must produce a
+    quantity of $\frac{\hbar^2}{4}$.
+
+  \end{answerpart}
+
+\end{answer}
