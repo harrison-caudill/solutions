@@ -1,0 +1,115 @@
+\begin{question}
+
+
+  \begin{questionpart}
+    Consider two kets $\ket{\alpha}$ and $\ket{\beta}$. Suppose
+    $\braket{a'}{\alpha}, \braket{a''}{\alpha},\ldots$ and
+    $\braket{a'}{\beta}, \braket{a''}{\beta},\ldots$ are all known,
+    where $\ket{a'}, \ket{a''}, \ldots$ form a complete set of base
+    kets. Find the matrix representation of the operator
+    $\dyad{\alpha}{\beta}$ in that basis.
+  \end{questionpart}
+
+
+  \begin{questionpart}
+    We now consider a spin $\frac 1 2$ system and let $\ket{\alpha}$
+    and $\ket{\beta}$ be $\ket{S_z; +}$ and $\ket{S_x; +}$,
+    respectively. Write down explicitly the square matrix that
+    corresponds to $\dyad{\alpha}{\beta}$ in the usual ($S_z$
+    diagonal) basis.
+  \end{questionpart}
+
+\end{question}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                              Part a                                       %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{answerpart}{}
+
+  \begin{equation}
+    \tag{1.73}
+    X \dot{=}
+    \begin{pmatrix}
+      \mel{\alpha^{(1)}}{X}{\alpha^{(1)}} & \mel{\alpha^{(1)}}{X}{\alpha^{(2)}} & \ldots \\
+      \mel{\alpha^{(2)}}{X}{\alpha^{(1)}} & \mel{\alpha^{(2)}}{X}{\alpha^{(2)}} & \ldots \\
+      \vdots & \vdots & \ddots\\
+    \end{pmatrix}
+  \end{equation}
+
+  \begin{equation}
+    \tag{1.86}
+    A = \sum_{a''}\sum_{a'} \dyad{a''}A\dyad{a'}
+  \end{equation}
+
+  Extending 1.86
+
+  \begin{equation}
+    \begin{split}
+      A
+      &= \sum_{i}\sum_{j} \dyad{a_i}A\dyad{a_j}\\
+      &= \sum_{i}\sum_{j}\mel{a_i}{A}{a_j}\dyad{a_i}{a_j}\\
+    \end{split}
+  \end{equation}
+
+  Combining with 1.73
+  
+  \begin{equation}
+    \begin{split}
+      A_{i'j'}
+      &= \bra{a_{i'}} \left(\sum_{i}\sum_{j}\mel{a_i}{A}{a_j}\dyad{a_i}{a_j}\right) \ket{a_{j'}}\\
+      &= \mel{a_{i'}}{A}{a_{j'}}
+    \end{split}
+  \end{equation}
+
+  Combining with our operator definition:
+  
+  \begin{equation}
+    \begin{split}
+      \dyad{\alpha}{\beta}_{ij}
+      &= \mel{a_i}{(\dyad{\alpha}{\beta})}{a_j}\\
+      &= \braket{a_i}{\alpha}\braket{\beta}{a_j}\\
+      &= \braket{a_i}{\alpha}\braket{a_j}{\beta}^* \qed\\
+    \end{split}
+  \end{equation}
+  
+\end{answerpart}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                              Part b                                       %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{answerpart}{}
+
+  \begin{equation}
+    \ket{\alpha} \equiv \ket +, \ket{\beta} \equiv \ket{x+}
+  \end{equation}
+
+  \begin{equation}
+    \ket{\beta} = \frac{1}{\sqrt{2}}\ket{+} + \frac{1}{\sqrt{2}}\ket{-}
+  \end{equation}
+
+  \begin{equation}
+    \dyad{\alpha}{\beta} = \frac{1}{\sqrt{2}}\dyad{+} + \frac{1}{\sqrt{2}}\dyad{+}{-}
+  \end{equation}
+  
+  \begin{equation}
+    \begin{split}
+      \dyad{\alpha}{\beta}
+      &\dot{=}
+      \begin{bmatrix}
+        \mel{+}{A}{+} & \mel{+}{A}{-}\\
+        \mel{-}{A}{+} & \mel{-}{A}{-}\\
+      \end{bmatrix}\\
+      &=
+      \frac{1}{\sqrt{2}}
+      \begin{bmatrix}
+        1 & 1\\
+        0 & 0\\
+      \end{bmatrix}\qed
+    \end{split}
+  \end{equation}
+  
+\end{answerpart}

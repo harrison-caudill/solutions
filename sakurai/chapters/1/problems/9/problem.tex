@@ -1,0 +1,183 @@
+\begin{question}
+
+  Consider a ket space spanned by the eigenkets ${\ket{a'}}$ of a
+  Hermitian operator $A$.  There is no degeneracy.
+
+  \begin{questionpart}
+    Prove that
+    \begin{equation*}
+      \prod_{a'}(A - a')
+    \end{equation*}
+    is the null operator.
+  \end{questionpart}
+
+  \begin{questionpart}
+    What is the significance of
+    \begin{equation*}
+      \prod_{a'' \ne a'}\frac{(A-a'')}{(a'-a'')}?
+    \end{equation*}
+  \end{questionpart}
+
+  \begin{questionpart}
+    Illustrate (a) and (b) using $A$ set equal to $S_z$ of a sping $\frac 1 2$ system.
+  \end{questionpart}
+
+\end{question}
+
+\begin{answer}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                              Part a                                       %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{answerpart}{Null Operator}
+  This problem will be solved in two different ways, one more elegant
+  than the other.  I initially solved this problem using a direct
+  combinatorial analysis (a friend of mine employed a
+  proof-by-induction approach as he was most recently coming from a
+  PhD in computer science).  The more elegant approach is to recognize
+  the deeper significance of the individual terms and to show the
+  effect.
+
+  To begin the combinatorial approach, recite a few of the
+  mathematical assumptions from the problem:
+
+  \begin{equation}
+    A^\dagger = A = \left. \sum_i a_i\Lambda_i, \text{ where } a_i \ne a_j \right|_{i \ne j}
+  \end{equation}
+
+  We then need to show that
+
+  \begin{equation}
+    P \equiv \prod_i(A - a_iI) = \hat{0}
+  \end{equation}
+
+  \begin{equation}
+    \begin{split}
+      P
+      =\ &\prod_i(A - a_iI)\\
+      =\ &\prod_i(\sum_ja_j\Lambda_j - a_iI)\\
+      =\ 
+      &(a_1\Lambda_1 + a_2\Lambda_2 + \ldots + a_n\Lambda_n - a_1)\\
+      &(a_1\Lambda_1 + a_2\Lambda_2 + \ldots + a_n\Lambda_n - a_2)\\
+      &\vdots\\
+      &(a_1\Lambda_1 + a_2\Lambda_2 + \ldots + a_n\Lambda_n - a_n)\\
+    \end{split}
+  \end{equation}
+
+  \begin{itemize}
+
+  \item The resulting product is all combinations of one element from each row.
+
+  \item We know that all cross-terms including any
+    $\left.\Lambda_i\Lambda_j\right|_{i \ne j}$ terms will go to 0.
+    That means any cross-terms with dissimilar $\Lambda$'s are 0,
+    leaving only cross-terms originating from the final column.
+
+  \item For any term of the form $\left.a_i^k\Lambda_i\right|_{k>1}$,
+    there will be a 1:1 correspondance with a negative term because:
+
+    \begin{equation}
+      \begin{split}
+        a_i\Lambda_i \cdot a_i\Lambda_i &= a_i^2\Lambda_i\\
+        -a_i \cdot a_i\Lambda_i &= -a_i^2\Lambda_i\\
+      \end{split}
+    \end{equation}
+
+  \item The remaining terms are:
+
+    \begin{equation}
+      (-1)^{n-1}\sum_i\prod_ja_j\Lambda_i + (-1)^{n}\prod_ja_j
+    \end{equation}
+
+    A quick note about the $n-1$ vs $n$ for the terms there which is
+    important.  In the $n-1$ case, one of the terms originates from a
+    term with a $\Lambda_i$ which will always be positive, whereas all
+    the other terms must originate from the right column which will
+    always be negative.  Hence, there are $n-1$ negative terms applied
+    and one positive, resulting in $(-1)^{n-1}$.  The final term,
+    however, is the term resulting from the product of all of the bare
+    terms in the final column, all $n$ of which are negative,
+    resulting in $(-1)^n$.  This distinction is critical to showing
+    that the two portions cancel each other out.
+
+  \item Using $I = \sum_i\Lambda_i$ , we can show that
+    
+    \begin{equation}
+      \begin{split}
+        &(-1)^{n-1}\sum_i\prod_ja_j\Lambda_i + (-1)^{n}\prod_ja_jI\\
+        =\ &(-1)^{n-1}\prod_ja_jI + (-1)^{n}\prod_ja_jI\\
+        =\ &(-1)^{n-1}\prod_ja_jI - (-1)^{n-1}\prod_ja_jI\\
+        =\ &(-1)^{n-1}\prod_ja_j(I - I)\\
+        =\ &(-1)^{n-1}\prod_ja_j(0)\\
+        =\ &0 \qed\\
+      \end{split}
+    \end{equation}
+  \end{itemize}
+
+  I understand that this approach is somewhat brutish, but it's always
+  nice to then compare it with the elegant approach.  One of the best
+  pieces of advice I received in Calc 2 was this: ``If you're ever
+  stuck and don't know what to do, just start taking derivatives.''
+  Similarly, this problem is a good reminder that when you're stuck,
+  you should try acting a couple of kets on things to see what happens.
+
+  \begin{equation}
+    (A - a_i)\ket{a_i} = (a_i - a_i)\ket{a_i} = 0
+  \end{equation}
+
+  Each term essentially eliminates one of the eigenbases.  If the
+  eigenbasis is non-degenerate, then this operator eliminates the
+  entire space.$\qed$
+  
+\end{answerpart}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                              Part b                                       %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{answerpart}{Projection Operator}
+
+  Jumping right to the easy way of doing things this time, we see that:
+  
+  \begin{equation}
+    \begin{split}
+      X\ket{a_j}
+      &= \prod_{i \ne j}\frac{(A - a_i)}{(a_j - a_i)}\ket{a_j}\\
+      &= \prod_{i \ne j}\frac{(a_j - a_i)}{(a_j - a_i)}\ket{a_j}\\
+      &= \ket{a_j}\\
+    \end{split}
+  \end{equation}
+
+  The filter on the top removes anything other than the omitted
+  eigenket, and the normalization constant on the bottom ensures that
+  the magnitude is 1.  Showing a negative result is also pretty easy:
+
+  \begin{equation}
+    \begin{split}
+      \left.X\ket{a_k}\right|_{k \ne j}
+      &= \prod_{i \ne j}\frac{(A - a_i)}{(a_j - a_i)}\ket{a_k}\\
+      &= \frac{A - a_k}{a_j - a_k}\prod_{i \ne j \ne k}\frac{(A - a_i)}{(a_j - a_i)}\ket{a_k}\\
+      &= \frac{a_k - a_k}{a_j - a_k}\prod_{i \ne j \ne k}\frac{(A - a_i)}{(a_j - a_i)}\ket{a_k}\\
+      &= 0\prod_{i \ne j \ne k}\frac{(A - a_i)}{(a_j - a_i)}\ket{a_k}\\
+      &= 0\\
+    \end{split}
+  \end{equation}
+
+  \begin{equation}
+    \prod_{i \ne j}\frac{(A - a_i)}{(a_j - a_i)} = \Lambda_j \qed
+  \end{equation}
+
+\end{answerpart}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                              Part c                                       %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{answerpart}{Grind it Out}
+\end{answerpart}
+
+\end{answer}

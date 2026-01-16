@@ -29,16 +29,116 @@
 %%                              Part a                                       %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{answerpart}{Trace XY}
-  
+\begin{answerpart}{$Tr(XY) == Tr(YX)$}
+
+  \begin{equation}
+    \tag{1.170}
+    tr(X) = \sum_i \ev{X}{a_i}\\
+  \end{equation}
+
+  \begin{equation}
+    \tag{1.171}
+    \begin{split}
+      \sum_{a'}{\ev{X}{a'}}
+      &= \sum_{a'}\sum_{b'}\sum_{b''}\bra{a'}\ket{b'}\bra{b'}X\ket{b''}\bra{b''}\ket{a'}\\
+      &= \sum_{b'}\sum_{b''}\bra{b''}\ket{b'}\bra{b'}X\ket{b''}\\
+      &= \sum_{b'}\bra{b'}X\ket{b'}\\
+    \end{split}
+  \end{equation}
 \end{answerpart}
+
+\begin{equation}
+  \inlabel{xy}
+  \begin{split}
+    tr(XY)
+    &= \sum_i\bra{a_i}XY\ket{a_i}\\
+    &= \sum_i\sum_j\bra{a_i}X\ket{a_j}\bra{a_j}Y\ket{a_i}\\
+  \end{split}
+\end{equation}
+
+Now let's see what it looks like when we have YX instead of XY.
+
+\begin{equation}
+  \begin{split}
+    tr(YX)
+    &= \sum_i\bra{a_i}YX\ket{a_i}\\
+    &= \sum_i\sum_j\bra{a_i}Y\ket{a_j}\bra{a_j}X\ket{a_i}\\
+  \end{split}
+\end{equation}
+
+After our basic multiplication by $\vectorbold{1}$, we relabel the
+indices (it's just a sum, so we can do the sum in whatever order we
+choose).
+
+\begin{equation}
+  \inlabel{yx}
+  \begin{split}
+    tr(YX)
+    &= \sum_i\sum_j\bra{a_i}Y\ket{a_j}\bra{a_j}X\ket{a_i}\\
+    &= \sum_i\sum_j\bra{a_j}Y\ket{a_i}\bra{a_i}X\ket{a_j}\\
+    &= \sum_i\sum_j\bra{a_i}X\ket{a_j}\bra{a_j}Y\ket{a_i}\\
+  \end{split}
+\end{equation}
+
+You'll note that the final product of equation \inref{yx} is the same
+as the final product of equation \inref{xy}.  Putting everything
+together, we have:
+
+\begin{equation}
+  \begin{split}
+    tr(XY)
+    &= \sum_i\bra{a_i}XY\ket{a_i}\\
+    &= \sum_i\sum_j\bra{a_i}X\ket{a_j}\bra{a_j}Y\ket{a_i}\\
+    &= \sum_i\sum_j\bra{a_j}Y\ket{a_i}\bra{a_i}X\ket{a_j}\\
+    &= \sum_i\sum_j\bra{a_i}Y\ket{a_j}\bra{a_j}X\ket{a_i}\\
+    &= \sum_i\bra{a_i}YX\ket{a_i}\\
+    &= tr(YX) \qed\\
+  \end{split}
+\end{equation}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                              Part b                                       %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{answerpart}{Hermitian of XY}
+\begin{answerpart}{$(XY)^\dagger$}
+
+  He actually give us the answer in equation 1.45, copied here for
+  convenience:
+  
+  \begin{equation}
+    \tag{1.45}
+    XY\ket{\alpha}
+    = X(Y\ket{\alpha})
+    \overset{\text{DC}}{\leftrightarrow}
+    (\bra{\alpha}Y^\dagger)X^\dagger
+    = \bra{\alpha}Y^{\dagger}X^{\dagger}
+  \end{equation}
+
+  This is still a practice problem, though, so I guess I'll embelish
+  Sakurai's proof a bit.
+
+  \begin{equation}
+    \tag{1.39}
+    X\ket{\alpha} \overset{\text{DC}}{\leftrightarrow} \bra{\alpha}X^{\dagger}
+  \end{equation}
+
+  \begin{equation}
+    \ket{\beta} \equiv Y\ket{\alpha}
+  \end{equation}
+
+  \begin{equation}
+    \begin{split}
+      XY\ket{\alpha}
+      &= X(Y\ket{\alpha})\\
+      &= X\ket{\beta} \overset{\text{DC}}{\leftrightarrow} \bra{\beta}X^{\dagger}\\
+      &= (\bra{\alpha}Y^{\dagger})X^{\dagger}\\
+      &= \bra{\alpha}Y^{\dagger}X^{\dagger}\\
+      &\Rightarrow (XY)^{\dagger} = Y^{\dagger}X^{\dagger}
+    \end{split}
+  \end{equation}
+
 \end{answerpart}
 
 
@@ -47,6 +147,180 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{answerpart}{Phasors (on stun)}
+
+  \begin{equation}
+    e^X \equiv \sum_{k=0}^{\infty} \frac{1}{k!} X^k
+  \end{equation}
+
+  \begin{equation}
+    f(A) \equiv \sum_{k=0}^{\infty} \frac{1}{k!} A^k
+  \end{equation}
+
+  \begin{equation}
+    \begin{split}
+      A
+      &= \sum_i a_i\dyad{a_i} \\
+      &= \sum_i a_i\Lambda_i \\
+    \end{split}
+  \end{equation}
+
+  \begin{equation}
+    \begin{split}
+      e^if(A)
+      &\equiv \sum_{k=0}^{\infty} \frac{1}{k!} (if(A))^k\\
+      &= \sum_{k=0}^{\infty} \frac{1}{k!} i^kf(A)^k\\
+      &= \sum_{k=0}^{\infty} \frac{(-1)^k}{2k!} f(A)^{2k} + i\sum_{k=0}^{\infty} \frac{(-1)^k}{(2k+1)!} f(A)^{2k+1}\\
+      &= \cos{f(A)} + i\sin{f(A)}\\
+    \end{split}
+  \end{equation}
+
+  The only issue I have with this construction is that we didn't make
+  use of the any of the initial properties of the operator: ``where
+  $A$ is a Hermitian operator whose eigenvalues are known''
+
+  The only thing I can think of to do is to rewrite it as:
+  \begin{equation}
+    \cos{f(A)} + i\sin{f(A)} = \cos{f(\sum_i a_i\Lambda_i)} + i\sin{f(\sum_i a_i\Lambda_i)}
+  \end{equation}
+
+  But because we don't know anything about $f(A)$, we can't make any
+  assumptions about linearity so we can't break it open beyond that.
+  Here are some possible definitions of $f(A)$ given what we know
+  about it:
+
+  \begin{equation}
+    \begin{split}
+      f(A) &= A\\
+      f(A) &= M - A (where\ M\ is\ an\ undiagonalizable\ matrix)\\
+      f(A) &= 0\\
+      f(A) &= \vectorbold{0}\\
+      f(A) &= \dyad{0}\\
+      f(A) &= A\ BASKET\ OF\ KITTENS!! (yes,\ take\ the\ factorial\ twice)\\
+    \end{split}
+  \end{equation}
+
+  Absent any assumptions about $f(A)$, this is the end of the
+  problem...However, others have suggested that we should \emph{make}
+  some assumptions about $f(A)$ (in the paraphrased words of the Pitch
+  Meetings guy on YouTube) ``So the problem can happen!''.
+
+  Let's assume that $f(A)$ is an \emph{analytic} function
+  \emph{returning an operator} -- so the problem can happen!  Under
+  this assumption it is, by definition, expressible as a taylor
+  series.
+
+  \begin{equation}
+    \begin{split}
+      f(A) &= \sum_{k=0}^{\infty} \frac{f^{(k)}(0)}{k!} A^k
+    \end{split}
+  \end{equation}
+
+  Using our spectral decomposition of $A$, we find that
+
+  \begin{equation}
+    f(A)
+    = \sum_{j=0}^{\infty} \frac{f^{(j)}(0)}{j!} A^j
+    = \sum_{j=0}^{\infty} \frac{f^{(j)}(0)}{j!} \left(\sum_i a_i\Lambda_i\right)^j
+    = \sum_{j=0}^{\infty} \frac{f^{(j)}(0)}{j!} \left(\sum_i a_i\Lambda_i\right)^j
+  \end{equation}
+
+  Subsituting our new expression for $f(A)$ back into our power-series
+  expansion of $exp[i\ f(A)]$ we find that
+
+  \begin{equation}
+    \begin{split}
+      exp[if(A)]
+      &\equiv \sum_{k=0}^{\infty} \frac{1}{k!} (if(A))^k\\
+      &= \sum_{k=0}^{\infty} \frac{1}{k!} i^k\left(\sum_{j=0}^{\infty} \frac{f^{(j)}(0)}{j!} \left(\sum_i a_i\Lambda_i\right)^j\right)^k\\
+    \end{split}
+  \end{equation}
+
+  This is obviously a hopeless mess, so let's try to simplify a bit.
+  We'll start by examining what happens when our sum of $a_i\Lambda_i$
+  is raised to a power:
+
+  \begin{equation}
+    \begin{split}
+      \left(\sum_i a_i\Lambda_i\right)^2 =\ 
+      &(a_1\Lambda_1 + a_2\Lambda_2 + \ldots + a_n\Lambda_n)\\
+      &(a_1\Lambda_1 + a_2\Lambda_2 + \ldots + a_n\Lambda_n)\\
+    \end{split}
+  \end{equation}
+
+  Since $\Lambda_i\Lambda_j = \delta_{ij}$, we know that any
+  cross-terms go to 0, and since $\Lambda_i^n = \Lambda_i$ that leaves
+  us with:
+  
+  \begin{equation}
+    \left(\sum_i a_i\Lambda_i\right)^2 = (a_1^2\Lambda_1 + a_2^2\Lambda_2 + \ldots + a_n^2\Lambda_n)
+  \end{equation}
+
+  Going the next step, we see that:
+
+  \begin{equation}
+    \begin{split}
+      \left(\sum_i a_i\Lambda_i\right)^n
+      &= (a_1^n\Lambda_1 + a_n^n\Lambda_n + \ldots + a_n^n\Lambda_n)\\
+      &= \sum_i a_i^n\Lambda_i
+    \end{split}
+  \end{equation}
+  
+  Putting our handy new identity into our horrendous equation, we see
+  that:
+
+  \begin{equation}
+    \begin{split}
+      exp[if(A)]
+      &= \sum_{k=0}^{\infty} \frac{1}{k!} i^k\left(\sum_{j=0}^{\infty} \frac{f^{(j)}(0)}{j!} \left(\sum_i a_i^j\Lambda_i\right)\right)^k\\
+    \end{split}
+  \end{equation}
+
+  Since i and j are independet of one another, let's rearrange our sums:
+
+  \begin{equation}
+    \begin{split}
+      exp[if(A)]
+      &= \sum_{k=0}^{\infty} \frac{1}{k!} i^k\left(\sum_i\sum_{j=0}^{\infty} \frac{f^{(j)}(0)}{j!}a_i^j\Lambda_i\right)^k\\
+    \end{split}
+  \end{equation}
+
+  We can now reverse our Taylor series expression and also re-apply
+  our trick with the orthogonality of $\Lambda_i$:
+
+  \begin{equation}
+    \begin{split}
+      exp[if(A)]
+      &= \sum_{k=0}^{\infty} \frac{1}{k!} i^k\left(\sum_i\sum_{j=0}^{\infty} \frac{f^{(j)}(0)}{j!}a_i^j\Lambda_i\right)^k\\
+      &= \sum_{k=0}^{\infty} \frac{1}{k!} i^k\left(\sum_if(a_i)\Lambda_i\right)^k\\
+      &= \sum_{k=0}^{\infty} \frac{1}{k!} i^k\sum_if(a_i)^k\Lambda_i\\
+      &= \sum_i\sum_{k=0}^{\infty} \frac{1}{k!} i^kf(a_i)^k\Lambda_i\\
+    \end{split}
+  \end{equation}
+
+  There's a subtlety there.  Note that the $\Lambda_i$ is
+  \emph{outside} of the $f(a_i)$.  That's because $\Lambda_i^0 = I \ne
+  \Lambda_i$ and the infinite sum over $j$ starts at 0 not 1.  As a
+  direct consequence, the $\Lambda_i$ DOES NOT match the pattern of
+  the Taylor series and must be excluded.  One of the characteristics
+  of an analytic function is that it is inherently polymorphic and can
+  work on either a scalar or an operator.
+
+  We'll reverse one more identity, the one for $e^{iX}$ to arrive at
+  our final form:
+  
+  \begin{equation}
+    \begin{split}
+      exp[if(A)]
+      &= \sum_i\sum_{k=0}^{\infty} \frac{1}{k!} i^kf(a_i)^k\Lambda_i\\
+      &= \sum_i e^{if(a_i)}\Lambda_i\\
+    \end{split}
+  \end{equation}
+
+  This is a truly remarkable result and will likely be referenced
+  frequently in the future.  You can spectrally decompose an operator
+  inside of a function (assuming the function is analytic in nature,
+  which it almost certainly will be).
+  
 \end{answerpart}
 
 
@@ -55,4 +329,34 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{answerpart}{Inner Products}
+
+  This one seems pretty roundabout for something so simple, but here
+  we go anyway.
+
+  \begin{equation}
+    \psi_{\alpha'}(\vectorbold{x'}) \equiv \braket{\vectorbold{x'}}{\alpha'}
+  \end{equation}
+
+  Swapping to my preferred notation:
+  
+  \begin{equation}
+    \sum_{\alpha'} \psi_{\alpha'}^*(\vectorbold{x'}) \psi_{\alpha'}(\vectorbold{x''})
+    = \sum_i \psi_i^*(x')\psi_i(x'')
+  \end{equation}
+
+  And doing the trivial translation:
+  
+  \begin{equation}
+    \begin{split}
+      \sum_i \psi_i^*(x')\psi_i(x'')
+      &= \sum_i \braket{\alpha_i}{x'}\braket{x''}{\alpha_i}\\
+      &= \sum_i \braket{x''}{\alpha_i}\braket{\alpha_i}{x'}\\
+      &= \braket{x''}{x'} \qed\\
+    \end{split}
+  \end{equation}
+
+  We may \emph{suspect} that $\ket{x'}$ and $\ket{x''}$ are eigkenkets
+  and therefor orthogonal, but we don't \emph{know} anything about
+  them, so this is where the problem ends.
+  
 \end{answerpart}
