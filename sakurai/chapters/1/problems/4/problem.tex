@@ -1,6 +1,6 @@
 \begin{question}
 
-Suppose a 2x2 matrix $X$ (not necessarily Hermitian, nor unitary) is
+Suppose a $2 \times 2$ matrix $X$ (not necessarily Hermitian, nor unitary) is
 written as:
 
 \begin{equation*}
@@ -17,8 +17,16 @@ $a_{1,2,3}$ are numbers.
   \item Obtain $a_0$ and $a_k$ in terms of the matrix elements $X_{ij}$
 \end{questionpart}
 
-
 \end{question}
+
+Before jumping into the mathematical detail, it's worth taking a
+moment to consider the physical interpretation of $\vec{\sigma} \cdot
+\vec{a}$.  In this case, $\vec{a}$ is a vector representing a quantum
+state where it tells you what fraction of the state is in $x$, what
+fraction is in $y$, and what fraction is in $z$.  Since a has no
+restriction in magnitude, presumably its magnitude is $\frac \hbar 2$
+or something.  The next problem uses $\hat{n}$ as a unit vector to
+much the same effect and will be discussed further in that problem.
 
 \begin{equation*}
   \tag{3.50}
@@ -50,10 +58,6 @@ $a_{1,2,3}$ are numbers.
   \end{split}
 \end{equation*}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%                              Part a                                       %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{answerpart}{}
 
@@ -173,8 +177,8 @@ $a_{1,2,3}$ are numbers.
 
   Adding in $a_0$
   
-  \begin{equation*}
-    \tag{3.56}
+  \begin{equation}
+    \inlabel{solution-b}
     \begin{split}
       \vec{\sigma} \cdot \vec{a} &\equiv \sum_k a_k \sigma_k \\
       &= \begin{pmatrix}
@@ -183,6 +187,6 @@ $a_{1,2,3}$ are numbers.
       \end{pmatrix}
       \qed
     \end{split}
-  \end{equation*}
+  \end{equation}
 
 \end{answerpart}
