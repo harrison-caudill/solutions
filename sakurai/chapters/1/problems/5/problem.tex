@@ -1,0 +1,315 @@
+\begin{question}
+
+  \begin{questionpart}
+  Show that the determinant of a $2 \times 2$ matrix
+    $\vec{\sigma} \cdot \vec{a}$ is invariant under
+
+    \begin{equation*}
+      \vec{\sigma} \cdot \vec{a} \rightarrow \vec{\sigma} \cdot \vec{a}' \equiv
+      exp \left( \frac{i\vec{\sigma} \cdot \hat{n}\phi}{2}\right)
+      \vec{\sigma} \cdot \vec{a} \ 
+      exp \left( \frac{-i\vec{\sigma} \cdot \hat{n}\phi}{2}\right)
+    \end{equation*}
+
+    where the matrices $\sigma$ are given in (3.50).\\
+  \end{questionpart}
+
+  \begin{questionpart}
+  Find $a_k'$ in terms of $a_k$ when $\hat{n}$ is in the
+    positive z-direction and interpret your result.\\
+  \end{questionpart}
+
+\end{question}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                              Part a                                       %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{answerpart}{Equivalence of determinants}
+
+  We start by separating out the three terms individually
+  
+  \begin{equation}
+    \begin{split}
+      X
+      &= \vec{\sigma} \cdot \vec{a} \rightarrow \vec{\sigma} \cdot \vec{a}'\\
+      &\equiv
+      exp \left( \frac{i\vec{\sigma} \cdot \hat{n}\phi}{2}\right)
+      \vec{\sigma} \cdot \vec{a} \ 
+      exp \left( \frac{-i\vec{\sigma} \cdot \hat{n}\phi}{2}\right)\\
+      &= A \cdot B \cdot C\\
+    \end{split}
+  \end{equation}
+
+  Using the separability of the determinant of the factors:
+
+  \begin{equation}
+    det(X) = det(ABC) = det(A) det(B) det(C)
+  \end{equation}
+
+  Ultimately, we are trying to show that:
+
+  \begin{equation}
+    \begin{split}
+      det(X)
+      &= det(B) \\
+      &= det(ABC) \\
+      &= det(A) det(B) det(C) \\
+    \end{split}
+  \end{equation}
+
+  This implies that
+  
+  \begin{equation}
+    \begin{split}
+      \frac{det(X)}{det(B)}
+      &= 1 \\
+      &= det(A)det(C) \\
+      &= det(AC) \\
+    \end{split}
+  \end{equation}
+
+  Putting it all together, we see that:
+  
+  \begin{equation}
+    \begin{split}
+      det(X)
+      &= det \left\{ exp \left( \frac{i\vec{\sigma} \cdot \hat{n}\phi}{2}\right)
+      \vec{\sigma} \cdot \vec{a} \ 
+      exp \left( \frac{-i\vec{\sigma} \cdot \hat{n}\phi}{2}\right) \right\}\\
+      &= det(ABC) \\
+      &= det(A)det(B)det(C) \\
+      &= det(A)det(C)det(B) \\
+      &= det(AC)det(B) \\
+      &= det(I)det(B) \\
+      &= det(B) \\
+      &= det(\vec{\sigma} \cdot \vec{a})
+      \qed\\
+    \end{split}
+  \end{equation}
+
+\end{answerpart}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                              Part b                                       %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{answerpart}{$\hat{n} = \hat{z}$}
+
+To address this part, we must first examine the meaning of
+$\vec{\sigma} \cdot \hat{n}$.  The $n$ vector is a vector of real
+numbers between -1 and 1 indicating the fraction within $\sigma_i$.
+The problem specifies $\hat{n}$ = $\hat{z}$ meaning that
+
+\begin{equation}
+  \sigma \cdot \hat{n} = \sigma_z
+\end{equation}
+
+Next, we'll substitute that back into our definition of $a'$
+
+\begin{equation}
+  \inlabel{b-characteristic}
+  \begin{split}
+    A &=
+    \vec{\sigma} \cdot \vec{a}' \\
+    &= exp \left( \frac{i\sigma_z\phi}{2}\right)
+       \vec{\sigma} \cdot \vec{a} \ 
+       exp \left( \frac{-i\sigma_z\phi}{2}\right)\\
+  \end{split}
+\end{equation}
+
+To solve for $A$, we'll need to use the definition of matrix
+exponentiation:
+
+\begin{equation}
+  exp(X) \equiv \sum_{0}^{\infty} \frac{1}{k!} X^k
+\end{equation}
+
+Applying this definition to $A$, we find that:
+
+\begin{equation}
+  \begin{split}
+    A &=
+    \vec{\sigma} \cdot \vec{a}' \\
+    &= exp \left( \frac{i\sigma_z\phi}{2}\right)
+       \vec{\sigma} \cdot \vec{a} \ 
+       exp \left( \frac{-i\sigma_z\phi}{2}\right)\\
+    &= \sum_{0}^{\infty}{\frac{1}{k!}\left(\frac{i\sigma_z\phi}{2}\right)^k}
+       \vec{\sigma} \cdot \vec{a} \
+       \sum_{0}^{\infty}{\frac{1}{k!}\left(\frac{-i\sigma_z\phi}{2}\right)^k}
+  \end{split}
+\end{equation}
+
+Because $\sigma_i^2 = I$ and owing to the nature of the i in the
+exponent, we can see that the sum is going to look interesting, so
+let's explore that.
+
+\begin{equation}
+  \begin{array}{ccccc}
+    Term & Imag & Sign & \sigma \\
+    \hline
+    0 & 1 & + & I \\
+    1 & i & + & \sigma_z \\
+    2 & 1 & - & I \\
+    3 & i & - & \sigma_z \\
+    \hline
+    4 & 1 & + & I \\
+    5 & i & + & \sigma_z \\
+    6 & 1 & - & I \\
+    7 & i & - & \sigma_z \\
+    \hline
+    ...
+  \end{array}
+\end{equation}
+
+The periodicity of 4 and odd/even behavior allows us to rewrite the
+original sum as follows:
+
+\begin{equation}
+  \sum_{0}^{\infty}{\frac{1}{k!}\left(\frac{i\sigma_z\phi}{2}\right)^k}
+  = \sum_{0}^{\infty}{\frac{(-1)^k}{2k!}\left(\frac{\phi}{2}\right)^{2k}}
+  + i\sigma_z\sum_{0}^{\infty}{\frac{(-1)^k}{(2k+1)!}\left(\frac{\phi}{2}\right)^{2k+1}}
+\end{equation}
+
+As it happens, this pattern matches Euler's Taylor series formulation
+of $cos + i\ sin$ meaning that:
+
+\begin{equation}
+  \sum_{0}^{\infty}{\frac{1}{k!}\left(\frac{i\sigma_z\phi}{2}\right)^k}
+  = \cos(\frac \phi 2) + i \sigma_z \sin(\frac \phi 2)
+\end{equation}
+
+Substituting that back into our initial equation (\inref{b-characteristic})
+
+\begin{equation}
+  \begin{split}
+    A &=
+    \vec{\sigma} \cdot \vec{a}' \\
+    &= exp \left( \frac{i\sigma_z\phi}{2}\right)
+       \vec{\sigma} \cdot \vec{a} \ 
+       exp \left( \frac{-i\sigma_z\phi}{2}\right)\\
+    &= \left\{ \cos(\frac \phi 2) + i \sigma_z \sin(\frac \phi 2) \right\}
+       \vec{\sigma} \cdot \vec{a} \ 
+       \left\{ \cos(-\frac \phi 2) + i \sigma_z \sin(-\frac \phi 2) \right\}\\
+    &= \left\{ \cos(\frac \phi 2) + i \sigma_z \sin(\frac \phi 2) \right\}
+       \vec{\sigma} \cdot \vec{a} \ 
+       \left\{ \cos(\frac \phi 2) - i \sigma_z \sin(\frac \phi 2) \right\}\\
+  \end{split}
+\end{equation}
+
+With the help of a couple of identities:
+
+\begin{equation}
+  \cos(\frac \phi 2) + i\sin(\frac \phi 2) = e^{i \tfrac \phi 2}
+\end{equation}
+
+\begin{equation}
+  \begin{split}
+    e^{-i \tfrac \phi 2}
+    &= (\cos(-\frac \phi 2) + i\sin(-\frac \phi 2) \\
+    &= \cos(\frac \phi 2) - i\sin(\frac \phi 2) \\
+  \end{split}
+\end{equation}
+
+  And recalling equation 3.50 from the book:  
+  
+  \begin{equation*}
+    \tag{3.50}
+    \sigma_1 =
+    \begin{pmatrix}
+      0 & 1 \\
+      1 & 0 \\
+    \end{pmatrix},
+    \sigma_2 =
+    \begin{pmatrix}
+      0 & -i \\
+      i &  0 \\
+    \end{pmatrix},
+    \sigma_3 =
+    \begin{pmatrix}
+      1 &  0 \\
+      0 & -1 \\
+    \end{pmatrix}
+  \end{equation*}
+
+  We can rewrite our matrix as
+
+  \begin{equation}
+    \begin{split}
+      A &=
+      \begin{pmatrix}
+        e^{i \tfrac \phi 2} & 0\\
+        0 & e^{-i \tfrac \phi 2}\\
+      \end{pmatrix}
+      \vec{\sigma} \cdot \vec{a}
+      \begin{pmatrix}
+        e^{-i \tfrac \phi 2} & 0\\
+        0 & e^{i \tfrac \phi 2}\\
+      \end{pmatrix}\\
+    \end{split}
+  \end{equation}
+
+Recalling equation 3.56:
+
+\begin{equation*}
+  \tag{3.56}
+  \begin{split}
+    \vec{\sigma} \cdot \vec{a} &\equiv \sum_k a_k \sigma_k \\
+    &= \begin{pmatrix}
+      a_3        & a_1 - ia_2 \\
+      a_1 + ia_2 & -a_3 \\
+    \end{pmatrix}
+  \end{split}
+\end{equation*}
+
+  We can now construct the final values for $\vec{\sigma} \cdot
+  \vec{a'}$:
+
+  \begin{equation}
+    \inlabel{final}
+    \begin{split}
+      \vec{\sigma} \cdot \vec{a'}
+      &=
+      \begin{pmatrix}
+        e^{i \tfrac \phi 2} & 0\\
+        0 & e^{-i \tfrac \phi 2}\\
+      \end{pmatrix}
+      \begin{pmatrix}
+        a_3  & a_1 - ia_2 \\
+        a_1 + ia_2 & -a_3 \\
+      \end{pmatrix}
+      \begin{pmatrix}
+        e^{-i \tfrac \phi 2} & 0\\
+        0 & e^{i \tfrac \phi 2}\\
+      \end{pmatrix}\\
+      &=
+      \begin{pmatrix}
+        e^{i \tfrac \phi 2} & 0\\
+        0 & e^{-i \tfrac \phi 2}\\
+      \end{pmatrix}
+      \begin{pmatrix}
+        e^{-i \tfrac \phi 2}(a_3)  & e^{i \tfrac \phi 2}(a_1 - ia_2) \\
+        e^{-i \tfrac \phi 2}(a_1 + ia_2) & e^{i \tfrac \phi 2}(-a_3) \\
+      \end{pmatrix}\\
+      &=
+      \begin{pmatrix}
+        a_3  & e^{i\phi}(a_1 - ia_2) \\
+        e^{-i\phi}(a_1 + ia_2) & -a_3 \\
+      \end{pmatrix}\\
+    \end{split}
+  \end{equation}
+
+What is truly fascinating here is that the rotation has been applied
+to the anti-diagonal components of the final matrix.  If a rotation
+about the z-axis were to occur, then the z-axis components would not
+change.  Sakurai's selection of the z-axis for this rotation is
+presumably intended to help illustrate this point.  Instead of
+modifying the z-axis components, we instead see that the x and y
+components are rotated.
+
+Comparing 3.56 to \inref{final}, we see that while $a_3' = a_3$, terms
+containing $a_1$ and $a_2$ each have a factor of $e^i\tfrac \phi 2$
+applied.
+\end{answerpart}

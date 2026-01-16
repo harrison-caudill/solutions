@@ -1,0 +1,379 @@
+\begin{question}
+
+  Construct $\ket{\vectorbold{S}\cdot\vectorbold{\hat{n}}; +}$ such that
+  \begin{equation*}
+    \vectorbold{S}\cdot\vectorbold{\hat{n}} \ket{\vectorbold{S}\cdot\vectorbold{\hat{n}}; +}
+    = \left(\frac{\hbar}{2}\right)\ket{\vectorbold{S}\cdot\vectorbold{\hat{n}}; +}
+  \end{equation*}
+  where $\vectorbold{\hat{n}}$ is characterized by the angles shown in
+  the figure. Express your answer as a linear combination of $\ket +$
+  and $\ket -$
+
+  [\emph{Note:} The answer is
+    \begin{equation*}
+      \cos(\frac \beta 2)\ket + + \sin(\frac \beta 2) e^{i\alpha}\ket -
+    \end{equation*}
+    But do not just verify that this answer satisfies the above
+    eigenvalue equation. Rather, treat the problem as a
+    straightforward eigenvalue problem. Also do not use rotation
+    operators, which we will introduce later in this book.]
+  
+\end{question}
+
+\begin{answer}
+
+  Grumble grumble grumble...stupid problem...grumble grumble...already
+  saw rotation operators...baa humbug...grumble...
+
+  sigh...ok...yes...this problem is really annoying...but I should
+  probably put in some real annotations anyway.  My buddy Eric says
+  that it's going to be a useful derivation later.  Still...at times
+  like this, I really really like the eig function in GNU Octave.
+
+  It's worth noting that what is happening is that we're constructing
+  an $S_n$ operator where $\hat{n}$ is along any arbitrary 3D
+  direction.  Putting it another way, what happens if you give your
+  Stern Gerlach device to a drunk baby?\footnote{I said I was going to
+  put in real annotations, I didn't say that I wasn't going to be
+  surly about it.}  Even though it's a random orientation, you're
+  still going to need a few things to be true, such as the eigenvalues
+  needing to still be $\frac \hbar 2$\footnote{SPOILERS!!!}.
+
+  The notation that Sakurai uses is a little heavyweight, so let's
+  lighten it up a bit.
+
+  \begin{equation}
+    A \equiv \vectorbold{S}\cdot\vectorbold{\hat{n}}
+  \end{equation}
+
+  \begin{equation}
+    \ket{\alpha} \equiv \ket{\vectorbold{S}\cdot\vectorbold{\hat{n}}; +}
+  \end{equation}
+
+  They give us one of the Eigenvalues right at the beginning, but
+  what's the fun in that.  If we're going to embrace the painful
+  irritation of computing everything by hand then let's do it!
+  
+  \begin{equation}
+    \lambda_+ \equiv \left(\frac \hbar 2\right)
+  \end{equation}
+
+  Finally, we arrive at our characteristic equation like we all
+  remember from childhood...ahhh those ``happy'' days...
+  
+  \begin{equation}
+    A\ket{\alpha} = \lambda\ket{\alpha}
+  \end{equation}
+
+  Referencing the figure in the book\footnote{It's a vector graphic in
+  the PDF and I didn't feel like either screenshotting it or
+  recreating it, so just look it up in your book...you...\emph{did}
+  buy the book right? RIGHT?}, we can construct our $\hat{n}$ which is
+  expressed in spherical coordinates
+  
+  \begin{equation}
+    \vectorbold{\hat{n}}
+    \equiv
+    \begin{bmatrix}
+      \cos{\alpha}\sin{\beta}\\
+      \sin{\alpha}\sin{\beta}\\
+      \cos{\beta}\\
+    \end{bmatrix}
+  \end{equation}
+
+  We recall some basic definitions
+  
+  \begin{equation}
+    \tag{1.111a}
+    S_x = \frac \hbar 2 (\ket - \bra + + \ket + \bra -)
+  \end{equation}
+
+  \begin{equation}
+    \tag{1.111b}
+    S_y = i \frac \hbar 2 (\ket - \bra + - \ket + \bra -)
+  \end{equation}
+  
+  \begin{equation}
+    \tag{1.90}
+    S_z = \frac \hbar 2 (\Lambda_+ - \Lambda_-) = (\ket + \bra + - \ket - \bra -)
+  \end{equation}
+
+  And now we take the giant linear combination
+  
+  \begin{equation}
+    \begin{split}
+      A
+      &\equiv \vectorbold{S}\cdot\vectorbold{\hat{n}}\\
+      &= \cos{\alpha}\sin{\beta}S_x + \sin{\alpha}\sin{\beta}S_y + \cos{\beta}S_z\\
+      &= \left(\frac \hbar 2\right)\left\{
+        \cos{\alpha}\sin{\beta}(\ket - \bra + + \ket + \bra -)
+        + i\sin{\alpha}\sin{\beta}(\ket - \bra + - \ket + \bra -)
+        + \cos{\beta}(\Lambda_+ - \Lambda_-)
+        \right\}\\
+      &= \left(\frac \hbar 2\right)\left\{
+        \sin{\beta}[\cos{\alpha} + i\sin{\alpha}](\ket - \bra +)
+        + \sin{\beta}[\cos{\alpha} - i\sin{\alpha}](\ket + \bra -)
+        + \cos{\beta}\Lambda_+
+        - \cos{\beta}\Lambda_-
+      \right\}\\
+      &= \left(\frac \hbar 2\right)\left\{
+        \sin{\beta}e^{i\alpha}(\ket - \bra +)
+        + \sin{\beta}e^{-i\alpha}(\ket + \bra -)
+        + \cos{\beta}\Lambda_+
+        - \cos{\beta}\Lambda_-
+      \right\}\\
+    \end{split}
+  \end{equation}
+
+  Now that we have our 4 basic components ($++, +-, -+, --$), we
+  recall how the book says we're supposed to cram them together.
+  
+  \begin{equation}
+    \tag{1.73}
+    X \dot{=}
+    \begin{pmatrix}
+      \mel{\alpha^{(1)}}{X}{\alpha^{(1)}} & \mel{\alpha^{(1)}}{X}{\alpha^{(2)}} & \ldots \\
+      \mel{\alpha^{(2)}}{X}{\alpha^{(1)}} & \mel{\alpha^{(2)}}{X}{\alpha^{(2)}} & \ldots \\
+      \vdots & \vdots & \ddots\\
+    \end{pmatrix}
+  \end{equation}
+
+  We do some cramming and come back with our representative matrix
+  that we can use to solve the Eigenvalue problem.
+  
+  \begin{equation}
+    \inlabel{A-finish}
+    \begin{split}
+      A
+      &\equiv \vectorbold{S}\cdot\vectorbold{\hat{n}}\\
+      &= \left(\frac \hbar 2\right)\left\{
+        \sin{\beta}e^{i\alpha}(\ket - \bra +)
+        + \sin{\beta}e^{-i\alpha}(\ket + \bra -)
+        + \cos{\beta}\Lambda_+
+        - \cos{\beta}\Lambda_-
+      \right\}\\
+      &\dot{=}
+      \begin{bmatrix}
+        \mel{+}{A}{+} & \mel{+}{A}{-}\\
+        \mel{-}{A}{+} & \mel{-}{A}{-}\\
+      \end{bmatrix}\\
+      &=
+      \left(\frac{\hbar}{2}\right)
+      \begin{bmatrix}
+        \cos{\beta} & \sin{\beta}e^{-i\alpha}\\
+        \sin{\beta}e^{i\alpha} & -\cos{\beta}\\
+      \end{bmatrix}\\
+    \end{split}
+  \end{equation}
+
+  Fleshing out our characteristic equation, we find that
+  
+  \begin{equation}
+    \begin{split}
+      \vectorbold{0}
+      &= (A - \lambda I)\ket{A+}\\
+      &\dot{=}
+      \left\{
+      \left(\frac{\hbar}{2}\right)      
+      \begin{bmatrix}
+        \cos{\beta} & \sin{\beta}e^{-i\alpha}\\
+        \sin{\beta}e^{i\alpha} & -\cos{\beta}\\
+      \end{bmatrix}
+      - 
+      \begin{bmatrix}
+        \lambda & 0\\
+        0 & \lambda\\
+      \end{bmatrix}
+      \right\}
+      \ket{A+}\\
+      &=
+      \left(\frac{\hbar}{2}\right)
+      \begin{bmatrix}
+        \cos{\beta} - \frac{2}{\hbar}\lambda & \sin{\beta}e^{-i\alpha}\\
+        \sin{\beta}e^{i\alpha} & -\cos{\beta} - \frac{2}{\hbar}\lambda\\
+      \end{bmatrix}
+      \begin{bmatrix}
+        \alpha_+\\
+        \alpha_-\\
+      \end{bmatrix}
+      \\
+      &\Rightarrow\\
+      &0 =
+      \left(\frac{\hbar}{2}\right)
+      \left[
+        (\cos{\beta}-\frac{2}{\hbar}\lambda)\alpha_+ + \sin{\beta}e^{-i\alpha}\alpha_-
+        \right] = (\cos{\beta}-\frac{2}{\hbar}\lambda)\alpha_+ + \sin{\beta}e^{-i\alpha}\alpha_-\\
+      &0 =
+      \left(\frac{\hbar}{2}\right)
+      \left[
+        \sin{\beta}e^{i\alpha}\alpha_+ - (\cos{\beta} + \frac{2}{\hbar}\lambda)\alpha_-
+        \right] = \sin{\beta}e^{i\alpha}\alpha_+ - (\cos{\beta} + \frac{2}{\hbar}\lambda)\alpha_-\\
+    \end{split}
+  \end{equation}
+
+  We put together our two sets of independent expressions for
+  $\lambda$, $\alpha_+$, and $\alpha_-$, starting with the first one
+  
+  \begin{equation}
+    \begin{split}
+      0
+      &= (\cos{\beta}-\frac{2}{\hbar}\lambda)\alpha_+ + \sin{\beta}e^{-i\alpha}\alpha_-\\
+      &\Rightarrow
+      0 = \cos{\beta}\alpha_+ - \frac{2}{\hbar}\lambda\alpha_+ + \sin{\beta}e^{-i\alpha}\alpha_-\\
+      &\Rightarrow
+      \frac{2}{\hbar}\lambda\alpha_+ = \cos{\beta}\alpha_+ + \sin{\beta}e^{-i\alpha}\alpha_-\\
+      &\Rightarrow
+      \lambda_1 = \frac{\hbar}{2}\frac{\cos{\beta}\alpha_+ + \sin{\beta}e^{-i\alpha}\alpha_-}{\alpha_+}\\
+    \end{split}
+  \end{equation}
+
+  \begin{equation}
+    \begin{split}
+      0
+      &= (\cos{\beta}-\frac{2}{\hbar}\lambda)\alpha_+ + \sin{\beta}e^{-i\alpha}\alpha_-\\
+      &\Rightarrow
+      0 = \frac{(\cos{\beta}-\frac{2}{\hbar}\lambda)\alpha_+}{\cos{\beta}-\frac{2}{\hbar}\lambda} + \frac{\sin{\beta}e^{-i\alpha}\alpha_-}{\cos{\beta}-\frac{2}{\hbar}\lambda}\\
+      &\Rightarrow
+      \alpha_+ = - \frac{\sin{\beta}e^{-i\alpha}}{\cos{\beta}-\frac{2}{\hbar}\lambda}\alpha_-\\
+      &\Rightarrow
+      \alpha_- = - \frac{\cos{\beta}-\frac{2}{\hbar}\lambda}{\sin{\beta}e^{-i\alpha}}\alpha_+
+    \end{split}
+  \end{equation}
+
+  Moving on to our second independent equation and solving for those same 3 values
+  
+  \begin{equation}
+    \begin{split}
+      0
+      &= \sin{\beta}e^{i\alpha}\alpha_+ - (\cos{\beta} + \frac{2}{\hbar}\lambda)\alpha_-\\
+      &\Rightarrow
+      0 = \sin{\beta}e^{i\alpha}\alpha_+ - \cos{\beta}\alpha_- - \frac{2}{\hbar}\lambda\alpha_-\\
+      &\Rightarrow
+      \frac{2}{\hbar}\lambda\alpha_- = \sin{\beta}e^{i\alpha}\alpha_+ - \cos{\beta}\alpha_-\\
+      &\Rightarrow
+      \lambda_2 = \frac{\hbar}{2}\frac{\sin{\beta}e^{i\alpha}\alpha_+ - \cos{\beta}\alpha_-}{\alpha_-}\\
+    \end{split}
+  \end{equation}
+  
+  \begin{equation}
+    \begin{split}
+      0
+      &= \sin{\beta}e^{i\alpha}\alpha_+ - (\cos{\beta} + \frac{2}{\hbar}\lambda)\alpha_-\\
+      &\Rightarrow
+      0 = \frac{\sin{\beta}e^{i\alpha}\alpha_+}{\sin{\beta}e^{i\alpha}} - \frac{(\cos{\beta} + \frac{2}{\hbar}\lambda)\alpha_-}{\sin{\beta}e^{i\alpha}}\\
+      &\Rightarrow
+      \alpha_+ = \frac{\cos{\beta} + \frac{2}{\hbar}\lambda}{\sin{\beta}e^{i\alpha}}\alpha_-\\
+      &\Rightarrow
+      \alpha_- = \frac{\sin{\beta}e^{i\alpha}}{\cos{\beta} + \frac{2}{\hbar}\lambda}\alpha_+\\
+    \end{split}
+  \end{equation}
+
+\noindent And when [t]his work is done -
+
+\noindent Haha! - begins the fun.
+
+\noindent From two equations
+
+\noindent To one giant mess 
+
+\noindent By way of Iliysk,
+
+\noindent And Novorossiysk,
+
+\noindent To Alexandrovsk to Akmolinsk
+
+\noindent To Tomsk to Omsk
+
+\noindent To Pinsk to Minsk
+
+\noindent To here Eigenvalues run,
+
+\noindent Yes, to here the'Eigenvalues run!
+
+  \begin{equation}
+    \begin{split}
+      \alpha_+ &= - \frac{\sin{\beta}e^{-i\alpha}}{\cos{\beta}-\frac{2}{\hbar}\lambda}\alpha_-
+      = - \frac{\sin{\beta}e^{-i\alpha}}{\cos{\beta}-\frac{2}{\hbar}\lambda}\frac{\sin{\beta}e^{i\alpha}}{\cos{\beta} + \frac{2}{\hbar}\lambda}\alpha_+\\
+      &\Rightarrow
+      1 = - \frac{\sin{\beta}e^{-i\alpha}}{\cos{\beta}-\frac{2}{\hbar}\lambda}\frac{\sin{\beta}e^{i\alpha}}{\cos{\beta} + \frac{2}{\hbar}\lambda}\\
+      &\Rightarrow
+      1 = - \frac{\cos{\beta}-\frac{2}{\hbar}\lambda}{\sin{\beta}e^{-i\alpha}}\frac{\cos{\beta} + \frac{2}{\hbar}\lambda}{\sin{\beta}e^{i\alpha}}\\
+      &\Rightarrow
+      1 = - \left(\cos{\beta}-\frac{2}{\hbar}\lambda\right)\left(\cos{\beta} + \frac{2}{\hbar}\lambda\right) \frac{1}{\sin^2{\beta}}\\
+      &\Rightarrow
+      1 = - \frac{\cos^2{\beta} + \frac{4}{\hbar^2}\lambda^2}{\sin^2{\beta}}\\
+      &\Rightarrow
+      \sin^2{\beta} = - \cos^2{\beta} + \frac{4}{\hbar^2}\lambda^2\\
+      &\Rightarrow
+      \sin^2{\beta} + \cos^2{\beta} = \frac{4}{\hbar^2}\lambda^2\\
+      &\Rightarrow
+      1 = \frac{4}{\hbar^2}\lambda^2\\
+      &\Rightarrow
+      \frac{\hbar^2}{4} = \lambda^2\\
+      &\Rightarrow
+      \lambda = \pm \frac{\hbar}{2}\qed\\
+    \end{split}
+  \end{equation}
+
+Putting in our Eigenvalues, and solving for $\alpha_\pm$
+  
+  \begin{equation}
+    \begin{split}
+      &0 = (\cos{\beta}-\frac{2}{\hbar}\lambda)\alpha_+ + \sin{\beta}e^{-i\alpha}\alpha_-
+      = (\cos{\beta}-1)\alpha_+ + \sin{\beta}e^{-i\alpha}\alpha_-\\
+      &0 = \sin{\beta}e^{i\alpha}\alpha_+ - (\cos{\beta} + \frac{2}{\hbar}\lambda)\alpha_-
+      = \sin{\beta}e^{i\alpha}\alpha_+ - (\cos{\beta} + 1)\alpha_-\\
+    \end{split}
+  \end{equation}
+
+  \begin{equation}
+    \begin{split}
+      \alpha_+ &= -\frac{\sin{\beta}e^{-i\alpha}\alpha_-}{\cos{\beta}-1}\\
+      \alpha_- &= \frac{\sin{\beta}e^{i\alpha}\alpha_+}{\cos{\beta} + 1}\\
+    \end{split}
+  \end{equation}
+
+  When we start setting up to build our Eigenvectors, we're going to
+  need these half-angle formulas:
+  
+  \begin{equation}
+    1 + \cos{\beta} = 2 \cos^2{\frac{\beta}{2}}
+  \end{equation}
+
+  \begin{equation}
+    1 - \cos{\beta} = 2 \sin^2{\frac{\beta}{2}}
+  \end{equation}
+
+  My humor largely exhausted, and soul much relieved to have done so,
+  I present unto you, patient (and likely mortified) reader, the final
+  derivation of our eigenvector:
+  
+  \begin{equation}
+    \begin{split}
+      \frac{\alpha_+}{\alpha_-}
+      &= -\frac{\sin{\beta}e^{-i\alpha}\alpha_-}{\cos{\beta}-1}
+      \frac{\cos{\beta} + 1}{\sin{\beta}e^{i\alpha}\alpha_+}\\
+      &= -\frac{\alpha_-}{\alpha_+}\frac{\sin{\beta}e^{-i\alpha}}{\sin{\beta}e^{i\alpha}}
+      \frac{\cos{\beta} + 1}{\cos{\beta} - 1}\\
+      &= -\frac{\alpha_-}{\alpha_+}\frac{e^{-i\alpha}}{e^{i\alpha}}
+      \frac{\cos{\beta} + 1}{\cos{\beta} - 1}\\
+      &= -\frac{\alpha_-}{\alpha_+}e^{-2i\alpha}
+      \frac{\cos{\beta} + 1}{\cos{\beta} - 1}\\
+      \frac{\alpha_+^2}{\alpha_-^2}
+      &= -e^{-2i\alpha}\frac{\cos{\beta} + 1}{\cos{\beta} - 1}\\
+      &= e^{-2i\alpha}\frac{1 + \cos{\beta}}{1 - \cos{\beta}}\\
+      &= e^{-2i\alpha}\frac{2 \cos^2{\frac{\beta}{2}}}{2 \sin^2{\frac{\beta}{2}}}\\
+      &= e^{-2i\alpha}\frac{\cos^2{\frac{\beta}{2}}}{\sin^2{\frac{\beta}{2}}}\\
+      \frac{\alpha_+}{\alpha_-}
+      &= e^{-i\alpha}\frac{\cos{\frac{\beta}{2}}}{\sin{\frac{\beta}{2}}}\\
+    \end{split}
+  \end{equation}
+
+  \begin{equation}
+    \ket{\alpha_+} = \cos{\frac{\beta}{2}} \ket + + e^{-i\alpha}\sin{\frac{\beta}{2}} \ket - \qed
+  \end{equation}
+
+  The appropriate next step is Laguvulin 16, or maybe Bowmore 18, or,
+  you know, some acetone or some stricnine or something.
+
+\end{answer}
