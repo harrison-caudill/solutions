@@ -177,7 +177,48 @@
 %%                              Part c                                       %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{answerpart}{Grind it Out}
+\begin{answerpart}{Grind it Out for $S_z$}
+
+  \begin{equation}
+    \begin{split}
+      \prod_i\left(A - a_i\right)
+      &= (A - aI)(A + aI)\\
+      &= AA + aA - aA - aaI\\
+      &= AA + \cancel{aA} - \cancel{aA} - aaI\\
+      &= AA  - aaI\\
+      &= a^2(\Lambda_+ - \Lambda_-)(\Lambda_+ - \Lambda_-) - a^2I\\
+      &= a^2(\Lambda_+ + \Lambda_-) - a^2I\\
+      &= a^2\left[(\Lambda_+ - \Lambda_-) - I\right]\\
+      &= a^2\left[I - I\right]\\
+      &= a^2\left[0\right]\\
+      &= 0 \qed
+    \end{split}
+  \end{equation}
+
+  Let $j = \ket +$.
+
+  \begin{equation}
+    \begin{split}
+      \prod_{i \ne j}\frac{(A - a_i)}{a_j - a_i} \ket +
+      &= \frac{(A - (-a))}{a - (-a)}\ket +\\
+      &= \frac{(A + a)}{a + a}\ket +\\
+      &= \frac{(a + a)}{a + a}\ket +\\
+      &= \ket + \qed\\
+    \end{split}
+  \end{equation}
+
+  Let $j = \ket -$.
+
+  \begin{equation}
+    \begin{split}
+      \prod_{i \ne j}\frac{(A - a_i)}{a_j - a_i} \ket -
+      &= \frac{(A - a)}{a - a}\ket -\\
+      &= \frac{(A - a)}{a - a}\ket -\\
+      &= \frac{(a - a)}{a - a}\ket -\\
+      &= \ket - \qed\\
+    \end{split}
+  \end{equation}
+
 \end{answerpart}
 
 \end{answer}
