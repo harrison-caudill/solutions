@@ -3,13 +3,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \NewDocumentCommand{\probChapter}{m}{
-\setcounter{section}{#1-1}
+\setcounter{section}{\numexpr #1 - 1 \relax}%
 \section{Chapter #1}
 \input{\bookName/chapters/#1/chapter}
 }
 
 \NewDocumentCommand{\problem}{mm}{%
-\setcounter{subsection}{#2-1}
+\setcounter{subsection}{\numexpr #2 - 1 \relax}%
 \subsection{Problem #2}
 \graphicspath{{\buildPath/\bookName/chapters/#1/problems/#2}}
 \input{\bookName/chapters/#1/problems/#2/problem}
@@ -23,12 +23,14 @@
 }
 
 \newenvironment{answer}{%
+\setcounter{qpart}{1}
 }{%
 }%
 
 \newenvironment{answerpart}[1]{%
-\subsubsection{#1}
+\subsubsection{Subpart \alph{qpart}: #1}
 }{%
+\refstepcounter{qpart}
 }
 
 \newenvironment{questionpart}{%
