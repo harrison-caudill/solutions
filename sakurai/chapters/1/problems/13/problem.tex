@@ -1,0 +1,150 @@
+\begin{question}
+
+  A two-state system is characterized by the Hamiltonian
+
+  \begin{equation*}
+    H = H_{11} \dyad{1} + H_{22} \dyad{2} + H_{12}[\dyad{1}{2} + \dyad{2}{1}]
+  \end{equation*}
+  
+  where $H_{11}$, $H_{22}$, and $H_{12}$ are real numbers with the
+  dimension of energy, and $\ket{1}$ and $\ket{2}$ are eigenkets of
+  some observable ($\ne H$). Find the energy eigenkets and
+  corresponding energy eigenvalues. Make sure that your answer makes
+  good sense for $H_{12} = 0$.
+
+\end{question}
+
+\begin{purpose}
+  There are two main purposes to this problem:
+  \begin{enumerate}
+
+  \item Repetition with the mechanics of eigenvalue problems.
+
+  \item Connecting the eigenvalue problems to hamiltonians and state
+    energies.
+  \end{enumerate}
+\end{purpose}
+
+\begin{answer}
+
+  Let's put the basic matrix representation together:
+
+  \begin{equation}
+    H \dot{=}
+    \begin{bmatrix}
+      H_{11} & H_{12}\\
+      H_{12} & H_{22}\\
+    \end{bmatrix}
+  \end{equation}
+
+  Putting together our characteristic equation
+
+  \begin{equation}
+    \begin{split}
+      0 &=
+      det\left(
+      \begin{bmatrix}
+        H_{11} - \lambda & H_{12}\\
+        H_{12} & H_{22} - \lambda\\
+      \end{bmatrix}
+      \right)\\
+      &= (H_{11} - \lambda)(H_{22} - \lambda) - H_{12}^2\\
+      &= H_{11}H_{22} - H_{11}\lambda - H_{22}\lambda + \lambda^2 - H_{12}^2\\
+      &= \lambda^2 - (H_{11} + H_{22})\lambda + H_{11}H_{22} - H_{12}^2\\
+    \end{split}
+  \end{equation}
+
+  Since the problem discusses it, we should probably point out that if
+  $H_{12} = 0$ then it's already factored and $\lambda_{1,2} =
+  H_{11,22}$ and the Eigenbasis is shared as the eigenvectors become
+  $\begin{bmatrix}1\\0\end{bmatrix}$ and
+    $\begin{bmatrix}0\\1\end{bmatrix}$.
+
+  In general, however, we'll want to solve for $\lambda$.  Pulling out
+  the Po-Shen Loh
+  method \footnote{https://www.youtube.com/watch?v=XKBX0r3J-9Y}:
+
+  \begin{equation}
+    \lambda_{1,2} = -\frac{B}{2} \pm \sqrt{\frac{B^2}{4} - C}
+  \end{equation}
+
+  where $B = (H_{11} + H_{22})$ and $C = H_{11}H_{22} - H_{12}^2$
+  making
+
+  \begin{equation}
+    \inlabel{theBigUgly}
+    \begin{split}
+      \lambda_{1,2} &= \frac{(H_{11} + H_{22})}{2} \pm
+      \sqrt{\frac{(H_{11} + H_{22})^2}{4} - H_{11}H_{22} + H_{12}^2}\\
+      &= \frac{1}{2}\left(H_{11} + H_{22} \pm
+      \sqrt{(H_{11} + H_{22})^2 - 4H_{11}H_{22} + 4H_{12}^2}\right)\\
+      &= \frac{1}{2}\left(H_{11} + H_{22}\pm
+      \sqrt{H_{11}^2 + 2H_{11}H_{22} + H_{22}^2 - 4H_{11}H_{22} + 4H_{12}^2}\right)\\
+      &= \frac{1}{2}\left(H_{11} + H_{22}) \pm
+      \sqrt{H_{11}^2 - 2H_{11}H_{22} + H_{22}^2 + 4H_{12}^2}\right)\\
+      &= \frac{1}{2}\left(H_{11} + H_{22} \pm
+      \sqrt{(H_{11} - H_{22})^2 + 4H_{12}^2}\right)\\
+    \end{split}
+  \end{equation}
+
+  We can see that if we set $H_{12} = 0$ then we find our Eigenvalues
+  to be:
+
+  \begin{equation}
+    \begin{split}
+      \lambda_{1,2}
+      &= \frac{1}{2}\left(H_{11} + H_{22} \pm
+      \sqrt{(H_{11} - H_{22})^2 + 4H_{12}^2}\right)\\
+      &= \frac{1}{2}\left(H_{11} + H_{22} \pm \sqrt{(H_{11} - H_{22})^2}\right)\\
+      &= \frac{1}{2}\left(H_{11} + H_{22} \pm (H_{11} - H_{22})\right)\\
+    \end{split}
+  \end{equation}
+
+  In the general case, however, we have to go back to equation
+  \inref{theBigUgly}, albeit with a few simplifying assertions:
+
+  \begin{equation}
+    u \equiv \sqrt{(H_{11} - H_{22})^2 + 4H_{12}^2}
+  \end{equation}
+
+  That transforms equation \inref{theBigUgly} into
+
+  \begin{equation}
+    \lambda_{1,2} = \frac 1 2 (H_{11} + H_{22} \pm u)
+  \end{equation}
+
+  Solving for our first Eigenvector, we'll start by setting our
+  non-normalized $x_1 = 1$:
+
+  \begin{equation}
+    \begin{alignedat}{2}
+      & & H_{11}x_1 + H_{12}y_1 = \lambda_1x_1\\
+      \implies \quad & & H_{11} + H_{12}y_1 = \lambda_1\\
+      \implies \quad & & y_1 = \frac{\lambda_1 - H_{11}}{H_{12}}\\
+      \implies \quad & & y_1 = \frac{1}{2}\frac{H_{22} - H_{11}+
+      \sqrt{(H_{11} - H_{22})^2 + 4H_{12}^2}}{H_{12}}\\
+    \end{alignedat}
+  \end{equation}
+
+  Similarly, setting $y_2 = 1$ we find that
+  
+  \begin{equation}
+    \begin{alignedat}{2}
+      & & H_{12}x_2 + H_{22}y_2 = \lambda_2y_2\\
+      \implies \quad & & x_2 = \frac{\lambda_2 - H_{22}}{H_{12}}\\
+      \implies \quad & & x_2 = \frac{1}{2}\frac{H_{11} - H_{22} -
+      \sqrt{(H_{11} - H_{22})^2 + 4H_{12}^2}}{H_{12}}\\
+    \end{alignedat}
+  \end{equation}
+
+  If you want to find the normalization constants for that...be my
+  guest.
+
+  It's worth noting that you can use mathematics discussed in later
+  chapters to reduce the problem further by incorporating angles
+  between elements of the matrix.  Since the formalism of angles
+  between components of a generalized 2D Hilbert space is well beyond
+  the scope of chapter 1, however, that discussion is \emph{not}
+  included here.
+
+\end{answer}
