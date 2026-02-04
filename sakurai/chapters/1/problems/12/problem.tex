@@ -1,0 +1,302 @@
+\begin{question}
+
+  The Hamiltonian operator for a two-state system is given by
+  \begin{equation*}
+    H = a(\dyad 1 - \dyad 2 + \dyad{1}{2} + \dyad{2}{1}),
+  \end{equation*}
+
+  where $a$ is a number with the dimension of energy. Find the energy
+  eigenvalues and the corresponding energy eigenkets (as linear
+  combinations of $\ket 1$ and $\ket 2$).
+\end{question}
+
+\begin{answer}
+
+  It's worth noting that the fact that it's a Hamiltonian is totally
+  irrelevant to the problem.  It would be just as meaningful to the
+  $MaraLagoFace$ operator which transforms $\hat{MLF}\ket{prettyWoman}
+  = \ket{frankenFascist}$.  So long as you have a basis in which to
+  express it (let's say the $\ket{brutish}$ and $\ket{bulbous}$ basis
+  kets) then you can put it in matrix form and find the eigenkets
+  (say, $\ket{carWreckVictim}$ for example or
+  $\ket{agingBeautyQueen}$).
+  
+  Manually expressing the operator as a matrix, we find that:
+
+  \begin{equation}
+    \tag{1.73}
+    X \dot{=}
+    \begin{pmatrix}
+      \mel{\alpha^{(1)}}{X}{\alpha^{(1)}} & \mel{\alpha^{(1)}}{X}{\alpha^{(2)}} & \ldots \\
+      \mel{\alpha^{(2)}}{X}{\alpha^{(1)}} & \mel{\alpha^{(2)}}{X}{\alpha^{(2)}} & \ldots \\
+      \vdots & \vdots & \ddots\\
+    \end{pmatrix}
+  \end{equation}
+
+  \begin{equation}
+    \begin{split}
+      \mel{1}{H}{1}
+      &= \mel{L}{H}{R}\\
+      &=a(
+      \braket{L}{1}\braket{1}{R}
+      - \braket{L}{2}\braket{2}{R}
+      + \braket{L}{1}\braket{2}{R}
+      + \braket{L}{2}\braket{1}{R}
+      )
+      \\
+      &=a(
+      \braket{1}{1}\braket{1}{1}
+      - \braket{1}{2}\braket{2}{1}
+      + \braket{1}{1}\braket{2}{1}
+      + \braket{1}{2}\braket{1}{1}
+      )
+      \\
+      &=
+      a(
+      1
+      - 0
+      + 0
+      + 0
+      )
+      \\
+      &= a
+    \end{split}
+  \end{equation}
+
+  \begin{equation}
+    \begin{split}
+      \mel{1}{H}{2}
+      &= \mel{L}{H}{R}\\
+      &=a(
+      \braket{L}{1}\braket{1}{R}
+      - \braket{L}{2}\braket{2}{R}
+      + \braket{L}{1}\braket{2}{R}
+      + \braket{L}{2}\braket{1}{R}
+      )
+      \\
+      &=a(
+      \braket{1}{1}\braket{1}{2}
+      - \braket{1}{2}\braket{2}{2}
+      + \braket{1}{1}\braket{2}{2}
+      + \braket{1}{2}\braket{1}{2}
+      )
+      \\
+      &=
+      a(
+      0
+      - 0
+      + 1
+      + 0
+      )
+      \\
+      &= a
+    \end{split}
+  \end{equation}
+
+  \begin{equation}
+    \begin{split}
+      \mel{2}{H}{1}
+      &= \mel{L}{H}{R}\\
+      &=a(
+      \braket{L}{1}\braket{1}{R}
+      - \braket{L}{2}\braket{2}{R}
+      + \braket{L}{1}\braket{2}{R}
+      + \braket{L}{2}\braket{1}{R}
+      )
+      \\
+      &=a(
+      \braket{2}{1}\braket{1}{1}
+      - \braket{2}{2}\braket{2}{1}
+      + \braket{2}{1}\braket{2}{1}
+      + \braket{2}{2}\braket{1}{1}
+      )
+      \\
+      &=
+      a(
+      0
+      - 0
+      + 0
+      + 1
+      )
+      \\
+      &= a
+    \end{split}
+  \end{equation}
+
+  \begin{equation}
+    \begin{split}
+      \mel{2}{H}{2}
+      &= \mel{L}{H}{R}\\
+      &=a(
+      \braket{L}{1}\braket{1}{R}
+      - \braket{L}{2}\braket{2}{R}
+      + \braket{L}{1}\braket{2}{R}
+      + \braket{L}{2}\braket{1}{R}
+      )
+      \\
+      &=a(
+      \braket{2}{1}\braket{1}{2}
+      - \braket{2}{2}\braket{2}{2}
+      + \braket{2}{1}\braket{2}{2}
+      + \braket{2}{2}\braket{1}{2}
+      )
+      \\
+      &=
+      a(
+      0
+      - 1
+      + 0
+      + 0
+      )
+      \\
+      &= -a
+    \end{split}
+  \end{equation}
+
+  \begin{equation}
+    H \dot{=}
+    a\begin{pmatrix}
+      1 & 1\\
+      1 & -1\\
+    \end{pmatrix}
+  \end{equation}
+
+  OK...if you're like me, then you haven't worked a basic Eigenvalue
+  problem since college (well...I guess some of you still \emph{in}
+  college) and have been leaning pretty heavily on the Eig function
+  (which, incidentally, when you go source-diving seems to be
+  \emph{defined} inside the header file...not just like putting a stub
+  there so that the compiler knows what to expect...no...the actual
+  source for it seems to live within the header file...C++ is an
+  abomination... use Rust or Julia... or Python... or Gauss-help-you even
+  straight C is a better choice).  No way around it, so let's dive
+  right in.
+
+  
+  \begin{equation}
+    \begin{split}
+      0 &= det(H - \lambda I)\\
+      &= (a - \lambda)(-a - \lambda) - a^2\\
+      &= -a^2 - a\lambda + a\lambda + \lambda^2 - a^2\\
+      &= -a^2 + \lambda^2 - a^2\\
+      &= -2a^2 + \lambda^2\\
+      \implies \lambda^2 &= 2a^2\\
+      \implies \lambda &= \pm a \sqrt{2}\\
+    \end{split}
+  \end{equation}
+
+  Now let's plug that into our characteristic equations
+
+  \begin{equation}
+    \begin{split}
+      H
+      \begin{bmatrix}
+        x_1\\
+        y_1\\
+      \end{bmatrix}
+      &= \lambda_1
+      \begin{bmatrix}
+        x_1\\
+        y_1\\
+      \end{bmatrix}\\
+      H
+      \begin{bmatrix}
+        x_2\\
+        y_2\\
+      \end{bmatrix}
+      &= \lambda_2
+      \begin{bmatrix}
+        x_2\\
+        y_2\\
+      \end{bmatrix}\\
+    \end{split}
+  \end{equation}
+
+  Yeah, you can do the row reduction thing, but where's the fun in
+  that?  Translating into a system of equations, and taking them one
+  at a time, we find:
+
+  \begin{equation}
+    \begin{alignedat}{2}
+      & & ax_1 + ay_1 &= \lambda_1x_1\\
+      \implies \quad & & ax_1 + ay_1 &= a\sqrt{2}x_1\\
+      \implies \quad & & x_1 + y_1 &= \sqrt{2}x_1\\
+      \implies \quad & & y_1 &= (\sqrt{2} - 1)x_1\\
+      & & ax_1 - ay_1 &= \lambda_1y_1\\
+      \implies \quad & & ax_1 - ay_1 &= a\sqrt{2}y_1\\
+      \implies \quad & & x_1 - y_1 &= \sqrt{2}y_1\\
+      \implies \quad & & x_1 &= (\sqrt{2} + 1)y_1\\
+      & & ax_2 + ay_2 &= \lambda_2x_2\\
+      \implies \quad & & ax_2 + ay_2 &= -a\sqrt{2}x_2\\
+      \implies \quad & & x_2 + y_2 &= -\sqrt{2}x_2\\
+      \implies \quad & & y_2 &= -(\sqrt{2} + 1)x_2\\
+      & & ax_2 - ay_2 &= \lambda_2y_2\\
+      \implies \quad & & ax_2 - ay_2 &= -a\sqrt{2}y_2\\
+      \implies \quad & & x_2 - y_2 &= -\sqrt{2}y_2\\
+      \implies \quad & & x_2 &= (1 - \sqrt{2})y_2\\
+    \end{alignedat}
+  \end{equation}
+
+  You'll note that all of the factors of $a$ go away because
+  eigenvectors are relative values that get normalized later, so
+  constant factors go away.  It's also pretty easy to show since the
+  definition of $H$ includes the constant factor of $a$.  In general,
+  it's easier to pull the factor out before we go through the effort.
+  If we pick some numbers out of thin air to get the ball rolling, say
+  $x_1 \equiv 1$ \& $y_2 \equiv 1$, we find that the non-normalized
+  values are:
+  
+  \begin{equation}
+    \begin{split}
+      x_1 &= 1\\
+      y_1 &= (\sqrt{2} - 1)x_1\\
+      &= \sqrt{2} - 1\\
+      y_2 &= 1\\
+      x_2 &= 1 - \sqrt{2}y_2\\
+      &= 1 - \sqrt{2}\\
+    \end{split}
+  \end{equation}
+
+  Solving for the normalization coefficients:
+  
+  \begin{equation}
+    \begin{split}
+      N_1 &= |\vec{a_1}|\\
+      &= \sqrt{\vec{a_1} \cdot \vec{a_1}}\\
+      &= \sqrt{4 - 2\sqrt{2}}\\
+      N_2 &= |\vec{a_2}|\\
+      &= \sqrt{\vec{a_2} \cdot \vec{a_2}}\\
+      &= \sqrt{4 - 2\sqrt{2}}\\
+      N &= N_1 = N_2 = \sqrt{4 - 2\sqrt{2}}\\
+    \end{split}
+  \end{equation}
+
+  Running a quick check with our earlier equations, we find that:
+
+  \begin{equation}
+    \begin{alignedat}{2}
+      & & ax_1 + ay_1 &= \lambda_1x_1\\
+      \implies \quad & & a + ay_1 &= a\sqrt{2}\\
+      \implies \quad & & 1 + y_1 &= \sqrt{2}\\
+      \implies \quad & & 1 + \sqrt{2} - 1 &= \sqrt{2}\\
+      \implies \quad & & \sqrt{2} &= \sqrt{2}\qed\\
+    \end{alignedat}
+  \end{equation}
+
+  We'll also need to restore the factor of $a$ that we dropped earlier
+  (since it's just a constant multiplied by the matrix we solved for).
+  Don't worry, I missed it the first few times as well.
+
+  \begin{equation}
+    \begin{split}
+      \frac H a &= \sum_i \lambda_i \dyad{a_i}\\
+      &\dot{=}\sum_i \lambda_i \begin{bmatrix}x_1\\y_1\\\end{bmatrix}\begin{bmatrix}x_1&y_1\\\end{bmatrix}\\
+          &=
+          \frac{\sqrt{2}}{N^2}
+          \begin{bmatrix}1\\\sqrt{2} - 1\\\end{bmatrix}\begin{bmatrix}1&\sqrt{2} - 1\\\end{bmatrix}
+              - \frac{\sqrt{2}}{N^2}
+              \begin{bmatrix}1 - \sqrt{2}\\1\\\end{bmatrix}\begin{bmatrix}1 - \sqrt{2}&1\\\end{bmatrix}
+    \end{split}
+  \end{equation}
+
+\end{answer}
