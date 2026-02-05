@@ -10,6 +10,7 @@
 
 \NewDocumentCommand{\problem}{mm}{%
 \setcounter{section}{\numexpr #1 \relax}%
+\setcounter{equation}{0}%
 \section*{\thesection: #2}
 \phantomsection
 \addcontentsline{toc}{section}{%
