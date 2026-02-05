@@ -2,17 +2,25 @@
 %% Chapter/Problem Infrastructure                                            %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\NewDocumentCommand{\probChapter}{m}{
-\setcounter{section}{\numexpr #1 - 1 \relax}%
-\section{Chapter #1}
+\NewDocumentCommand{\probChapter}{mm}{
+\setcounter{chapter}{\numexpr #1 - 1 \relax}%
+\chapter{#2}
 \input{\bookName/chapters/#1/chapter}
 }
 
 \NewDocumentCommand{\problem}{mm}{%
-\setcounter{subsection}{\numexpr #2 - 1 \relax}%
-\subsection{Problem #2}
-\graphicspath{{\buildPath/\bookName/chapters/#1/problems/#2}}
-\input{\bookName/chapters/#1/problems/#2/problem}
+\setcounter{section}{\numexpr #1 \relax}%
+\section*{\thesection: #2}
+\phantomsection
+\addcontentsline{toc}{section}{%
+    \texorpdfstring{\thesection:\ #2}{\thesection:\ #2}%
+}%
+
+\graphicspath{%
+        {\buildPath/\bookName}%
+        {\buildPath/\bookName/chapters/\thechapter/problems/#1}%
+}%
+\input{\bookName/chapters/\thechapter/problems/#1/problem}
 }
 
 \newenvironment{question}{%
@@ -28,7 +36,12 @@
 }%
 
 \newenvironment{answerpart}[1]{%
-\subsubsection{Subpart \alph{qpart}: #1}
+    \section*{\thesubsection: #1}
+    \phantomsection
+    \renewcommand{\thesubsection}{\thesection.\alph{qpart}}
+    \addcontentsline{toc}{subsection}{%
+        \texorpdfstring{\thesubsection:\ #1}{\thesubsection:\ #1}%
+    }%
 }{%
 \refstepcounter{qpart}
 }
@@ -43,7 +56,7 @@
         \setlength{\parsep}{0pt}
     }%
     \item \relax % Create the item
-    %% \textbf{\alph{qpart})}\ 
+    %% \textbf{\alph{qpart})}\
 }{%
     \endlist%
 }
@@ -53,9 +66,9 @@ Drawing upon the problem, we can surmise that:
 }{%
 }
 
-% Set up section/subsection/subsubsection numbering to account for
+% Set up chapter/section/subsection numbering to account for
 % problem naming
-\renewcommand{\thesubsubsection}{\thesubsection.\alph{subsubsection}}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
 
 % This is where we put in annotations about what the problem is trying
 % to goad us into learning/practicing.
@@ -71,12 +84,22 @@ Drawing upon the problem, we can surmise that:
 % can reference equations across problems if we want, but also can
 % safely have namespace collisions between sections.
 \newcommand{\inlabel}[1]{%
-  \label{\thesubsection:#1}%
+  \label{\thechapter:\thesection:#1}%
 }%
 
 % The corresponding ref command for the \inlabel command
 \newcommand{\inref}[1]{%
-  \ref{\thesubsection:#1}%
+  \ref{\thechapter:\thesection:#1}%
+}%
+
+% Similar to inlabel but meant for use with the QRF
+\newcommand{\qlabel}[1]{%
+  \label{q:#1}%
+}%
+
+% The corresponding ref command for the \inlabel command
+\newcommand{\qref}[1]{%
+  \ref{q:#1}%
 }%
 
 \NewDocumentCommand{\disputed}{m}{%

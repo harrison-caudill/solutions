@@ -56,25 +56,37 @@ ref: .dummy_builddir
 	echo "\def\\\\buildPath{$(BUILD)}" >> $(BUILD)/bookParams.tex
 	make ref/ref.pdf
 
+params:
+	echo "\def\\\\bookName{$(bookName)}" > $(BUILD)/bookParams.tex
+	echo "\def\\\\chapterNum{$(chapterNum)}" >> $(BUILD)/bookParams.tex
+	echo "\def\\\\problemNum{$(problemNum)}" >> $(BUILD)/bookParams.tex
+	echo "\def\\\\buildPath{$(BUILD)}" >> $(BUILD)/bookParams.tex
+
 jackson: .dummy_builddir
 	bin/qcad_export.py -s jackson -d $(BUILD)
-	echo "\def\\\\bookName{jackson}" > $(BUILD)/bookParams.tex
-	echo "\def\\\\buildPath{$(BUILD)}" >> $(BUILD)/bookParams.tex
+	make -e bookName=jackson params
 	make jackson/manual.pdf
 	mv $(BUILD)/manual.pdf $(BUILD)/jackson.pdf
 
+sqrf: .dummy_builddir
+	make -e bookName=sakurai params
+	bin/qcad_export.py -s sakurai/qrf -d $(BUILD)/sakurai
+	$(PDFTEX) \
+	-jobname qrf \
+	sakurai/qrf.tex \
+	$(BUILD)/qrf.pdf
+
 sak: .dummy_builddir
+	make -e bookName=sakurai params
 	bin/qcad_export.py -s sakurai -d $(BUILD)
 	echo "\def\\\\bookName{sakurai}" > $(BUILD)/bookParams.tex
 	echo "\def\\\\buildPath{$(BUILD)}" >> $(BUILD)/bookParams.tex
 	make sakurai/manual.pdf
 	mv $(BUILD)/manual.pdf $(BUILD)/sakurai.pdf
 
-problem: .dummy_builddir
-	echo "\def\\\\bookName{$(bookName)}" > $(BUILD)/problemParams.tex
-	echo "\def\\\\chapterNum{$(chapterNum)}" >> $(BUILD)/problemParams.tex
-	echo "\def\\\\problemNum{$(problemNum)}" >> $(BUILD)/problemParams.tex
-	echo "\def\\\\buildPath{$(BUILD)}" >> $(BUILD)/problemParams.tex
+problem: .dummy_builddir params
+	bin/qcad_export.py -s sakurai/qrf -d $(BUILD)/sakurai
+	bin/qcad_export.py -s sakurai/$(bookName)/chapters/$(chapterNum)/problems/$(problemNum) -d $(BUILD)/sakurai/$(bookName)/chapters/$(chapterNum)/problems/$(problemNum)
 	$(PDFTEX) \
 	-jobname $(bookName)-$(chapterNum)-$(problemNum) \
 	problem.tex \
