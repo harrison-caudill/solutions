@@ -1,4 +1,10 @@
-\documentclass[fleqn]{article}
+
+%% oneside means that it prints more like an article than a book, so
+%% you don't get, for example, page numbers that alternate between the
+%% left and the right.
+
+%% fleqn left-aligns the equations
+\documentclass[fleqn, oneside]{book}
 
 \input{packages}
 
@@ -16,13 +22,24 @@
 \maketitle
 
 \input{BUILD/bookParams}
+\graphicspath{{\buildPath/\bookName}}
 
-A few notes about notation:
+\frontmatter
+\renewcommand{\thefigure}{\thechapter.\arabic{figure}}
+\renewcommand{\theequation}{\thechapter.\arabic{equation}}
 
-\begin{equation*}
-  \ket{a'} \Rightarrow \ket{a_i}
-\end{equation*}
+\setcounter{chapter}{1}
+\renewcommand{\thechapter}{Q}
+\chapter{Quick Reference}
+\input{\bookName/qrfContents}
 
-\probChapter{1}
+\tableofcontents
+
+\mainmatter
+\renewcommand{\thechapter}{\arabic{chapter}}
+\renewcommand{\thefigure}{\thesection.\arabic{figure}}
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+
+\probChapter{1}{Fundamental Concepts}
 
 \end{document}

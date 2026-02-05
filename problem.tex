@@ -1,6 +1,6 @@
-\documentclass[fleqn]{article}
+\documentclass[fleqn, oneside]{book}
 
-\input{BUILD/problemParams}
+\input{BUILD/bookParams}
 
 \input{packages}
 
@@ -18,7 +18,11 @@
 
 \maketitle
 
-\graphicspath{{\buildPath/\bookName/chapters/\chapterNum/problems/\problemNum}}
+\graphicspath{
+  {\buildPath/\bookName}
+  {\buildPath/\bookName/chapters/\chapterNum/problems/\problemNum}
+}
+
 \input{\bookName/chapters/\chapterNum/problems/\problemNum/problem}
 
 \end{document}
