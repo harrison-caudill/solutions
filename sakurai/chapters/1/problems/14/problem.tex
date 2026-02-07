@@ -21,7 +21,7 @@ $\gamma = 0\text{, }\pi/2\text{, and }\pi.$)
 \end{question}
 
 \begin{purpose}
-  Learn how to apply our result from problem 11.
+  Learn how to apply our result from problem \ref{1.11:theQuestion}.
 \end{purpose}
 
 \begin{answer}
@@ -37,17 +37,124 @@ $\gamma = 0\text{, }\pi/2\text{, and }\pi.$)
     \end{equation}
 
     \begin{equation}
-      ||
-      \vectorbold{\hat{n}} \cdot \vectorbold{\hat{x}}
-      +
-      \vectorbold{\hat{n}} \cdot \vectorbold{\hat{z}}
-      ||^2 = 1
+      || \vectorbold{\hat{n}} \cdot \vectorbold{\hat{x}}||^2
+      + || \vectorbold{\hat{n}} \cdot \vectorbold{\hat{z}}||^2
+      = 1
     \end{equation}
 
+    Since we're using $S_x$ as our measurement basis, let's pull up
+    those definitions also:
+
+    \begin{equation*}
+      \tag{1.110a}
+      \begin{split}
+        \ket{x\pm} &= \frac{1}{\sqrt{2}} [\ket + \pm \ket -]\\
+        &=> \ket{x+} = \frac{1}{\sqrt{2}} [\ket + + \ket -]
+      \end{split}
+    \end{equation*}
+
+    \begin{equation*}
+      \tag{1.111a}
+      S_x = \frac{\hbar}{2} [\ket - \bra + + \ket + \bra - ]
+    \end{equation*}
+
+    Referencing our axis diagram (\qref{spinAxes}) in the QRF, we see
+    that the problem describes an azimuth angle ($\alpha$) of $0$ and
+    an elevation-complement angle ($\beta$) of $\gamma$.  Applying our
+    result from problem \ref{1.11:theQuestion}
+    (\ref{1.11:spinAngle}/\qref{spinAngle}):
+
+    \begin{equation}
+      \begin{split}
+        \ket{\alpha_+}
+        &= \cos{\frac{\beta}{2}} \ket + + e^{-i\alpha}\sin{\frac{\beta}{2}} \ket -\\
+        &= \cos{\frac{\gamma}{2}} \ket + + \sin{\frac{\gamma}{2}} \ket -\\
+      \end{split}
+    \end{equation}
+
+    Evaluating our probability:
+    \begin{equation}
+      \begin{split}
+        P(x+)
+        &= \left|\braket{x+}{\alpha+}\right|^2\\
+        &= \left|\frac{1}{\sqrt{2}}
+        (\bra + + \bra -)
+        (\cos{\frac{\gamma}{2}} \ket + + \sin{\frac{\gamma}{2}} \ket -)\right|^2\\
+        &= \frac{1}{2}\left|
+        \cos{\frac{\gamma}{2}}\braket +
+        + \sin{\frac{\gamma}{2}}\braket -\right|^2\\
+        &= \frac{1}{2}\left|
+        \cos{\frac{\gamma}{2}} + \sin{\frac{\gamma}{2}}
+        \right|^2\\
+        &= \frac{1}{2}\left|
+        (\cos^2{\frac{\gamma}{2}} + \sin^2{\frac{\gamma}{2}})
+        + 2\cos{\frac{\gamma}{2}}\sin{\frac{\gamma}{2}}
+        \right|\\
+        &= \frac{1}{2}(1 + \sin{\gamma})\\
+      \end{split}
+    \end{equation}
+
+    Obviously we can evaluate the general solution, but what fun is
+    that?  
+
+    \begin{equation}
+      \begin{alignedat}{2}
+      %
+      &&\braket{x+}{\alpha_+} &=
+      \bra{x+}\left(\cos{\frac{\gamma}{2}} \ket +
+      + \sin{\frac{\gamma}{2}} \ket -\right)\\
+      %
+      \gamma &= 0 \quad &
+      \braket{x+}{\alpha_+} &=
+      \bra{x+}(\cos{0} \ket + + \sin{0} \ket -)\\
+      & & &=
+      \frac{1}{\sqrt{2}} (\bra + + \bra -)(\cos{0} \ket + + \sin{0} \ket -)\\
+      %
+      & & &=
+      \frac{1}{\sqrt{2}}\\
+      %
+      \gamma &= \frac{\pi}{2} \quad &
+      \braket{x+}{\alpha_+} &=
+      \bra{x+}(\cos{\frac{\pi}{4}} \ket + + \sin{\frac{\pi}{4}} \ket -)\\
+      & & &=
+      \frac{1}{\sqrt{2}}(\bra + + \bra -)\frac{1}{\sqrt{2}}(\ket + + \ket -)\\
+      & & &=
+      \frac{1}{2}(\braket + + \braket -)\\
+      & & &=
+      1\\
+      %
+      \gamma &= \pi \quad &
+      \braket{x+}{\alpha_+} &=
+      \bra{x+}\left(\cos{\frac{\pi}{2}} \ket +
+      + \sin{\frac{\pi}{2}} \ket -\right)\\
+      & & &=
+      \frac{1}{\sqrt{2}}(\bra + + \bra -)\left(\cos{\frac{\pi}{2}} \ket +
+      + \sin{\frac{\pi}{2}} \ket -\right)\\
+      & & &=
+      \frac{1}{\sqrt{2}}\\
+      %
+    \end{alignedat}
+  \end{equation}
+
+  Translating those magnitudes into probabilities, we see that when we
+  are aligned with $x+$, $P(\frac{\hbar}{2}) = 1$ whereas when we are
+  perpendicular to it, our probability is $\frac 1 2$.  When we're
+  perpendicular, then we have no information about which way it'll go
+  (either $\frac \hbar 2$ or $- \frac \hbar 2$) so we expect a
+  probability of $\frac 1 2$.
+
+  \begin{equation}
+    \begin{alignedat}{2}
+      P(x+;\gamma&=0) & &= \frac 1 2\\
+      P(x+;\gamma&=\frac{\pi}{2}) & &= 1\\
+      P(x+;\gamma&=\pi) & &= \frac 1 2\\
+    \end{alignedat}
+  \end{equation}
 
   \end{answerpart}
 
   \begin{answerpart}{Dispersion}
   \end{answerpart}
+
   
 \end{answer}
