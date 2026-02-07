@@ -1,7 +1,79 @@
+\renewcommand{\thechapter}{Q}
+\chapter{Quick Reference}
+
 Because the $'$ and $''$ and $'''$ and so on gets really annoying, I
 switch from primed Eigenvectors/Eigenvalues to subscripts.  So you'll
 see $\ket{a'} \Rightarrow \ket{a_i}$ and $\ket{a''} \Rightarrow
 \ket{a_j}$ and so on.
+
+
+\section{General Purpose}
+
+\subsection{Trig Identities}
+
+\begin{equation}
+  \sin{2\alpha} = 2\sin{\alpha}\cos{\alpha}
+\end{equation}
+
+\begin{equation}
+  \begin{split}
+  \cos{2\alpha}
+  &= \cos^2{\alpha} - \sin^2{\alpha}
+  &= 2\cos^2{\alpha} - 1
+  &= 1 - 2\sin^2{\alpha}
+  \end{split}
+\end{equation}
+
+\begin{equation}
+  \cos/\sin{\frac \alpha 2} \pm \sqrt{\frac{1 \pm \cos{\alpha}}{2}}
+\end{equation}
+
+foo: \theequation :bar
+\section{Pauli Spin}
+foo: \theequation :bar
+
+\begin{equation}
+  foo
+\end{equation}
+
+\begin{equation*}
+  \tag{1.110a}
+  \ket{x\pm} = \frac{1}{\sqrt{2}} [\ket + \pm \ket -]
+\end{equation*}
+
+\begin{equation*}
+  \tag{1.110b}
+  \ket{y\pm} = \frac{1}{\sqrt{2}} [\ket + \pm i\ket -]
+\end{equation*}
+
+\begin{equation*}
+  \tag{1.111a}
+  S_x = \frac{\hbar}{2} [\ket - \bra + + \ket + \bra - ]
+\end{equation*}
+
+\begin{equation*}
+  \tag{1.111b}
+  S_y = i \frac{\hbar}{2} [\ket - \bra + - \ket + \bra - ]
+\end{equation*}
+
+\begin{equation*}
+  \tag{3.50}
+  \sigma_x =
+  \begin{pmatrix}
+    0 & 1 \\
+    1 & 0 \\
+  \end{pmatrix},
+  \sigma_y =
+  \begin{pmatrix}
+    0 & -i \\
+    i &  0 \\
+  \end{pmatrix},
+  \sigma_z =
+  \begin{pmatrix}
+    1 &  0 \\
+    0 & -1 \\
+  \end{pmatrix}
+\end{equation*}
 
 \begin{figure}
   \begin{center}
@@ -12,3 +84,8 @@ see $\ket{a'} \Rightarrow \ket{a_i}$ and $\ket{a''} \Rightarrow
       $\beta$ are represented as $a$ and $b$ respectively.}
   \end{center}
 \end{figure}
+
+\begin{equation}
+  \qlabel{spinAngle}
+  \cos(\frac \beta 2)\ket + + \sin(\frac \beta 2) e^{i\alpha}\ket -
+\end{equation}

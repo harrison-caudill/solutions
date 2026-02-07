@@ -88,6 +88,13 @@ problem: .dummy_builddir params
 	bin/qcad_export.py -s sakurai/qrf -d $(BUILD)/sakurai
 	bin/qcad_export.py -s sakurai/$(bookName)/chapters/$(chapterNum)/problems/$(problemNum) -d $(BUILD)/sakurai/$(bookName)/chapters/$(chapterNum)/problems/$(problemNum)
 	$(PDFTEX) \
-	-jobname $(bookName)-$(chapterNum)-$(problemNum) \
+	-jobname $(bookName)-$(chapterNum)-$(problemNum)-raw \
 	problem.tex \
-	$(BUILD)/$(bookName)-$(chapterNum)-$(problemNum).pdf
+	$(BUILD)/$(bookName)-$(chapterNum)-$(problemNum)-raw.pdf
+	gs \
+        -sDEVICE=pdfwrite \
+        -dNOPAUSE \
+        -dBATCH \
+        -dFirstPage=2 \
+        -sOutputFile=$(BUILD)/$(bookName)-$(chapterNum)-$(problemNum).pdf \
+	$(BUILD)/$(bookName)-$(chapterNum)-$(problemNum)-raw.pdf
