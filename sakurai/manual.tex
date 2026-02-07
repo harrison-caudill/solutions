@@ -24,21 +24,19 @@
 \input{BUILD/bookParams}
 \graphicspath{{\buildPath/\bookName}}
 
-\frontmatter
-\renewcommand{\thefigure}{\thechapter.\arabic{figure}}
-\renewcommand{\theequation}{\thechapter.\arabic{equation}}
 
-\setcounter{chapter}{1}
-\renewcommand{\thechapter}{Q}
-\chapter{Quick Reference}
+\frontmatter
+
+%% 
+\appendixCounters{}
+
 \input{\bookName/qrfContents}
 
 \tableofcontents
 
 \mainmatter
-\renewcommand{\thechapter}{\arabic{chapter}}
-\renewcommand{\thefigure}{\thesection.\arabic{figure}}
-\renewcommand{\theequation}{\thesection.\arabic{equation}}
+
+\problemCounters{}
 
 \probChapter{1}{Fundamental Concepts}
 

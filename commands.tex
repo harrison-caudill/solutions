@@ -2,49 +2,92 @@
 %% Chapter/Problem Infrastructure                                            %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\NewDocumentCommand{\probChapter}{mm}{
-\setcounter{chapter}{\numexpr #1 - 1 \relax}%
-\chapter{#2}
-\input{\bookName/chapters/#1/chapter}
-}
+\NewDocumentCommand{\appendixCounters}{}{%
+    % In appendices, we want our equations/figures to increment within
+    % the chapters, not any other level.
+    \counterwithin{equation}{chapter}
+    \counterwithout{equation}{section}
+    \counterwithout{equation}{subsection}
+    \counterwithout{equation}{subsubsection}
+    \renewcommand{\theequation}{\thechapter.\arabic{equation}}
+    %
+    \counterwithin{figure}{chapter}
+    \counterwithout{figure}{section}
+    \counterwithout{figure}{subsection}
+    \counterwithout{figure}{subsubsection}
+    \renewcommand{\thefigure}{\thechapter.\arabic{figure}}
+    \setcounter{chapter}{0}
+}%
+
+\NewDocumentCommand{\problemCounters}{}{%
+    % In appendices, we want our equations/figures to increment within
+    % the chapters, not any other level.
+    \counterwithin{equation}{chapter}
+    \counterwithin{equation}{section}
+    \counterwithout{equation}{subsection}
+    \counterwithout{equation}{subsubsection}
+    \renewcommand{\theequation}{\thesection.\arabic{equation}}
+    %
+    \counterwithin{figure}{chapter}
+    \counterwithin{figure}{section}
+    \counterwithout{figure}{subsection}
+    \counterwithout{figure}{subsubsection}
+    \renewcommand{\thefigure}{\thesection.\arabic{figure}}
+    %
+    \renewcommand{\thechapter}{\arabic{chapter}}
+    \setcounter{chapter}{1}
+}%
+
+%% In the main document, import a chapter of problem solutions.
+\NewDocumentCommand{\probChapter}{mm}{%
+
+    % We may or may not work all chapters in sequence, so we
+    % explicitly assign the 
+    \setcounter{chapter}{\numexpr #1 - 1 \relax}%
+
+    \chapter{#2}%
+    \input{\bookName/chapters/#1/chapter}%
+}%
 
 \NewDocumentCommand{\problem}{mm}{%
-\setcounter{section}{\numexpr #1 \relax}%
-\setcounter{equation}{0}%
-\section*{\thesection: #2}
-\phantomsection
-\addcontentsline{toc}{section}{%
+    \setcounter{section}{\numexpr #1-1 \relax}%
+    \refstepcounter{section}%
+    \setcounter{equation}{0}%
+    \needspace{5\baselineskip}
+    \section*{\thesection: #2}
+    \phantomsection
+    \inlabel{theQuestion}
+    \addcontentsline{toc}{section}{%
     \texorpdfstring{\thesection:\ #2}{\thesection:\ #2}%
-}%
-
-\graphicspath{%
+    }%
+    \graphicspath{%
         {\buildPath/\bookName}%
         {\buildPath/\bookName/chapters/\thechapter/problems/#1}%
-}%
-\input{\bookName/chapters/\thechapter/problems/#1/problem}
+    }%
+    \input{\bookName/chapters/\thechapter/problems/#1/problem}
 }
 
 \newenvironment{question}{%
-\begin{quote}
-\noindent
+    \begin{quote}
+    \noindent
 }{%
-\end{quote}
+    \end{quote}
 }
 
 \newenvironment{answer}{%
-\setcounter{qpart}{1}
+\setcounter{qpart}{0}
 }{%
 }%
 
 \newenvironment{answerpart}[1]{%
-    \section*{\thesubsection: #1}
-    \phantomsection
+    \refstepcounter{qpart}
     \renewcommand{\thesubsection}{\thesection.\alph{qpart}}
+    \subsection*{\thesubsection: #1}
+    \phantomsection
     \addcontentsline{toc}{subsection}{%
         \texorpdfstring{\thesubsection:\ #1}{\thesubsection:\ #1}%
     }%
 }{%
-\refstepcounter{qpart}
 }
 
 \newenvironment{questionpart}{%
@@ -85,12 +128,12 @@ Drawing upon the problem, we can surmise that:
 % can reference equations across problems if we want, but also can
 % safely have namespace collisions between sections.
 \newcommand{\inlabel}[1]{%
-  \label{\thechapter:\thesection:#1}%
+  \label{\thesection:#1}%
 }%
 
 % The corresponding ref command for the \inlabel command
 \newcommand{\inref}[1]{%
-  \ref{\thechapter:\thesection:#1}%
+  \ref{\thesection:#1}%
 }%
 
 % Similar to inlabel but meant for use with the QRF
