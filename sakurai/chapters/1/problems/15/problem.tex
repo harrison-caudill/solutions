@@ -14,8 +14,8 @@ Stern–Gerlach type measurements as follows.
   $\vectorbold{\hat{n}}$ making an angle $\beta$ in the xz-plane with
   respect to the z-axis.
 
-\item The third measurement accepts $S_z = \frac{\hbar}{2}$ atoms and
-  rejects $S_z = -\frac{\hbar}{2}$ atoms.
+\item The third measurement accepts $S_z = -\frac{\hbar}{2}$ atoms and
+  rejects $S_z = \frac{\hbar}{2}$ atoms.
 
 \end{enumerate}
 
@@ -34,25 +34,218 @@ Stern–Gerlach type measurements as follows.
 
 \begin{purpose}
   This one looks like basic practice with how state collapses across
-  observations and how that affects probabilities.
+  observations and how that affects probabilities.  Interestingly, it
+  also sets us up to better understand the classical experiment where
+  3 polarizing filters will work where 2 will not and also how LCD
+  displays work.
 \end{purpose}
 
 \begin{answer}
 
-  \begin{answerpart}
+  \begin{answerpart}{Infant Mortality}
     For simplicity, let's put up a quick diagram of the pipeline of
     experiments:
 
-    \begin{figure}
-      \inlabel{pipeline}
-      \includegraphics[width=3in]{pipeline.png}
-      \caption{Phase a}
-    \end{figure}
+    \begin{center}
+      \begin{figure}
+        \inlabel{pipeline}
+        \includegraphics[width=3in]{pipeline.png}
+        \caption{Phase a}
+      \end{figure}
+    \end{center}
 
+    Let's start with with intuition about the physics of the problem
+    and see where it leads, then we can try to grind it out and
+    compare results.  We can say that the $a \rightarrow b$ beam is
+    homongenously in the $\ket{z+}$ state as only atoms with an
+    observed angular momentum in the $z$ axis of $\frac{\hbar}{2}$
+    will pass, and others shall fall to the depths of Moria.
+
+    Next, we consider our boundaries: at $\beta = 0$ the full beam
+    survives and turned to $\beta = \frac{\pi}{2}$ only half the beam
+    survives.  Finally, if $\beta = -\pi$, then all is lost.  Any
+    atoms incident upon box $b$ can be said to be in one of two
+    states: $\ket{n+}$ and $\ket{n-}$.  Of those lil' guys, any of
+    them in the $\ket{n+}$ will pass (so, 100\%).  Any in the
+    $\ket{n-}$ will fall (so 0\%). So our task, then, would be to find
+    out what fraction ($p$) is $\ket{n+}$ and the deduce what fraction
+    ($q = 1 - p$) is not.
+
+    So, we can pretty easily see that we're going to have a
+    coefficient of a $\sin$ or $\cos$ or something to let us know what
+    fraction will pass.  We can also pretty easily enumerate a few
+    specific cases:
+
+    \begin{equation}
+      \begin{split}
+        p(\beta=0) &= 1\\
+        p(\beta=\frac{\pi}{2}) &= \frac{1}{2}\\
+        p(\beta=\pi) &= 0\\
+        p(\beta=\frac{3\pi}{2}) &= \frac{1}{2}\\
+      \end{split}
+    \end{equation}
+
+    Remembering, also, that probabilities are proportional to the
+    square of the amplitude, we're probably looking for something of
+    the form:
+
+    \begin{equation}
+      p(\beta) = c_1 + c_2\cos^2{\beta}
+    \end{equation}
+
+    Solving for some initial conditions, and we can postulate a
+    solution:
+    
+    \begin{equation}
+      P(\beta) = \frac{1}{2} + \frac{\cos{\beta}}{2}
+    \end{equation}
+
+    The problem with this solution is that it's a $\cos$ instead of
+    something squared like we would expect for a probability vs a wave
+    amplitude.  Thankfully, we have the half-angle formulas to help us
+    out here:
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        & & \cos{\frac \alpha 2} &= \pm \sqrt{\frac{1 + \cos{\alpha}}{2}}\\
+        \implies \quad & & \cos^2{\frac \beta 2} &= \frac{1}{2} + \frac{\cos{\beta}}{2}\\
+      \end{alignedat}
+    \end{equation}
+    
+    That leaves us with our final ansatz'd solution of:
+    \begin{equation}
+      \inlabel{touchyFeely}
+      P(\beta) = \cos^2{\frac \beta 2}
+    \end{equation}
+    
+    Evaluating our new expression at the test points:
+    \begin{equation}
+      \begin{split}
+        p(\beta=0) &= 1\qed\\
+        p(\beta=\frac{\pi}{2}) &= \frac{1}{2}\qed\\
+        p(\beta=\pi) &= 0\qed\\
+        p(\beta=\frac{3\pi}{2}) &= \frac{1}{2}\qed\\
+      \end{split}
+    \end{equation}
+
+    Using the same approach, we estimate the beam intensity out of
+    gate $c$ (since it's symmetric, just showing $q$ instead of $p$
+    since the last gate passes $\ket{x-}$):
+
+    \begin{equation}
+      \inlabel{touchyFeely}
+      \begin{split}
+        P_{b \rightarrow} &= \cos^2{\frac \beta 2}\\
+        P_{c \rightarrow} &= \cos^2{\frac \beta 2} (1 - \cos^2{\frac \beta 2})\\
+        &= \cos^2{\frac \beta 2} \sin^2{\frac \beta 2}\\
+        &= \left(\frac{\sin{\beta}}{2}\right)^2\\
+        &= \frac{\sin^2{\beta}}{4}\\
+      \end{split}
+    \end{equation}
+    
+    Evaluating our new expression at the test points:
+    \begin{equation}
+      \begin{split}
+        p(\beta=0) &= 0\qed\\
+        p(\beta=\frac{\pi}{2}) &= \frac{1}{4}\qed\\
+        p(\beta=\pi) &= 0\qed\\
+        p(\beta=\frac{3\pi}{2}) &= \frac{1}{4}\qed\\
+      \end{split}
+    \end{equation}
+
+    This is about what we would expect.  If you're either aligned with
+    or against the first or last gate, then nothing gets through.  If
+    you're aligned exactly in between, then you decimate by $\frac 1
+    2$ each time with a final beam intensity of $\frac 1 4$. So, our
+    test-points seem to work, but that's not the same as being
+    correct, so let's grind it out.
+
+    We start by recalling equation \ref{1.14:ket} which we will use to
+    construct our $\Lambda_{n+}$ operator:
+
+    \begin{equation}
+      \begin{split}
+        \Lambda_{n+}
+        &= \dyad{n+}\\
+        &= \left(\cos{\frac{\beta}{2}} \ket{+}
+        + \sin{\frac{\beta}{2}} \ket{-}\right)
+        \left(\cos{\frac{\beta}{2}} \bra{+}
+        + \sin{\frac{\beta}{2}} \bra{-}\right)
+      \end{split}
+    \end{equation}
+
+    Acting that projection operator onto the incoming $\ket{+}$
+    state, we find that the output of the box is:
+
+    \begin{equation}
+      \begin{split}
+        \Lambda_{n+} \ket{+}
+        &= \dyad{n+}\ket{+}\\
+        &= \left(\cos{\frac{\beta}{2}} \ket{+}
+        + \sin{\frac{\beta}{2}} \ket{-}\right)
+        \left(\cos{\frac{\beta}{2}} \bra{+}
+        + \sin{\frac{\beta}{2}} \bra{-}\right)\ket{+}\\
+        &= \left(\cos{\frac{\beta}{2}} \ket{+}
+        + \sin{\frac{\beta}{2}} \ket{-}\right)
+        \cos{\frac{\beta}{2}}\braket{+}\\
+        &= \cos{\frac{\beta}{2}}\left(\cos{\frac{\beta}{2}} \ket{+}
+        + \sin{\frac{\beta}{2}} \ket{-}\right)\\
+        &= \cos{\frac{\beta}{2}}\ket{n+}
+      \end{split}
+    \end{equation}
+
+    Taking the probability, we find that our probability is exactly
+    what we intuited earlier in equation \inref{touchyFeely}, coming
+    out to:
+
+    \begin{equation}
+      \begin{split}
+        P_{b \rightarrow}
+        &= \cos{\frac{\beta}{2}}\bra{n+}\cos{\frac{\beta}{2}}\ket{n+}\\
+        &= \cos^2{\frac{\beta}{2}}\braket{n+}\\
+        &= \cos^2{\frac{\beta}{2}}\\
+      \end{split}
+    \end{equation}
+
+    We then apply the $\Lambda_{-}$ to the resulting output state to
+    determine the final probability and we get:
+
+    \begin{equation}
+      \begin{split}
+        \Lambda_{-}\cos{\frac{\beta}{2}}\ket{n+}
+        &= \dyad{-}\cos{\frac{\beta}{2}}
+        \left(\cos{\frac{\beta}{2}} \ket{+}
+        + \sin{\frac{\beta}{2}} \ket{-}\right)\\
+        &= \cos{\frac{\beta}{2}}\sin{\frac{\beta}{2}}\ket{-}\\
+      \end{split}
+    \end{equation}
+
+    Once again, taking the inner product to find the probability, we
+    find that grinding it out produces exactly the same result as we
+    found above through intuition:
+
+    \begin{equation}
+      \begin{split}
+        P_{c \rightarrow}
+        &= \cos{\frac{\beta}{2}}\sin{\frac{\beta}{2}}\bra{-}\cos{\frac{\beta}{2}}\sin{\frac{\beta}{2}}\ket{-}\\
+        &= \cos^2{\frac{\beta}{2}}\sin^2{\frac{\beta}{2}}\braket{-}\\
+        &= \cos^2{\frac{\beta}{2}}\sin^2{\frac{\beta}{2}}\\
+        &= \left(\frac{\sin{\beta}}{2}\right)^2\\
+        &= \frac{\sin^2{\beta}}{4}\qed\\
+      \end{split}
+    \end{equation}
+
+    So we see that our intuition beautifully matches the
+    grinding-it-out approach.
+    
   \end{answerpart}
 
-  \begin{answerpart}
-    bar
+  \begin{answerpart}{Probabilitis Maximus}
+    Just like with LCD screens, our output probability is maximized
+    when our intermediate filter splits the difference between the
+    first and the last (just look at the equation for the probability
+    and you see that it's maximized at $\frac{\pi}{2}$ and
+    $\frac{3\pi}{2}$).
   \end{answerpart}
 
 \end{answer}
