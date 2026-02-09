@@ -22,6 +22,8 @@ $\gamma = 0\text{, }\pi/2\text{, and }\pi.$)
 
 \begin{purpose}
   Learn how to apply our result from problem \ref{1.11:theQuestion}.
+  I'm guessing that he's also trying to help us understand the need
+  for the upcoming discussions of the Bloch Sphere.
 \end{purpose}
 
 \begin{answer}
@@ -58,13 +60,14 @@ $\gamma = 0\text{, }\pi/2\text{, and }\pi.$)
       S_x = \frac{\hbar}{2} [\ket - \bra + + \ket + \bra - ]
     \end{equation*}
 
-    Referencing our axis diagram (\qref{spinAxes}) in the QRF, we see
-    that the problem describes an azimuth angle ($\alpha$) of $0$ and
-    an elevation-complement angle ($\beta$) of $\gamma$.  Applying our
-    result from problem \ref{1.11:theQuestion}
+    Referencing our axis diagram (figure \qref{spinAxes}) in the QRF,
+    we see that the problem describes an azimuth angle ($\alpha$) of
+    $0$ and an elevation-complement angle ($\beta$) of $\gamma$.
+    Applying our result from problem \ref{1.11:theQuestion}
     (\ref{1.11:spinAngle}/\qref{spinAngle}):
 
     \begin{equation}
+      \inlabel{ket}
       \begin{split}
         \ket{\alpha_+}
         &= \cos{\frac{\beta}{2}} \ket + + e^{-i\alpha}\sin{\frac{\beta}{2}} \ket -\\
@@ -76,7 +79,7 @@ $\gamma = 0\text{, }\pi/2\text{, and }\pi.$)
     \begin{equation}
       \begin{split}
         P(x+)
-        &= \left|\braket{x+}{\alpha+}\right|^2\\
+        &= \left|\braket{x+}{\alpha_+}\right|^2\\
         &= \left|\frac{1}{\sqrt{2}}
         (\bra + + \bra -)
         (\cos{\frac{\gamma}{2}} \ket + + \sin{\frac{\gamma}{2}} \ket -)\right|^2\\
@@ -154,7 +157,139 @@ $\gamma = 0\text{, }\pi/2\text{, and }\pi.$)
   \end{answerpart}
 
   \begin{answerpart}{Dispersion}
+
+    Recalling equation 1.144:
+    \begin{equation*}
+      \tag{1.144}
+      \expval{(\Delta A)^2}
+      = \expval{(A^2 - 2A\expval{A} + \expval{A}^2)}
+      = \expval{A^2} - \expval{A}^2
+    \end{equation*}
+
+    \begin{equation}
+      \begin{split}
+        \expval{S_x}
+        &= \mel{\alpha_+}{S_x}{\alpha_+}\\
+      \end{split}
+    \end{equation}
+
+    Recalling equation \inref{ket}:
+
+    \begin{equation}
+      \ket{\alpha_+}
+      = \cos{\frac{\gamma}{2}} \ket +
+      + \sin{\frac{\gamma}{2}} \ket -\\
+    \end{equation}
+    
+    Recalling equation 1.111a from the book:
+    \begin{equation*}
+      \tag{1.111a}
+      S_x = \frac{\hbar}{2} [\ket - \bra + + \ket + \bra - ]
+    \end{equation*}
+
+    \begin{equation}
+      \begin{split}
+        \expval{S_x}
+        &= \mel{\alpha_+}{S_x}{\alpha_+}\\
+        &= (\cos{\frac{\gamma}{2}} \bra + + \sin{\frac{\gamma}{2}} \bra -)
+        (\frac{\hbar}{2} [\ket - \bra + + \ket + \bra - ])
+        (\cos{\frac{\gamma}{2}} \ket + + \sin{\frac{\gamma}{2}} \ket -)\\
+        &= \frac{\hbar}{2}
+        (\cos{\frac{\gamma}{2}} \bra + + \sin{\frac{\gamma}{2}} \bra -)
+        (\sin{\frac{\gamma}{2}} \ket + + \cos{\frac{\gamma}{2}} \ket -)\\
+        &= \frac{\hbar}{2}
+        (\cos{\frac{\gamma}{2}}\sin{\frac{\gamma}{2}} \braket +
+        \sin{\frac{\gamma}{2}}\cos{\frac{\gamma}{2}} \braket -)\\
+        &= \frac{\hbar}{2} (2\cos{\frac{\gamma}{2}}\sin{\frac{\gamma}{2}})\\
+        &= \frac{\hbar}{2}\sin{\gamma}\\
+      \end{split}
+    \end{equation}
+
+    There are two ways to do this one, and it's worth going through
+    both.  First, let's just grind it out:
+    
+    \begin{equation}
+      \begin{split}
+        \expval{S_x^2}
+        &= \mel{\alpha_+}{S_x^2}{\alpha_+}\\
+        &= (\cos{\frac{\gamma}{2}} \bra + + \sin{\frac{\gamma}{2}} \bra -)
+        (\frac{\hbar}{2} [\ket - \bra + + \ket + \bra - ])        
+        (\frac{\hbar}{2} [\ket - \bra + + \ket + \bra - ])
+        (\cos{\frac{\gamma}{2}} \ket + + \sin{\frac{\gamma}{2}} \ket -)\\
+        &= \frac{\hbar^2}{4}
+        (\sin{\frac{\gamma}{2}} \bra + + \cos{\frac{\gamma}{2}} \bra -)
+        (\sin{\frac{\gamma}{2}} \ket + + \cos{\frac{\gamma}{2}} \ket -)\\
+        &= \frac{\hbar^2}{4}
+        (\sin^2{\frac{\gamma}{2}}\braket{+}
+        + \cos^2{\frac{\gamma}{2}}\braket{-})\\
+        &= \frac{\hbar^2}{4}
+      \end{split}
+    \end{equation}
+
+    Next, we'll make sue of the identity in \ref{1.10:sxSquared}, we
+    can rewrite our equation:
+
+    \begin{equation}
+      \begin{split}
+        \expval{S_x^2}
+        &= \mel{\alpha_+}{S_x^2}{\alpha_+}\\
+        &= \mel{\alpha_+}{\frac{\hbar^2}{4}I}{\alpha_+}\\
+        &= \frac{\hbar^2}{4}\braket{\alpha_+}\\
+        &= \frac{\hbar^2}{4}\\
+      \end{split}
+    \end{equation}
+
+    Putting it all together:
+
+    \begin{equation}
+      \begin{split}
+        \expval{(S_x - \expval{S_x})^2}
+        &= \expval{S_x^2} - \expval{S_x}^2\\
+        &= \frac{\hbar^2}{4} - \frac{\hbar^2}{4}\sin^2{\gamma}\\
+        &= \frac{\hbar^2}{4}(1 - \sin^2{\gamma})\\
+      \end{split}
+    \end{equation}
+
+    Going back and referencing our axes (figure \qref{spinAxes}), we
+    see that when $\vectorbold{\hat{n}}$ is aligned with the $x$ axis,
+    the dispersion is $0$:
+
+    \begin{equation}
+      \begin{split}
+        \expval{(S_x - \expval{S_x})^2}
+        &= \frac{\hbar^2}{4}(1 - \sin^2{\gamma})\\
+        &= \frac{\hbar^2}{4}(1 - \sin^2{\frac \pi 2})\\
+        &= \frac{\hbar^2}{4}(1 - 1)\\
+        &= 0\\
+      \end{split}
+    \end{equation}
+
+    Alternatively, when we're perpendicular to our operator's axis, we
+    find that the dispersion is maximized at $\frac{\hbar^2}{4}$:
+    
+    \begin{equation}
+      \begin{split}
+        \expval{(S_x - \expval{S_x})^2}
+        &= \frac{\hbar^2}{4}(1 - \sin^2{\gamma})\\
+        &= \frac{\hbar^2}{4}(1 - \sin^2{0})\\
+        &= \frac{\hbar^2}{4}(1 - 0)\\
+        &= \frac{\hbar^2}{4}\\
+      \end{split}
+    \end{equation}
+
+    In classical statistical theory, the dispersion is a measure of
+    how diverse the data are.  By amplifying small differences between
+    the input values it tells us how concentrated the data are.  As we
+    saw in problem \ref{1.3:theProblem}, the quantum mechanical view
+    of the dispersion is more related to what Heisenberg may have
+    called the indeterminacy of the system or about how much
+    information (a la Claude Shannon) the $S_x$ operator provides when
+    states are prepared along the $\vectorbold{\hat{n}}$ axis.  When
+    the state is prepared along the $x$ axis, then observations don't
+    provide any information (it starts as $x$, it ends as $x$, you
+    don't change it).  However, when you start aligning it with other
+    axes, you start introducing variability in the outcome, and you
+    start seeing the dispersion increase.
   \end{answerpart}
 
-  
 \end{answer}

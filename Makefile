@@ -86,7 +86,7 @@ sak: .dummy_builddir
 
 problem: .dummy_builddir params
 	bin/qcad_export.py -s sakurai/qrf -d $(BUILD)/sakurai
-	bin/qcad_export.py -s sakurai/$(bookName)/chapters/$(chapterNum)/problems/$(problemNum) -d $(BUILD)/sakurai/$(bookName)/chapters/$(chapterNum)/problems/$(problemNum)
+	bin/qcad_export.py -s $(bookName)/chapters/$(chapterNum)/problems/$(problemNum) -d $(BUILD)/$(bookName)/chapters/$(chapterNum)/problems
 	$(PDFTEX) \
 	-jobname $(bookName)-$(chapterNum)-$(problemNum)-raw \
 	problem.tex \
