@@ -8,7 +8,10 @@
 
 \input{packages}
 
-\usepackage[pdftitle={Solutions Manual: Sakurai (3rd ed)},colorlinks=false]{hyperref}
+\usepackage[pdftitle={Solutions Manual: Sakurai (3rd ed)},
+  colorlinks=false,
+  bookmarksopen=true,
+  bookmarksopenlevel=2]{hyperref}
 
 \input{preamble}
 \input{commands}
@@ -32,6 +35,11 @@
 
 \input{\bookName/qrfContents}
 
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{%
+  \texorpdfstring{Table of Contents}{Table of Contents}%
+}%
 \tableofcontents
 
 \mainmatter
