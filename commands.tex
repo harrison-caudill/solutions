@@ -20,7 +20,7 @@
 }%
 
 \NewDocumentCommand{\problemCounters}{}{%
-    % In appendices, we want our equations/figures to increment within
+    % In problems, we want our equations/figures to increment within
     % the chapters, not any other level.
     \counterwithin{equation}{chapter}
     \counterwithin{equation}{section}
@@ -52,10 +52,9 @@
 \NewDocumentCommand{\problem}{mm}{%
     \setcounter{section}{\numexpr #1-1 \relax}%
     \refstepcounter{section}%
-    \setcounter{equation}{0}%
     \needspace{5\baselineskip}
-    \section*{\thesection: #2}
     \phantomsection
+    \section*{\thesection: #2}
     \inlabel{theQuestion}
     \addcontentsline{toc}{section}{%
     \texorpdfstring{\thesection:\ #2}{\thesection:\ #2}%
@@ -82,8 +81,8 @@
 \newenvironment{answerpart}[1]{%
     \refstepcounter{qpart}
     \renewcommand{\thesubsection}{\thesection.\alph{qpart}}
-    \subsection*{\thesubsection: #1}
     \phantomsection
+    \subsection*{\thesubsection: #1}
     \addcontentsline{toc}{subsection}{%
         \texorpdfstring{\thesubsection:\ #1}{\thesubsection:\ #1}%
     }%
