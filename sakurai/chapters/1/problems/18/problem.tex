@@ -1,0 +1,43 @@
+\begin{question}
+
+  Two Hermitian operators anticommute:
+  \begin{equation*}
+    \{A, B\} = AB + BA = 0
+  \end{equation*}
+
+  Is it possible to have a simultaneous (that is, common) eigenket of
+  $A$ and $B$? Prove or illustrate your assertion.
+
+\end{question}
+
+\begin{purpose}
+  The purpose of this one is a little unclear.  He's either checking
+  that we understand the basics of how to eigen-decompose an operator
+  or...I don't know...maybe he's building to something.
+\end{purpose}
+
+\begin{answer}
+
+  Let's start by decomposing the operator into its eigenvectors.
+  
+  Drawing upon equation \outref{1}{17}{result}, we see that whenever
+  there \emph{is} a simultaneous Eigenbasis, then
+
+  \begin{equation}
+    AB = BA
+  \end{equation}
+
+  So, if we apply that here, we would have:
+
+  \begin{equation}
+    \begin{split}
+      0
+      &= AB + BA\\
+      &= AB + AB\\
+      &= 2AB\\
+    \end{split}
+  \end{equation}
+
+  For this equation to hold, either $A$ or $B$ (or both) must be $0$.
+
+\end{answer}
