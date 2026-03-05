@@ -1,0 +1,75 @@
+\begin{question}
+
+Two observables $A1$ and $A2$, which do not involve time explicitly,
+are known not to commute,
+
+\begin{equation*}
+  [A1 , A2] \ne 0,
+\end{equation*}
+
+yet we also know that $A1$ and $A2$ both commute with the Hamiltonian:
+
+\begin{equation*}
+  [A1, H] = 0, [A2, H] = 0.
+\end{equation*}
+
+\begin{questionpart}
+  Prove that the energy eigenstates are, in general, degenerate.
+\end{questionpart}
+
+\begin{questionpart}
+  Are there exceptions?
+\end{questionpart}
+
+\begin{questionpart}
+  As an example, you may think of the central-force problem $H =
+  \vectorbold{p}^2/2m + V(r)$, with $A1 \rightarrow L_z$, $A2
+  \rightarrow L_x$.
+\end{questionpart}
+
+\end{question}
+
+\begin{purpose}
+  OK, this problem is meant to be our first foray into wave mechanics
+  and there are a LOT of things going on here.  This is where we start
+  going from abstract operators to real-world integrals. I fell flat
+  on my face the first time I tried to attempt this one until some
+  external help allowed me to perform a rectal craniotomy and muddle
+  through it.  Let's start by listing a few of the things going on
+  here:
+
+  \begin{itemize}
+
+  \item Contrary to what you may recall from equation 1.33 in the
+    \textit{Griffiths} book, $\hat{p} \ne \left( -i \hbar
+    \frac{\partial}{\partial x}\right)$.  Rather, working from the
+    foundation of Hamltonian mechanics found in Goldstein, Sakurai
+    posits the existence of a momentum operator $\hat{p}$ and then
+    shows how it must behave.  In doing so, he develops a generalized
+    expression of that behavior in equation 1.249.  If you try to
+    treat the $-i \hbar \ldots$ as the operator itself, then you'll
+    get to equation 1.248 and start cursing at the world saying ``How
+    in the actual fsck did you move that $\frac{\partial}{\partial x}$
+    into the middle of the dyad while multiplying by
+    1?!\@\#\@!?!!1!eleven!1?  We'll cover this one soon.
+
+  \item There is a difference between an abstract operator, say
+    $\hat{p}$, and the expression of that operator in an integral.
+    Considering the example of $\hat{p}$ when acting on a ket holding
+    the position, the proper expression in physical space is $-i \hbar
+    \left(\frac{\partial}{\partial x}\right)$ (well, more properly
+    it's $-i \hbar \nabla \vectorbold{x}$) but if you're acting on a
+    ket that represents the momentum, then it gets much more
+    complicated and becomes $p$, if you're operating on a ket that
+    represents Schr\"{o}dinger's cat (the sadist...who kills
+    kittens!?) then I'm pretty sure it spontaneously generates a black
+    hole.
+
+  \item It's probably worth reviewing Goldstein chapter XXX where he
+    derives the generators from Hamiltonian mechanics.
+  \end{itemize}
+\end{purpose}
+
+\begin{answer}
+  
+\end{answer}

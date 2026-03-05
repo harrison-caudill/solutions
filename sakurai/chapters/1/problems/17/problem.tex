@@ -1,0 +1,93 @@
+\begin{question}
+
+  Let $A$ and $B$ be observables. Suppose the simultaneous eigenkets
+  of $A$ and $B$ $\left\{\ket{a',b'}\right\}$ form a complete
+  orthonormal set of base kets. Can we always conclude that
+
+  \begin{equation*}
+    [A, B] = 0?
+  \end{equation*}
+
+  If your answer is yes, prove the assertion. If your answer is no,
+  give a counterexample.
+
+\end{question}
+
+\begin{purpose}
+  I guess to make sure you have a pulse?
+\end{purpose}
+
+\begin{answer}
+  
+  Because, and I can't emphasize this enough, I'm lazy and don't want
+  to type $\left\{\ket{a',b'}\right\}$ a bunch, I'm going to redefine
+  this
+
+  \begin{equation}
+    \text{let }\left\{\ket{a',b'}\right\} \equiv \left\{\ket{c_i}\right\}
+  \end{equation}
+  
+  When in doubt, multiply by $1$!
+
+  \begin{equation}
+    \begin{split}
+      A &= A1\\
+      &= \sum_{i}A\dyad{c_i}\\
+      &= \sum_{i}a_i\dyad{c_i}\\
+      &= \sum_{i}a_i\Lambda_i\\
+    \end{split}
+  \end{equation}
+
+  \begin{equation}
+    \begin{split}
+      B &= B1\\
+      &= \sum_{i}B\dyad{c_i}\\
+      &= \sum_{i}b_i\dyad{c_i}\\
+      &= \sum_{i}b_i\Lambda_i\\
+    \end{split}
+  \end{equation}
+
+  We start with our definition of commutation
+
+  \begin{equation}
+    \begin{split}
+      [A, B] &= AB - BA\\
+    \end{split}
+  \end{equation}
+
+  Next, we work out one part of that:
+
+  \begin{equation}
+    \begin{split}
+      AB
+      &= \left(\sum_{i} a_i\Lambda_i\right)\left(\sum_{j} b_j\Lambda_j\right)\\
+    \end{split}
+  \end{equation}
+
+  Since we know that $\Lambda_i\Lambda_j = \Lambda_i\delta_{ij}$, we can
+  eliminate any cross-terms in that giant ugly mess and come back with:
+  
+  \begin{equation}
+    \begin{split}
+      AB
+      &= \left(\sum_{i} a_i\Lambda_i\right)\left(\sum_{j} b_j\Lambda_j\right)\\
+      &= \sum_{i} a_ib_i\Lambda_i\\
+    \end{split}
+  \end{equation}
+
+  Since we can rearrange a constant anytime we please, let's elect to
+  do so now
+
+  \begin{equation}
+    \inlabel{result}
+    \begin{split}
+      AB
+      &= \left(\sum_{i} a_i\Lambda_i\right)\left(\sum_{j} b_j\Lambda_j\right)\\
+      &= \sum_{i} a_ib_i\Lambda_i\\
+      &= \sum_{i} b_ia_i\Lambda_i\\
+      &= \left(\sum_{i} b_i\Lambda_i\right)\left(\sum_{j} a_j\Lambda_j\right)\\
+      &= BA\qed
+    \end{split}
+  \end{equation}
+
+\end{answer}

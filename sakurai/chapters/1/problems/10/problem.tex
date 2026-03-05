@@ -62,7 +62,7 @@
     crank it out.  For the 3 cyclic cases listed above, we'll need to show that:
 
     \begin{equation}
-      [S_i, S_j] = i \hbar S_k |_{(i, j, k) \in \{(x, y, z),  (y, z, x),  (z, x, y)\}}
+      \eval{[S_i, S_j] = i \hbar S_k}_{(i, j, k) \in \{(x, y, z),  (y, z, x),  (z, x, y)\}}
     \end{equation}
     
     Starting with $x$ and $y$:
@@ -199,8 +199,8 @@
         \expval{S_i^{2}}{\psi}
         &= (\bra \psi S_i ) (S_i \ket \psi)\\
         &= (\alpha^* \bra{\psi'}) (\alpha \ket{\psi'})\\
-        &= |\alpha^2| \braket{\psi'} \\
-        &= |\alpha^2|\\
+        &= \abs{\alpha^2} \braket{\psi'} \\
+        &= \abs{\alpha^2}\\
       \end{split}
     \end{equation}
 

@@ -261,13 +261,13 @@
   
   \begin{equation}
     \begin{split}
-      N_1 &= |\vec{a_1}|\\
-      &= \sqrt{\vec{a_1} \cdot \vec{a_1}}\\
-      &= \sqrt{4 - 2\sqrt{2}}\\
-      N_2 &= |\vec{a_2}|\\
-      &= \sqrt{\vec{a_2} \cdot \vec{a_2}}\\
-      &= \sqrt{4 - 2\sqrt{2}}\\
-      N &= N_1 = N_2 = \sqrt{4 - 2\sqrt{2}}\\
+      N_1 &= \frac{1}{\norm{\vec{a_1}}}\\
+      &= \frac{1}{\sqrt{\vec{a_1} \cdot \vec{a_1}}}\\
+      &= \frac{1}{\sqrt{4 - 2\sqrt{2}}}\\
+      N_2 &= \frac{1}{\norm{\vec{a_2}}}\\
+      &= \frac{1}{\sqrt{\vec{a_2} \cdot \vec{a_2}}}\\
+      &= \frac{1}{\sqrt{4 - 2\sqrt{2}}}\\
+      N &= N_1 = N_2 = \frac{1}{\sqrt{4 - 2\sqrt{2}}}\\
     \end{split}
   \end{equation}
 
@@ -292,9 +292,9 @@
       \frac H a &= \sum_i \lambda_i \dyad{a_i}\\
       &\dot{=}\sum_i \lambda_i \begin{bmatrix}x_1\\y_1\\\end{bmatrix}\begin{bmatrix}x_1&y_1\\\end{bmatrix}\\
           &=
-          \frac{\sqrt{2}}{N^2}
+          \sqrt{2}N^2
           \begin{bmatrix}1\\\sqrt{2} - 1\\\end{bmatrix}\begin{bmatrix}1&\sqrt{2} - 1\\\end{bmatrix}
-              - \frac{\sqrt{2}}{N^2}
+              - \sqrt{2}N^2
               \begin{bmatrix}1 - \sqrt{2}\\1\\\end{bmatrix}\begin{bmatrix}1 - \sqrt{2}&1\\\end{bmatrix}
     \end{split}
   \end{equation}
