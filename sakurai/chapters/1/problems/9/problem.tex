@@ -19,7 +19,7 @@
   \end{questionpart}
 
   \begin{questionpart}
-    Illustrate (a) and (b) using $A$ set equal to $S_z$ of a sping $\frac 1 2$ system.
+    Illustrate (a) and (b) using $A$ set equal to $S_z$ of a spin $\frac 1 2$ system.
   \end{questionpart}
 
 \end{question}
@@ -44,7 +44,7 @@
   mathematical assumptions from the problem:
 
   \begin{equation}
-    A^\dagger = A = \left. \sum_i a_i\Lambda_i, \text{ where } a_i \ne a_j \right|_{i \ne j}
+    A^\dagger = A = \sum_i a_i\Lambda_i, \text{ where } \eval{a_i \ne a_j}_{i \ne j}
   \end{equation}
 
   We then need to show that
@@ -71,11 +71,11 @@
   \item The resulting product is all combinations of one element from each row.
 
   \item We know that all cross-terms including any
-    $\left.\Lambda_i\Lambda_j\right|_{i \ne j}$ terms will go to 0.
+    $\eval{\Lambda_i\Lambda_j}_{i \ne j}$ terms will go to 0.
     That means any cross-terms with dissimilar $\Lambda$'s are 0,
     leaving only cross-terms originating from the final column.
 
-  \item For any term of the form $\left.a_i^k\Lambda_i\right|_{k>1}$,
+  \item For any term of the form $\eval{a_i^k\Lambda_i}_{k>1}$,
     there will be a 1:1 correspondance with a negative term because:
 
     \begin{equation}
@@ -157,7 +157,7 @@
 
   \begin{equation}
     \begin{split}
-      \left.X\ket{a_k}\right|_{k \ne j}
+      \eval{X\ket{a_k}}_{k \ne j}
       &= \prod_{i \ne j}\frac{(A - a_i)}{(a_j - a_i)}\ket{a_k}\\
       &= \frac{A - a_k}{a_j - a_k}\prod_{i \ne j \ne k}\frac{(A - a_i)}{(a_j - a_i)}\ket{a_k}\\
       &= \frac{a_k - a_k}{a_j - a_k}\prod_{i \ne j \ne k}\frac{(A - a_i)}{(a_j - a_i)}\ket{a_k}\\

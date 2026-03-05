@@ -1,0 +1,296 @@
+\begin{question}
+
+A certain observable in quantum mechanics has a $3 \times 3$ matrix
+representation as follows:
+
+\begin{equation*}
+  \frac{1}{\sqrt{2}}
+  \begin{pmatrix}
+    0 & 1 & 0\\
+    1 & 0 & 1\\
+    0 & 1 & 0\\
+  \end{pmatrix}
+\end{equation*}
+
+\begin{questionpart}
+  Find the normalized eigenvectors of this observable and the
+  corresponding eigenvalues. Is there any degeneracy?
+\end{questionpart}
+
+\begin{questionpart}
+ Give a physical example where all this is relevant.  
+\end{questionpart}
+
+\end{question}
+
+\begin{purpose}
+\end{purpose}
+
+\begin{answer}
+
+  \begin{answerpart}{Interesting Eigenvalues \& Rotations}
+
+    Let's start by getting rid of the constant since it's just
+    annoying.  Since we can always pull out a scalar ($c_0$ in this
+    case), we're going to define our matrix without it and we can
+    apply it at the end.
+
+    \begin{equation}
+      \text{let } A \equiv
+      \begin{pmatrix}
+        0 & 1 & 0\\
+        1 & 0 & 1\\
+        0 & 1 & 0\\
+      \end{pmatrix}
+    \end{equation}
+
+    \begin{equation}
+      \text{let } c_0 \equiv \frac{1}{\sqrt{2}}
+    \end{equation}
+
+    Obviously, this matrix is going to do some interesting stuff, so
+    let's start with a few observations about the symmetry of the
+    matrix:
+
+    \begin{equation}
+      A = A^\dagger = A^* = A^T
+    \end{equation}
+
+    We can also rotate the matrix like a pinwheel about the cetner 0
+    and we get the same matrix.  So we have bilateral and radial
+    symmetry in our matrix.
+
+    If we start taking the matrix to various powers, we see something
+    interesting happen.
+
+    \begin{equation}
+      \begin{split}
+        A^1 &=
+        \begin{pmatrix}
+          0 & 1 & 0\\
+          1 & 0 & 1\\
+          0 & 1 & 0\\
+        \end{pmatrix}\\
+        A^2 &=
+        \begin{pmatrix}
+          1 & 0 & 1\\
+          0 & 2 & 0\\
+          1 & 0 & 1\\
+        \end{pmatrix}\\
+        A^3 &=
+        \begin{pmatrix}
+          0 & 2 & 0\\
+          2 & 0 & 2\\
+          0 & 2 & 0\\
+        \end{pmatrix}\\
+        A^4 &=
+        \begin{pmatrix}
+          2 & 0 & 2\\
+          0 & 4 & 0\\
+          2 & 0 & 2\\
+        \end{pmatrix}\\
+      \end{split}
+    \end{equation}
+
+    If $n$ is odd, we find that:
+
+    \begin{equation}
+      A^n = 2^{\frac{n-1}{2}}
+      \begin{pmatrix}
+        0 & 1 & 0\\
+        1 & 0 & 1\\
+        0 & 1 & 0\\
+      \end{pmatrix}
+    \end{equation}
+
+    and if $n$ is even, we get
+
+    \begin{equation}
+      A^n = 2^{\frac{n}{2} - 1}
+      \begin{pmatrix}
+        1 & 0 & 1\\
+        0 & 2 & 0\\
+        1 & 0 & 1\\
+      \end{pmatrix}\\
+    \end{equation}
+
+    You can trace out how this happens if you look closely, but it
+    kinda feels like we're in the classic CS game \emph{The Game of
+    Life}.
+
+    Moving on to the Eigenstage, we can easily find the eigenvalues
+    using the classical approach:
+
+    \begin{equation}
+      \begin{split}
+        0 &=
+        det \left(
+        \frac{1}{\sqrt{2}}
+        \begin{bmatrix}
+          0-\lambda & 1 & 0\\
+          1 & 0-\lambda & 1\\
+          0 & 1 & 0-\lambda\\
+        \end{bmatrix}
+        \right)\\
+        &= -\lambda^3 - (-\lambda - \lambda)\\
+        &= -\lambda^3 + 2\lambda\\
+        &= (\lambda - 0)(\lambda - \sqrt{2})(\lambda + \sqrt{2})\\
+      \end{split}
+    \end{equation}
+
+    It's worth noting that we have $(-\sqrt{2}, 0, \sqrt{2})$ as our
+    Eigenvalues.  If we were to apply our $c_0$ from the beginning,
+    then those Eigenvalues become $(-1, 0, 1)$ which starts to look
+    physically interesting.  It's still just a constant, though.  Note
+    that we have both an Eigenvalue of $0$ and also a singular matrix
+    $A$.  Now let's solve for our (non-normalized but easy-to-read)
+    eigenvectors.
+
+    \begin{equation}
+      \begin{split}
+        A \vec{x} &= \lambda\vec{x}\\
+        \begin{pmatrix}
+          0 & 1 & 0\\
+          1 & 0 & 1\\
+          0 & 1 & 0\\
+        \end{pmatrix}
+        \begin{pmatrix}
+          x\\
+          y\\
+          z\\
+        \end{pmatrix}
+        &=
+        \lambda
+        \begin{pmatrix}
+          x\\
+          y\\
+          z\\
+        \end{pmatrix}\\
+      \end{split}
+    \end{equation}
+
+    From this, we can easily build our characteristic equations:
+
+    \begin{equation}
+      \inlabel{eigEquations}
+      \begin{split}
+        y &= \lambda x\\
+        x + z &= \lambda y\\
+        y &= \lambda z\\
+      \end{split}
+    \end{equation}
+
+    Using the first and last, we can easily see that $x = z$.
+    Defining $x/z$ to be $1$ for simplicity, we can rewrite our
+    equations:
+
+    \begin{equation}
+      \begin{split}
+        x &= 1\\
+        2 &= \lambda y => y = \frac{2}{\lambda}\\
+        z &= 1\\
+      \end{split}
+    \end{equation}
+
+    Knowing, as we do, that our non-degenerate $\lambda's$ are $\pm
+    \sqrt{2}$, we can go ahead and rationalize this to be:
+
+    \begin{equation}
+      \begin{split}
+        x &= 1\\
+        y &= \pm \frac{2}{\sqrt{2}} = \pm\sqrt{2} = \lambda\\
+        z &= 1\\
+      \end{split}
+    \end{equation}
+
+    In the end, our Eigenvectors become rather interesting:
+
+    \begin{equation}
+      \vec{a_{1,3}} = 
+      \begin{pmatrix}
+        1\\
+        \lambda\\
+        1\\
+      \end{pmatrix}\\
+    \end{equation}
+
+    Returning back to our $0$ Eigenvalue and using equation
+    \inref{eigEquations}, we see that:
+
+    \begin{equation}
+      \begin{split}
+        y &= 0\\
+        x + z &= 0 => x = -z\\
+        y &= 0\\
+      \end{split}
+    \end{equation}
+
+    Once again, we'll define $x = 1$ for simplicity, which makes our
+    final Eigenvector
+    
+    \begin{equation}
+      \vec{a_2} = 
+      \begin{pmatrix}
+        1\\
+        \lambda\\
+        -1\\
+      \end{pmatrix}\\
+    \end{equation}
+
+    It's worth noting that except for that pesky negative sign on the
+    z component, we almost got away with a single expression for the
+    Eigenvectors.
+
+    Since the book asks us to normalize, let's do that and also bring
+    back our $c_0$ as part of it.  So we're going to normalize our
+    eigenvector to have magnitude  trivially adding a
+    constant out front
+
+    \begin{equation}
+      c = \frac{1}{c_0\abs{a}} = \frac{1}{2c_0} = \frac{\sqrt{2}}{2}
+    \end{equation}
+
+    This constant ensures that the Eigenvectors we found are
+    normalized for the scaled matrix $c_0A$ specified in the problem.
+    Pull out the $\frac{1}{c_0}$ or leave it in depending upon whether
+    you want the vectors from before or after (respectively) the $c_0$
+    is applied.
+
+    \begin{equation}
+      \vec{a_{1,3}} =
+      \frac{\sqrt{2}}{2}
+      \begin{pmatrix}
+        1\\
+        \lambda\\
+        1\\
+      \end{pmatrix}\\
+    \end{equation}
+
+    Then for our final Eigenvector for our Eigenvalue of $0$
+
+    \begin{equation}
+      \vec{a_{2}} =
+      \frac{\sqrt{2}}{2}
+      \begin{pmatrix}
+        1\\
+        \lambda\\
+        -1\\
+      \end{pmatrix}\\
+    \end{equation}
+  \end{answerpart}
+  
+  \begin{answerpart}{Physical Interpretation}
+    There are a few cases where I can intuit this being useful, such
+    as with raising and lowering.  There's also clearly something to
+    the scaled 2-state aspect where $A^{n+2} = 2A^{n}$.  That being
+    said...I don't see any specific case from chapter 1 where I could
+    use this thing.
+
+    Employing external help, it turns out that this is a spin operator
+    for a Spin-1 system which is well beyond the scope of Chapter 1.
+    It's at times like this students such as myself lament Sakurai's
+    premature passing.  Since this portion is so far beyond the scope
+    of chapter 1, I'm going to leave it alone at that.
+  \end{answerpart}
+
+\end{answer}
