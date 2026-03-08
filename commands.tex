@@ -135,6 +135,11 @@ Drawing upon the problem, we can surmise that:
   \ref{\thesection:#1}%
 }%
 
+% The corresponding ref command for the \inlabel command
+\newcommand{\incite}[1]{%
+  \cite{\thesection:#1}%
+}%
+
 \newcommand{\outref}[3]{%
   \ref{#1.#2:#3}%
 }%
