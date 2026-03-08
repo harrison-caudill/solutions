@@ -1,5 +1,7 @@
-\begin{question}
+\def\ctrois{C\'{o}mmute \`{a} Trois}
 
+\begin{question}
+  
 Two observables $A1$ and $A2$, which do not involve time explicitly,
 are known not to commute,
 
@@ -23,53 +25,441 @@ yet we also know that $A1$ and $A2$ both commute with the Hamiltonian:
 
 \begin{questionpart}
   As an example, you may think of the central-force problem $H =
-  \vectorbold{p}^2/2m + V(r)$, with $A1 \rightarrow L_z$, $A2
+  \vb{p}^2/2m + V(r)$, with $A1 \rightarrow L_z$, $A2
   \rightarrow L_x$.
 \end{questionpart}
 
 \end{question}
 
 \begin{purpose}
+
   OK, this problem is meant to be our first foray into wave mechanics
-  and there are a LOT of things going on here.  This is where we start
-  going from abstract operators to real-world integrals. I fell flat
-  on my face the first time I tried to attempt this one until some
-  external help allowed me to perform a rectal craniotomy and muddle
-  through it.  Let's start by listing a few of the things going on
-  here:
+  and there are a LOT of things going on here.  I fell flat on my face
+  the first time I tried to attempt this one until some external help
+  allowed me to perform a rectal craniotomy and muddle through it.
+  Let's start by listing a few of the things going on here:
 
   \begin{itemize}
 
-  \item Contrary to what you may recall from equation 1.33 in the
-    \textit{Griffiths} book, $\hat{p} \ne \left( -i \hbar
-    \frac{\partial}{\partial x}\right)$.  Rather, working from the
-    foundation of Hamltonian mechanics found in Goldstein, Sakurai
-    posits the existence of a momentum operator $\hat{p}$ and then
-    shows how it must behave.  In doing so, he develops a generalized
-    expression of that behavior in equation 1.249.  If you try to
-    treat the $-i \hbar \ldots$ as the operator itself, then you'll
-    get to equation 1.248 and start cursing at the world saying ``How
-    in the actual fsck did you move that $\frac{\partial}{\partial x}$
-    into the middle of the dyad while multiplying by
-    1?!\@\#\@!?!!1!eleven!1?  We'll cover this one soon.
+  \item A simplistic view is to consider that $\hat{p} \equiv \left(
+    -i \hbar \frac{\partial}{\partial x}\right)$.  As Sakurai
+    discusses, working from the foundation of Hamltonian mechanics
+    found in Goldstein, Sakurai posits the existence of a momentum
+    operator $\hat{p}$ and then shows how it must behave.  In doing
+    so, he develops a generalized expression of that behavior in
+    equation 1.249.
 
   \item There is a difference between an abstract operator, say
     $\hat{p}$, and the expression of that operator in an integral.
     Considering the example of $\hat{p}$ when acting on a ket holding
     the position, the proper expression in physical space is $-i \hbar
     \left(\frac{\partial}{\partial x}\right)$ (well, more properly
-    it's $-i \hbar \nabla \vectorbold{x}$) but if you're acting on a
-    ket that represents the momentum, then it gets much more
-    complicated and becomes $p$, if you're operating on a ket that
-    represents Schr\"{o}dinger's cat (the sadist...who kills
+    it's $-i \hbar \nabla \vb{x}$, and even more properly
+    there's the expression for $\mel{x}{p}{\alpha}$) but if you're
+    acting on a ket that represents the momentum, then it gets much
+    more complicated and becomes $p$, if you're operating on a ket
+    that represents Schr\"{o}dinger's cat (the sadist...who kills
     kittens!?) then I'm pretty sure it spontaneously generates a black
     hole.
 
   \item It's probably worth reviewing Goldstein chapter XXX where he
     derives the generators from Hamiltonian mechanics.
+
+  \item The dimensionality of the infinities of eigenkets is equal to
+    the number of times you find an eigenvalue.  Find $\lambda$ once?
+    You have the typical line of eigenvectors (though we typically
+    normalize to magnitude 1).  Twice?  You have a plane in which any
+    two orthogonal vectors count as eigenvectors with the same
+    eigenvalues as before.  Thrice?  you have a 3D space, and so on.
+
   \end{itemize}
 \end{purpose}
 
 \begin{answer}
-  
+
+  \begin{answerpart}{\ctrois{}}
+    For simplicity and laziness, because I hate writing subscripts
+    unnecessarily, I'm going to make a quick substitution:
+
+    \begin{equation}
+      \text{let }A_1 \equiv A, A_2 \equiv B
+    \end{equation}
+
+    Next, let's have a brief recitation of the problem setup:
+    
+    \begin{equation}
+      \begin{split}
+        &[A, B] = AB - BA \ne 0\\
+        &[A, H] = AH - HA = [B, H] = BH - HB = 0\\
+        &H = \sum_i h_i\Lambda_{h,i} + \sum_j h_d\Lambda_{h,d,j}\\
+      \end{split}
+    \end{equation}
+
+    We know from problem FIXME that two operators commute if and only
+    if they have a simultaneous eigenbasis.  So if they don't commute,
+    they don't have a simultaneous eigenbasis.  That means we can
+    rewrite our operators as follows.
+
+    \begin{equation}
+      \begin{split}
+        A &= \sum_i a_{s,i}\Lambda_{s,i} + \sum_j a_{p,j}\Lambda_{a,p,j}
+        = A_s + A_p\\
+        B &= \sum_i b_{s,i}\Lambda_{s,i} + \sum_j b_{p,j}\Lambda_{b,p,j}
+        = B_s + B_p\\
+        H &= \sum_i h_{s,i}\Lambda_{s,i} + \sum_j h_{p,j}\Lambda_{h,p,j}
+        = H_s + H_p\\
+      \end{split}
+    \end{equation}
+
+    Here we use $s$ for the (s)hared eigenbasis and $p$ for the
+    (p)rivate eigenbasis for that operator.  For simplicity, we have
+    also broken out the shared vs private portions into their own
+    operators $X_s$ and $X_p$.  So, we know that if there's a shared
+    eigenbasis, it'll commute, and otherwise it won't, so that leaves:
+
+    \begin{equation}
+      \begin{split}
+        [A, B]
+        &= (A_s + A_p)(B_s + B_p) - (B_s + B_p)(A_s + A_p)\\
+        &= (A_sB_s + A_sB_p + A_pB_s + A_pB_p)
+        - (B_sA_s + B_sA_p + B_pA_s + B_pA_p)\\
+      \end{split}
+    \end{equation}
+
+    We know that all the interior eigenbases are orthogonal, which
+    allows us to eliminate cross-terms:
+    \begin{equation}
+      \begin{split}
+        XY
+        =\ &X_sY_s + X_sY_p + X_pY_s + X_pY_p\\
+        =\ &(\sum_i x_{s,i}\Lambda_{s,i})(\sum_i y_{s,i}\Lambda_{s,i})\\
+        &+ (\sum_i x_{s,i}\Lambda_{s,i})(\sum_i y_{p,i}\Lambda_{y,p,i})\\
+        &+ (\sum_i x_{p,i}\Lambda_{x,p,i})(\sum_i y_{s,i}\Lambda_{s,i})\\
+        &+ (\sum_i x_{p,i}\Lambda_{x,p,i})(\sum_i y_{p,i}\Lambda_{y,p,i})\\
+        =\ &\sum_i x_{s,i}y_{s,i}\Lambda_{s,i}
+        + (\sum_i x_{p,i}\Lambda_{x,p,i})(\sum_i y_{p,i}\Lambda_{y,p,i})\\
+        =\ &X_sY_s + X_pY_p\\
+      \end{split}
+    \end{equation}
+
+    Expanding to the full commutation:
+
+    \begin{equation}
+      \begin{split}
+        [A, B]
+        &= (A_sB_s + A_pB_p) - (B_sA_s + B_pA_p)\\
+        &= (A_sB_s - B_sA_s) + (A_pB_p - B_pA_p)\\
+        &= [A_s,B_s] + [A_p, B_p]\\
+      \end{split}
+    \end{equation}
+
+    Since, by definition, the $X_s$ portions have a shared eigenbasis,
+    we already know that the commutation goes to 0, which leaves us with:
+    
+    \begin{equation}
+      \begin{split}
+        [A, B]
+        &= [A_s,B_s] + [A_p, B_p]\\
+        &= [A_p, B_p]\\
+      \end{split}
+    \end{equation}
+
+    We can use the same logic with $A$ and $B$ when they commute with
+    $H$:
+
+    \begin{equation}
+      \begin{split}
+        [X, H]
+        &= [X_s,H_s] + [X_p, H_p]\\
+        &= [X_p, H_p]\\
+        &= 0\\
+      \end{split}
+    \end{equation}
+
+    Since commutation means simultaneous eigenbasis, that also means
+    that there must exist an eigenbasis that works for both operators.
+
+    \begin{equation}
+      \begin{split}
+        &\exists \left\{\Lambda_{h,a,i}\right\} \text{ s.t.}\\
+        & H = H_s + \sum_i h_{a,i}\Lambda_{h,a,i}\\
+        & A = A_s + \sum_i a_{h,i}\Lambda_{h,a,i}\\
+        \Rightarrow & \sum_i h_{a,i}\Lambda_{h,a,i} = \sum_i h_{i}\Lambda_{h,i}\\
+      \end{split}
+    \end{equation}
+
+    %% So now we're talking about having \emph{multiple} sets of
+    %% eigenkets that work for $A/B$ or $H$ or both.  When you hear that,
+    %% your degeneracy senses should start tingling.  Now that we know we
+    %% can express our $A/H$ shared kets using $H$'s original kets, we
+    %% know that they both occupy the same space.  We can make use of
+    %% another property to write that:
+
+    %% \begin{equation}
+    %%   \begin{split}
+    %%     I
+    %%     &= \sum_i \Lambda_{s,i} + \sum_j \Lambda_{h,j}\\
+    %%     &= \sum_i \Lambda_{s,i} + \sum_j \Lambda_{a,j}\\
+    %%     &= \sum_i \Lambda_{s,i} + \sum_j \Lambda_{b,j}\\
+    %%     &= \sum_i \Lambda_{s,i} + \sum_j \Lambda_{h,a,j}\\
+    %%     &= \sum_i \Lambda_{s,i} + \sum_j \Lambda_{h,b,j}\\
+    %%   \end{split}
+    %% \end{equation}
+    
+    %% That's a whole lotta sums so lemme sum it up for you.  They're all
+    %% eigenbases, so the projection operators all sum to the identity
+    %% matrix.  We can also remove the shared eigenkets to show that:
+
+    %% \begin{equation}
+    %%     \sum_j \Lambda_{h,j}
+    %%     = \sum_j \Lambda_{a,j}
+    %%     = \sum_j \Lambda_{b,j}
+    %%     = \sum_j \Lambda_{h,a,j}
+    %%     = \sum_j \Lambda_{h,b,j}
+    %% \end{equation}
+    
+    So, it's easy to show that $A$ and $B$ don't commute simply by
+    postulating that they don't share a simultaneous eigenbasis.  The
+    fun part is showing that with the shared vs private
+    parameterization of the operators, $A/B$ and $H$ \emph{do}
+    commute.
+    
+    With the completeness theorem, we know that the sum of the
+    projectors is $I$ and we know that we can build our new
+    simultaneous basis using the original basis kets.  The trick of it
+    is that the new simultaneous basis will also need to be an
+    eigenbasis, which means it'll need to obey the core eigenvalue
+    equation:
+
+    \begin{equation}
+      \begin{split}
+        k_i \ket{h,a,i}
+        &= \hat{H}_p \ket{h,a,i}\\
+        &=
+        \Bigg(\sum_j h_{p,j}\Lambda_{h,p,j}\Bigg)
+        \ket{h,a,i}
+        \\
+        &=
+        \Bigg(\sum_j h_{p,j}\Lambda_{h,p,j}\Bigg)
+        \Bigg(\sum_k c_{a,i,k} \ket{h,p,k}\Bigg)
+        \\
+        &=
+        \sum_j \sum_k
+        h_{p,j}\Lambda_{h,p,j}
+        c_{a,i,k} \ket{h,p,k}
+        \delta_{jk}
+        \\
+        &= \sum_k h_{p,k} c_{a,i,k} \ket{h,p,k}\\
+      \end{split}
+    \end{equation}
+
+    This one could use some explanation.  $\ket{h,a,i}$ is the
+    eigenket for the $\hat{H}_p$ operator that has been adjusted to
+    play nicely with the $A$ operator and it's the $i$th such ket.
+    $h_{p,j}$ is the $j$th eigenvalue of the $\hat{H}_p$ (which as a
+    reminder is the unshared subspace of the $\hat{H}$ operator).
+    $c_{a,i,k}$ is the projection coefficient to produce the $i$th
+    simultaneous basis vector in the $\hat{H}_p$ operator drawing upon
+    the $k$th traditional eigenvector all to play nicely with the
+    $\hat{A}_p$ operator.  If we clean that up a bit and scope it to
+    the interaction between $\hat{H}_p$ and $\hat{A}_p$, then we get:
+
+    \begin{equation}
+      \begin{split}
+        k_i \ket{a_i}
+        &= \hat{H} \ket{a_i}\\
+        &=
+        \Bigg(\sum_j h_{j}\Lambda_{h,j}\Bigg)
+        \ket{a_i}
+        \\
+        &=
+        \Bigg(\sum_j h_{j}\Lambda_{h,j}\Bigg)
+        \Bigg(\sum_k c_{k} \ket{h,k}\Bigg)
+        \\
+        &=
+        \sum_j \sum_k
+        h_{j}\Lambda_{h,j}
+        c_{k} \ket{h,k}
+        \delta_{jk}
+        \\
+        &= \sum_k h_{k} c_{k} \ket{h,k}\\
+        \Rightarrow
+        \sum_k k_{i} c_{k} \ket{h,k}
+        &= \sum_k h_{k} c_{k} \ket{h,k}\\
+        \Rightarrow
+        k_{i} &= h_{k} = h_d\\
+      \end{split}
+    \end{equation}
+
+    For the above relation to hold then $\forall i, h_k = k_i$ which
+    implies that $h_k$ is shared amongst all of the kets as a single
+    constant.  We can easily calculate the value by assigning $c_1 =
+    1$ (implying the others are 0) whereupon we see that the resulting
+    value must be $h_d$ since it's just the same as the original
+    degenerate eigenvector and so the eigenvalue will be the same as
+    well.
+
+    This is the part where the observant reader (or annoying ai
+    assistant) might point out that the problem \emph{technically}
+    doesn't require that you prove that the \ctrois{} is
+    \emph{possible} with degeneracy\ldots rather, it just asks that
+    you show that \emph{if} it's true, then degeneracy is
+    involved... So here, for your very brief pleasure, is the short
+    version:
+
+    If $\forall i \lambda_{h,i} \ne \lambda_{h,j \ne i}$ then $H =
+    H_s$.  If $[A, H] = 0$, then $A = A_s$.  Since the same can be
+    said of $B$ then it means that all three operators share the same
+    eigenbasis and they would all commute.  So, clearly, $H \ne H_s$.
+
+    That's it...that's all it was asking for... ::sigh::
+  \end{answerpart}
+
+  \begin{answerpart}{Exceptions}
+    So, in general, the proof hinges upon the degenerate
+    subspace($\hat{H}_d$) encompassing the private subspace
+    ($\hat{A}_p$ and $\hat{B}_p$) of the other operators.
+
+    \begin{equation}
+      \begin{split}
+        [A, B] &= [A_p, B_p] \ne 0\\
+        [A, H] &= [A_p, H_p] = 0\\
+        [B, H] &= [B_p, H_p] = 0\\
+      \end{split}
+    \end{equation}
+
+    So, any edge-cases which meet the above restrictions will work.
+    The most obvious is if $H_p = 0$.  However, if we do that, we're
+    also introducing a degeneracy since the eigenvalues are all
+    trivially $0$ which would \emph{technically} not be an exception.
+
+    Next we explore the concept of having one eigenvalue in each of
+    two matrices that don't fully share an eigenbasis be
+    0...unfortunately, that doesn't work either.  You need a minimum
+    of two eigenvectors to be different (since all eigenvectors are
+    orthogonal, you can't just randomly reorient the last one, you
+    have to reorient a minimum of two of them).  That means that the
+    minimum dimensionality for $\hat{X}_p$ is 2 which means that when
+    you look at the commutation of, say $\hat{H}_p$ and $\hat{B}_p$
+    (let's assume you've delcared that $\hat{H}$ and $\hat{A}$ share
+    an eigenbasis), then you get
+
+    \begin{equation}
+      \begin{split}
+        [\hat{H}, \hat{B}]
+        &= (h_1\Lambda_{h,1} + h_2\Lambda_{h,2})
+        (b_1\Lambda_{b,1} + b_2\Lambda_{b,2})
+        - (b_1\Lambda_{b,1} + b_2\Lambda_{b,2})
+        (h_1\Lambda_{h,1} + h_2\Lambda_{h,2})\\
+        &= (
+        h_1b_1\Lambda_{h,1}\Lambda_{b,1}
+        + h_1b_2\Lambda_{h,1}\Lambda_{b,2}
+        + h_2b_1\Lambda_{h,2}\Lambda_{b,1}
+        + h_2b_2\Lambda_{h,2}\Lambda_{b,2})\\
+        &\ \ - (
+        h_1b_1\Lambda_{b,1}\Lambda_{h,1}
+        + h_1b_2\Lambda_{b,1}\Lambda_{h,2}
+        + h_2b_1\Lambda_{b,2}\Lambda_{h,1}
+        + h_2b_2\Lambda_{b,2}\Lambda_{h,2})\\
+      \end{split}
+    \end{equation}
+
+    As you can see, though, there is no combination of $h_i$, $b_i$,
+    $\Lambda_{h,i}$, or $\Lambda_{b,i}$ where you can zero out a
+    single item from each matrix that will allow it to commute
+    cleanly.  That means that if you want to zero it out, you're gonna
+    need degeneracy.
+
+    That being said...it was pointed out to me...annoyingly...that
+    Sakurai doesn't want us to show that it's true in general, only
+    that there exists an exceptional \emph{eigenstate} which, when
+    acted upon by the commutation operators, violates the \ctrois{}.
+
+    So if we dive in, then there's at least one obvious counterexample
+    which is the null ket ($\ket{0}$).  This one obviously violates
+    the \ctrois{} because $[\hat{A}, \hat{B}]\ket{0} = \ket{0}$.  That
+    being said, there are a couple of problems here.  First off, in
+    the world of quantum mechanics, zero energy (though technically
+    any energy value would be mathematically consistent there, but 0
+    seems most appropriate to consider) isn't really a thing...unless
+    there, well, isn't anything...but we haven't really gotten to that
+    in the book yet.
+
+    Speaking of $0$ energy...that would mean that you have $0$
+    momentum (or negative potential) which would run afoul of the
+    $[\hat{p}, \hat{x}]$ uncertainty essentially turning this into the
+    world's biggest Bose occupying, well, everywhere; but again...we
+    haven't covered that yet.
+
+    The final problem is that \emph{teeeeechnically} speaking,
+    $\ket{0}$ cannot be considered an eigenket because by
+    \emph{convention} we don't consider the $0$ vector to be an
+    eigenvector.
+
+    That leaves us with two final counterexamples which don't violate
+    any of the rules.  First, we consider the case where you have an
+    eigenstate within the null space of $[\hat{A}, \hat{B}]$.  That
+    would violate the \ctrois{} because the $[\hat{A}, \hat{B}]$
+    commutation works out to $0$.  The problem states that they are
+    ``known not to commute'' so this one qualifies as an exception.
+
+    That leaves us with one final counterexample: if you set
+    $\hat{H}_p = \hat{A}_p \ne \hat{B}_p$ and place the energy
+    eigenstate in the nullspace of $[\hat{B}, \hat{H}]$ then you could
+    preserve the \ctrois{}, but without the degeneracy that is
+    mandated in the general case.  The problem setup is $[\hat{A},
+      \hat{B}] \ne \hat{0}$ and $[\hat{A}, \hat{H}] = [\hat{B},
+      \hat{H}] = \hat{0}$ \emph{and} that there is degeneracy in the
+    Hamiltonian.  This counterexample allows us to maintain the
+    commutation relations \emph{without} the degeneracy.
+  \end{answerpart}
+
+  \begin{answerpart}{T+V Example}
+    now we're examining orbital angular momentum with $A \equiv L_z$
+    and $B \equiv L_x$.
+
+    According to the intertubes:
+    \begin{equation}
+      \begin{split}
+        \{L_i, L_j\} &= L_k \epsilon_{ijk}\\
+        \{L_i, H\} &= 0\\
+      \end{split}
+    \end{equation}
+
+    Drawing upon the wisdom of the book:
+    \begin{equation}
+      \tag{1.229}
+      [\ ,\ ]_{\text{classical}} \rightarrow \frac{[\ ,\ ]_{\text{}}}{i\hbar}
+    \end{equation}
+
+    Combining those, we see that
+
+    \begin{equation}
+      [L_i, H] = i\hbar \cdot 0
+    \end{equation}
+
+    \begin{equation}
+      [L_z, L_x] = i\hbar L_y \ne 0
+    \end{equation}
+
+    So, the conditions of the problem are clearly met in this case.
+    We can also clearly see that there must be degeneracy because the
+    state vector includes position and the amount of energy is a
+    function only of the radius $r$ and not of the specific
+    coordinates, so any set of coordinates which share the same radius
+    will share the same energy.  We can also draw upon both classical
+    physics and a quantum mechanical theorem not covered in this
+    chapter (the Virial theorem) to show that we can't reallocate
+    energy from $T$ and place it in $V$ instead.
+
+    The Virial theorem\incite{wikipediaVirial} states that:
+    \begin{equation}
+      \ev{T} = - \frac{1}{2} \sum_{k=1}^{N}\ev{\vb{F}_k \cdot \vb{r}_k}
+    \end{equation}
+
+    As we can see, the kinetic is just as bound by the radius as the
+    potential.
+
+  \end{answerpart}
+
 \end{answer}
