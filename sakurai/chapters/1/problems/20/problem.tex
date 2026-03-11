@@ -1,0 +1,256 @@
+\begin{question}
+
+  \begin{questionpart}
+    The simplest way to derive the Schwarz inequality goes as
+    follows. First, observe
+
+    \begin{equation*}
+      \tag{1.149}
+      \left(
+      \bra{\alpha} + \lambda^{*}\bra{\beta} \right)
+      \cdot
+      \left( \ket{\alpha} + \lambda\ket{\beta} \right)
+      \ge 0
+    \end{equation*}
+
+    for any complex number $\lambda$; then choose $\lambda$ in such a
+    way that the preceding inequality reduces to the Schwarz
+    inequality.
+  \end{questionpart}
+
+  \begin{questionpart}
+    Show that the equality sign in the generalized uncertainty
+    relation holds if the state in question satisfies
+    \begin{equation*}
+      \Delta A \ket{\alpha} = \lambda \Delta B \ket{\alpha}
+    \end{equation*}
+     with $\lambda$ purely imaginary.
+  \end{questionpart}
+
+  \begin{questionpart}
+    Explicit calculations using the usual rules of wave mechanics
+    show that the wave function for a Gaussian wave packet given by
+
+    \begin{equation*}
+      \braket{x'}{\alpha} = \left(2 \pi d^2\right)^{-1/4}
+      \text{exp}\left[
+        \frac{i\expval{p}x'}{\hbar}
+        -  \frac{\left(x' - \expval{x}\right)^2}{4d^2}
+        \right]
+    \end{equation*}
+
+    satisfies the minimum uncertainty relation
+    
+    \begin{equation*}
+      \sqrt{\expval{\left(\Delta x\right)^2}}
+      \sqrt{\expval{\left(\Delta p\right)^2}}
+      = \frac{\hbar}{2}
+    \end{equation*}
+
+    Prove that the requirement
+
+    \begin{equation*}
+      \mel{x'}{\Delta x}{\alpha}
+      = \left(\text{imaginary number}\right)
+      \mel{x'}{\Delta p}{\alpha}
+    \end{equation*}
+
+    is indeed satisfied for such a Gaussian wave packet, in agreement
+    with (b).
+  \end{questionpart}
+
+\end{question}
+
+\begin{purpose}
+  Well, for starters he wants us to derive the Schwarz inequality.
+  It's one of the more consequential findings in quantum mechanics so
+  it's probably worth it.  Once that has been proven, we then show
+  that the uncertainty relation holds for Gaussian wave packets.  So
+  this is where we connect Bra/Ket algebras to wave packets.
+\end{purpose}
+
+\begin{answer}
+
+  \begin{answerpart}{May the Schwarz Be With [Us All]}
+
+    Before we get into how to \emph{prove} the that the Schwarz is
+    with us, we should probably show what it \emph{is}
+
+    \begin{equation}
+      \tag{1.147}
+      \braket{\alpha}{\alpha}\braket{\beta}{\beta}
+      \ge \abs{\braket{\alpha}{\beta}}^2
+    \end{equation}
+    
+    Proving the Schwarz inequality starts with the observation that
+    the magnitude of an inner product of a state with its own
+    hermitian conjugate is always $\ge 0$ (at least in the math we
+    play with here in hello quantum).  That's essentially what
+    equation 1.149 is stating:
+
+    \begin{equation}
+      \begin{split}
+        0
+        &\le \braket{\gamma}{\gamma}
+        \\
+        &= \left(
+        \bra{\alpha} + \lambda^{*}\bra{\beta} \right)
+        \cdot
+        \left( \ket{\alpha} + \lambda\ket{\beta} \right)
+        \\
+      \end{split}
+    \end{equation}
+
+    If you want to grind through the $3^{\text{metric-sh**-ton}}$
+    components of the complex numbers, be my guest.  I'm going to take
+    it on faith that when a bra and a ket like each other very much,
+    they form a very special relationship and make a real number.
+
+    We have our target, so let's ansatz a solution and see what we
+    get.  We'll start by getting rid of those complex conjugates and
+    move from $\braket{\alpha}{\beta}$ to
+    $\abs{\braket{\alpha}{\beta}}^2$ by choosing $\lambda$ to react
+    with those:
+
+    \begin{equation}
+      \text{let } \lambda \equiv \braket{\beta}{\alpha}
+    \end{equation}
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        %% LT_1 -> & <- RT_1  &  RT_2 -> & <- LT_2
+        & &
+        0
+        &\le \left(
+        \bra{\alpha} + \lambda^{*}\bra{\beta} \right)
+        \cdot
+        \left( \ket{\alpha} + \lambda\ket{\beta} \right)
+        \\
+        & &
+        &= \braket{\alpha}{\alpha}
+        + \lambda\braket{\alpha}{\beta}
+        + \lambda^{*}\braket{\beta}{\alpha}
+        + \abs{\lambda}^{2}\braket{\beta}{\beta}
+        \\
+        & &
+        &= \braket{\alpha}{\alpha}
+        + \braket{\beta}{\alpha}\braket{\alpha}{\beta}
+        + \braket{\alpha}{\beta}\braket{\beta}{\alpha}
+        + \abs{\lambda}^{2}\braket{\beta}{\beta}
+        \\
+        & &
+        &= \braket{\alpha}{\alpha}
+        + \abs{\braket{\alpha}{\beta}}^2
+        + \abs{\braket{\alpha}{\beta}}^2
+        + \abs{\lambda}^{2}\braket{\beta}{\beta}
+        \\
+        & &
+        &= \braket{\alpha}{\alpha}
+        + 2\abs{\braket{\alpha}{\beta}}^2
+        + \abs{\braket{\alpha}{\beta}}^2\braket{\beta}{\beta}
+        \\
+        \implies \quad & &
+        0
+        &\le
+        \braket{\alpha}{\alpha}\braket{\beta}{\beta}
+        + 2\abs{\braket{\alpha}{\beta}}^2\braket{\beta}{\beta}
+        + \abs{\braket{\alpha}{\beta}}^2\braket{\beta}{\beta}\braket{\beta}{\beta}
+        \\
+        \implies \quad & &
+        \abs{\braket{\alpha}{\beta}}^2
+        &\le
+        \braket{\alpha}{\alpha}\braket{\beta}{\beta}
+        + 2\abs{\braket{\alpha}{\beta}}^2\braket{\beta}{\beta}
+        + \abs{\braket{\alpha}{\beta}}^2
+        + \abs{\braket{\alpha}{\beta}}^2\braket{\beta}{\beta}\braket{\beta}{\beta}
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    OK, first attempt yielded something pretty ugly, but at least we
+    have the right form...plus a bunch of garbage.  Let's start by
+    getting rid of the the extra $\braket{\beta}{\beta}$'s by dividing our
+    $\lambda$ by $\braket{\beta}{\beta}$.
+
+    \begin{equation}
+      \text{let } \lambda \equiv \frac{\braket{\beta}{\alpha}}{\braket{\beta}{\beta}}
+    \end{equation}
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        %% LT_1 -> & <- RT_1  &  RT_2 -> & <- LT_2
+        & &
+        0
+        &\le
+        \braket{\alpha}{\alpha}
+        + \lambda\braket{\alpha}{\beta}
+        + \lambda^{*}\braket{\beta}{\alpha}
+        + \abs{\lambda}^{2}\braket{\beta}{\beta}
+        \\
+        & & &=
+        \braket{\alpha}{\alpha}
+        + 2\frac{\abs{\braket{\alpha}{\beta}}^2}{\braket{\beta}{\beta}}
+        + \frac{\abs{\braket{\alpha}{\beta}}^2\cancel{\braket{\beta}{\beta}}}{\braket{\beta}{\beta}\cancel{\braket{\beta}{\beta}}}
+        \\
+        \implies \quad & & 0 &\le
+        \braket{\alpha}{\alpha}\braket{\beta}{\beta}
+        + 2\abs{\braket{\alpha}{\beta}}^2
+        + \abs{\braket{\alpha}{\beta}}^2
+        \\
+        \implies \quad & & \abs{\braket{\alpha}{\beta}}^2 &\le
+        \braket{\alpha}{\alpha}\braket{\beta}{\beta}
+        + 4\abs{\braket{\alpha}{\beta}}^2
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    Better, but we still have some extra terms hanging around.  What
+    happens if we make our $\lambda$ negative?  It should turn that
+    middle term from $+2$ to $-2$ which is a difference of $4$ and,
+    fingers-crossed, should zero out the factor of $4$ in our last
+    attempt.  Let's find out.
+
+    \begin{equation}
+      \text{let } \lambda \equiv -\frac{\braket{\beta}{\alpha}}{\braket{\beta}{\beta}}
+    \end{equation}
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        %% LT_1 -> & <- RT_1  &  RT_2 -> & <- LT_2
+        & &
+        0
+        &\le
+        \braket{\alpha}{\alpha}
+        + \lambda\braket{\alpha}{\beta}
+        + \lambda^{*}\braket{\beta}{\alpha}
+        + \abs{\lambda}^{2}\braket{\beta}{\beta}
+        \\
+        & & &=
+        \braket{\alpha}{\alpha}
+        - 2\frac{\abs{\braket{\alpha}{\beta}}^2}{\braket{\beta}{\beta}}
+        + \frac{\abs{\braket{\alpha}{\beta}}^2\cancel{\braket{\beta}{\beta}}}{\braket{\beta}{\beta}\cancel{\braket{\beta}{\beta}}}
+        \\
+        \implies \quad & & 0 &\le
+        \braket{\alpha}{\alpha}\braket{\beta}{\beta}
+        - 2\abs{\braket{\alpha}{\beta}}^2
+        + \abs{\braket{\alpha}{\beta}}^2
+        \\
+        \implies \quad & & \abs{\braket{\alpha}{\beta}}^2 &\le
+        \braket{\alpha}{\alpha}\braket{\beta}{\beta}
+        \qed
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    So, if we start from the concept that magnitudes are positive, we
+    can ultimately find our way to the Schwarz.  May we also find
+    Yogurt.  Yogurt with raspberries.
+  \end{answerpart}
+
+  \begin{answerpart}{Setting Boundaries}
+  \end{answerpart}
+
+  \begin{answerpart}{Ride the Wave [Packet]}
+  \end{answerpart}
+
+\end{answer}
