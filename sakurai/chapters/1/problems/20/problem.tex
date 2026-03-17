@@ -33,10 +33,10 @@
 
     \begin{equation*}
       \braket{x'}{\alpha} = \left(2 \pi d^2\right)^{-1/4}
-      \text{exp}\left[
+      \exp[
         \frac{i\expval{p}x'}{\hbar}
         -  \frac{\left(x' - \expval{x}\right)^2}{4d^2}
-        \right]
+        ]
     \end{equation*}
 
     satisfies the minimum uncertainty relation
@@ -62,11 +62,12 @@
 \end{question}
 
 \begin{purpose}
-  Well, for starters he wants us to derive the Schwarz inequality.
-  It's one of the more consequential findings in quantum mechanics so
-  it's probably worth it.  Once that has been proven, we then show
-  that the uncertainty relation holds for Gaussian wave packets.  So
-  this is where we connect Bra/Ket algebras to wave packets.
+  This book doesn't have a particularly good discussion about the
+  Schwarz inequality, the uncertainty relations etc.  These are
+  extremely fundamental relations in quantum mechanics and deserve a
+  viewing of the man behind the curtain.  The other thing we're doing
+  here is integrating wave mechanics with bra/kets.  This simplistic
+  explanation belies the depth of this problem so buckle up.
 \end{purpose}
 
 \begin{answer}
@@ -248,9 +249,626 @@
   \end{answerpart}
 
   \begin{answerpart}{Setting Boundaries}
+    So long as we're showing compliance, let's show what we're
+    complying with, and add a few utility equations in there:
+
+    \begin{equation}
+      \tag{1.98}
+      \expval{A} \equiv \mel{\alpha}{A}{\alpha}
+    \end{equation}
+
+    \begin{equation}
+      \tag{1.143}
+      \Delta A \equiv A - \expval{A}
+    \end{equation}
+    
+    \begin{equation}
+      \tag{1.144}
+      \dispersion{A}
+      = \expval{(A^2 - 2A\expval{A} + \expval{A}^2)}
+      = \expval{A^2} - \expval{A}^2
+    \end{equation}
+
+    \begin{equation}
+      \tag{1.146}
+      \dispersion{A}\dispersion{B} \ge \frac{1}{4} \abs{\expval{[A, B]}}^2
+    \end{equation}
+
+    So, in this case, we'll want to show the equality version of that
+    which is to say:
+
+    \begin{equation}
+      \inlabel{boundary}
+      \dispersion{A}\dispersion{B} = \frac{1}{4} \abs{\expval{[A, B]}}^2
+    \end{equation}
+
+    whenever
+
+    \begin{equation}
+      \inlabel{complex}
+      \eval{\Delta A \ket{\alpha} = iy \Delta B \ket{\alpha}}_{y \in \mathbb{R}}
+    \end{equation}
+
+    Given our handy relation, let's see what happens when we
+    substitute it into the left side.  Quick note here since it
+    tripped me up the first time: equation \inref{complex} only
+    applies when you're acting on $\ket{\alpha}$.  So if you try to
+    apply it twice to $\ket{\alpha}$ then it won't (necessarily) work
+    the second time.
+
+    \begin{equation}
+      \begin{split}
+        \dispersion{A}\dispersion{B}
+        &=
+        \mel{\alpha}{\Delta A \Delta A}{\alpha}
+        \expval{(\Delta B)^2}
+        \\
+        &=
+        (\bra{\alpha}\Delta A)(\Delta A\ket{\alpha})
+        \expval{(\Delta B)^2}
+        \\
+        &=
+        (-iy\bra{\alpha}\Delta B)(iy\Delta B\ket{\alpha})
+        \expval{(\Delta B)^2}
+        \\
+        &=
+        (-iy)(iy)\mel{\alpha}{\Delta B \Delta B}{\alpha}
+        \expval{(\Delta B)^2}
+        \\
+        &=
+        y^2\mel{\alpha}{\Delta B \Delta B}{\alpha}
+        \expval{(\Delta B)^2}
+        \\
+        &=
+        (y\expval{(\Delta B)^2})^2
+        \\
+      \end{split}
+    \end{equation}
+
+    Let's see what happens on the right.  We're going to make use of
+    an aside from the book on page 33 just after equation 1.153 which
+    doesn't have an equation number associated with it, but I'll
+    provide a derivation of it anyway:
+
+    \begin{equation}
+      \inlabel{deltaNoMore}
+      \begin{split}
+        [\Delta A, \Delta B]
+        &= (A - \expval{A})(B - \expval{B})
+        - (B - \expval{B})(A - \expval{A})\\
+        &= (AB - A\expval{B} - \expval{A}B + \expval{A}\expval{B})
+        - (BA - B\expval{A} - \expval{B}A + \expval{B}\expval{A})\\
+        &= (AB - \cancel{A\expval{B}} - \expval{A}B + \expval{A}\expval{B})
+        - (BA - B\expval{A} - \cancel{\expval{B}A} + \expval{B}\expval{A})\\
+        &= (AB - \cancel{A\expval{B}} - \cancel{\expval{A}B} + \expval{A}\expval{B})
+        - (BA - \cancel{B\expval{A}} - \cancel{\expval{B}A} + \expval{B}\expval{A})\\
+        &= (AB - \cancel{A\expval{B}} - \cancel{\expval{A}B} + \cancel{\expval{A}\expval{B}})
+        - (BA - \cancel{B\expval{A}} - \cancel{\expval{B}A} + \cancel{\expval{B}\expval{A}})\\
+        &= AB - BA\\
+        &= [A, B]\\
+      \end{split}
+    \end{equation}
+
+    That allows us to use equation \inref{complex} on the right side:
+
+
+    \begin{equation}
+      \begin{split}
+        %% LT_1 -> & <- RT_1  &  RT_2 -> & <- LT_2
+        \frac{1}{4} \abs{\expval{[A, B]}}^2
+        &=
+        \frac{1}{4} \abs{\expval{[\Delta A, \Delta B]}}^2
+        \\
+        &= 
+        \frac{1}{4} \abs{\mel{\alpha}{[\Delta A, \Delta B]}{\alpha}}^2
+        \\
+        &= 
+        \frac{1}{4}
+        \abs{\mel{\alpha}{\Delta A\Delta B - \Delta B \Delta A}{\alpha}}^2
+        \\
+        &= 
+        \frac{1}{4}
+        (\mel{\alpha}{\Delta A\Delta B - \Delta B \Delta A}{\alpha})^\dagger
+        (\mel{\alpha}{\Delta A\Delta B - \Delta B \Delta A}{\alpha})
+        \\
+        &= 
+        \frac{1}{4}
+        (\mel{\alpha}{\Delta B\Delta A - \Delta A \Delta B}{\alpha})
+        (\mel{\alpha}{\Delta A\Delta B - \Delta B \Delta A}{\alpha})
+        \\
+        &= 
+        \frac{1}{4}
+        (\mel{\alpha}{\Delta B(iy\Delta B) - (-iy\Delta B) \Delta B}{\alpha})
+        (\mel{\alpha}{(-iy\Delta B)\Delta B - \Delta B(iy\Delta B)}{\alpha})
+        \\
+        &= 
+        \frac{1}{4}
+        ((iy)\mel{\alpha}{(\Delta B)^2 + (\Delta B)^2}{\alpha})
+        ((-iy)\mel{\alpha}{(\Delta B)^2 + (\Delta B)^2}{\alpha})
+        \\
+        &= 
+        \frac{1}{4}
+        (y\expval{(\Delta B)^2 + (\Delta B)^2})
+        (y\expval{(\Delta B)^2 + (\Delta B)^2})
+        \\
+        &= 
+        \frac{1}{4}
+        2(y\expval{(\Delta B)^2})
+        2(y\expval{(\Delta B)^2})
+        \\
+        &= 
+        (y\expval{(\Delta B)^2})
+        (y\expval{(\Delta B)^2})
+        \\
+        &= 
+        (y\expval{(\Delta B)^2})^2\qed
+        \\
+      \end{split}
+    \end{equation}
+
+    So this is a truly fascinating finding.  Why does equation
+    \inref{complex} ensure that we minimize our uncertainty?  Are we
+    rotating about an axis going into and out of the complex plane
+    with an arbitrary scale-factor $y$?  Do quaternions hold the
+    answers to these questions?
+
+    To answer the ``What's going on here?'' part of this, we're going
+    to revisit the entire developmental chain and also start by
+    answering a different question: ``Why is the Schwarz inequality
+    even a thing?''  We'll start by recalling the inequality itself,
+    but with a minor twist:
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        & &
+        \braket{\alpha}{\alpha}\braket{\beta}{\beta}
+        &\ge \abs{\braket{\alpha}{\beta}}^2\\
+        \implies \quad & &
+        (\bra{\psi}\Delta A)(\Delta A\ket{\psi})
+        (\bra{\psi}\Delta B)(\Delta B\ket{\psi})
+        &\ge
+        \abs{(\bra{\psi}\Delta A)(\Delta B\ket{\psi})}^2\\
+        \implies \quad & &
+        \dispersion{A}
+        \dispersion{B}
+        &\ge
+        \abs{\expval{\Delta A \Delta B}}^2
+      \end{alignedat}
+    \end{equation}
+
+    Recalling a little trick
+
+    \begin{equation}
+      \begin{split}
+        \frac{1}{2}[A, B] + \frac{1}{2}\{A, B\}
+        &= \frac{1}{2}(AB - BA) + \frac{1}{2}(AB + BA)\\
+        &= \frac{1}{2}(AB - \cancel{BA} + AB + \cancel{BA})\\
+        &= \frac{1}{2}(2 AB)\\
+        &= AB\\
+      \end{split}
+    \end{equation}
+
+    We finalize our inequality from above
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        & &
+        \braket{\alpha}{\alpha}\braket{\beta}{\beta}
+        &\ge \abs{\braket{\alpha}{\beta}}^2\\
+        \implies \quad & &
+        \dispersion{A}
+        \dispersion{B}
+        &\ge
+        \abs{\expval{\Delta A \Delta B}}^2\\
+        & &
+        &=
+        \abs{\expval{\frac{1}{2}[\Delta A, \Delta B]
+            + \frac{1}{2}\{\Delta A, \Delta B\}}}^2\\
+      \end{alignedat}
+    \end{equation}
+
+    Because the cross-terms of the commutation and anti-commutation
+    will cancel each other out.  It works just like a complex number
+    with a real and imaginary part because, well, that's exactly what
+    it is.  When the Hermitian conjugate is just the negative
+    (i.e. $x^\dagger = -x$) then you're dealing with something that's
+    purely imaginary.  Similarly, when the value is hermitian
+    (i.e. $x^\dagger = x$), you're dealing with something purely real.
+    As such, normal complex number multiplying/absoluting rules
+    apply. In the end, we are left with the final form of the
+    uncertainty relation
+
+    \begin{equation}
+      \inlabel{actualUncertainty}
+      \dispersion{A}\dispersion{B}
+      \ge
+      \frac{1}{4} \abs{\expval{[\Delta A, \Delta B]}}^2
+      + \frac{1}{4} \abs{\expval{\{\Delta A, \Delta B\}}}^2
+    \end{equation}
+
+    Except that \emph{isn't} how it's normally written.  Normally the
+    anticommutation term is omitted with the rationale that it
+    ``...can only make the inequality relation stronger.''  I mean...I
+    guess that's technically true...if you throw away a positive real
+    term then yeah...sure...why not...you can make it less.  If you
+    want to, you can also subtract $1$!  Go nuts if you like, subtract
+    $2$!  What on earth is going on here?  So...probably the most
+    important take-home here is
+
+    \begin{center}
+      \textbf{\large{The book is wrong.  All the books are wrong.
+          Kill all humans!}}
+    \end{center}
+
+    OK, maybe the books aren't ``wrong'' per se, but they definitely
+    do a very poor job here.  Let's poke around and see why.  Using
+    equation \inref{deltaNoMore}, we see that for the commutation
+    term, we can drop the $\Delta$'s.  So we can rewrite equation
+    \inref{actualUncertainty} with some useful labels as follows
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        & &
+        \left(\text{Variance A}\right)
+        \left(\text{Variance B}\right)
+        &\ge
+        \abs{\text{Covariance of A/B}}^2\\
+        \implies\quad&&
+        \left(\text{Variance A}\right)
+        \left(\text{Variance B}\right)
+        &\ge
+        \frac{1}{4} \abs{\expval{[A, B]}}^2
+        + \frac{1}{4} \abs{\expval{\{\Delta A, \Delta B\}}}^2
+      \end{alignedat}
+    \end{equation}
+
+    In classical statistical theory, we call this finding the
+    Cauchy-Schwarz
+    Inequality.\incite{wikipedia:CauchySchwarzInequality} It's also
+    worth noting that sometimes the word ``dispersion'' is used (even
+    this solutions manual uses \textbackslash dispersion vs
+    \textbackslash variance) which is \emph{technically} correct
+    because ``dispersion'' is the generalized concept of
+    spread-outedness whereas ``variance'' is a specific computation of
+    spread-outedness.  Moving on, because of equation
+    \inref{deltaNoMore}, we see that one term is a statistical measure
+    and one term is something more intrinsic to the operator itself.
+
+    As we saw earlier, the anti-commutator is the real part (much like
+    $z + z* = Re(z)$) and the commutator is the imaginary part.  As
+    such, there is no classical analog for the imaginary part.  So why
+    do people throw away the anti-commutation?  It seems like, and I
+    can't really verify this, it turns out in practice to be handy to
+    do so.  This move isn't one of principle, nor is it one that will
+    be readily accessible to anyone reading chapter 1 of this book.
+    It's a move of expedience based upon experience we don't have from
+    problems we haven't seen.
+
+    For now, probably the right way to think of it, is that there's
+    clearly something \emph{interesting} about the commutation
+    part...so let's pay attention to that part.
+
+    Another thing that should be remembered is that this uncertainty
+    relation doesn't actually minimize the product of the
+    dispersions...especially when you just start removing terms.  Even
+    the full version we (naively) derived above with the
+    anti-commutation included doesn't minimize it.  There are several
+    other uncertainty relations that tighten it up, whereas the
+    approach listed above loosens it; that gets into the utility of
+    it.  Wikipedia has a whole page of stronger uncertainty relations
+    you can look at.\incite{wikipedia:StrongerUncertaintyRelations}
+ 
+    As you can probably tell, this mistreatment was bugging me.  I've
+    learned to live with it...this is me living with it...So...in
+    summary...\emph{why} does the equation \inref{complex} mean that
+    the inequality works out to equality?  It's because we're ensuring
+    that the \emph{real} anticommutation goes to 0 and we're left only
+    with the \emph{imaginary} commutation...imagine that.
   \end{answerpart}
 
   \begin{answerpart}{Ride the Wave [Packet]}
+    This wave packet is quite close to the one worked out in the book
+    in equation 1.267
+
+    \begin{equation}
+      \tag{1.267}
+      \braket{x'}{\alpha} = \left[\frac{1}{\pi^{1/4}\sqrt{d}}\right]
+      \exp[
+        ikx'
+        -  \frac{x'^2}{2d^2}
+        ]
+    \end{equation}
+
+    Let's also repeat the wave packet definition from the problem just
+    so we don't have to keep scrolling to the top, also let's give it
+    a number.
+
+    \begin{equation}
+      \inlabel{packet}
+      \braket{x'}{\alpha} = \left(2 \pi d^2\right)^{-1/4}
+      \exp[
+        \frac{i\expval{p}x'}{\hbar}
+        -  \frac{\left(x' - \expval{x}\right)^2}{4d^2}
+        ]
+    \end{equation}
+    
+    If we compare the two side-by-side, we get:
+    
+    \begin{equation}
+      \begin{split}
+      \braket{x'}{\alpha} = \left[\frac{1}{\pi^{1/4}\sqrt{d}}\right]
+      &\exp[
+        ikx'
+        -  \frac{x'^2}{2d^2}
+        ]\\
+      \braket{x'}{\alpha} =
+      \frac{1}{\sqrt[4]{2}}
+      \left[
+        \frac{1}{\pi^{1/4}\sqrt{d}}\right]
+      &\exp[
+        \frac{i\expval{p}x'}{\hbar}
+        -  \frac{1}{2}\frac{\left(x' - \expval{x}\right)^2}{2d^2}
+        ]\\
+      \end{split}
+    \end{equation}
+
+    Next up, let's recall that the primed values are variables, so we
+    can replace the unprimed $\expval{x}$ with a constant just to make
+    it visually simpler and also to help reenforce that this equation
+    is analogous to expressing the \ac{pdf} of a normal distribution
+    about $\mu$ with a mean group momentum $\expval{p}$.
+
+    \begin{equation}
+      \braket{x'}{\alpha} =
+      \frac{1}{\sqrt[4]{2}}
+      \left[
+        \frac{1}{\pi^{1/4}\sqrt{d}}\right]
+      \exp[
+        \frac{ip_0x'}{\hbar}
+        -  \frac{1}{2}\frac{\left(x' - x_0\right)^2}{2d^2}
+        ]
+    \end{equation}
+
+    We're now quite close to being on the garden-path from the book,
+    though that is hardly a satisfying way to do things.  We can
+    massage it a bit further to say that $k \equiv p_0/\hbar$
+    resulting in
+
+    \begin{equation}
+      \braket{x'}{\alpha} =
+      \frac{1}{\sqrt[4]{2}}
+      \left[
+        \frac{1}{\pi^{1/4}\sqrt{d}}\right]
+      \exp[
+        ikx'
+        -  \frac{1}{2}\frac{\left(x' - x_0\right)^2}{2d^2}
+        ]
+    \end{equation}
+
+    Sakurai has already shown the following
+
+    \begin{equation}
+      \sqrt{\expval{\left(\Delta x\right)^2}}
+      \sqrt{\expval{\left(\Delta p\right)^2}}
+      = \frac{\hbar}{2}
+    \end{equation}
+
+    But for the sake of practice, let's go ahead and set up that
+    integral.
+    
+    \begin{equation}
+      \begin{split}
+        \dispersion{x}
+        &= \expval{\left(x - \expval{x}\right)^2}\\
+        &=  \expval{x^2} - \expval{x}^2\\
+        &= \expval{x^2} - x_0^2\\
+      \end{split}
+    \end{equation}
+
+    \begin{equation}
+      \begin{split}
+        \expval{x^2}
+        &= \int dx' x'^2 P(x')\\
+        &= \int dx' x'^2 \abs{\braket{x'}{\alpha}}^2\\
+        &= \int dx' x'^2 \abs{
+          \frac{1}{\sqrt[4]{2}}
+          \left[
+            \frac{1}{\pi^{1/4}\sqrt{d}}\right]
+          \exp[
+            ikx'
+            - \frac{1}{2}\frac{\left(x' - x_0\right)^2}{2d^2}
+          ]
+        }^2\\
+        &=
+        \frac{1}{\sqrt{2}}
+        \frac{1}{\pi^{1/2}d}
+        \int dx' x'^2
+        \left\{
+          \exp[
+            ikx'
+            - \frac{1}{2}\frac{\left(x' - x_0\right)^2}{2d^2}
+          ]
+          \exp[
+            - ikx'
+            - \frac{1}{2}\frac{\left(x' - x_0\right)^2}{2d^2}
+          ]
+          \right\}
+          \\
+        &=
+        \frac{1}{\sqrt{2}}
+        \frac{1}{\pi^{1/2}d}
+        \int dx' x'^2
+          \exp[- \frac{\left(x' - x_0\right)^2}{2d^2}]
+          \\
+      \end{split}
+    \end{equation}
+
+    From here you can use an integral table or Wolfram Alpha or
+    something if you really want to.  I am, at present, content to let
+    Sakurai do the heavy lifting here.  As for $\hat{p}$, that's going
+    to take a bit more doing.  We will again use equation 1.144 and we
+    will again assume the group momentum $\expval{p} = p_0$, so that
+    still leaves the expectation of the square ($\expval{p^2}$) to
+    compute.  We know that we're looking for something of the form
+    $\mel{\alpha}{p}{\alpha}$.  We can't compute that directly, but we
+    \emph{can} integrate that over the entire range of $x'$ to get the
+    same thing.  First, though, let's start with a handy-dandy
+    identity from the book
+
+    \begin{equation}
+      \tag{1.249}
+      \mel{x'}{\hat{p}}{\alpha} = -i \hbar \pdv{x'} \braket{x'}{\alpha}
+    \end{equation}
+
+    \begin{equation}
+      \begin{split}
+        \expval{p}
+        &= p_0\\
+        &= \mel{\alpha}{\hat{p}}{\alpha}\\
+        &= \int dx' \bra{\alpha} \left(\dyad{x'}\right) \hat{p}\ket{\alpha}\\
+        &= \int dx' \braket{\alpha}{x'} \mel{x'}{\hat{p}}{\alpha}\\
+        &= \int dx' \braket{\alpha}{x'} (-i \hbar \pdv{x'})\braket{x'}{\alpha}\\
+      \end{split}
+    \end{equation}
+
+    That gives us a way to set up an integral using the problem setup.
+    Now let's use the same approach to compute $\expval{p^2}$.
+
+    \begin{equation}
+      \begin{split}
+        \expval{p^2}
+        &= \mel{\alpha}{\hat{p}^2}{\alpha}\\
+        &= \int dx' \braket{\alpha}{x'} \mel{x'}{\hat{p}^2}{\alpha}\\
+        &= \int dx' \braket{\alpha}{x'}
+        (-i \hbar \pdv{x'})^2
+        \braket{x'}{\alpha}\\
+        &= \int dx'
+        \frac{1}{\sqrt[4]{2}}
+        \left[\frac{1}{\pi^{1/4}\sqrt{d}}\right]
+        \exp[
+          - ikx'
+          - \frac{1}{2}\frac{\left(x' - x_0\right)^2}{2d^2}
+        ]
+        -\hbar^2\frac{\partial^2}{\partial x'^2}
+        \frac{1}{\sqrt[4]{2}}
+        \left[\frac{1}{\pi^{1/4}\sqrt{d}}\right]
+        \exp[
+          ikx'
+          - \frac{1}{2}\frac{\left(x' - x_0\right)^2}{2d^2}
+        ]\\
+        &=
+        \frac{1}{d\sqrt{2\pi}}
+        \int dx'
+        \exp[
+          - ikx'
+          - \frac{1}{2}\frac{\left(x' - x_0\right)^2}{2d^2}
+        ]
+        -\hbar^2\frac{\partial^2}{\partial x'^2}
+        \exp[
+          ikx'
+          - \frac{1}{2}\frac{\left(x' - x_0\right)^2}{2d^2}
+        ]\\
+      \end{split}
+    \end{equation}
+
+    Once again, feel free to grind through that if you want.  We don't
+    actually need to do any of this work...it just seems like
+    something that might be nice to have hanging around.
+
+    So, going back to our problem, we need to show that for this wave
+    equation
+
+    \begin{equation}
+      \mel{x'}{\Delta x}{\alpha}
+      = \left(\text{imaginary number}\right)
+      \mel{x'}{\Delta p}{\alpha}
+    \end{equation}
+
+    Let's start by evaluating the right hand side
+
+    \begin{equation}
+      \begin{split}
+        \mel{x'}{\Delta p}{\alpha}
+        &= \mel{x'}{\hat{p} - \expval{\hat{p}}}{\alpha}\\
+        &= \mel{x'}{\hat{p}}{\alpha} - \mel{x'}{p_0}{\alpha}\\
+        &= \left(-i \hbar \pdv{x'}\right) \braket{x'}{\alpha}
+        - p_0\braket{x'}{\alpha}\\
+      \end{split}
+    \end{equation}
+
+    Since the problem specifies a $\braket{x'}{\alpha}$, we can
+    substitute that in and crank out the partial derivative.
+
+    \begin{equation}
+      \begin{split}
+        \mel{x'}{\Delta p}{\alpha}
+        &=
+        \frac{1}{(2\pi)^{1/4}\sqrt{d}}
+        \left\{
+        \left(-i \hbar \pdv{x'}\right)
+        \exp[ikx' - \frac{1}{2}\frac{\left(x' - x_0\right)^2}{2d^2}]
+        - p_0\exp[ikx' - \frac{1}{2}\frac{\left(x' - x_0\right)^2}{2d^2}]
+        \right\}\\
+        &=
+        \frac{1}{(2\pi)^{1/4}\sqrt{d}}
+        \left\{
+        -i \hbar
+        \left(ik - \frac{2(x'-x_0)}{4d^2} \right)
+        \exp[ikx' - \frac{1}{2}\frac{\left(x' - x_0\right)^2}{2d^2}]
+        - p_0\exp[ikx' - \frac{1}{2}\frac{\left(x' - x_0\right)^2}{2d^2}]
+        \right\}\\
+        &=
+        \frac{1}{(2\pi)^{1/4}\sqrt{d}}
+        \left\{
+        \hbar k  + i\hbar\frac{2(x' - x_0)}{4d^2}
+        - p_0
+        \right\}
+        \exp[ikx' - \frac{1}{2}\frac{\left(x' - x_0\right)^2}{2d^2}]
+        \\
+        &=
+        \frac{1}{(2\pi)^{1/4}\sqrt{d}}
+        \left\{
+        \cancel{\hbar \frac{p_0}{\hbar}}  + i\hbar\frac{2(x' - x_0)}{4d^2}
+        - \cancel{p_0}
+        \right\}
+        \exp[ikx' - \frac{1}{2}\frac{\left(x' - x_0\right)^2}{2d^2}]
+        \\
+        &=
+        i\hbar\frac{2(x' - x_0)}{4d^2}
+        \left\{
+        \frac{1}{(2\pi)^{1/4}\sqrt{d}}
+        \exp[ikx' - \frac{1}{2}\frac{\left(x' - x_0\right)^2}{2d^2}]
+        \right\}
+        \\
+        &=
+        iy(x' - x_0)\braket{x'}{\alpha}\qed
+        \\
+      \end{split}
+    \end{equation}
+
+    Here, we have made use of the fact that $x'$ and $x_0$ are both
+    real numbers and also of an earlier observation that
+
+    \begin{equation}
+      k \equiv \frac{p_0}{\hbar}
+    \end{equation}
+
+    Sakurai wants us to show equivalence to the left-side, so let's
+    take a look.
+
+    \begin{equation}
+      \begin{split}
+        \mel{x'}{\Delta x}{\alpha}
+        &= \mel{x'}{(\hat{x} - \expval{x})}{\alpha}\\
+        &= \mel{x'}{\hat{x}}{\alpha} - \mel{x'}{\expval{x}}{\alpha}\\
+        &= x'\braket{x'}{\alpha} - x_0\braket{x'}{\alpha}\\
+        &= (x' - x_0)\braket{x'}{\alpha}\\
+      \end{split}
+    \end{equation}
+
+    As you can easily see, our relation holds and we find that the two
+    differ only by an imaginary constant.
+
   \end{answerpart}
 
 \end{answer}
