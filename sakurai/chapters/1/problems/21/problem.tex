@@ -1,0 +1,550 @@
+\begin{question}
+
+  \begin{questionpart}
+    Compute
+    
+    \begin{equation*}
+      \dispersion{S_x} \equiv \expval{S_x^2} - \expval{S_x}^2,
+    \end{equation*}
+
+    where the expectation value is taken for the $S_z+$ state.  Using
+    your result, check the generalized uncertainty relation
+    
+    \begin{equation*}
+      \dispersion{A}\dispersion{B} \ge \frac{1}{4}\abs{\expval{[A, B]}}^2
+    \end{equation*}
+
+    with $A \rightarrow S_x, B \rightarrow S_y$.
+  \end{questionpart}
+
+  \begin{questionpart}
+    Check the uncertainty relation with $A \rightarrow S_x, B
+    \rightarrow S_y$ for the $S_x+$ state.
+  \end{questionpart}
+
+\end{question}
+
+\begin{purpose}
+  Eh, just go through some practice and connect some dots.  Nothing
+  earth shattering here.
+\end{purpose}
+
+\begin{answer}
+
+  \begin{answerpart}{Checking for $\ket{+}$}
+
+    \begin{equation}
+      \tag{1.111a}
+      S_x = \frac{\hbar}{2} [\ket - \bra + + \ket + \bra - ]
+    \end{equation}
+
+    \begin{equation}
+      \begin{split}
+        \expval{S_x}
+        &= \mel{\alpha}{S_x}{\alpha}\\
+        &= \mel{\alpha}{\frac{\hbar}{2} [\ket - \bra + + \ket + \bra - ]}{\alpha}\\
+        &=
+        \frac{\hbar}{2}
+        \left(
+        \braket{\alpha}{-}
+        \braket{+}{\alpha}
+        +
+        \braket{\alpha}{+}
+        \braket{-}{\alpha}
+        \right)\\
+        &=
+        \frac{\hbar}{2}
+        \left(
+        z
+        +
+        \bar{z}
+        \right)\\
+        &= Re(z)\\
+      \end{split}
+    \end{equation}
+
+    We have defined a convenience variable $z \equiv
+    \braket{\alpha}{-}\braket{+}{\alpha}$.
+
+    \begin{equation}
+      \begin{split}
+        \expval{S_x}^2
+        &= \frac{\hbar^2}{4}(z + \bar{z})(z + \bar{z})\\
+        &= \frac{\hbar^2}{4}(z^2 + \bar{z}^2 + 2z\bar{z})\\
+        &= \frac{\hbar^2}{4}\left(
+        (\braket{\alpha}{-}\braket{+}{\alpha})^2
+        + (\braket{\alpha}{+}\braket{-}{\alpha})^2
+        + 2
+        \braket{\alpha}{-}\braket{+}{\alpha}
+        \braket{\alpha}{+}\braket{-}{\alpha}
+        \right)\\
+        &= \frac{\hbar^2}{4}(z^2 + \bar{z}^2 + 2z\bar{z})\\
+      \end{split}
+    \end{equation}
+
+    \begin{equation}
+      \begin{split}
+        \expval{S_x^2}
+        &= \mel{\alpha}{S_x^2}{\alpha}\\
+        &= \mel{\alpha}{\left(\frac{\hbar}{2} [\ket - \bra + + \ket + \bra - ]\right)^2}{\alpha}\\
+        &=
+        \frac{\hbar^2}{4}
+        \bra{\alpha}
+        \left(
+        \dyad{-} + \dyad{+}
+        \right)
+        \ket{\alpha}
+        \\
+        &=
+        \frac{\hbar^2}{4}
+        \sum_i \mel{\alpha}{\Lambda_i}{\alpha}
+        \\
+        &=
+        \frac{\hbar^2}{4}\mel{\alpha}{\hat{1}}{\alpha}
+        \\
+        &=
+        \frac{\hbar^2}{4}
+        \\
+      \end{split}
+    \end{equation}
+
+    \begin{equation}
+      \begin{split}
+        \dispersion{S_x}
+        &\equiv \expval{S_x^2} - \expval{S_x}^2\\
+        &= \frac{\hbar^2}{4}\left\{1 - \left[
+        (\braket{\alpha}{-}\braket{+}{\alpha})^2
+        + (\braket{\alpha}{+}\braket{-}{\alpha})^2
+        + 2
+        \braket{\alpha}{-}\braket{+}{\alpha}
+        \braket{\alpha}{+}\braket{-}{\alpha}
+        \right]
+        \right\}
+        \\
+      \end{split}
+    \end{equation}
+
+    \begin{equation}
+      \tag{1.111b}
+      S_y = i \frac{\hbar}{2} [\ket - \bra + - \ket + \bra - ]
+    \end{equation}
+
+    \begin{equation}
+      \begin{split}
+        \expval{S_y}
+        &= \mel{\alpha}{S_y}{\alpha}\\
+        &= \mel{\alpha}{i \frac{\hbar}{2} [\ket - \bra + - \ket + \bra - ]}{\alpha}\\
+        &=
+        i\frac{\hbar}{2}
+        \left(
+        \braket{\alpha}{-}
+        \braket{+}{\alpha}
+        -
+        \braket{\alpha}{+}
+        \braket{-}{\alpha}
+        \right)\\
+        &=
+        i\frac{\hbar}{2}
+        \left(
+        z_s
+        -
+        \bar{z_s}
+        \right)\\
+        &= Im(z)\\
+      \end{split}
+    \end{equation}
+    
+    \begin{equation}
+      \begin{split}
+        \expval{S_y}^2
+        &= -\frac{\hbar^2}{4}(z - \bar{z})(z - \bar{z})\\
+        &= -\frac{\hbar^2}{4}(z^2 + \bar{z}^2 - 2z\bar{z})\\
+        &= -\frac{\hbar^2}{4}\left(
+        (\braket{\alpha}{-}\braket{+}{\alpha})^2
+        + (\braket{\alpha}{+}\braket{-}{\alpha})^2
+        - 2
+        \braket{\alpha}{-}\braket{+}{\alpha}
+        \braket{\alpha}{+}\braket{-}{\alpha}
+        \right)\\
+        &= -\frac{\hbar^2}{4}(z^2 + \bar{z}^2 - 2z\bar{z})\\
+      \end{split}
+    \end{equation}
+
+    \begin{equation}
+      \begin{split}
+        \expval{S_y^2}
+        &= \mel{\alpha}{S_y^2}{\alpha}\\
+        &= \mel{\alpha}{\left(i\frac{\hbar}{2} [\ket - \bra + - \ket + \bra - ]\right)^2}{\alpha}\\
+        &=
+        \frac{\hbar^2}{4}
+        \bra{\alpha}
+        \left(
+        \dyad{-} + \dyad{+}
+        \right)
+        \ket{\alpha}
+        \\
+        &=
+        \frac{\hbar^2}{4}
+        \sum_i \mel{\alpha}{\Lambda_i}{\alpha}
+        \\
+        &=
+        \frac{\hbar^2}{4}\mel{\alpha}{\hat{1}}{\alpha}
+        \\
+        &=
+        \frac{\hbar^2}{4}
+        \\
+        &=
+        \expval{S_x^2}
+        \\
+      \end{split}
+    \end{equation}
+
+    Collecting our findings
+    
+    \begin{equation}
+      \begin{split}
+        let k &\equiv \frac{\hbar^2}{4}\\
+        \expval{S_x^2} &= k\\
+        \expval{S_y^2} &= k\\
+        \expval{S_x} &= \sqrt{k}(z + \bar{z})\\
+        \expval{S_y} &= i\sqrt{k}(z - \bar{z})\\
+      \end{split}
+    \end{equation}
+
+    Putting them all together
+
+    \begin{equation}
+      \inlabel{lhs}
+      \begin{split}
+        \dispersion{S_x}\dispersion{S_y}
+        &=
+        (\expval{S_x^2} - \expval{S_x}^2)
+        (\expval{S_y^2} - \expval{S_y}^2)\\
+        &=
+        \expval{S_x^2}\expval{S_y^2}
+        - \expval{S_x^2}\expval{S_y}^2
+        - \expval{S_x}^2\expval{S_y^2}
+        + (\expval{S_x}\expval{S_y})^2
+        \\
+        &=
+        k^2
+        + k^2(z - \bar{z})^2
+        - k^2(z + \bar{z})^2
+        - k^2((z + \bar{z})(z - \bar{z}))^2
+        \\
+        &=
+        k^2
+        \left\{
+        1
+        + (z^2 - 2z\bar{z} + \bar{z}^2)
+        - (z^2 + 2z\bar{z} + \bar{z}^2)
+        - (z^2 - \cancel{z\bar{z}} + \cancel{\bar{z}z} - \bar{z}^2)^2
+        \right\}
+        \\
+        &=
+        k^2
+        \left\{
+        1
+        + \cancel{z^2} - 2z\bar{z} + \cancel{\bar{z}^2}
+        - \cancel{z^2} - 2z\bar{z} - \cancel{\bar{z}^2}
+        - z^4 + 2z^2\bar{z}^2 - \bar{z}^4
+        \right\}
+        \\
+        &=
+        k^2
+        \left\{
+        1
+        - 4z\bar{z}
+        - z^4 + 2z^2\bar{z}^2 - \bar{z}^4
+        \right\}
+        \\
+        &=
+        k^2
+        \left\{
+        1
+        - 4\abs{z}^2
+        - z^4 + 2\abs{z}^4 - \bar{z}^4
+        \right\}
+        \\
+        &=
+        \frac{\hbar^4}{16}
+        \left\{
+        1
+        - 4\abs{\braket{\alpha}{-}\braket{+}{\alpha}}^2
+        - (\braket{\alpha}{-}\braket{+}{\alpha})^4
+        + 2\abs{\braket{\alpha}{-}\braket{+}{\alpha}}^4
+        - (\braket{\alpha}{+}\braket{-}{\alpha})^4
+        \right\}
+        \\
+      \end{split}
+    \end{equation}
+
+    Now that we have a generalized solution for the \ac{lhs}, we'll
+    want to do the same for the \ac{rhs}.
+
+    \begin{equation}
+      \inlabel{rhs}
+      \begin{split}
+        \frac{1}{4}\abs{\expval{[S_x, S_y]}}^2
+        &=
+        \frac{1}{4}
+        \abs{
+          \expval{
+            (\frac{\hbar}{2} [\dyad{-}{+} + \dyad{+}{-}])
+            (i \frac{\hbar}{2} [\dyad{-}{+} - \dyad{+}{-}])
+            -
+            (i \frac{\hbar}{2} [\dyad{-}{+} - \dyad{+}{-}])
+            (\frac{\hbar}{2} [\dyad{-}{+} + \dyad{+}{-}])
+          }
+        }^2\\
+        &=
+        \frac{1}{4}
+        \frac{\hbar^4}{16}
+        \abs{
+          \expval{
+            [\dyad{-}{+} + \dyad{+}{-}]
+            i[\dyad{-}{+} - \dyad{+}{-}]
+            -
+            i[\dyad{-}{+} - \dyad{+}{-}]
+            [\dyad{-}{+} + \dyad{+}{-}]
+          }
+        }^2\\
+        &=
+        \frac{1}{4}
+        \frac{\hbar^4}{16}
+        \abs{
+          \expval{
+            -i\dyad{-}{-} + i\dyad{+}{+}
+            -i\dyad{-}{-} + i\dyad{+}{+}
+          }
+        }^2\\
+        &=
+        \frac{1}{4}
+        \frac{\hbar^4}{16}
+        \abs{\expval{2i\Lambda_+ - 2i\Lambda_-}}^2\\
+        &=
+        \frac{\hbar^4}{16}
+        \abs{i\mel{\alpha}{\Lambda_+ - \Lambda_-}{\alpha}}^2\\
+      \end{split}
+    \end{equation}    
+
+    Finally, let's evaluate equations \inref{lhs} and \inref{rhs} for
+    $\ket{\alpha} = \ket{+}$.
+
+    \begin{equation}
+      \begin{split}
+        z &\equiv \braket{\alpha}{+}\braket{-}{\alpha}\\
+        &= \braket{+}{+}\braket{-}{+}\\
+        &= 0\\
+        \bar{z} &= \braket{\alpha}{-}\braket{+}{\alpha}\\
+        &= 0\\
+      \end{split}
+    \end{equation}
+
+    \begin{equation}
+      \begin{split}
+        \dispersion{S_x}\dispersion{S_y}
+        &=
+        (\expval{S_x^2} - \expval{S_x}^2)
+        (\expval{S_y^2} - \expval{S_y}^2)\\
+        &=
+        k^2
+        \left\{
+        1
+        - \cancel{4\abs{z}^2}
+        - \cancel{z^4} + \cancel{2\abs{z}^4} - \cancel{\bar{z}^4}
+        \right\}
+        \\
+        &=
+        \frac{\hbar^4}{16}
+        \\
+      \end{split}
+    \end{equation}
+
+    and checking the \ac{rhs}
+
+    \begin{equation}
+      \begin{split}
+        \frac{1}{4}\abs{\expval{[S_x, S_y]}}^2
+        &=
+        \frac{\hbar^4}{16}
+        \abs{i\mel{\alpha}{\Lambda_+ - \Lambda_-}{\alpha}}^2\\
+        &=
+        \frac{\hbar^4}{16}
+        \abs{i\mel{+}{\Lambda_+ - \Lambda_-}{+}}^2\\
+        &=
+        \frac{\hbar^4}{16}
+        \abs{i\braket{+}{+}}^2\\
+        &=
+        \frac{\hbar^4}{16}
+        \abs{i}^2\\
+        &=
+        \frac{\hbar^4}{16}\\
+      \end{split}
+    \end{equation}
+
+    Plugging that all together we find that
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        & &
+        \dispersion{S_x}\dispersion{S_y}
+        &\ge \frac{1}{4}\abs{\expval{[S_x, S_y]}}^2\\
+        \implies\quad & &
+        \frac{\hbar^4}{16} &\ge \frac{\hbar^4}{16}\qed\\
+      \end{alignedat}
+    \end{equation}
+    
+  \end{answerpart}
+
+  \begin{answerpart}{Checking for $\ket{x+}$}
+
+    Now we'll evaluate equation \inref{lhs} for $\ket{\alpha} =
+    \frac{1}{\sqrt{2}} [\ket{+} + \ket{-}]$
+
+    \begin{equation}
+      \begin{split}
+        z &\equiv \braket{x+}{+}\braket{-}{x+}\\
+        &=
+        \braket{\frac{1}{\sqrt{2}} [\ket{+} + \ket{-}]}{+}
+        \braket{-}{\frac{1}{\sqrt{2}} [\ket{+} + \ket{-}]}
+        \\
+        &=
+        \frac{1}{2}
+        \braket{\ket{+}}{+}
+        \braket{-}{\ket{-}}
+        \\
+        &=
+        \frac{1}{2}
+        \\
+        \bar{z} &= \braket{\alpha}{-}\braket{+}{\alpha}\\
+        &= \frac{1}{2}\\
+      \end{split}
+    \end{equation}
+
+    \begin{equation}
+      \begin{split}
+        \dispersion{S_x}\dispersion{S_y}
+        &=
+        k^2
+        \left\{
+        1
+        - 4\abs{z}^2
+        - z^4 + 2\abs{z}^4 - \bar{z}^4
+        \right\}
+        \\
+        &=
+        \frac{\hbar^4}{16}        
+        \left\{
+        1
+        - 4\abs{\frac{1}{2}}^2
+        - (\frac{1}{2})^4 + 2(\frac{1}{2})^4 - (\frac{1}{2})^4
+        \right\}
+        \\
+        &=
+        \frac{\hbar^4}{16}
+        \left\{
+        1
+        - \frac{4}{4}
+        - \frac{1}{2^4} + \frac{2}{2^4} - \frac{1}{2^4}
+        \right\}
+        \\
+        &=
+        \frac{\hbar^4}{16}
+        \left\{
+        \cancel{1}
+        - \cancel{1}
+        \cancel{- \frac{1}{2^4}} + \cancel{\frac{2}{2^4}} - \cancel{\frac{1}{2^4}}
+        \right\}
+        \\
+        &= 0\\
+      \end{split}
+    \end{equation}
+
+    Another way to look at this is to examine the \ac{lhs} and
+    consider the $S_x$ dispersion ($\dispersion{S_x}$).  If we're in
+    the $\ket{x+}$ state, then $\expval{S_x^2} = (\frac{\hbar}{2})^2$
+    and the same is true for $\expval{S_x}^2$ so it trivially
+    evaluates to 0.  If that term is 0, then the whole \ac{lhs} must
+    also evaluate to 0.
+
+    Now we also know that the \ac{rhs} will need to evaluate to 0,
+    otherwise our core assumption is in deep trouble.
+
+    \begin{equation}
+      \begin{split}
+        \frac{1}{4}\abs{\expval{[S_x, S_y]}}^2
+        &=
+        \frac{\hbar^4}{16}
+        \abs{i\mel{\alpha}{\Lambda_+ - \Lambda_-}{\alpha}}^2\\
+        &=
+        \frac{\hbar^4}{16}
+        \abs{i
+          (\frac{1}{\sqrt{2}} [\bra{+} + \bra{-}])
+          (\Lambda_+ - \Lambda_-)
+          (\frac{1}{\sqrt{2}} [\ket{+} + \ket{-}])
+          }^2\\
+        &=
+        \frac{\hbar^4}{16}
+        \frac{1}{4}
+        \abs{i
+          [\bra{+} + \bra{-}]
+          (\Lambda_+ - \Lambda_-)
+          [\ket{+} + \ket{-}]
+          }^2\\
+        &=
+        \frac{\hbar^4}{16}
+        \frac{1}{4}
+        \abs{i
+          [\bra{+} + \bra{-}]
+          [\ket{+} - \ket{-}]
+          }^2\\
+        &=
+        \frac{\hbar^4}{16}
+        \frac{1}{4}
+        \abs{i(\braket{+}{+} - \braket{-}{-})}^2\\
+        &=
+        \frac{\hbar^4}{16}
+        \frac{1}{4}
+        \abs{0}^2\\
+        &= 0\qed\\
+      \end{split}
+    \end{equation}
+
+    There's also an easier way to examine this problem than cranking
+    out all the nitty algebra, which is to use the physical meaning of
+    the equations:
+
+    \begin{equation}
+      \begin{split}
+        \frac{1}{4}\abs{\expval{[S_x, S_y]}}^2
+        &=
+        \frac{1}{4}
+        \abs{
+          \mel{x+}{S_xS_y}{x+}
+          - \mel{x+}{S_yS_x}{x+}
+        }^2
+        \\
+        &=
+        \frac{1}{4}
+        \abs{
+          \frac{\hbar}{2}\mel{x+}{S_y}{x+}
+          - \mel{x+}{S_y}{\frac{\hbar}{2}x+}
+        }^2
+        \\
+        &=
+        \frac{1}{4}
+        \abs{
+          \frac{\hbar}{2}(\mel{x+}{S_y}{x+} - \mel{x+}{S_y}{x+})
+        }^2
+        \\
+        &= 0\\
+      \end{split}
+    \end{equation}
+
+    When you're an eigenket of one of the operators in the
+    commutation, then you just pop our an eigenvalue and go on about
+    your day which results in a quick 0.
+  \end{answerpart}
+
+\end{answer}
