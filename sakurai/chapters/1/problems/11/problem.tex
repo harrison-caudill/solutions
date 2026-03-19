@@ -302,8 +302,8 @@
 
   \begin{equation}
     \begin{split}
-      \alpha_+ &= - \frac{\sin{\beta}e^{-i\alpha}}{\cos{\beta}-\frac{2}{\hbar}\lambda}\alpha_-
-      = - \frac{\sin{\beta}e^{-i\alpha}}{\cos{\beta}-\frac{2}{\hbar}\lambda}\frac{\sin{\beta}e^{i\alpha}}{\cos{\beta} + \frac{2}{\hbar}\lambda}\alpha_+\\
+      \alpha_+ &= - \frac{\sin{\beta}e^{-i\alpha}}{\cos{\beta}-\frac{2}{\hbar}\lambda}\alpha_-\\
+      &= - \frac{\sin{\beta}e^{-i\alpha}}{\cos{\beta}-\frac{2}{\hbar}\lambda}\frac{\sin{\beta}e^{i\alpha}}{\cos{\beta} + \frac{2}{\hbar}\lambda}\alpha_+\\
       &\Rightarrow
       1 = - \frac{\sin{\beta}e^{-i\alpha}}{\cos{\beta}-\frac{2}{\hbar}\lambda}\frac{\sin{\beta}e^{i\alpha}}{\cos{\beta} + \frac{2}{\hbar}\lambda}\\
       &\Rightarrow
@@ -311,7 +311,7 @@
       &\Rightarrow
       1 = - \left(\cos{\beta}-\frac{2}{\hbar}\lambda\right)\left(\cos{\beta} + \frac{2}{\hbar}\lambda\right) \frac{1}{\sin^2{\beta}}\\
       &\Rightarrow
-      1 = - \frac{\cos^2{\beta} + \frac{4}{\hbar^2}\lambda^2}{\sin^2{\beta}}\\
+      1 = - \frac{\cos^2{\beta} - \frac{4}{\hbar^2}\lambda^2}{\sin^2{\beta}}\\
       &\Rightarrow
       \sin^2{\beta} = - \cos^2{\beta} + \frac{4}{\hbar^2}\lambda^2\\
       &\Rightarrow
@@ -379,9 +379,34 @@ Putting in our Eigenvalues, and solving for $\alpha_\pm$
     \end{split}
   \end{equation}
 
+  To make sure we stick with the conventions defined by Sakurai in the
+  problem, we'll go ahead and assign the positive side to be:
+
+  \begin{equation}
+    \begin{alignedat}{2}
+      & &
+      \Lambda_+\ket{\alpha_+} &= \cos(\frac \beta 2)\ket +\\
+      \Rightarrow \quad & &
+      \alpha_+ &= \cos(\frac \beta 2)\\
+    \end{alignedat}
+  \end{equation}
+
+  Then solving for the $\ket -$ coefficient ($\alpha_-$)
+
+  \begin{equation}
+    \begin{split}
+      \frac{\alpha_+}{\alpha_-}
+      &= e^{-i\alpha}\frac{\cos{\frac{\beta}{2}}}{\sin{\frac{\beta}{2}}}\\
+      \frac{\cancel{\cos{\frac{\beta}{2}}}}{\alpha_-}
+      &= e^{-i\alpha}
+      \frac{\cancel{\cos{\frac{\beta}{2}}}}{\sin{\frac{\beta}{2}}}\\
+      \alpha_- &= e^{i\alpha}\sin{\frac{\beta}{2}}\\
+    \end{split}
+  \end{equation}
+
   \begin{equation}
     \inlabel{spinAngle}
-    \ket{\alpha_+} = \cos{\frac{\beta}{2}} \ket + + e^{-i\alpha}\sin{\frac{\beta}{2}} \ket - \qed
+    \ket{\alpha_+} = \cos{\frac{\beta}{2}} \ket + + e^{i\alpha}\sin{\frac{\beta}{2}} \ket - \qed
   \end{equation}
 
   The appropriate next step is Laguvulin 16, or maybe Bowmore 18, or,

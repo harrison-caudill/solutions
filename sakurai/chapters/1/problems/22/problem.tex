@@ -1,0 +1,329 @@
+\begin{question}
+
+  \begin{questionpart}
+    Find the linear combination of $\ket{+}$ and $\ket{-}$ kets that
+    maximizes the uncertainty product
+    \begin{equation*}
+      \dispersion{S_x}\dispersion{S_y}
+    \end{equation*}
+  \end{questionpart}
+  
+  \begin{questionpart}
+    Verify explicitly that for the linear combination you found, the
+    uncertainty relation for $S_x$ and $S_y$ is not violated.
+  \end{questionpart}
+  
+\end{question}
+
+\begin{purpose}
+  Pretty sure Sakurai wants us to connect our previous problem in
+  which we derived the generic ket-on-a-swivel expression so we can
+  show the angle that maximizes the uncertainty outcome.  We may not
+  need the eigenvectors that we derived in problem
+  \ref{1.11:theQuestion}, but we can at least rob some of the math.
+\end{purpose}
+
+\begin{answer}
+
+  \begin{answerpart}{Maximus Dipersionus Uncertainus}
+
+    \begin{equation}
+      \begin{split}
+        \dispersion{S_x}\dispersion{S_y}
+        &=
+        \left(\expval{S_x^2} - \expval{S_x}^2\right)
+        \left(\expval{S_y^2} - \expval{S_y}^2\right)
+        \\
+      \end{split}
+    \end{equation}
+
+    We can simplify our characteristic equation above by recalling
+    (from any number of previous problems) that for all the spin
+    operators $\expval{S_n^2} = \frac{\hbar^2}{4}$
+    
+    \begin{equation}
+      \inlabel{top}
+      \begin{split}
+        \dispersion{S_x}\dispersion{S_y}
+        &=
+        \left(\frac{\hbar^2}{4} - \expval{S_x}^2\right)
+        \left(\frac{\hbar^2}{4} - \expval{S_y}^2\right)
+        \\
+      \end{split}
+    \end{equation}
+
+    There's a subtlety here which is worth calling out.  The problem
+    isn't looking for the linear combination of $\ket{+}$ and
+    $\ket{-}$ with \emph{real} coefficients.  It's asking for the
+    combination from the entire Bloch Sphere.\footnote{We haven't
+    covered the Bloch Sphere yet but it's worth looking up quickly.}
+    Blessedly, we've already computed the eigenvectors for a linear
+    combination of operators.  In problem \ref{1.11:theQuestion} we
+    computed the eigenvectors of a spin operator which is rotated
+    arbitrarily in 3D space by two angles $\alpha$ (azimuthal angle in
+    the $xy$ plane starting from the $x$ axis) and $\beta$ (elevation
+    angle starting from the $z$ axis).  Restating equation
+    \ref{1.11:spinAngle}, we found the eigenvectors of this
+    arbitrarily-rotated spin operator to be:
+
+    \begin{equation}
+      \inlabel{spinAngle}
+      \ket{\alpha_+} =
+      \cos{\frac{\beta}{2}} \ket + + e^{i\alpha}\sin{\frac{\beta}{2}} \ket -
+    \end{equation}
+
+    OK...what does that mean exactly?  The expression above is the
+    generalized expression of the $\ket{S_n+}$ eigenket from the
+    generalized operator $S_n$ which has been arbitrarily rotated in
+    the Bloch Sphere.  So the question then becomes...how does that
+    help us?  Let's start by going back to the setup for problem
+    \ref{1.11:theQuestion}
+
+    \begin{equation}
+      \vectorbold{S}\cdot\vectorbold{\hat{n}} \ket{\vectorbold{S}\cdot\vectorbold{\hat{n}}; +}
+      = \left(\frac{\hbar}{2}\right)\ket{\vectorbold{S}\cdot\vectorbold{\hat{n}}; +}
+    \end{equation}
+
+    So...does that help us?  No.  No it does not.  So, like we said
+    earlier, the eigen-nature of our previous finding doesn't really
+    help us, but we \emph{can} use the resulting eigen-ket because it
+    has all the properties we care about.  So if we move to the next
+    dead-end (well not so much dead-end as bad-idea).  We can use our
+    handy expression from equation \inref{spinAngle} in our earlier
+    equation \inref{top}.  Then we can maximize the value by checking
+    partial derivatives.
+
+    \begin{equation}
+      \inlabel{top}
+      \begin{split}
+        0
+        &= \pdv{}{\alpha}{\beta} \dispersion{S_x}\dispersion{S_y}\\
+        &= \pdv{}{\alpha}{\beta}
+        \left(\frac{\hbar^2}{4} - \expval{S_x}^2\right)
+        \left(\frac{\hbar^2}{4} - \expval{S_y}^2\right)
+        \\
+        &= \pdv{}{\alpha}{\beta}
+        \left(\frac{\hbar^2}{4} - \mel{\alpha+}{S_x}{\alpha+}^2\right)
+        \left(\frac{\hbar^2}{4} - \mel{\alpha+}{S_y}{\alpha+}^2\right)
+        \\
+        &= \pdv{}{\alpha}{\beta}
+        \left(\frac{\hbar^2}{4}
+        [- (\cos{\frac{\beta}{2}} \ket + + e^{i\alpha}\sin{\frac{\beta}{2}} \ket -)
+        S_x
+        (\cos{\frac{\beta}{2}} \ket + + e^{i\alpha}\sin{\frac{\beta}{2}} \ket -)]^2\right)
+        \left(\frac{\hbar^2}{4}
+        \ldots
+        \right)
+        \\
+      \end{split}
+    \end{equation}
+
+    So...yeah...be my guest...I don't even know if I did those
+    substitutions properly, and I don't care.  Let's try this another
+    way then, shall we?
+
+    Going back to \inref{top}, we see that we can rewrite it as
+
+    \begin{equation}
+      \begin{split}
+        \dispersion{S_x}\dispersion{S_y} = 
+        &\left[(\text{positive real number}) - (\text{another positive real number})\right]\\
+        &\left[(\text{positive real number}) - (\text{another positive real number})\right]\\
+      \end{split}
+    \end{equation}
+
+    So, if we're trying to maximize that expression, then we probably
+    want the two numbers being multiplied are maximized.  We can do
+    that by ensuring that the second number there is minimized.  Let's
+    see what we can do to make that happen.  Ideally, we'll be able to
+    make them both 0.  So let's see if we can make that happen, we're
+    going to be looking for $\mel{\psi}{S_x}{\psi} = 0$ and
+    $\mel{\psi}{S_y}{\psi} = 0$.
+
+    \begin{equation}
+      \tag{1.111a}
+      S_x = \frac{\hbar}{2} [\ket - \bra + + \ket + \bra - ]
+    \end{equation}
+    
+    \begin{equation}
+      \begin{split}
+        0
+        &= \mel{\psi}{S_x}{\psi}
+        \\
+        &=
+        \left\{\cos{\frac{\beta}{2}} \bra + + e^{-i\alpha}\sin{\frac{\beta}{2}} \bra -\right\}
+        \left\{\frac{\hbar}{2} [\ket - \bra + + \ket + \bra - ]\right\}
+        \left\{\cos{\frac{\beta}{2}} \ket + + e^{i\alpha}\sin{\frac{\beta}{2}} \ket -\right\}
+        \\
+        &=
+        \frac{\hbar}{2}
+        \left\{\cos{\frac{\beta}{2}} \bra + + e^{-i\alpha}\sin{\frac{\beta}{2}} \bra -\right\}
+        \left\{\cos{\frac{\beta}{2}} \ket - + e^{i\alpha}\sin{\frac{\beta}{2}} \ket +\right\}
+        \\
+        &=
+        \frac{\hbar}{2}\left\{
+        e^{i\alpha}\sin{\frac{\beta}{2}}\cos{\frac{\beta}{2}}\braket{+}{+}
+        +
+        e^{-i\alpha}\sin{\frac{\beta}{2}}\cos{\frac{\beta}{2}}\braket{-}{-}
+        \right\}
+        \\
+        &=
+        \frac{\hbar}{2}
+        \sin{\frac{\beta}{2}}\cos{\frac{\beta}{2}}
+        \left(e^{i\alpha} + e^{-i\alpha}\right)
+        \\
+        &=
+        2\frac{\hbar}{2}
+        \sin{\frac{\beta}{2}}\cos{\frac{\beta}{2}}
+        \cos{\alpha}
+        \\
+        &=
+        \frac{\hbar}{2}
+        \sin{\beta}
+        \cos{\alpha}
+        \\
+      \end{split}
+    \end{equation}
+
+    So, we know from $S_x$ that so long as $\beta$ is an integer
+    multiple of $\pi$ or $\pi/2$ for $\alpha$ then $S_x$ will be 0.
+    Let's take a look at $S_y$
+
+    \begin{equation}
+      \tag{1.111b}
+      S_y = i \frac{\hbar}{2} [\ket - \bra + - \ket + \bra - ]
+    \end{equation}
+
+    \begin{equation}
+      \begin{split}
+        0
+        &= \mel{\psi}{S_y}{\psi}
+        \\
+        &=
+        \left\{\cos{\frac{\beta}{2}} \bra + + e^{-i\alpha}\sin{\frac{\beta}{2}} \bra -\right\}
+        \left\{i \frac{\hbar}{2} [\ket - \bra + - \ket + \bra - ]\right\}
+        \left\{\cos{\frac{\beta}{2}} \ket + + e^{i\alpha}\sin{\frac{\beta}{2}} \ket -\right\}
+        \\
+        &=
+        i\frac{\hbar}{2}
+        \left\{\cos{\frac{\beta}{2}} \bra + + e^{-i\alpha}\sin{\frac{\beta}{2}} \bra -\right\}
+        \left\{\cos{\frac{\beta}{2}} \ket - - e^{i\alpha}\sin{\frac{\beta}{2}} \ket +\right\}
+        \\
+        &=
+        i\frac{\hbar}{2}\left\{
+        e^{-i\alpha}\sin{\frac{\beta}{2}}\cos{\frac{\beta}{2}}\braket{-}{-}
+        -
+        e^{i\alpha}\sin{\frac{\beta}{2}}\cos{\frac{\beta}{2}}\braket{+}{+}
+        \right\}
+        \\
+        &=
+        -i\frac{\hbar}{2}
+        \sin{\frac{\beta}{2}}\cos{\frac{\beta}{2}}
+        \left(e^{i\alpha} - e^{-i\alpha}\right)
+        \\
+        &=
+        2\frac{\hbar}{2}
+        \sin{\frac{\beta}{2}}\cos{\frac{\beta}{2}}
+        \sin{\alpha}
+        \\
+        &=
+        \frac{\hbar}{2}
+        \sin{\beta}
+        \sin{\alpha}
+        \\
+      \end{split}
+    \end{equation}
+
+    Clearly, any solution where $\beta = n\pi$ will result in the
+    maximum uncertainty.  If we reference our figure
+    \ref{1.11:spinAxes} (or figure \ref{q:spinAxes} in the \ac{qrf}).
+    You'll note also that the angle $\alpha$ doesn't really help us,
+    and that the assigned $\beta$ leaves our vector colinear with the
+    $z$ axis.  That brings us to the \emph{easy} way to solve this
+    problem (have you noticed how I always leave the easy way for the
+    very end?).
+
+    If you want the \emph{maximum uncertainty} then you want the
+    \emph{minimum knowledge}.  When you prepare a state that is in the
+    $z$ axis (either plus or minus) then you have \emph{absolutely no
+    knowledge} about its orientation in the $xy$ plane.  When you have
+    no knowledge, then you're just as likely to get a $\ket{x/y+}$ as
+    you are to get an $\ket{x/y-}$ so the expectation value is always
+    going to be 0.  That's the easy way to solve this part.  But take
+    heart, we're going to need the math above for the next part...or
+    are we?  No, we aren't...but aren't you glad you did it anyway?
+
+    Oh, and because we're technically required to give the linear
+    combination, I present unto you:
+
+    \begin{equation}
+      \ket{\alpha} = \ket{\pm}\qed
+    \end{equation}
+    
+  \end{answerpart}
+  
+  \begin{answerpart}{But are you \emph{suuuuure}?}
+    So, now that we want to explicitly verify the relation, we can
+    just plug our 0's into equation \inref{top} and find that the
+    product of the dispersions is $\hbar^4/16$.  So let's see how that
+    stacks up against the commutation.
+
+    \begin{equation}
+      \begin{split}
+        [S_x, S_y]
+        &=  S_xS_y - S_yS_x\\
+        &= i\frac{\hbar^2}{4}
+        \left(
+             [\ket - \bra + + \ket + \bra - ]
+             [\ket - \bra + - \ket + \bra - ]
+             - 
+             [\ket - \bra + - \ket + \bra - ]
+             [\ket - \bra + + \ket + \bra - ]
+             \right)
+        \\
+        &= i\frac{\hbar^2}{4}
+        \left(
+             [\dyad{+}{+} -\dyad{-}{-}]
+             - 
+             [\dyad{-}{-} - \dyad{+}{+}]
+             \right)
+        \\
+        &= 2i\frac{\hbar^2}{4}(\Lambda_+ - \Lambda_-)\\
+        &= 2i\frac{\hbar}{2}S_z\\
+      \end{split}
+    \end{equation}
+
+    So, if we evaluate our final equation
+
+    \begin{equation}
+      \begin{split}
+        \frac{1}{4}\abs{\expval{[S_x, S_y]}}^2
+        &=
+        \frac{1}{4}
+        \abs{
+          \mel{\pm}{2i\frac{\hbar}{2}S_z}{\pm}
+        }^2
+        \\
+        &=
+        \abs{
+          i\frac{\hbar^2}{4}\braket{\pm}{\pm}
+        }^2
+        \\
+        &= \frac{\hbar^4}{16} \\
+      \end{split}
+    \end{equation}
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        & &
+        \dispersion{S_x}\dispersion{S_y}
+        &\overset{?}{\ge}
+        \frac{1}{4}\abs{\expval{[S_x, S_y]}}^2\\
+        \implies \quad & &
+        \frac{\hbar^4}{16} &\ge \frac{\hbar^4}{16}\qed\\
+      \end{alignedat}
+    \end{equation}
+    
+  \end{answerpart}
+
+\end{answer}
