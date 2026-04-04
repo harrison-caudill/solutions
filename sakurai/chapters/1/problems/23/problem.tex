@@ -1,0 +1,818 @@
+\begin{question}
+
+  Evaluate the $x-p$ uncertainty product
+  $\dispersion{x}\dispersion{p}$ for a one-dimensional particle
+  confined between two rigid walls
+
+  \begin{equation}
+    V =
+    \begin{cases} 
+      0 & \text{for } 0 < x < a,\\
+      \infty & \text{otherwise}
+    \end{cases}
+  \end{equation}  
+
+  \begin{questionpart}
+    Do this for both the ground
+  \end{questionpart}
+  
+  \begin{questionpart}
+    and excited states.
+  \end{questionpart}
+\end{question}
+
+\begin{purpose}
+\end{purpose}
+
+\begin{answer}
+
+  \begin{answerpart}{You're Grounded Mr}
+
+    Pulling out our undergrad wavey-mechanicy quantum book, we find
+    that for the infinite square potential well problem
+
+    \begin{equation}
+      \tag{griffiths:2.23}
+      \inlabel{griffiths:e}
+      E_n = \frac{\hbar^2k_n^2}{2m} = \frac{n^2\pi^2\hbar^2}{2ma^2}
+    \end{equation}
+
+    \begin{equation}
+      \tag{griffiths:2.24}
+      \inlabel{griffiths:psi}
+      \psi_n(x) = \sqrt{\frac{2}{a}}\sin{\frac{n\pi}{a}x}
+    \end{equation}
+
+    So, that gives us a $\psi_n$ so let's see what happens if we just
+    set up our problem.
+
+    \begin{equation}
+      \tag{1.251}
+      \inlabel{exp:p}
+      \begin{split}
+        \mel{\beta}{p}{\alpha}
+        &= \int_0^a dx' \braket{\beta}{x'}
+        \left(
+        -i \hbar \pdv{}{x'} \braket{x'}{a}
+        \right)\\
+        &= \int_0^a dx'
+        \psi_{\beta}^{*}(x')
+        \operatorP{x'}
+        \psi_{\alpha}(x')\\
+      \end{split}
+    \end{equation}
+
+    Cramming equation \inref{griffiths:e} into \inref{exp:p} we find
+    
+    \begin{equation}
+      \inlabel{expp}
+      \begin{split}
+        \mel{\psi_n}{\hat{p}}{\psi_n}
+        &=
+        \int_0^a dx'
+        \psi_{n}^{*}(x')
+        \operatorP{x'}
+        \psi_{n}(x')\\
+        &=
+        \int_0^a dx'
+        \sqrt{\frac{2}{a}}\sin{\frac{n\pi}{a}x'}
+        \operatorP{x'}
+        \sqrt{\frac{2}{a}}\sin{\frac{n\pi}{a}x'}
+        \\
+        &=
+        -i \hbar \frac{2}{a}
+        \int_0^a dx'
+        \sin{\frac{n\pi}{a}x'}
+        \frac{n\pi}{a}
+        \cos{\frac{n\pi}{a}x'}
+        \\
+        &=
+        -i \hbar \frac{2}{a}
+        \frac{n\pi}{a}
+        \int_0^a dx'
+        \sin{\frac{n\pi}{a}x'}
+        \cos{\frac{n\pi}{a}x'}
+        \\
+        &=
+        -i \hbar
+        \frac{n\pi}{a^2}
+        \int_0^a dx'
+        \sin{\frac{2n\pi}{a}x'}
+        \\
+        &=
+        i \hbar
+        \frac{n\pi}{a^2}
+        \frac{a}{2n\pi}
+        \eval{
+          \cos{\frac{2n\pi}{a}x'}
+          }_0^a
+        \\
+        &=
+        i \hbar
+        \frac{1}{2a}
+        \left(
+        \cos{\frac{2n\pi}{a}a}
+        -
+        \cos{\frac{2n\pi}{a}0}
+        \right)
+        \\
+        &=
+        i \hbar
+        \frac{1}{2a}
+        \left(
+        \cos{2n\pi}
+        -
+        \cos{0}
+        \right)
+        \\
+        &= 0
+        \\
+      \end{split}
+    \end{equation}
+
+    Before we go much further, let's apply a little bit of physical
+    reasoning about this one.  As usual, we're going to consider the
+    physics of the problem \emph{after} we go through the pain.  When
+    we look at the wave equation, we see that it is symmetrical about
+    $a/2$.  So we're just as likely to find the particle on the left
+    as we are on the right.  So, in theory, the expectation-value of
+    momentum for any symmetrical wave function should be 0 just like
+    the expectation-value for position should be the point of symmetry
+    ($a/2$ in this case), though this is not something we have proven.
+
+    \begin{equation}
+      \begin{split}
+        \mel{\psi_n}{\hat{p}^2}{\psi_n}
+        &=
+        \int_0^a dx'
+        \psi_{n}^{*}(x')
+        \left(
+        (-1)^2i^2\hbar^2\frac{\partial^2}{\partial x^{\prime 2}}
+        \right)
+        \psi_{n}(x')\\
+        &=
+        \int_0^a dx'
+        \sqrt{\frac{2}{a}}\sin{\frac{n\pi}{a}x'}
+        \left(
+        (-1)^2i^2\hbar^2\frac{\partial^2}{\partial x^{\prime 2}}
+        \right)
+        \sqrt{\frac{2}{a}}\sin{\frac{n\pi}{a}x'}
+        \\
+        &=
+        -\hbar^2
+        \frac{2}{a}
+        \int_0^a dx'
+        \sin{\frac{n\pi}{a}x'}
+        \left(
+        \frac{\partial^2}{\partial x^{\prime 2}}
+        \right)
+        \sin{\frac{n\pi}{a}x'}
+        \\
+        &=
+        -\hbar^2
+        \frac{2}{a}
+        \frac{n\pi}{a}
+        \int_0^a dx'
+        \sin{\frac{n\pi}{a}x'}
+        \left(
+        \pdv{}{x'}
+        \right)
+        \cos{\frac{n\pi}{a}x'}
+        \\
+        &=
+        \hbar^2
+        \frac{2}{a}
+        \frac{n^2\pi^2}{a^2}
+        \int_0^a dx'
+        \sin{\frac{n\pi}{a}x'}
+        \sin{\frac{n\pi}{a}x'}
+        \\
+        &=
+        \hbar^2
+        \frac{2}{a}
+        \frac{n^2\pi^2}{a^2}
+        \int_0^a dx'
+        \sin^2{\frac{n\pi}{a}x'}
+        \\
+      \end{split}
+    \end{equation}
+
+    Recalling our trig identity from equation \qref{trigCos2A}
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        & & 
+        \cos{2\alpha}
+        &= 1 - 2\sin^2{\alpha}\\
+        \implies \quad & &
+        \sin^2{\alpha} &= \frac{1 - \cos{2\alpha}}{2}\\
+      \end{alignedat}
+    \end{equation}
+
+    Substituting in that trig identity, we find that
+
+    \begin{equation}
+      \inlabel{expp2}
+      \begin{split}
+        \mel{\psi_n}{\hat{p}^2}{\psi_n}
+        &=
+        \hbar^2
+        \frac{2}{a}
+        \frac{n^2\pi^2}{a^2}
+        \int_0^a dx'
+        \sin^2{\frac{n\pi}{a}x'}
+        \\
+        &=
+        \hbar^2
+        \frac{2}{a}
+        \frac{n^2\pi^2}{a^2}
+        \int_0^a dx'
+        \frac{1 - \cos{\frac{2n\pi}{a}x'}}{2}
+        \\
+        &=
+        \hbar^2
+        \frac{2}{a}
+        \frac{n^2\pi^2}{a^2}
+        \left(
+        \frac{a}{2}
+        -
+        \frac{1}{2}
+        \int_0^a dx'
+        \cos{\frac{2n\pi}{a}x'}
+        \right)
+        \\
+        &=
+        \hbar^2
+        \frac{2}{a}
+        \frac{n^2\pi^2}{a^2}
+        \left(
+        \frac{a}{2}
+        -
+        \frac{1}{2}
+        \eval{
+          \frac{a}{2n\pi}\sin{\frac{2n\pi}{a}x'}
+        }_0^a
+        \right)
+        \\
+        &=
+        \hbar^2
+        \frac{2}{a}
+        \frac{n^2\pi^2}{a^2}
+        \left(
+        \frac{a}{2}
+        \right)
+        \\
+        &=
+        \hbar^2
+        \frac{n^2\pi^2}{a^2}
+        \\
+      \end{split}
+    \end{equation}
+
+    Recalling equation \inref{griffiths:e} from earlier, and comparing
+    we see that:
+
+    \begin{equation}
+      \begin{split}
+        E_n
+        &= \frac{1}{2m}\frac{n^2\pi^2\hbar^2}{a^2}
+        \\
+        \mel{\psi_n}{\hat{p}^2}{\psi_n}
+        &= \frac{n^2\pi^2\hbar^2}{a^2}
+        \\
+      \end{split}
+    \end{equation}
+    
+    So, what we ultimately find here is that the energy of the system
+    is almost pulled directly from classical mechanics with $P^2/2m$.
+    This is one of those moments where you pause and say ``huh...I
+    guess it actually works after all.''
+
+    Moving on from our reveries to the expecatation of position, we
+    note that as we discussed earlier, a symmetric wave function
+    should have an expectation value of position equal to the point of
+    symmetry.  So I'm going to put it out there and predict that the
+    below equation is going to work out to $\expval{\hat{x}} = a/2$.
+    Let's work it out, shall we?
+
+    \begin{equation}
+      \begin{split}
+        \mel{\psi_n}{\hat{x}}{\psi_n}
+        &=
+        \int_0^a dx'
+        \psi_{n}^{*}(x')
+        \operatorP{x'}
+        \psi_{n}(x')\\
+        &=
+        \int_0^a dx'
+        \sqrt{\frac{2}{a}}\sin{\frac{n\pi}{a}x'}
+        x'
+        \sqrt{\frac{2}{a}}\sin{\frac{n\pi}{a}x'}
+        \\
+        &=
+        \frac{2}{a}
+        \int_0^a dx'
+        x'
+        \sin^2{\frac{n\pi}{a}x'}
+        \\
+      \end{split}
+    \end{equation}
+
+    Substituting the same trig identity from the
+    $\mel{\psi_n}{\hat{p}^2}{\psi_n}$ computation in to make the
+    integral easier
+
+    \begin{equation}
+      \begin{split}
+        \mel{\psi_n}{\hat{x}}{\psi_n}
+        &=
+        \frac{2}{a}
+        \int_0^a dx'
+        x'
+        \sin^2{\frac{n\pi}{a}x'}
+        \\
+        &=
+        \frac{2}{a}
+        \int_0^a dx'
+        x'
+        \left(\frac{1 - \cos{\frac{2n\pi}{a}x'}}{2}\right)
+        \\
+        &=
+        \frac{1}{a}
+        \left\{
+        \int_0^a dx'
+        x'
+        -
+        \int_0^a dx'
+        x'
+        \cos{\frac{2n\pi}{a}x'}
+        \right\}
+        \\
+        &=
+        \frac{1}{a}
+        \left\{
+        \eval{\frac{x^2}{2}}_0^a
+        -
+        \int_0^a dx'
+        x'
+        \cos{\frac{2n\pi}{a}x'}
+        \right\}
+        \\
+        &=
+        \frac{a}{2}
+        -
+        \frac{1}{a}
+        \int_0^a dx'
+        x'
+        \cos{\frac{2n\pi}{a}x'}
+        \\
+      \end{split}
+    \end{equation}
+
+    Choosing our $u$ and $v'$ for an integration by parts so we can
+    get rid of the $x'$:
+
+    \begin{equation}
+      \begin{split}
+        \int u'v &= uv - \int v'u\\
+        u &= \frac{a}{2n\pi}\sin{\frac{2n\pi}{a}x'}\\
+        u' &= \cos{\frac{2n\pi}{a}x'}\\
+        v &= x'\\
+        v' &= 1 \\
+      \end{split}
+    \end{equation}
+
+    \begin{equation}
+      \inlabel{expx}
+      \begin{split}
+        \mel{\psi_n}{\hat{x}}{\psi_n}
+        &=
+        \frac{a}{2}
+        -
+        \frac{1}{a}
+        \int_0^a dx'
+        x'
+        \cos{\frac{2n\pi}{a}x'}
+        \\
+        &=
+        \frac{a}{2}
+        -
+        \frac{1}{a}
+        \eval{
+        \left(
+        \frac{a}{2n\pi}x'\sin{\frac{2n\pi}{a}x'}
+        - \frac{a}{2n\pi}\sin{\frac{2n\pi}{a}x'}
+        \right)
+        }_0^a
+        \\
+        &=
+        \frac{a}{2}
+        -
+        \frac{1}{2n\pi}
+        \eval{
+        \left(
+        \sin{\frac{2n\pi}{a}x'}(x' - 1)
+        \right)
+        }_0^a
+        \\
+        &=
+        \frac{a}{2}
+        -
+        \frac{1}{2n\pi}
+        \left(
+        \sin{\frac{2n\pi}{\cancel{a}}\cancel{a}}(a - 1)
+        - 
+        \cancel{\sin{\frac{2n\pi}{a}0}(0 - 1)}
+        \right)
+        \\
+        &=
+        \frac{a}{2}
+        -
+        \frac{1}{2n\pi}
+        \left(
+        \cancel{\sin{2n\pi}(a - 1)}
+        \right)
+        \\
+        &= \frac{a}{2}\\
+      \end{split}
+    \end{equation}
+
+    So, we see that our physical reasoning actually worked out.  High
+    fives all around.  Let's see what happens with $\expval{x^2}$.
+
+    \begin{equation}
+      \begin{split}
+        \mel{\psi_n}{\hat{x}^2}{\psi_n}
+        &=
+        \int_0^a dx'
+        \psi_{n}^{*}(x')
+        \operatorP{x'}
+        \psi_{n}(x')\\
+        &=
+        \int_0^a dx'
+        \sqrt{\frac{2}{a}}\sin{\frac{n\pi}{a}x'}
+        x^{'2}
+        \sqrt{\frac{2}{a}}\sin{\frac{n\pi}{a}x'}
+        \\
+        &=
+        \frac{2}{a}
+        \int_0^a dx'
+        x^{'2}
+        \sin^2{\frac{n\pi}{a}x'}
+        \\
+      \end{split}
+    \end{equation}
+
+    Using the same trig substitution as before:
+
+    \begin{equation}
+      \begin{split}
+        \mel{\psi_n}{\hat{x}^2}{\psi_n}
+        &=
+        \frac{2}{a}
+        \int_0^a dx'
+        x^{'2}
+        \sin^2{\frac{n\pi}{a}x'}
+        \\
+        &=
+        \frac{2}{a}
+        \int_0^a dx'
+        x^{'2}
+        \left(\frac{1 - \cos{\frac{2n\pi}{a}x'}}{2}\right)
+        \\
+        &=
+        \frac{1}{a}
+        \left\{
+        \int_0^a dx'
+        x^{'2}
+        -
+        \int_0^a dx'
+        x^{'2}
+        \cos{\frac{2n\pi}{a}x'}
+        \right\}
+        \\
+        &=
+        \frac{1}{a}
+        \left\{
+        \eval{\frac{x^3}{3}}_0^a
+        -
+        \int_0^a dx'
+        x^{'2}
+        \cos{\frac{2n\pi}{a}x'}
+        \right\}
+        \\
+        &=
+        \frac{a^2}{3}
+        -
+        \frac{1}{a}
+        \int_0^a dx'
+        x^{'2}
+        \cos{\frac{2n\pi}{a}x'}
+        \\
+      \end{split}
+    \end{equation}
+
+    We'll select the same portions for our integration by parts, but
+    this time around we're going to need to integrate twice and for
+    the second one we'll get to leverage our earlier result.
+
+    \begin{equation}
+      \begin{split}
+        \int u'v &= uv - \int v'u\\
+        u &= \frac{a}{2n\pi}\sin{\frac{2n\pi}{a}x'}\\
+        u' &= \cos{\frac{2n\pi}{a}x'}\\
+        v &= x^{'2}\\
+        v' &= 2x' \\
+      \end{split}
+    \end{equation}
+    
+    \begin{equation}
+      \begin{split}
+        \mel{\psi_n}{\hat{x}^2}{\psi_n}
+        &=
+        \frac{a^2}{3}
+        -
+        \frac{1}{a}
+        \int_0^a dx'
+        x^{'2}
+        \cos{\frac{2n\pi}{a}x'}
+        \\
+        &=
+        \frac{a^2}{3}
+        -
+        \frac{1}{a}
+        \left(
+        uv - \int_0^a v'u
+        \right)
+        \\
+        &=
+        \frac{a^2}{3}
+        -
+        \frac{1}{a}
+        \left(
+        \eval{
+          x^{'2}\frac{a}{2n\pi}\sin{\frac{2n\pi}{a}x'}
+        }_0^a
+        - \int_0^a
+        2x'\frac{a}{2n\pi}\sin{\frac{2n\pi}{a}x'}
+        \right)
+        \\
+        &=
+        \frac{a^2}{3}
+        -
+        \frac{a^2}{2n\pi}\sin{\frac{2n\pi}{\cancel{a}}\cancel{a}}
+        +
+        \frac{1}{\cancel{a}}
+        \int_0^a
+        \cancel{2}x'\frac{\cancel{a}}{\cancel{2}n\pi}\sin{\frac{2n\pi}{a}x'}
+        \\
+        &=
+        \frac{a^2}{3}
+        -
+        \frac{a^2}{2n\pi}\cancel{\sin{2n\pi}}
+        +
+        \frac{1}{n\pi}
+        \int_0^a
+        x'\sin{\frac{2n\pi}{a}x'}
+        \\
+        &=
+        \frac{a^2}{3}
+        +
+        \frac{1}{n\pi}
+        \int_0^a
+        x'\sin{\frac{2n\pi}{a}x'}
+        \\
+      \end{split}
+    \end{equation}
+
+    Repeating our integration by parts with new values
+
+    \begin{equation}
+      \begin{split}
+        \int u'v &= uv - \int v'u\\
+        u &= -\frac{a}{2n\pi}\cos{\frac{2n\pi}{a}x'}\\
+        u' &= \sin{\frac{2n\pi}{a}x'}\\
+        v &= x'\\
+        v' &= 1 \\
+      \end{split}
+    \end{equation}
+    
+    
+    We'll repeat our integration by parts, but noting that it's now
+    $x'$ instead of $x^{'2}$
+
+    \begin{equation}
+      \inlabel{expx2}
+      \begin{split}
+        \mel{\psi_n}{\hat{x}^2}{\psi_n}
+        &=
+        \frac{a^2}{3}
+        +
+        \frac{1}{n\pi}
+        \int_0^a
+        x'\sin{\frac{2n\pi}{a}x'}
+        \\
+        &=
+        \frac{a^2}{3}
+        +
+        \frac{1}{n\pi}
+        \left(
+        uv - \int_0^a v'u
+        \right)
+        \\
+        &=
+        \frac{a^2}{3}
+        +
+        \frac{1}{n\pi}
+        \left(
+        -\eval{
+          x'\frac{a}{2n\pi}\cos{\frac{2n\pi}{a}x'}
+        }_0^a
+        -
+        \int_0^a
+        -\frac{a}{2n\pi}\cos{\frac{2n\pi}{a}x'}
+        \right)
+        \\
+        &=
+        \frac{a^2}{3}
+        +
+        \frac{1}{n\pi}
+        \left(
+        -\frac{a^2}{2n\pi}\cos{\frac{2n\pi}{\cancel{a}}\cancel{a}}
+        +
+        \frac{a}{2n\pi}
+        \eval{
+          \left[
+          \frac{a}{2n\pi}\sin{\frac{2n\pi}{a}x'}
+          \right]
+        }_0^a
+        \right)
+        \\
+        &=
+        \frac{a^2}{3}
+        +
+        \frac{1}{n\pi}
+        \left(
+        -\frac{a^2}{2n\pi}
+        +
+        \frac{a^2}{4n^2\pi^2}
+        \sin{\frac{2n\pi}{\cancel{a}}\cancel{a}}
+        \right)
+        \\
+        &=
+        \frac{a^2}{3}
+        -
+        \frac{1}{n\pi}
+        \frac{a^2}{2n\pi}
+        \\
+        &=
+        \frac{a^2}{3} - \frac{a^2}{2n^2\pi^2}
+        \\
+      \end{split}
+    \end{equation}
+
+    
+    Putting it all together, we find that:
+
+    \begin{equation}
+      \inlabel{handy}
+      \begin{alignedat}{2}
+        \expval{x}^2 &= \frac{a^2}{4} & \quad{} &\text{(eq \inref{expx})}\\
+        \expval{x^2} &= \frac{a^2}{3} - \frac{a^2}{2n^2\pi^2} & &\text{(eq \inref{expx2})}\\
+        \expval{p}^2 &= 0 & &\text{(eq \inref{expp})}\\
+        \expval{p^2} &= \frac{n^2\pi^2\hbar^2}{a^2} & &\text{(eq \inref{expp2})}\\
+      \end{alignedat}
+    \end{equation}
+
+    recalling our definition of the variance
+
+    \begin{equation*}
+      \tag{1.144}
+      \dispersion{A} = \expval{A^2} - \expval{A}^2
+    \end{equation*}
+
+    \begin{equation}
+      \begin{split}
+        \dispersion{x}\dispersion{p}
+        &=
+        \left(\expval{\hat{x}^2} - \expval{\hat{x}}^2\right)
+        \left(\expval{\hat{p}^2} - \expval{\hat{p}}^2\right)
+        \\
+        &=
+        \left(\frac{a^2}{3} - \frac{a^2}{2n^2\pi^2} - \frac{a^2}{4}\right)
+        \left(\frac{n^2\pi^2\hbar^2}{a^2} - 0\right)
+        \\
+        &=
+        \cancel{a^2}
+        \left(\frac{1}{3} - \frac{1}{2n^2\pi^2} - \frac{1}{4}\right)
+        \frac{1}{\cancel{a^2}}
+        \left(n^2\pi^2\hbar^2\right)
+        \\
+        &=
+        n^2\pi^2\hbar^2
+        \left(\frac{1}{3} - \frac{1}{2n^2\pi^2} - \frac{1}{4}\right)
+        \\
+      \end{split}
+    \end{equation}
+
+    Let's actually pause here to note that the uncertainty is
+    \emph{not} proportional in any way to $a$.  Iiiiinteresting.
+
+    \begin{equation}
+      \begin{split}
+        \dispersion{x}\dispersion{p}
+        &=
+        n^2\pi^2\hbar^2
+        \left(\frac{1}{3} - \frac{1}{2n^2\pi^2} - \frac{1}{4}\right)
+        \\
+        &=
+        \frac{n^2\pi^2\hbar^2}{3}
+        - \frac{\cancel{n^2\pi^2}\hbar^2}{2\cancel{n^2\pi^2}}
+        - \frac{n^2\pi^2\hbar^2}{4}
+        \\
+        &=
+        \frac{n^2\pi^2\hbar^2}{3}
+        - \frac{n^2\pi^2\hbar^2}{4}
+        - \frac{\hbar^2}{2}
+        \\
+        &=
+        \hbar^2
+        \left(
+        \frac{n^2\pi^2}{12}
+        - \frac{1}{2}
+        \right)
+        \\
+      \end{split}
+    \end{equation}
+
+    So, it makes some amount of intuitive sense that the uncertainty
+    isn't going to be a function of the size of the box.  Otherwise,
+    consider what happens when you change the size of the box by
+    changing the units.  Instead of $a$mm make it $a$cm.  You've
+    changed the size of the box by a factor of 10, but otherwise
+    everything remains the same.  To keep the factor of $a$ in there
+    would also invite the final result to have an extra unit of
+    distance in there which would preclude us from having $\hbar$
+    (because then the units would be all wrong).  There's probably a
+    proof hanging around about this observation, but it sure ain't in
+    chapter 1 of Sakurai.
+
+    So, we were supposed to validate our relation, so let's try it out
+    with $n=0$
+
+    \begin{equation}
+      \begin{split}
+        \eval{\dispersion{x}\dispersion{p}}_{n=1}
+        &=
+        \eval{
+          \hbar^2
+          \left(
+          \frac{n^2\pi^2}{12}
+          - \frac{1}{2}
+          \right)
+        }_{n=1}
+        \\
+        &=
+        \hbar^2
+        \left(
+        \frac{\pi^2}{12}
+        - \frac{1}{2}
+        \right)
+        \\
+        &\approx
+        \hbar^2
+        \frac{1}{3}
+        \\
+        &>
+        \hbar^2
+        \frac{1}{4}
+        \\
+      \end{split}
+    \end{equation}
+
+    As we can see, it passes...by the skin of its teeth...but it
+    passes.
+
+  \end{answerpart}
+
+  \begin{answerpart}{I'm So Ex-cited!}
+    When we evaluate at higher energy levels, that $n^2$ term starts
+    to quickly dominate as shown in figure \inref{figure:splosions}.
+
+    \begin{figure}
+      \begin{center}
+        \caption{As you can see, the ground state just barely clears
+          the Heisenberg limit, but it does clear it.  Pretty quickly
+          thereafter the energy level's $n^2$ term dominates.}
+        \includegraphics[width=0.8\linewidth]{energy_levels.pdf}
+        \inlabel{figure:splosions}
+      \end{center}
+    \end{figure}
+
+    This has a feeling of getting into information theory and entropy.
+    The higher energy levels carry with them higher amounts of
+    uncertainty...at least in this example.  Let's see what happens as
+    we continue our journey.
+  \end{answerpart}
+
+\end{answer}
