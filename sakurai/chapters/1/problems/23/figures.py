@@ -31,4 +31,5 @@ ax.grid(axis='y', alpha=0.3)
 
 fig.tight_layout()
 
-fig.savefig('energy_levels.pdf', format='pdf', dpi=300)
+fig.savefig(os.path.join(sys.argv[1], 'energy_levels.pdf'),
+            format='pdf', dpi=300)

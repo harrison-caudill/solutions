@@ -85,6 +85,8 @@ sak: .dummy_builddir
 	mv $(BUILD)/manual.pdf $(BUILD)/sakurai.pdf
 
 problem: .dummy_builddir params
+	bin/figures.sh $(bookName)/chapters/$(chapterNum)/problems/$(problemNum)
+foo:
 	bin/qcad_export.py -s sakurai/qrf -d $(BUILD)/sakurai
 	bin/qcad_export.py -s $(bookName)/chapters/$(chapterNum)/problems/$(problemNum) -d $(BUILD)/$(bookName)/chapters/$(chapterNum)/problems
 	$(PDFTEX) \
