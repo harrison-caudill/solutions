@@ -2,19 +2,24 @@
 %% Chapter/Problem Infrastructure                                            %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%% NOTE: The places where I have \theHequation is so that the internal
+%% reference infrastructure employed by the hyperref package doesn't
+%% experience any name collisions.  You don't actually interact with
+%% it, so it just needs to be unique.
+
+
 \NewDocumentCommand{\appendixCounters}{}{%
     % In appendices, we want our equations/figures to increment within
     % the chapters, not any other level.
     \counterwithin{equation}{chapter}
     \counterwithout{equation}{section}
     \counterwithout{equation}{subsection}
-    \counterwithout{equation}{subsubsection}
     \renewcommand{\theequation}{\thechapter.\arabic{equation}}
+    \renewcommand{\theHequation}{\thechapter.\arabic{equation}.\arabic{HAnchorEq}}
     %
     \counterwithin{figure}{chapter}
     \counterwithout{figure}{section}
     \counterwithout{figure}{subsection}
-    \counterwithout{figure}{subsubsection}
     \renewcommand{\thefigure}{\thechapter.\arabic{figure}}
     \setcounter{chapter}{0}
 }%
@@ -27,6 +32,7 @@
     \counterwithout{equation}{subsection}
     \counterwithout{equation}{subsubsection}
     \renewcommand{\theequation}{\thesection.\arabic{equation}}
+    \renewcommand{\theHequation}{\thechapter.\arabic{equation}.\arabic{HAnchorEq}}
     %
     \counterwithin{figure}{chapter}
     \counterwithin{figure}{section}
@@ -37,7 +43,6 @@
     \renewcommand{\thechapter}{\arabic{chapter}}
     \setcounter{chapter}{1}
 }%
-
 %% In the main document, import a chapter of problem solutions.
 \NewDocumentCommand{\probChapter}{mm}{%
 
@@ -81,6 +86,8 @@
 }%
 
 \newenvironment{answerpart}[1]{%
+    \renewcommand{\theHqpart}{A.\thesection.\arabic{qpart}}
+    \setcounter{qspart}{0}
     \refstepcounter{qpart}
     \renewcommand{\thesubsection}{\thesection.\alph{qpart}}
     \phantomsection
@@ -91,9 +98,39 @@
 }{%
 }
 
+\newenvironment{answerspart}{%
+    \renewcommand{\theHqspart}{A.\thesection.\arabic{qpart}.\arabic{qspart}}
+    \refstepcounter{qspart}
+    \renewcommand{\thesubsubsection}{\thesection.\alph{qpart}.\roman{qspart}}
+    \phantomsection
+    \subsubsection*{\thesubsubsection}
+    \addcontentsline{toc}{subsubsection}{%
+        \texorpdfstring{\thesubsubsection}{\thesubsubsection}%
+    }%
+}{%
+}
+
 \newenvironment{questionpart}{%
+    \renewcommand{\theHqpart}{Q.\thesection.\arabic{qpart}}
+    \setcounter{qspart}{0}
     \refstepcounter{qpart}
     \list{\textbf{\alph{qpart})}}{%
+        \setlength{\leftmargin}{2em}   % Indentation of the text
+        \setlength{\labelwidth}{1.5em} % Width of the "a)" part
+        \setlength{\labelsep}{0.5em}   % Space between "a)" and text
+        \setlength{\topsep}{0.5em}     % Vertical space above this part
+        \setlength{\parsep}{0pt}
+    }%
+    \item \relax % Create the item
+    %% \textbf{\alph{qpart})}\
+}{%
+    \endlist%
+}
+
+\newenvironment{questionsubpart}{%
+    \renewcommand{\theHqspart}{Q.\thesection.\arabic{qpart}.\arabic{qspart}}
+    \refstepcounter{qspart}
+    \list{\textbf{\roman{qspart})}}{%
         \setlength{\leftmargin}{2em}   % Indentation of the text
         \setlength{\labelwidth}{1.5em} % Width of the "a)" part
         \setlength{\labelsep}{0.5em}   % Space between "a)" and text
@@ -183,3 +220,9 @@ Drawing upon the problem, we can surmise that:
 }%
 
 \newcommand{\qed}{\ _\blacksquare}
+
+\newcommand{\fixme}[1]{%
+  \vspace{1cm}
+  \textbf{\Large{FIXME:}} #1
+  \vspace{1cm}
+}%
