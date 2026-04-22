@@ -22,18 +22,19 @@
 
 \begin{document}
 
+\frontmatter
+\appendixCounters{}
+
+%% Tell hyperref not to count the title page as page 1 to avoid a collision
+\hypersetup{pageanchor=false}
 \maketitle
+\hypersetup{pageanchor=true}
 
 \input{BUILD/bookParams}
 \input{\bookName/acronyms}
 \input{\bookName/commands}
 \graphicspath{{\buildPath/\bookName}}
 
-
-\frontmatter
-
-%% 
-\appendixCounters{}
 
 \chapter{XXX: Point and Purpose}
 \begin{itemize}
@@ -49,9 +50,7 @@
 
 \clearpage
 \phantomsection
-\addcontentsline{toc}{chapter}{%
-  \texorpdfstring{Table of Contents}{Table of Contents}%
-}%
+\addcontentsline{toc}{chapter}{Table of Contents}
 \tableofcontents
 
 \mainmatter

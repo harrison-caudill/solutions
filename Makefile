@@ -1,4 +1,5 @@
 PDFTEX  = docker run -ti \
+	-e max_print_line=10000 \
 	-v `pwd`:/root/work \
 	-w /root/work \
 	pdflatex \
@@ -41,10 +42,19 @@ dpi     = 300
 %.ps: %.tex %.dvi
 	$(DVIPS) -Ppdf $*.dvi
 
-all: .dummy_builddir jackson
+all: .dummy_builddir sak
 
 .dummy_builddir:
 	mkdir -p $(BUILD)
+
+sak: .dummy_builddir
+	make -e bookName=sakurai params
+	bin/figures.py -b sakurai
+	bin/qcad_export.py -s sakurai -d $(BUILD)
+	echo "\def\\\\bookName{sakurai}" > $(BUILD)/bookParams.tex
+	echo "\def\\\\buildPath{$(BUILD)}" >> $(BUILD)/bookParams.tex
+	make sakurai/manual.pdf
+	mv $(BUILD)/manual.pdf $(BUILD)/sakurai.pdf
 
 clean:
 	bash -c '. .shlib ; clean -pr'
@@ -75,15 +85,6 @@ sqrf: .dummy_builddir
 	-jobname qrf \
 	sakurai/qrf.tex \
 	$(BUILD)/qrf.pdf
-
-sak: .dummy_builddir
-	make -e bookName=sakurai params
-	bin/figures.py -b sakurai
-	bin/qcad_export.py -s sakurai -d $(BUILD)
-	echo "\def\\\\bookName{sakurai}" > $(BUILD)/bookParams.tex
-	echo "\def\\\\buildPath{$(BUILD)}" >> $(BUILD)/bookParams.tex
-	make sakurai/manual.pdf
-	mv $(BUILD)/manual.pdf $(BUILD)/sakurai.pdf
 
 problem: .dummy_builddir params
 	bin/figures.py -b $(bookName) -c $(chapterNum) -p $(problemNum)
