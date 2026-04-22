@@ -8,13 +8,13 @@
     \counterwithin{equation}{chapter}
     \counterwithout{equation}{section}
     \counterwithout{equation}{subsection}
-    \counterwithout{equation}{subsubsection}
+    %\counterwithout{equation}{subsubsection}
     \renewcommand{\theequation}{\thechapter.\arabic{equation}}
     %
     \counterwithin{figure}{chapter}
     \counterwithout{figure}{section}
     \counterwithout{figure}{subsection}
-    \counterwithout{figure}{subsubsection}
+    %\counterwithout{figure}{subsubsection}
     \renewcommand{\thefigure}{\thechapter.\arabic{figure}}
     \setcounter{chapter}{0}
 }%
@@ -25,13 +25,13 @@
     \counterwithin{equation}{chapter}
     \counterwithin{equation}{section}
     \counterwithout{equation}{subsection}
-    \counterwithout{equation}{subsubsection}
+    %\counterwithout{equation}{subsubsection}
     \renewcommand{\theequation}{\thesection.\arabic{equation}}
     %
     \counterwithin{figure}{chapter}
     \counterwithin{figure}{section}
     \counterwithout{figure}{subsection}
-    \counterwithout{figure}{subsubsection}
+    %\counterwithout{figure}{subsubsection}
     \renewcommand{\thefigure}{\thesection.\arabic{figure}}
     %
     \renewcommand{\thechapter}{\arabic{chapter}}
@@ -81,6 +81,7 @@
 }%
 
 \newenvironment{answerpart}[1]{%
+    \setcounter{qspart}{0}
     \refstepcounter{qpart}
     \renewcommand{\thesubsection}{\thesection.\alph{qpart}}
     \phantomsection
@@ -91,9 +92,36 @@
 }{%
 }
 
+\newenvironment{answerspart}{%
+    \refstepcounter{qspart}
+    \renewcommand{\thesubsubsection}{\thesection.\alph{qpart}.\roman{qspart}}
+    \phantomsection
+    \subsubsection*{\thesubsubsection}
+    \addcontentsline{toc}{subsubsection}{%
+        \texorpdfstring{\thesubsubsection}{\thesubsubsection}%
+    }%
+}{%
+}
+
 \newenvironment{questionpart}{%
+    \setcounter{qspart}{0}
     \refstepcounter{qpart}
     \list{\textbf{\alph{qpart})}}{%
+        \setlength{\leftmargin}{2em}   % Indentation of the text
+        \setlength{\labelwidth}{1.5em} % Width of the "a)" part
+        \setlength{\labelsep}{0.5em}   % Space between "a)" and text
+        \setlength{\topsep}{0.5em}     % Vertical space above this part
+        \setlength{\parsep}{0pt}
+    }%
+    \item \relax % Create the item
+    %% \textbf{\alph{qpart})}\
+}{%
+    \endlist%
+}
+
+\newenvironment{questionsubpart}{%
+    \refstepcounter{qspart}
+    \list{\textbf{\roman{qspart})}}{%
         \setlength{\leftmargin}{2em}   % Indentation of the text
         \setlength{\labelwidth}{1.5em} % Width of the "a)" part
         \setlength{\labelsep}{0.5em}   % Space between "a)" and text
@@ -183,3 +211,9 @@ Drawing upon the problem, we can surmise that:
 }%
 
 \newcommand{\qed}{\ _\blacksquare}
+
+\newcommand{\fixme}[1]{%
+  \vspace{1cm}
+  \textbf{\Large{FIXME:}} #1
+  \vspace{1cm}
+}%
