@@ -79,12 +79,14 @@ sqrf: .dummy_builddir
 sak: .dummy_builddir
 	make -e bookName=sakurai params
 	bin/qcad_export.py -s sakurai -d $(BUILD)
+	bin/figures.sh sakurai/chapters
 	echo "\def\\\\bookName{sakurai}" > $(BUILD)/bookParams.tex
 	echo "\def\\\\buildPath{$(BUILD)}" >> $(BUILD)/bookParams.tex
 	make sakurai/manual.pdf
 	mv $(BUILD)/manual.pdf $(BUILD)/sakurai.pdf
 
 problem: .dummy_builddir params
+	bin/figures.sh $(bookName)/chapters/$(chapterNum)/problems/$(problemNum)
 	bin/qcad_export.py -s sakurai/qrf -d $(BUILD)/sakurai
 	bin/qcad_export.py -s $(bookName)/chapters/$(chapterNum)/problems/$(problemNum) -d $(BUILD)/$(bookName)/chapters/$(chapterNum)/problems
 	$(PDFTEX) \
