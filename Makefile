@@ -43,7 +43,9 @@ jackson: .dummy_builddir
 
 sqrf: .dummy_builddir
 	make -e bookName=sakurai params
-	bin/qcad_export.py -s sakurai/qrf -d $(BUILD)/sakurai
+	bin/figures.py -b sakurai -q
+	bin/ref.py -b sakurai -q
+	bin/qcad_export.py -b sakurai -q
 	$(PDFTEX) \
 	-jobname qrf \
 	sakurai/qrf.tex \
