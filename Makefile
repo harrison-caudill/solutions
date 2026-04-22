@@ -5,9 +5,13 @@ PDFTEX  = docker run -ti \
 	pdflatex \
 	pdflatex -halt-on-error \
 	-output-directory $(BUILD)
+BIBTEX  = docker run -ti \
+	-v `pwd`:/root/work \
+	-w /root/work \
+	pdflatex \
+	bibtex
 DVITEX  = latex
 DVIPS   = dvips
-BIBTEX  = bibtex
 PSPDF   = ps2pdf
 DIA     = dia
 CONVERT = convert
@@ -31,6 +35,7 @@ dpi     = 300
 
 %.pdf: %.tex
 	$(PDFTEX) $<
+	$(BIBTEX) $(BUILD)/manual
 	$(PDFTEX) $<
 	$(PDFTEX) $<
 
@@ -50,6 +55,7 @@ all: .dummy_builddir sak
 sak: .dummy_builddir
 	make -e bookName=sakurai params
 	bin/figures.py -b sakurai
+	bin/ref.py -b sakurai
 	bin/qcad_export.py -s sakurai -d $(BUILD)
 	echo "\def\\\\bookName{sakurai}" > $(BUILD)/bookParams.tex
 	echo "\def\\\\buildPath{$(BUILD)}" >> $(BUILD)/bookParams.tex
@@ -88,6 +94,7 @@ sqrf: .dummy_builddir
 
 problem: .dummy_builddir params
 	bin/figures.py -b $(bookName) -c $(chapterNum) -p $(problemNum)
+	bin/ref.py -b $(bookName) -c $(chapterNum) -p $(problemNum)
 	bin/qcad_export.py -s sakurai/qrf -d $(BUILD)/sakurai
 	bin/qcad_export.py -s $(bookName)/chapters/$(chapterNum)/problems/$(problemNum) -d $(BUILD)/$(bookName)/chapters/$(chapterNum)/problems
 	$(PDFTEX) \
