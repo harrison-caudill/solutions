@@ -1,0 +1,252 @@
+\begin{question}
+
+  \begin{questionpart}
+    Prove the following:
+
+    \begin{questionsubpart}
+      \begin{equation*}
+        \mel{p'}{x}{\alpha} = i\hbar \pdv{}{p'}\braket{p'}{\alpha}
+      \end{equation*}
+    \end{questionsubpart}
+
+    \begin{questionsubpart}
+      \begin{equation*}
+        \mel{\beta}{x}{\alpha} = \int dp' \phi_{\beta}^{*}(p')i \hbar \pdv{}{p'} \phi_{\alpha}(p')
+      \end{equation*}
+    \end{questionsubpart}
+
+    where $\phi_{\alpha}(p') = \braket{p'}{\alpha}$ and
+    $\phi_{\beta}(p') = \braket{p'}{\beta}$ are momentum-space wave
+    functions.
+  \end{questionpart}
+
+  \begin{questionpart}
+    What is the physical significance of
+    \begin{equation*}
+      \exp(\frac{ix\Xi}{\hbar})
+    \end{equation*}
+  \end{questionpart}
+
+\end{question}
+
+\begin{purpose}
+\end{purpose}
+
+\begin{answer}
+  \begin{answerpart}{Oh yeah?  Prove it.}
+
+    \begin{answerspart}
+
+      As with most problem in this chapter, we'll start by multiplying
+      by 1.
+
+      \begin{equation}
+        \begin{split}
+          \mel{p'}{x}{\alpha}
+          &=(\bra{p'}\hat{x})(\hat{1}\ket{\alpha})\\
+          &=\int dx' (\bra{p'}\hat{x})\dyad{x'}(\ket{\alpha})\\
+          &=\int dx' \mel{p'}{\hat{x}}{x'}\braket{x'}{\alpha}\\
+          &=\int dx' x'\braket{p'}{x'}\braket{x'}{\alpha}\\
+        \end{split}
+      \end{equation}
+
+      So, here we have two options...we can either postulate the
+      existence of some operator $O$ such that our original equation
+      holds
+
+      \begin{equation}
+        \begin{split}
+          \mel{p'}{x}{\alpha}
+          &= i\hbar \pdv{}{p'}\braket{p'}{\alpha}\\
+          &= \hat{O}\braket{p'}{\alpha}\\
+        \end{split}
+      \end{equation}
+
+      Substituting that into our earlier equation, we get
+
+      \begin{equation}
+        \begin{split}
+          \mel{p'}{x}{\alpha}
+          &=\int dx' x'\braket{p'}{x'}\braket{x'}{\alpha}\\
+          &=\hat{O}\braket{p'}{\alpha}\\
+          &=\hat{O}\int dx' (\bra{p'}) \dyad{x'} (\ket{\alpha})\\
+          &=\hat{O}\int dx' \braket{p'}{x'}\braket{x'}{\alpha}\\
+        \end{split}
+      \end{equation}
+
+      So, this is pretty similar to what we got earlier, except that
+      we have that pesky operator outside of the integral.  This is
+      where we make our second assumption: that it's an operator of
+      $p'$ and not $x'$.  If that's the case, then we can migrate the
+      operator inside the integral.
+      
+      \begin{equation}
+        \begin{split}
+          \mel{p'}{x}{\alpha}
+          &=\int dx' x'\braket{p'}{x'}\braket{x'}{\alpha}\\
+          &=\int dx' \hat{O}(p')\braket{p'}{x'}\braket{x'}{\alpha}\\
+          &=\int dx' x'\braket{p'}{x'}\braket{x'}{\alpha} = \int dx' x'f(x', p')\\
+          &=\int dx' \hat{O}(p')\braket{p'}{x'}\braket{x'}{\alpha} = \int dx' \hat{O}(p')f(x', p')\\
+        \end{split}
+      \end{equation}
+
+      So, clearly, the solution is going to be of the form
+      $\exp(kx')$.  Pulling in equation 1.264 because we're going to
+      need its complex conjugate in just a moment:
+
+      \begin{equation}
+        \tag{1.264}
+        \braket{x'}{p'} = \frac{1}{\sqrt{2\pi\hbar}} \exp(\frac{ip'x'}{\hbar})
+      \end{equation}
+
+      Separating out the $x'$ and $p'$ portions and substituting in
+      equation 1.264 above and we get
+
+      \begin{equation}
+        \begin{alignedat}{2}
+          & &
+          \braket{x'}{\alpha}\hat{O}(p')\braket{p'}{x'}
+          &= x'\braket{p'}{x'}\braket{x'}{\alpha}\\
+          \implies & &
+          \hat{O}(p')\braket{p'}{x'}
+          &= x'\braket{p'}{x'}\\
+          \implies & &
+          \hat{O}(p')\frac{1}{\sqrt{2\pi\hbar}}\exp(\frac{-ip'x'}{\hbar})
+          &= x'\frac{1}{\sqrt{2\pi\hbar}}\exp(\frac{-ip'x'}{\hbar})\\
+          \implies & &
+          \hat{O}(p')\exp(\frac{-ip'x'}{\hbar})
+          &= x'\exp(\frac{-ip'x'}{\hbar})\\
+        \end{alignedat}
+      \end{equation}
+
+      So, we aren't so much deriving this as we are hypothesizing the
+      existence and form of it, then computing what it would have to
+      be to comply with that hypothesis.  Rewriting the equation
+      above, we find
+
+      \begin{equation}
+        \begin{alignedat}{2}
+          & &
+          \hat{O}(p')\exp(\frac{-ip'x'}{\hbar})
+          &= x'\exp(\frac{-ip'x'}{\hbar})\\
+          \implies & &
+          \hat{O}(p')\exp(kp')
+          &= x'\exp(kp')\\
+          \implies & &
+          \hat{O}(p') &= \frac{x'}{k}\pdv{}{p'}\\
+          & & &= \cancel{x'}\frac{\hbar}{-i\cancel{x'}}\pdv{}{p'}\\
+          & & &= i\hbar\pdv{}{p'}\qed\\
+        \end{alignedat}
+      \end{equation}
+
+      So, again, we didn't really re-derive it so much as we
+      hypothesized the existence of an operator of the form
+      $\hat{O}(p)$ acting in the way presented and showed that the
+      value is what was presented in the problem.
+
+      As you can probably see by now, the operator we just showed to
+      be correct is the analog of the momentum operator we've been
+      using the whole time.  You just swap the $p$'s for $x$'s and add
+      a negative sign.
+    \end{answerspart}
+
+    \begin{answerspart}
+
+      Showing this part is much easier, and also a bit more
+      interesting.
+
+      \begin{equation}
+        \begin{split}
+          \mel{\beta}{x}{\alpha}
+          &= \int dp' (\bra{\beta})(\dyad{p'})(x\ket{\alpha})\\
+          &= \int dp' \braket{\beta}{p'}\mel{p'}{x}{\alpha}\\
+        \end{split}
+      \end{equation}
+
+      Using our result from the previous section
+      \begin{equation}
+        \mel{p'}{x}{\alpha} = i\hbar \pdv{}{p'}\braket{p'}{\alpha}
+      \end{equation}
+
+      \begin{equation}
+        \begin{split}
+          \mel{\beta}{x}{\alpha}
+          &= \int dp' \braket{\beta}{p'}\mel{p'}{x}{\alpha}\\
+          &= \int dp' \braket{\beta}{p'}\left(i\hbar \pdv{}{p'}\right)\braket{p'}{\alpha}\\
+          &= \int dp' \braket{\beta}{p'}\left(i\hbar \pdv{}{p'}\right)\braket{p'}{\alpha}\\
+        \end{split}
+      \end{equation}
+
+      Pulling in our definitions for $\phi$ from equation 1.265
+
+      \begin{equation}
+        \begin{split}
+          \phi_{\alpha}(p') &= \braket{p'}{\alpha}\\
+          \phi_{\beta}(p') &= \braket{p'}{\beta}\\
+        \end{split}
+      \end{equation}
+
+      Then substituting those into the equation above
+
+      \begin{equation}
+        \begin{split}
+          \mel{\beta}{x}{\alpha}
+          &= \int dp' \braket{\beta}{p'}\left(i\hbar \pdv{}{p'}\right)\braket{p'}{\alpha}\\          
+          &= \int dp' \phi_{\beta}^{*}(p')
+          \left(i\hbar \pdv{}{p'}\right)
+          \phi_{\alpha}(p')\qed\\
+        \end{split}
+      \end{equation}
+
+      So, essentially, what we're doing here is looking at the
+      \ac{pmf} in momentum space and integrating across it.
+    \end{answerspart}
+  \end{answerpart}
+
+  \begin{answerpart}
+    Before addressing this, it's worth noting the palindrome that
+    Sakurai left for us: $ix Xi$...oh what a joker...
+
+    So, we see this equation in a couple of different forms throughout
+    our travels and interpreting physically can get hairy.  We're
+    going to try to avoid re-creating all of \ac{qft}.  Let's start by
+    pulling in the jog operator from section 1.6.4
+
+    \begin{equation}
+      \tag{1.218}
+      \mathscr{J}(\Delta x' \vu{x}) = \exp(- \frac{ip_x\Delta x'}{N\hbar})
+    \end{equation}
+
+    Sign issues aside, that's almost exactly the same as the equation
+    we're given:
+
+    \begin{equation}
+      \exp(\frac{ix\Xi}{\hbar})
+    \end{equation}
+
+    But let's go further.  In addition to being a jog operator, it can
+    also be what I'm calling the jerk operator (whether that's in
+    honor of Steve Martin or the $3^{rd}$ derivative of position I'll
+    leave up to you).
+
+    \begin{equation}
+      \mathscr{J}(\Delta p' \vu{p}) = \exp(- \frac{ix\Delta p'}{N\hbar})
+    \end{equation}
+
+    We're also applying a phase change in the momentum and position
+    spaces.  What does that mean exactly?  Stay tuned for \ac{qft} and
+    find out!  Same Feynman time, same Feynman lectures!
+
+    Finally, it also shows us what the wave function would look like
+    with a fixed value of $p$ thereby implying an infinite uncertainty
+    in position and giving us a plane wave...I figured I'd leave the
+    lamest answer for the last one.
+
+  \end{answerpart}
+
+  So...I woooouuullld celebrate the end of the chapter at this point,
+  \emph{but}, if you've been reading along then you know that I solved
+  this problem \emph{before} solving problem \ref{1.24.theQuestion},
+  so look somewhere else for a celebration.
+
+\end{answer}
