@@ -8,6 +8,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import utils
 
 
 class Converter(object):
@@ -102,16 +103,7 @@ class Converter(object):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-
-    parser.add_argument('--source-dir', '-s',
-                        metavar='SRC_DIR',
-                        action='store',
-                        dest='src_dir',
-                        required=False,
-                        default='.',
-                        type=str,
-                        help='Source directory',)
+    parser = utils.PathParser()
 
     parser.add_argument('--dst-dir', '-d',
                         metavar='DST_DIR',
@@ -162,7 +154,9 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    c = Converter(src=args.src_dir,
+    path = utils.Pathfinder(args)
+
+    c = Converter(src=path.tgt(),
                   dst=args.dst_dir,
                   dpi=args.dpi,
                   qcad=args.qcad_bins,

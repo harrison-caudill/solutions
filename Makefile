@@ -10,28 +10,9 @@ BIBTEX  = docker run -ti \
 	-w /root/work \
 	pdflatex \
 	bibtex
-DVITEX  = latex
-DVIPS   = dvips
 PSPDF   = ps2pdf
-DIA     = dia
 CONVERT = convert
 BUILD   = BUILD
-cout    = combined
-cname   = generic
-book    =
-dpi     = 300
-
-%.eps: %.dia
-	$(DIA) --export=$*.eps $<
-
-%.jpg: %.xcf.bz2
-	bzcat $< | $(CONVERT) -flatten - $*.jpg
-
-%.jpg: %.eps
-	$(CONVERT) $< $*.jpg
-
-%.jpg: %.png
-	$(CONVERT) $< $*.jpg
 
 %.pdf: %.tex
 	$(PDFTEX) $<
@@ -39,38 +20,14 @@ dpi     = 300
 	$(PDFTEX) $<
 	$(PDFTEX) $<
 
-%.dvi: %.tex
-	$(DVITEX) $<
-	$(DVITEX) $<
-	$(DVITEX) $<
-
-%.ps: %.tex %.dvi
-	$(DVIPS) -Ppdf $*.dvi
-
 all: .dummy_builddir sak
 
 .dummy_builddir:
 	mkdir -p $(BUILD)
 
-sak: .dummy_builddir
-	make -e bookName=sakurai params
-	bin/figures.py -b sakurai
-	bin/ref.py -b sakurai
-	bin/qcad_export.py -s sakurai -d $(BUILD)
-	echo "\def\\\\bookName{sakurai}" > $(BUILD)/bookParams.tex
-	echo "\def\\\\buildPath{$(BUILD)}" >> $(BUILD)/bookParams.tex
-	make sakurai/manual.pdf
-	mv $(BUILD)/manual.pdf $(BUILD)/sakurai.pdf
-
 clean:
 	bash -c '. .shlib ; clean -pr'
 	yes | rm -rf $(BUILD)
-
-ref: .dummy_builddir
-	bin/qcad_export.py -s ref -d $(BUILD)
-	echo "\def\\\\bookName{ref}" > $(BUILD)/bookParams.tex
-	echo "\def\\\\buildPath{$(BUILD)}" >> $(BUILD)/bookParams.tex
-	make ref/ref.pdf
 
 params:
 	echo "\def\\\\bookName{$(bookName)}" > $(BUILD)/bookParams.tex
@@ -92,11 +49,26 @@ sqrf: .dummy_builddir
 	sakurai/qrf.tex \
 	$(BUILD)/qrf.pdf
 
+sak: .dummy_builddir
+	make -e bookName=sakurai params
+	bin/figures.py -b sakurai -q
+	bin/figures.py -b sakurai
+	bin/ref.py -b sakurai -q
+	bin/ref.py -b sakurai
+	bin/qcad_export.py -b sakurai -q
+	bin/qcad_export.py -b sakurai
+	echo "\def\\\\bookName{sakurai}" > $(BUILD)/bookParams.tex
+	echo "\def\\\\buildPath{$(BUILD)}" >> $(BUILD)/bookParams.tex
+	make sakurai/manual.pdf
+	mv $(BUILD)/manual.pdf $(BUILD)/sakurai.pdf
+
 problem: .dummy_builddir params
+	bin/figures.py -b $(bookName) -q
 	bin/figures.py -b $(bookName) -c $(chapterNum) -p $(problemNum)
+	bin/ref.py -b $(bookName) -q
 	bin/ref.py -b $(bookName) -c $(chapterNum) -p $(problemNum)
-	bin/qcad_export.py -s sakurai/qrf -d $(BUILD)/sakurai
-	bin/qcad_export.py -s $(bookName)/chapters/$(chapterNum)/problems/$(problemNum) -d $(BUILD)/$(bookName)/chapters/$(chapterNum)/problems
+	bin/qcad_export.py -b sakurai -q
+	bin/qcad_export.py -b sakurai -c $(chapterNum) -p $(problemNum)
 	$(PDFTEX) \
 	-jobname $(bookName)-$(chapterNum)-$(problemNum)-raw \
 	problem.tex \

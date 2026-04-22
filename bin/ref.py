@@ -6,6 +6,7 @@ import os
 import pprint
 import re
 import sys
+import utils
 
 
 class BibIt(object):
@@ -32,7 +33,7 @@ class BibIt(object):
                 if 'ref.bib' not in files: continue
                 entries += self._process_problem(book, chapter, problem, cur)
 
-        tgt = os.path.join(base, 'BUILD', 'ref.bib')
+        tgt = os.path.join(self.base, 'BUILD', 'ref.bib')
         with open(tgt, 'w') as fd:
             fd.write('\n'.join(entries))
 
@@ -73,54 +74,11 @@ class BibIt(object):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-
-    parser.add_argument('--book', '-b',
-                        metavar='BOOK',
-                        action='store',
-                        dest='book',
-                        required=False,
-                        type=str,
-                        help='Book name',)
-
-    parser.add_argument('--chapter', '-c',
-                        metavar='CHAPTER',
-                        action='store',
-                        dest='chapter',
-                        required=False,
-                        type=int,
-                        help='Problem number',)
-
-    parser.add_argument('--problem', '-p',
-                        metavar='PROBLEM',
-                        action='store',
-                        dest='prob',
-                        required=False,
-                        type=int,
-                        help='Problem number',)
+    parser = utils.PathParser()
+    args = parser.parse_args()
+    path = utils.Pathfinder(args)
     
     args = parser.parse_args()
 
-    # Find our starting point.  It's the parent of the script location.
-    base = os.path.realpath(os.path.join(os.path.dirname(sys.argv[0]), '..'))
-
-    # Find our walking start location
-    root = base
-    if args.book:
-        root = os.path.join(base, args.book)
-        if not os.path.isdir(root):
-            print(f"Hey Dumbass, {root} isn't a real place!")
-            sys.exit(-1)
-        if args.chapter:
-            root = os.path.join(root, 'chapters', str(args.chapter))
-            if not os.path.isdir(root):
-                print(f"Hey Dumbass, {root} isn't a real place!")
-                sys.exit(-1)
-            if args.prob:
-                root = os.path.join(root, 'problems', str(args.prob))
-                if not os.path.isdir(root):
-                    print(f"Hey Dumbass, {root} isn't a real place!")
-                    sys.exit(-1)
-
-    bib = BibIt(base, root)
+    bib = BibIt(path.base(), path.tgt())
     bib.go()

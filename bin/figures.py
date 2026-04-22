@@ -6,6 +6,7 @@ import os
 import pprint
 import re
 import sys
+import utils
 
 
 class ItFigures(object):
@@ -62,54 +63,9 @@ class ItFigures(object):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-
-    parser.add_argument('--book', '-b',
-                        metavar='BOOK',
-                        action='store',
-                        dest='book',
-                        required=False,
-                        type=str,
-                        help='Book name',)
-
-    parser.add_argument('--chapter', '-c',
-                        metavar='CHAPTER',
-                        action='store',
-                        dest='chapter',
-                        required=False,
-                        type=int,
-                        help='Problem number',)
-
-    parser.add_argument('--problem', '-p',
-                        metavar='PROBLEM',
-                        action='store',
-                        dest='prob',
-                        required=False,
-                        type=int,
-                        help='Problem number',)
-    
+    parser = utils.PathParser()
     args = parser.parse_args()
+    path = utils.Pathfinder(args)
 
-    # Find our starting point.  It's the parent of the script location.
-    base = os.path.realpath(os.path.join(os.path.dirname(sys.argv[0]), '..'))
-
-    # Find our target location
-    tgt = base
-    if args.book:
-        tgt = os.path.join(base, args.book)
-        if not os.path.isdir(tgt):
-            print(f"Hey Dumbass, {tgt} isn't a real place!")
-            sys.exit(-1)
-        if args.chapter:
-            tgt = os.path.join(tgt, 'chapters', str(args.chapter))
-            if not os.path.isdir(tgt):
-                print(f"Hey Dumbass, {tgt} isn't a real place!")
-                sys.exit(-1)
-            if args.prob:
-                tgt = os.path.join(tgt, 'problems', str(args.prob))
-                if not os.path.isdir(tgt):
-                    print(f"Hey Dumbass, {tgt} isn't a real place!")
-                    sys.exit(-1)
-    
-    fig = ItFigures(base, tgt)
+    fig = ItFigures(path.base(), path.tgt())
     fig.go()
