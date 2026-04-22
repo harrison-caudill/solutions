@@ -1,0 +1,320 @@
+\begin{question}
+  Estimate the rough order of magnitude of the length of time that an
+  ice pick can be balanced on its point if the only limitation is that
+  set by the Heisenberg uncertainty principle. Assume that the point
+  is sharp and that the point and the surface on which it rests are
+  hard. You may make approximations which do not alter the general
+  order of magnitude of the result. Assume reasonable values for the
+  dimensions and weight of the ice pick. Obtain an approximate
+  numerical result and express it \emph{in seconds}.
+\end{question}
+
+\begin{purpose}
+  This is a classical problem in high-school physics: connect the
+  uncertainty relation to the real-world.  We can also see this with
+  things like entanglement in macro-scale systems (I think they
+  mentioned a pendulum somewhere in the book) and Bose condensates.
+
+  There are several concepts which need to come together for this
+  problem
+
+  \begin{itemize}
+  \item Application of the $X/P$ uncertainty relation.
+  \item Application of the $E/t$ uncertainty relation.
+  \item Taking expectation values using wave functions.
+  \item The Wigner function.
+  \item Wave function collapse after observations.
+  \item Mass energy and momentum implications from special relativity.
+  \end{itemize}
+
+  We're going to solve the problem using a few different approaches:
+  
+  \begin{questionpart}
+    The most straight-forward normal way of doing this problem is to
+    assume a wave function for the position, determine the \acp{pdf}
+    for $P$ and $X$ and integrate against the fall-time as a function
+    of those variables.  True to form, things are out of order here.
+  \end{questionpart}
+
+  \begin{questionpart}
+    The next fun way to solve the problem is to leverage the $E/t$
+    uncertainty relation to determine the amount of rotational kinetic
+    energy in the system.  Using the time during the observation of
+    energy, we then reverse-engineer the presumed initial conditions
+    and compute the expecation value just as we did in the previous
+    part.
+  \end{questionpart}
+
+  \begin{questionpart}
+    Finally, we use the $E/t$ uncertainty relation to, for this
+    problem, reconstruct the $X/P$ uncertainty relation at which point
+    the initial solution again applies.
+  \end{questionpart}
+
+  Note that I actually solved this problem out of order.  Problem
+  \ref{1.36:theQuestion} involves proving one of the key relations for
+  the solution to this problem so I decided to solve that one first.
+  
+\end{purpose}
+
+\begin{answer}
+  So, if we had a perfect and perfectly-determined world, then the
+  ice-pick would be perfectly vertical, made of Hyle, infinitely
+  rigid, no mechanical/electrical/use-the-force-luke perturbations and
+  it would just sit there until the heat-death of the universe.
+  Newsflash to anyone watching Krasnov and global warming...we don't
+  live in a perfect world.  The fundamental indeterminability of
+  quantum mechanics ensures that we h
+
+  
+
+
+  
+
+  \begin{answerpart}{The ``normal'' way}
+
+    I mean...I \emph{assume} this is the normal way at least.  Like
+    the old joke about Werner Heisenberg getting pulled over by the
+    cops goes, we can't know our position and momentum at the same
+    time.  We just went to great pains to prove that if $\vec{a}^{*}
+    \cdot \vec{a} \ge 0$ then the uncertainty relation is a thing.  So
+    let's run with that.  Starting with our uncertainty relation:
+
+    \begin{equation}
+      \tag{1.146}
+      \dispersion{A}\dispersion{B} \ge \frac{1}{4} \abs{\expval{[A, B]}}^2
+    \end{equation}
+
+    So swapping out those operators to be the ones we're interested in:
+  
+    \begin{equation}
+      \dispersion{x}\dispersion{p} \ge \frac{1}{4} \abs{\expval{[x, p]}}^2
+    \end{equation}
+
+    Next, it's worth looking at our momentum operator:
+    \begin{equation}
+      \hat{p} \approx -\hbar^2\frac{\partial^2}{\partial x'^2}
+    \end{equation}
+
+    So, if we pull in a few utility equations:
+
+    \begin{equation}
+      \tag{1.98}
+      \expval{A} \equiv \mel{\alpha}{A}{\alpha}
+    \end{equation}
+
+    \begin{equation}
+      \tag{1.143}
+      \Delta A \equiv A - \expval{A}
+    \end{equation}
+    
+    \begin{equation}
+      \tag{1.144}
+      \dispersion{A}
+      = \expval{(A^2 - 2A\expval{A} + \expval{A}^2)}
+      = \expval{A^2} - \expval{A}^2
+    \end{equation}
+
+    \begin{equation}
+      \tag{1.251}
+      \inlabel{exp:p}
+      \begin{split}
+        \mel{\beta}{p}{\alpha}
+        &= \int_0^a dx' \braket{\beta}{x'}
+        \left(
+        -i \hbar \pdv{}{x'} \braket{x'}{a}
+        \right)\\
+        &= \int_0^a dx'
+        \psi_{\beta}^{*}(x')
+        \operatorP{x'}
+        \psi_{\alpha}(x')\\
+      \end{split}
+    \end{equation}
+
+    So, we can pretty quickly see that all of our equations of
+    interest for computing the uncertainty ultimately just come down
+    to the state-ket $\ket{\psi}$:
+
+    Putting it all together, we find that:
+
+    \begin{equation}
+      \inlabel{handy}
+      \begin{alignedat}{2}
+        \expval{x}^2 &= \mel{\psi}{x}{\psi}^2 &
+        &= \left( \int dx \psi^{*}(x) x \psi(x) \right)^2
+        \\
+        \expval{x^2} &= \mel{\psi}{x^2}{\psi} &
+        &= \int dx \psi^{*}(x) x^2 \psi(x)
+        \\
+        \expval{p}^2 &= \mel{\psi}{p}{\psi}^2 &
+        &= \left( \int dx \psi^{*}(x) \left(-i \hbar\frac{\partial}{\partial x} \right) \psi(x) \right)^2
+        \\
+        \expval{p^2} &= \mel{\psi}{p^2}{\psi} &
+        &= \int dx \psi^{*}(x) \left(-\hbar^2\frac{\partial^2}{\partial x'^2} \right) \psi(x)
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    So, just as we were taught in wave mechanics, you know Saul, you
+    know em' all...no wait, that isn't it...you know $\psi$ you know
+    it all...less catchy, more correct.  Effectively that means that
+
+    \begin{equation}
+      \dispersion{x}\dispersion{p} = f(\psi(x))
+    \end{equation}
+
+    Since the uncertainty relation must hold true but also be minimized,
+    we can go one step further and say that:
+    
+    \begin{equation}
+      \begin{split}
+        \inlabel{coreConjecture}
+        \dispersion{x}\dispersion{p}
+        &= f(\psi(x))\\
+        &= \frac{1}{4} \abs{\expval{[x, p]}}^2
+      \end{split}
+    \end{equation}
+
+    So, if we have equality, then it means that the only wave
+    functions we're going to accept are those which meet that
+    equality.  Here, we're going to make an assumption.  Since the
+    whole concept is ``place the ice pick and make it reeeeeeally
+    steady'' then we're going to assume that placement of the ice-pick
+    is a gaussian with respect to the top of the ice pick (don't
+    worry, we'll multiply by 2 there to account for uncertainty of the
+    top and bottom).  It's also worth noting that Gaussian wave
+    packets are known to minimize uncertainty.
+  
+    So, that gives us an equation with one uknown: $\sigma$ (or at
+    least its spirit animal).  So, let's assume we already know sigma
+    (we'll solve for it later).  What do we do with $\sigma$?  Well,
+    don't know where the ice-pick is initially \emph{or} what it's
+    initial momentum is...there's that whole fundamental
+    indeterminability thing going on.  But what we \emph{do} know is
+    the \ac{pdf} for position which also determines the \ac{pdf} for
+    the momentum.  So, what we can do with \acp{pdf} is to determine
+    an \emph{expectation value}.  OK...what are we taking the
+    expectation value of?  Well, that we get from the problem setup:
+    the fall time.
+
+    Armed with the knowledge of (the construction of) the \ac{lhs} of
+    our equation, we now proceed to figuring out the \ac{rhs}.  If
+    we're going to take an expectation value of the fall time, then
+    we're expecting something like this:
+
+    \begin{equation}
+      \inlabel{guidingIntegral}
+      <t> = \int \int dx dp P(x)P(p)f(x, p)
+    \end{equation}
+
+    If we're going to evalute that, we're going to need to know how to
+    compute the probability of the position, and momentum.  \S 1.7.3
+    in the book discusses this exact issue and formulates the position
+    and momentum space wave functions (which happen to be fourier
+    transforms of one another...iiinteresting...kinda makes you wonder
+    about Shor's algorithm doesn't it).
+
+    Starting with the statistical interpretation from the text just
+    after eq 1.256, ``the probability that a measurement of $p$ gives
+    eigenvalue $p'$ within a narrow interval $dp'$ is
+    $\abs{\braket{p'}{\alpha}}^2dp'$.  It is customary to call
+    $\braket{p'}{\alpha}$ the \textbf{momentum-space wave function};
+    the notation $\phi_{\alpha}(p')$ is often used''.  So, if we have
+    an expression for $\phi_{\alpha}(p')$ then we can find the
+    probability:
+
+    \begin{equation}
+      P(p = p' \pm dp'/2) = \abs{\phi_{\alpha}(p')}^2dp'
+    \end{equation}
+
+    Later, Sakurai provides us with that exact equation:
+    
+    \begin{equation}
+      \tag{1.266a}
+      \psi_{\alpha}(x')
+      = \left[ \frac{1}{\sqrt{2\pi\hbar}} \right]
+      \int dp' \exp(\frac{ip'x'}{\hbar})\phi_{\alpha}(p')
+    \end{equation}
+
+    \begin{equation}
+      \tag{1.266b}
+      \phi_{\alpha}(p')
+      = \left[ \frac{1}{\sqrt{2\pi\hbar}} \right]
+      \int dp' \exp(\frac{-ip'x'}{\hbar})\psi_{\alpha}(x')
+    \end{equation}
+
+    So, we can already obtain the position-space variant more simply
+    with
+
+    \begin{equation}
+      P(x') = \abs{\braket{\alpha}{x'}}^2
+    \end{equation}
+
+    This gives us expressions for the probabilities for both the $x$
+    and $p$ values for us to take our integral in equation
+    \ref{guidingIntegral}.  That brings us to the fall-time, and the
+    issue of translation vs rotation.
+
+    Let's say that you have a very very good machine which places your
+    ice-pick in exactly the right place, but it may jerk at the last
+    possible moment and impart momentum.  Let's further suppose that
+    when it does so, it dosn't twist the ice-pick at all, but rather
+    causes it to glide on the infinite field of pefectly flat hyle
+    without any resistances.  Let's further assume that there are no
+    relativistic effects with which to contend (I mean...why not
+    right?  we're assuming we have Hyle, so Aristotle would be proud
+    already).  If the machine imparts no rotation, only translation
+    then the uncertainty relation is satisfied and yet it never falls
+    right?  Well...no...as it turns out.  The easy way to prove this
+    to yourself is to put yourself into the frame of reference of the
+    tip of the ice-pick.  In that frame of reference, you're
+    describing a system in which the uncertainties in position and
+    momentum are both 0.  Because we're trying to minimize the
+    uncertainty product, it also means that we get to assume that all
+    of that momentum uncertainty goes into rotational momentum, and we
+    also get to assume that all of that positional uncertainty is
+    asymmetric between the top and the bottom of the ice-pick.  In
+    other words, because we're minimizing it, we get to assume that
+    all the uncertainty goes into making it fall faster.
+
+    So, we'll incorporate our $\Delta p$ and $\Delta x$ as follows:
+
+    \begin{equation}
+      \begin{split}
+        \omega_0 &= \frac{p_0}{I}\\
+        \theta_0 &\approx x_0\\
+      \end{split}
+    \end{equation}
+
+    So that should be all of the pieces necessary to show the
+    expectation value for the fall time of an ideal and ideally-placed
+    ice-pick on an infinitely flat frictionless physics-plane.
+
+  \end{answerpart}
+
+  \begin{answerpart}{The Kill-Me-Now-Its-Fourier-Transforms Method}
+    I'm \emph{hypothesizing} that we can prove that a Gaussian wave
+    packet is the right approach.
+  \end{answerpart}
+
+  \begin{answerpart}{How Much Time/Energy Do I Have?}
+    We're also going to approach the problem from a different
+    uncertainty relation: the time/energy uncertainty.  This one is
+    outside the scope of chapter 1...it's just fun...
+
+    \begin{equation}
+      E = \frac{1}{2} I \omega^2
+    \end{equation}
+
+    Using the same relativity logic as above, we can show that a
+    0-energy state (disallowed for other reasons) would be required
+    for it to not fall.  Knowing its rotational kinetic energy and a
+    time-window in which that (average) energy is true implies the
+    ability to compute not only the current $\omega$ but also the
+    initial conditions to satisfy the constraints of the fall-time
+    equation given the time over which the observation is made.
+    
+  \end{answerpart}
+
+  
+\end{answer}
