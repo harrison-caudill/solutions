@@ -108,3 +108,64 @@ see $\ket{a'} \Rightarrow \ket{a_i}$ and $\ket{a''} \Rightarrow
   \qlabel{spinAngle}
   \cos(\frac \beta 2)\ket + + \sin(\frac \beta 2) e^{i\alpha}\ket -
 \end{equation}
+
+\subsection{Integral Table}
+
+\begin{equation}
+  \qlabel{integral:gaussian}
+  \int_{-\infty}^{\infty} dx\  e^{-\alpha x^2} = \sqrt{\frac{\pi}{\alpha}}
+\end{equation}
+
+\begin{equation}
+  \qlabel{integral:xgaussian}
+  \int_{-\infty}^{\infty} dx\  xe^{-\alpha x^2} = 0
+\end{equation}\cite[eq 3.321.3]{gr}
+
+\begin{equation}
+  \qlabel{integral:xxgaussian}
+  \int_{-\infty}^{\infty} dx\  x^2e^{-\alpha x^2} = \frac{1}{2\alpha}\sqrt{\frac{\pi}{\alpha}}
+\end{equation}
+
+\section{Wave Functions}
+
+\subsection{\acf{gwp}}
+\qlabel{wavey:gwp}
+    \begin{equation}
+      \inlabel{gwp:exp}
+      \begin{alignedat}{2}
+        \expval{X}^2 &= 0 & \quad{} &\text{(eq \ref{1.24:exp:x1})}\\
+        \expval{X^2} &= \frac{d^2}{2} & &\text{(eq \ref{1.24:exp:x2})}\\
+        \expval{P}^2 &= \hbar^2k^2 & &\text{(eq \ref{1.24:exp:p1})}\\
+        \expval{P^2} &= \hbar^2\left(k^2+\frac{1}{2d^2}\right)
+        & &\text{(eq \ref{1.24:exp:p2})}\\
+      \end{alignedat}
+    \end{equation}
+
+    \begin{equation}
+      \dispersion{X}\dispersion{P}
+      =
+      \left(\expval{\hat{X}^2} - \expval{\hat{X}}^2\right)
+      \left(\expval{\hat{P}^2} - \expval{\hat{P}}^2\right)
+      = \frac{\hbar^2}{4}
+    \end{equation}
+
+    \begin{equation}
+      \qlabel{wavey:gwp:psi}
+      \psi(x')
+      = \braket{x'}{\alpha}
+      = \frac{1}{\pi^{1/4}}\sqrt{\frac{1}{d}}
+      \exp[-\frac{1}{2d^2}x'^{2}]
+    \end{equation}
+
+    \begin{equation}
+      \qlabel{wavey:gwp:phi}
+      \phi(p')
+      =
+      \left[ \frac{1}{\sqrt{2\pi\hbar}} \right]
+      \int dx' \exp(\frac{-ip'x'}{\hbar})\psi_{\alpha}(x')
+      = 
+      \frac{1}{\pi^{1/4}}
+      \sqrt{\frac{d}{\hbar}}
+      \exp[-\frac{d^2}{2\hbar^2}p^2]
+    \end{equation}
+    

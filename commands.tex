@@ -75,6 +75,7 @@
 \newenvironment{question}{%
     \subsection*{Recitation of the Problem}
     \begin{quote}
+    \raggedright % when the text is terse, you don't want underfull hbox's
     \noindent
 }{%
     \end{quote}
@@ -184,8 +185,12 @@ Drawing upon the problem, we can surmise that:
 }%
 
 % The corresponding ref command for the \inlabel command
-\newcommand{\incite}[1]{%
-  \cite{\thesection:#1}%
+\NewDocumentCommand{\incite}{o m}{%
+  \IfValueTF{#1}{%
+    \cite[#1]{\thesection:#2}%
+  }{%
+    \cite{\thesection:#2}%
+  }%
 }%
 
 \newcommand{\outref}[3]{%

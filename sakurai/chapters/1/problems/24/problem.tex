@@ -1,3 +1,6 @@
+
+\newcommand{\icepick}{Schr\"{o}dinger's ice-pick}
+
 \begin{question}
   Estimate the rough order of magnitude of the length of time that an
   ice pick can be balanced on its point if the only limitation is that
@@ -27,34 +30,39 @@
   \item Mass energy and momentum implications from special relativity.
   \end{itemize}
 
-  We're going to solve the problem using a few different approaches:
+  Ultimately, this problem ties together just about all of the
+  important topics in chapter 1 and then some.  We're going to solve
+  the problem using a few different approaches:
   
   \begin{questionpart}
     The most straight-forward normal way of doing this problem is to
     assume a wave function for the position, determine the \acp{pdf}
     for $P$ and $X$ and integrate against the fall-time as a function
-    of those variables.  True to form, things are out of order here.
+    of those variables.  True to form, things are out of order here so
+    we'll have to skip around a bit, starting with working problem
+    \ref{1.36:theQuestion}.
+  \end{questionpart}
+
+  \begin{questionpart}
+    In our first solution, we essentially use quantum mechanics to set
+    up the probability distributions for the initial conditions, then
+    we use classical mechanics for time-propagation.  Here, we'll use
+    quantum mechanics to propagate our gaussian wave packet.
   \end{questionpart}
 
   \begin{questionpart}
     The next fun way to solve the problem is to leverage the $E/t$
     uncertainty relation to determine the amount of rotational kinetic
-    energy in the system.  Using the time during the observation of
-    energy, we then reverse-engineer the presumed initial conditions
-    and compute the expecation value just as we did in the previous
-    part.
-  \end{questionpart}
-
-  \begin{questionpart}
-    Finally, we use the $E/t$ uncertainty relation to, for this
-    problem, reconstruct the $X/P$ uncertainty relation at which point
-    the initial solution again applies.
+    energy in the system.  Using the time expended during the
+    observation of energy, we then reverse-engineer the presumed
+    initial conditions and compute the expecation value just as we did
+    in the previous part.
   \end{questionpart}
 
   Note that I actually solved this problem out of order.  Problem
   \ref{1.36:theQuestion} involves proving one of the key relations for
   the solution to this problem so I decided to solve that one first.
-  
+
 \end{purpose}
 
 \begin{answer}
@@ -64,12 +72,44 @@
   it would just sit there until the heat-death of the universe.
   Newsflash to anyone watching Krasnov and global warming...we don't
   live in a perfect world.  The fundamental indeterminability of
-  quantum mechanics ensures that we h
+  quantum mechanics ensures that we are working with \icepick{}.  That
+  means that whatever indeterminability there is results in the
+  ice-pick being in a superposition of all of those states.
 
-  
+  If everything is in a superposition of states then it doesn't really
+  make sense to ask how long it will take for that specific trial
+  since it is unknowable.  What we \emph{can} ask, is what the
+  expectation-value is for the fall-time.  But even that statement
+  raises questions.  If our infinite set of monkeys with their
+  infinite typewriters repeated the experiment an infinite number of
+  times would one of them take an infinite amount of time to fall?
+  While we're on that topic, what does the ``fall-time'' even mean?
 
+  Taking the last part first and the first part last, ``fall-time'' is
+  defined as when a recording-device of some kind recognizes a signal
+  which injects all sorts of statistical issues.  When are there
+  enough electrons on the gate of the Field Effect Transistors in the
+  CMOS logic sufficiently high to get past the ohmic region?  But we
+  understand that statistical analysis reasonably-well -- it's a bunch
+  of gaussians with $\sigma$'s that we have determined experimentally
+  (assuming it happens in time-ranges $\ge 10^{-10}$s).  The more
+  interesting quantum mechanics question is about what it means for
+  \icepick{} to trigger the sensor.  When \icepick{} falls, its
+  gaussian wave-packet is moving and expanding.  Initial
+  indeterminability of the momentum (becoming $\omega_0$) and position
+  (becoming $\theta_0$) leads to time-expanding indeterminability of
+  the position as it falls.  So we can define our ``fall-time'' as the
+  time at which the expectation-value of the spatial wave funtion
+  (reparameterized for $\theta$) reaches the ground (i.e. $\theta =
+  \pi/2$).  For simplicity, though, since time-evolution of
+  wave-functions isn't something that we covered, we're going to use
+  quantum mechanics to determine initial conditions and then (FIXME:
+  lagrangian or hamiltonian?) classical mechanics to determine the
+  fall-time from those initial conditions.
 
-  
+  Finally, the infinite monkeys...well..they eventually \emph{do}
+  cause \icepick{} to balance for an arbitrarily-long time.
+
 
   \begin{answerpart}{The ``normal'' way}
 
@@ -77,9 +117,28 @@
     the old joke about Werner Heisenberg getting pulled over by the
     cops goes, we can't know our position and momentum at the same
     time.  We just went to great pains to prove that if $\vec{a}^{*}
-    \cdot \vec{a} \ge 0$ then the uncertainty relation is a thing.  So
-    let's run with that.  Starting with our uncertainty relation:
+    \cdot \vec{a} \ge 0$ then the uncertainty relation is a thing, so
+    let's use that as our starting point.
 
+    We're going to need to pick a wave function to work with and the
+    \ac{gwp} fits the bill for a couple of reasons:
+
+    \begin{enumerate}
+    \item They are known to minimize the $\hat{X}/\hat{P}$ uncertainty
+      (i.e. $\dispersion{\hat{X}}\dispersion{\hat{P}} = \frac{1}{4}
+      \abs{\expval{[\hat{X}, \hat{P}]}}^2$
+
+    \item The problem setup actually kinda clues us into the concept
+      of using a Gaussian in that it seems quite natural to assume
+      that any machine which is capable of placing \icepick{} is
+      probably going to have a Gaussian in its placement.
+    \end{enumerate}
+
+    Since this is the first problem in which we need to really dig
+    into this wave function, we're going to show the full derivation
+    below then record the useful results in our \ac{qrf} section
+    \ref{q:wavey:gwp}.
+    
     \begin{equation}
       \tag{1.146}
       \dispersion{A}\dispersion{B} \ge \frac{1}{4} \abs{\expval{[A, B]}}^2
@@ -88,90 +147,11 @@
     So swapping out those operators to be the ones we're interested in:
   
     \begin{equation}
-      \dispersion{x}\dispersion{p} \ge \frac{1}{4} \abs{\expval{[x, p]}}^2
-    \end{equation}
-
-    Next, it's worth looking at our momentum operator:
-    \begin{equation}
-      \hat{p} \approx -\hbar^2\frac{\partial^2}{\partial x'^2}
-    \end{equation}
-
-    So, if we pull in a few utility equations:
-
-    \begin{equation}
-      \tag{1.98}
-      \expval{A} \equiv \mel{\alpha}{A}{\alpha}
-    \end{equation}
-
-    \begin{equation}
-      \tag{1.143}
-      \Delta A \equiv A - \expval{A}
-    \end{equation}
-    
-    \begin{equation}
-      \tag{1.144}
-      \dispersion{A}
-      = \expval{(A^2 - 2A\expval{A} + \expval{A}^2)}
-      = \expval{A^2} - \expval{A}^2
-    \end{equation}
-
-    \begin{equation}
-      \tag{1.251}
-      \inlabel{exp:p}
       \begin{split}
-        \mel{\beta}{p}{\alpha}
-        &= \int_0^a dx' \braket{\beta}{x'}
-        \left(
-        -i \hbar \pdv{}{x'} \braket{x'}{a}
-        \right)\\
-        &= \int_0^a dx'
-        \psi_{\beta}^{*}(x')
-        \operatorP{x'}
-        \psi_{\alpha}(x')\\
-      \end{split}
-    \end{equation}
-
-    So, we can pretty quickly see that all of our equations of
-    interest for computing the uncertainty ultimately just come down
-    to the state-ket $\ket{\psi}$:
-
-    Putting it all together, we find that:
-
-    \begin{equation}
-      \inlabel{handy}
-      \begin{alignedat}{2}
-        \expval{x}^2 &= \mel{\psi}{x}{\psi}^2 &
-        &= \left( \int dx \psi^{*}(x) x \psi(x) \right)^2
-        \\
-        \expval{x^2} &= \mel{\psi}{x^2}{\psi} &
-        &= \int dx \psi^{*}(x) x^2 \psi(x)
-        \\
-        \expval{p}^2 &= \mel{\psi}{p}{\psi}^2 &
-        &= \left( \int dx \psi^{*}(x) \left(-i \hbar\frac{\partial}{\partial x} \right) \psi(x) \right)^2
-        \\
-        \expval{p^2} &= \mel{\psi}{p^2}{\psi} &
-        &= \int dx \psi^{*}(x) \left(-\hbar^2\frac{\partial^2}{\partial x'^2} \right) \psi(x)
-        \\
-      \end{alignedat}
-    \end{equation}
-
-    So, just as we were taught in wave mechanics, you know Saul, you
-    know em' all...no wait, that isn't it...you know $\psi$ you know
-    it all...less catchy, more correct.  Effectively that means that
-
-    \begin{equation}
-      \dispersion{x}\dispersion{p} = f(\psi(x))
-    \end{equation}
-
-    Since the uncertainty relation must hold true but also be minimized,
-    we can go one step further and say that:
-    
-    \begin{equation}
-      \begin{split}
-        \inlabel{coreConjecture}
         \dispersion{x}\dispersion{p}
-        &= f(\psi(x))\\
-        &= \frac{1}{4} \abs{\expval{[x, p]}}^2
+        &\ge \frac{1}{4} \abs{\expval{[x, p]}}^2\\
+        &= \frac{1}{4} \abs{\expval{i\hbar}}^2\\
+        &= \frac{\hbar^2}{4}\\
       \end{split}
     \end{equation}
 
@@ -180,39 +160,446 @@
     equality.  Here, we're going to make an assumption.  Since the
     whole concept is ``place the ice pick and make it reeeeeeally
     steady'' then we're going to assume that placement of the ice-pick
-    is a gaussian with respect to the top of the ice pick (don't
-    worry, we'll multiply by 2 there to account for uncertainty of the
-    top and bottom).  It's also worth noting that Gaussian wave
-    packets are known to minimize uncertainty.
-  
-    So, that gives us an equation with one uknown: $\sigma$ (or at
-    least its spirit animal).  So, let's assume we already know sigma
-    (we'll solve for it later).  What do we do with $\sigma$?  Well,
-    don't know where the ice-pick is initially \emph{or} what it's
-    initial momentum is...there's that whole fundamental
-    indeterminability thing going on.  But what we \emph{do} know is
-    the \ac{pdf} for position which also determines the \ac{pdf} for
-    the momentum.  So, what we can do with \acp{pdf} is to determine
-    an \emph{expectation value}.  OK...what are we taking the
-    expectation value of?  Well, that we get from the problem setup:
-    the fall time.
-
-    Armed with the knowledge of (the construction of) the \ac{lhs} of
-    our equation, we now proceed to figuring out the \ac{rhs}.  If
-    we're going to take an expectation value of the fall time, then
-    we're expecting something like this:
+    is a gaussian with respect to the top of the ice pick.  It's also
+    worth noting that Gaussian wave packets are known to minimize
+    uncertainty.
 
     \begin{equation}
-      \inlabel{guidingIntegral}
-      <t> = \int \int dx dp P(x)P(p)f(x, p)
+      \tag{1.267}
+      \braket{x'}{\alpha}
+      = \left[\frac{1}{\pi^{1/4}\sqrt{d}}\right]
+      \exp[ikx' - \frac{x'^{2}}{2d^2}]
     \end{equation}
 
-    If we're going to evalute that, we're going to need to know how to
-    compute the probability of the position, and momentum.  \S 1.7.3
-    in the book discusses this exact issue and formulates the position
-    and momentum space wave functions (which happen to be fourier
-    transforms of one another...iiinteresting...kinda makes you wonder
-    about Shor's algorithm doesn't it).
+    With our spatial wave-function in hand, we now have 4 values to
+    compute: $\expval{\hat{X}}$, $\expval{\hat{X}^2}$,
+    $\expval{\hat{P}}$, and $\expval{\hat{P}^2}$.  Let's start with
+    $\expval{\hat{X}}$.  We're going to use $\psi$ to represent the
+    spatial wave-function rather than the more general $\alpha$.
+
+    \begin{equation}
+      \begin{split}
+        \expval{\hat{X}}
+        &= \mel{\psi}{\hat{X}}{\psi}\\
+        &= \mel{\psi}{\hat{X}\hat{1}}{\psi}\\
+        &= \int dx' (\bra{\psi})(\hat{X}\dyad{x'})(\ket{\psi})\\
+        &= \int dx' \mel{\psi}{\hat{X}}{x'}\braket{x'}{\psi}\\
+        &= \int dx' x'\braket{\psi}{x'}\braket{x'}{\psi}\\
+        &= \int dx' x'\braket{x'}{\psi}^{*}\braket{x'}{\psi}\\
+      \end{split}
+    \end{equation}
+
+    Bringing in our definition of our spatial wave funtion, we find
+    that
+    
+    \begin{equation}
+      \inlabel{exp:x1}
+      \begin{split}
+        \expval{\hat{X}}
+        &= \int dx' x'\braket{x'}{\psi}^{*}\braket{x'}{\psi}\\
+        &= \left[\frac{1}{\pi^{1/4}\sqrt{d}}\right]^2
+        \int dx' x'
+        \exp[\cancel{-ikx'} - \frac{x'^{2}}{2d^2}]
+        \exp[\cancel{ikx'} - \frac{x'^{2}}{2d^2}]\\
+        &= \frac{1}{\sqrt{\pi}d}
+        \int dx' x'
+        \exp[- \cancel{2}\frac{x'^{2}}{\cancel{2}d^2}]\\
+        &= \frac{1}{\sqrt{\pi}d}
+        \int dx' x'
+        \exp[- \frac{x'^{2}}{d^2}]\\
+        &= 0\\
+      \end{split}
+    \end{equation}
+
+    Using equation \ref{q:integral:xgaussian}, we see that the
+    expectation value for position is $0$.  So, this is a long-winded
+    way of saying something we already knew to be true: the
+    expectation value of a symmetric function centerd about $0$
+    is... well... $0$.  You can also shortcut the integral by noting
+    that you're integrating an odd function with symmetrical bounds
+    which is always $0$ ($\int_{-a}^a dx x \cdot \text{symmetric}(x) =
+    0$).  Let's next look at the expectation value of the square.
+    We're only going to get a second $x'$ in that integral but let's
+    do it anyway for completeness.
+
+    \begin{equation}
+      \begin{split}
+        \expval{\hat{X}^2}
+        &= \expval{\hat{X}\hat{X}}\\
+        &= \mel{\psi}{\hat{X}\hat{X}}{\psi}\\
+        &= \mel{\psi}{\hat{X}\hat{1}\hat{X}}{\psi}\\
+        &= \int dx' (\bra{\psi})(\hat{X}\dyad{x'}\hat{X})(\ket{\psi})\\
+        &= \int dx' \mel{\psi}{\hat{X}}{x'}\mel{x'}{\hat{X}}{\psi}\\
+        &= \int dx' x'^2\braket{\psi}{x'}\braket{x'}{\psi}\\
+        &= \int dx' x'^2\braket{x'}{\psi}^{*}\braket{x'}{\psi}\\
+      \end{split}
+    \end{equation}
+
+    Once again employing integral-by-table and referencing equation
+    \ref{q:integral:xxgaussian}, we find that
+
+    \begin{equation}
+      \inlabel{exp:x2}
+      \begin{alignedat}{2}
+        & &
+        \int_{-\infty}^{\infty} dx\ x^2e^{-\alpha x^2}
+        &= \frac{1}{2\alpha}\sqrt{\frac{\pi}{\alpha}}\\
+        \implies & &
+        \frac{1}{\sqrt{\pi}d}
+        \int_{-\infty}^{\infty} dx\ x^2\exp(-\frac{x^2}{d^2})
+        &= \cancel{\frac{1}{\sqrt{\pi}d}}\frac{d^2}{2}\cancel{\sqrt{d^2\pi}}\\
+        &&&= \frac{d^2}{2}\\
+      \end{alignedat}
+    \end{equation}
+
+    Next up, let's compute the expectation value for the momentum.
+    
+    \begin{equation}
+      \begin{split}
+        \expval{\hat{P}}
+        &= \mel{\psi}{\hat{P}}{\psi}\\
+        &= \mel{\psi}{\hat{1}\hat{P}}{\psi}\\
+        &= \int dx' (\bra{\psi})(\dyad{x'}\hat{P})(\ket{\psi})\\
+        &= \int dx' \braket{\psi}{x'}\mel{x'}{\hat{P}}{\psi}\\
+      \end{split}
+    \end{equation}
+
+    Pulling in an identity from the book
+
+    \begin{equation}
+      \tag{1.249}
+      \mel{x'}{\hat{p}}{\alpha} = -i \hbar \pdv{x'} \braket{x'}{\alpha}
+    \end{equation}
+
+    \begin{equation}
+      \begin{split}
+        \expval{\hat{P}}
+        &= \int dx'
+        \braket{\psi}{x'}
+        \mel{x'}{\hat{P}}{\psi}\\
+        &= \int dx'
+        \braket{x'}{\psi}^{*}
+        \left(-i \hbar \pdv{x'}\right)
+        \braket{x'}{\psi}\\
+        &= \left[\frac{1}{\pi^{1/4}\sqrt{d}}\right]^2
+        \int dx'
+        \exp[-ikx' - \frac{x'^{2}}{2d^2}]
+        \left(-i \hbar \pdv{x'}\right)
+        \exp[ikx' - \frac{x'^{2}}{2d^2}]\\
+        &= \frac{1}{d\sqrt{\pi}}
+        \int dx'
+        \exp[-ikx' - \frac{x'^{2}}{2d^2}]
+        (-i \hbar)
+        \left(
+        ik - \frac{\cancel{2}x'}{\cancel{2}d^2}
+        \right)
+        \exp[ikx' - \frac{x'^{2}}{2d^2}]\\
+        &= \frac{\hbar}{d\sqrt{\pi}}
+        \int dx'
+        \exp[-ikx' - \frac{x'^{2}}{2d^2}]
+        \left(
+        k + i\frac{x'}{d^2}
+        \right)
+        \exp[ikx' - \frac{x'^{2}}{2d^2}]\\
+        &= \frac{\hbar}{d\sqrt{\pi}}
+        \int dx'
+        \left(k + i\frac{x'}{d^2}\right)
+        \exp[- \frac{x'^{2}}{d^2}]\\
+        &= \frac{\hbar}{d\sqrt{\pi}}
+        \left\{
+        k\int dx'
+        \exp[- \frac{x'^{2}}{d^2}]
+        + i\int dx'
+        \frac{x'}{d^2}\exp[- \frac{x'^{2}}{d^2}]
+        \right\}\\
+      \end{split}
+    \end{equation}
+
+    Once again drawing upon our integrals in the \ac{qrf},
+    specifically equations \ref{q:integral:xgaussian} and
+    \ref{q:integral:xxgaussian}:
+
+    \begin{equation}
+      \inlabel{exp:p1}
+      \begin{split}
+        \expval{\hat{P}}
+        &= \int dx'
+        \braket{\psi}{x'}
+        \mel{x'}{\hat{P}}{\psi}
+        \\
+        &= \frac{\hbar}{d\sqrt{\pi}}
+        \left\{
+        k\int dx'
+        \exp[- \frac{x'^{2}}{d^2}]
+        + i\int dx'
+        \frac{x'}{d^2}\exp[- \frac{x'^{2}}{d^2}]
+        \right\}
+        \\
+        &= \frac{k\hbar}{d\sqrt{\pi}}
+        \int dx'
+        \exp[- \frac{x'^{2}}{d^2}]
+        \\
+        &= \frac{k\hbar}{d\sqrt{\pi}}
+        \sqrt{d^2\pi}
+        \\
+        &= k\hbar
+        \\
+      \end{split}
+    \end{equation}
+    
+    So, that works out quite conveniently doesn't it.  You'll note
+    that the $k$ is the imaginary term in the exponential which
+    represents the momentum term.  I'm preeeettty sure the gaussian
+    wave packet formulation was specifically designed to separate out
+    the spatial and momentum contributions.  It also makes it pretty
+    easy to see that this wave function has both a spatial and a
+    momentum component and thus represents a complete state
+    description.  One expectation value left.
+
+    \begin{equation}
+      \begin{split}
+        \expval{\hat{P}^2}
+        &= \mel{\psi}{\hat{P}\hat{P}}{\psi}\\
+        &= \mel{\psi}{\hat{P}\hat{1}\hat{P}}{\psi}\\
+        &= \int dx' (\bra{\psi})(\hat{P}\dyad{x'}\hat{P})(\ket{\psi})\\
+        &= \int dx' \mel{\psi}{\hat{P}}{x'}\mel{x'}{\hat{P}}{\psi}\\
+        &= \int dx' \mel{x'}{\hat{P}}{\psi}^{*}\mel{x'}{\hat{P}}{\psi}\\
+        &=
+        \int dx'
+        \left(i \hbar \pdv{x'}\right)
+        \braket{x'}{\psi}^{*}
+        \left(-i \hbar \pdv{x'}\right)
+        \braket{x'}{\psi}
+        \\
+        &=
+        \left[\frac{1}{\pi^{1/4}\sqrt{d}}\right]^2
+        \int dx'
+        \left\{
+        \left(i \hbar \pdv{x'}\right)
+        \exp[-ikx' - \frac{x'^{2}}{2d^2}]
+        \right\}
+        \left\{
+        \left(-i \hbar \pdv{x'}\right)
+        \exp[ikx' - \frac{x'^{2}}{2d^2}]        
+        \right\}
+        \\
+      \end{split}
+    \end{equation}
+
+    Leveraging some intermediate products from before (and being wary
+    of sign errors) we find that:
+
+    \begin{equation}
+      \begin{split}
+        \expval{\hat{P}^2}
+        &=
+        \left[\frac{1}{\pi^{1/4}\sqrt{d}}\right]^2
+        \int dx'
+        \left\{
+        \left(i \hbar \pdv{x'}\right)
+        \exp[-ikx' - \frac{x'^{2}}{2d^2}]
+        \right\}
+        \left\{
+        \left(-i \hbar \pdv{x'}\right)
+        \exp[ikx' - \frac{x'^{2}}{2d^2}]        
+        \right\}
+        \\
+        &=
+        \frac{1}{d\sqrt{\pi}}
+        \int dx'
+        (i \hbar)
+        \left(
+        -ik - \frac{\cancel{2}x'}{\cancel{2}d^2}
+        \right)
+        \exp[-ikx' - \frac{x'^{2}}{2d^2}]
+        (-i \hbar)
+        \left(
+        ik - \frac{\cancel{2}x'}{\cancel{2}d^2}
+        \right)
+        \exp[ikx' - \frac{x'^{2}}{2d^2}]
+        \\
+        &=
+        \frac{\hbar^2}{d\sqrt{\pi}}
+        \int dx'
+        \left(
+        k - i\frac{x'}{d^2}
+        \right)
+        \left(
+        k + i\frac{x'}{d^2}
+        \right)
+        \exp[-\frac{x'^{2}}{d^2}]
+        \\
+        &=
+        \frac{\hbar^2}{d\sqrt{\pi}}
+        \int dx'
+        \left(
+        k^2 + \frac{x'^2}{d^4}
+        \right)
+        \exp[-\frac{x'^{2}}{d^2}]
+        \\
+        &=
+        \frac{\hbar^2}{d\sqrt{\pi}}
+        \left[
+        k^2
+        \int dx'
+        \exp[-\frac{x'^{2}}{d^2}]
+        +
+        \int dx'
+        \frac{x'^2}{d^4}
+        \exp[-\frac{x'^{2}}{d^2}]
+        \right]
+        \\
+      \end{split}
+    \end{equation}
+
+    Once again bringing out our table of integrals
+
+    \begin{equation}
+      \inlabel{exp:p2}
+      \begin{split}
+        \expval{\hat{P}^2}
+        &=
+        \frac{\hbar^2}{d\sqrt{\pi}}
+        \left[
+        k^2
+        \int dx'
+        \exp[-\frac{x'^{2}}{d^2}]
+        +
+        \int dx'
+        \frac{x'^2}{d^4}
+        \exp[-\frac{x'^{2}}{d^2}]
+        \right]
+        \\
+        &=
+        \frac{\hbar^2}{d\sqrt{\pi}}
+        \left[
+        k^2
+        d\sqrt{\pi}
+        +
+        \frac{1}{d^4}
+        \frac{d^2}{2}d\sqrt{\pi}
+        \right]
+        \\
+        &=
+        \frac{\hbar^2}{\cancel{d\sqrt{\pi}}}
+        \cancel{d\sqrt{\pi}}
+        \left(
+        k^2
+        +
+        \frac{1}{2d^2}
+        \right)
+        \\
+        &=
+        \hbar^2
+        \left(
+        k^2
+        +
+        \frac{1}{2d^2}
+        \right)
+        \\
+      \end{split}
+    \end{equation}
+
+    \begin{equation}
+      \inlabel{exp:combined}
+      \begin{alignedat}{2}
+        \expval{X}^2 &= 0 & \quad{} &\text{(eq \inref{exp:x1})}\\
+        \expval{X^2} &= \frac{d^2}{2} & &\text{(eq \inref{exp:x2})}\\
+        \expval{P}^2 &= \hbar^2k^2 & &\text{(eq \inref{exp:p1})}\\
+        \expval{P^2} &=
+        \hbar^2
+        \left(
+        k^2
+        +
+        \frac{1}{2d^2}
+        \right)
+        & &\text{(eq \inref{exp:p2})}\\
+      \end{alignedat}
+    \end{equation}
+    
+    recalling our definition of the variance
+
+    \begin{equation*}
+      \tag{1.144}
+      \dispersion{A} = \expval{A^2} - \expval{A}^2
+    \end{equation*}
+
+    \begin{equation}
+      \begin{split}
+        \dispersion{X}\dispersion{P}
+        &=
+        \left(\expval{\hat{X}^2} - \expval{\hat{X}}^2\right)
+        \left(\expval{\hat{P}^2} - \expval{\hat{P}}^2\right)
+        \\
+        &=
+        \left(\frac{d^2}{2} - 0\right)
+        \left(
+        \hbar^2
+        \left(
+        k^2
+        +
+        \frac{1}{2d^2}
+        \right)
+        - \hbar^2k^2
+        \right)
+        \\
+        &=
+        \hbar^2
+        \frac{\cancel{d^2}}{2}
+        \left(
+        \cancel{k^2}
+        +
+        \frac{1}{2\cancel{d^2}}
+        - \cancel{k^2}
+        \right)
+        \\
+        &= \frac{\hbar^2}{4}
+      \end{split}
+    \end{equation}
+
+    Cool...  Well... I guess we just proved that the gaussian wave
+    packet does, indeedily-do, minimize the uncertainty.  So, what
+    does this tell us?  Well, for starters, it tells us that we made a
+    good selection of wave function for our experiment.  Next, it
+    gives us some equations to work with that have two variables ($d$
+    and $k$) with one representing position indeterminability and the
+    other representing group momentum.  As we see above, the group
+    velocity doesn't impact the overall indeterminability as it
+    cancels out (of course, so does the position indeterminability).
+    The $e^{ikx'}$ term is clearly recognizable as both a phasor and
+    as an independent operator.  We actually see this operator later
+    in problem \ref{1.36:theQuestion} where we call it the Jerk
+    Operator.
+
+    This is where we make another simplifying assumption: set $k = 0$.
+    Since we're trying our best to keep \icepick{} standing, we're
+    going to assume that any momentum is entirely rotational in
+    nature.  As such, we can safely set the group momentum to be 0.
+    Substituting those values into our expectations from before, we
+    find that
+
+    \begin{equation}
+      \inlabel{exp:simplified}
+      \begin{alignedat}{2}
+        \expval{X}^2 &= 0 & \quad{} &\text{(eq \inref{exp:x1})}\\
+        \expval{X^2} &= \frac{d^2}{2} & &\text{(eq \inref{exp:x2})}\\
+        \expval{P}^2 &= 0 & &\text{(eq \inref{exp:p1} modified)}\\
+        \expval{P^2} &= \frac{\hbar^2}{2d^2} & &\text{(eq \inref{exp:p2} modified)}\\
+      \end{alignedat}
+    \end{equation}
+    
+    This is where we run into an issue with the concept of an
+    expectation-value which is likely to require some limit trickery.
+    The denominator in the $\ln$ includes both $\theta_0$ and
+    $\omega_0$ which means that it blows up as you approach 0 on both
+    of them.  There is one thing that, physically, might help us out
+    here -- $P(\omega_0)|_{x_0 \approx 0} \approx 0$.  So let's see if
+    that integral converges.  To find out, we'll start by computing
+    the probabilities of $x'$ and $p'$.  \S 1.7.3 in the book
+    discusses this exact issue and formulates the position and
+    momentum space wave functions (which happen to be fourier
+    transforms of one another... iiinteresting... kinda makes you
+    wonder about Shor's algorithm doesn't it).
 
     Starting with the statistical interpretation from the text just
     after eq 1.256, ``the probability that a measurement of $p$ gives
@@ -240,79 +627,372 @@
       \tag{1.266b}
       \phi_{\alpha}(p')
       = \left[ \frac{1}{\sqrt{2\pi\hbar}} \right]
-      \int dp' \exp(\frac{-ip'x'}{\hbar})\psi_{\alpha}(x')
+      \int dx' \exp(\frac{-ip'x'}{\hbar})\psi_{\alpha}(x')
     \end{equation}
 
-    So, we can already obtain the position-space variant more simply
-    with
+    Let's use those equations to get ourselves a referenceable
+    expression for $\phi(p')$ and $\psi(x')$.  $\psi$ is, of course,
+    pretty easy since we started with an ansatz'd sapatial
+    wave-function deciding to infer the momentum-space wave-function
+    from there.  Going back to 1.267 and re-stating here with our own
+    internal numbering that we can more easily reference but also
+    inserting our assumption that $k=0$ we find that
 
     \begin{equation}
-      P(x') = \abs{\braket{\alpha}{x'}}^2
+      \inlabel{psi}
+      \begin{split}
+        \psi(x')
+        &= \braket{x'}{\alpha}\\
+        &= \left[\frac{1}{\pi^{1/4}\sqrt{d}}\right]
+        \exp[-\frac{x'^{2}}{2d^2}]\\
+      \end{split}
     \end{equation}
-
-    This gives us expressions for the probabilities for both the $x$
-    and $p$ values for us to take our integral in equation
-    \inref{guidingIntegral}.  That brings us to the fall-time, and the
-    issue of translation vs rotation.
-
-    Let's say that you have a very very good machine which places your
-    ice-pick in exactly the right place, but it may jerk at the last
-    possible moment and impart momentum.  Let's further suppose that
-    when it does so, it dosn't twist the ice-pick at all, but rather
-    causes it to glide on the infinite field of pefectly flat hyle
-    without any resistances.  Let's further assume that there are no
-    relativistic effects with which to contend (I mean...why not
-    right?  we're assuming we have Hyle, so Aristotle would be proud
-    already).  If the machine imparts no rotation, only translation
-    then the uncertainty relation is satisfied and yet it never falls
-    right?  Well...no...as it turns out.  The easy way to prove this
-    to yourself is to put yourself into the frame of reference of the
-    tip of the ice-pick.  In that frame of reference, you're
-    describing a system in which the uncertainties in position and
-    momentum are both 0.  Because we're trying to minimize the
-    uncertainty product, it also means that we get to assume that all
-    of that momentum uncertainty goes into rotational momentum, and we
-    also get to assume that all of that positional uncertainty is
-    asymmetric between the top and the bottom of the ice-pick.  In
-    other words, because we're minimizing it, we get to assume that
-    all the uncertainty goes into making it fall faster.
-
-    So, we'll incorporate our $\Delta p$ and $\Delta x$ as follows:
+    
+    Evaluating $\phi$ we have
 
     \begin{equation}
       \begin{split}
-        \omega_0 &= \frac{p_0}{I}\\
-        \theta_0 &\approx x_0\\
+        \phi(p')
+        &= 
+        \left[ \frac{1}{\sqrt{2\pi\hbar}} \right]
+        \int dx' \exp(\frac{-ip'x'}{\hbar})\psi(x')
+        \\
+        &= 
+        \left[ \frac{1}{\sqrt{2\pi\hbar}} \right]
+        \left[\frac{1}{\pi^{1/4}\sqrt{d}}\right]
+        \int dx'
+        \exp(\frac{-ip'x'}{\hbar})
+        \exp[-\frac{x'^{2}}{2d^2}]
+        \\
+        &= 
+        \left[ \frac{1}{\sqrt{2\pi\hbar}} \right]
+        \left[\frac{1}{\pi^{1/4}\sqrt{d}}\right]
+        \int dx'
+        \exp(\frac{-ip'x'}{\hbar}
+        - \frac{x'^{2}}{2d^2})
+        \\
       \end{split}
     \end{equation}
 
-    So that should be all of the pieces necessary to show the
-    expectation value for the fall time of an ideal and ideally-placed
-    ice-pick on an infinitely flat frictionless physics-plane.
-
-  \end{answerpart}
-
-  \begin{answerpart}{The Kill-Me-Now-Its-Fourier-Transforms Method}
-    I'm \emph{hypothesizing} that we can prove that a Gaussian wave
-    packet is the right approach.
-  \end{answerpart}
-
-  \begin{answerpart}{How Much Time/Energy Do I Have?}
-    We're also going to approach the problem from a different
-    uncertainty relation: the time/energy uncertainty.  This one is
-    outside the scope of chapter 1...it's just fun...
+    Pulling in equation 3.323.2 from our integral table.
+    \cite[eq3.323.2]{gr}
 
     \begin{equation}
-      E = \frac{1}{2} I \omega^2
+      \tag{3.323.2}
+      \int_{-\infty}^{\infty} \exp\left(-p^2x^2 \pm qx\right) dx
+      = \exp\left(\frac{q^2}{4p^2}\right)\frac{\sqrt{\pi}}{p}
     \end{equation}
 
-    Using the same relativity logic as above, we can show that a
-    0-energy state (disallowed for other reasons) would be required
-    for it to not fall.  Knowing its rotational kinetic energy and a
-    time-window in which that (average) energy is true implies the
-    ability to compute not only the current $\omega$ but also the
-    initial conditions to satisfy the constraints of the fall-time
-    equation given the time over which the observation is made.
+    Substituting into our expression above we find that we set $p =
+    \frac{1}{d\sqrt{2}}$ and $q = -ip'/\hbar$ to find that
+
+
+    \begin{equation}
+      \inlabel{phi}
+      \begin{split}
+        \phi(p')
+        &= 
+        \left[ \frac{1}{\sqrt{2\pi\hbar}} \right]
+        \int dx' \exp(\frac{-ip'x'}{\hbar})\psi(x')
+        \\
+        &= 
+        \left[ \frac{1}{\sqrt{2\pi\hbar}} \right]
+        \left[\frac{1}{\pi^{1/4}\sqrt{d}}\right]
+        \int dx'
+        \exp(\frac{-ip'x'}{\hbar}
+        - \frac{x'^{2}}{2d^2})
+        \\
+        &= 
+        \left[ \frac{1}{\sqrt{2\pi\hbar}} \right]
+        \left[\frac{1}{\pi^{1/4}\sqrt{d}}\right]
+        \exp(\frac{q^2}{4p^2})
+        \frac{\sqrt{\pi}}{p}
+        \\
+        &= 
+        \left[ \frac{1}{\sqrt{\cancel{2\pi}\hbar}} \right]
+        \left[\frac{1}{\pi^{1/4}\sqrt{d}}\right]
+        \exp(-\frac{p'^2}{4\hbar^2}2d^2)
+        d\cancel{\sqrt{2\pi}}
+        \\
+        &= 
+        \frac{1}{\pi^{1/4}}
+        \sqrt{\frac{d}{\hbar}}
+        \exp[-\frac{1}{2}\left(\frac{p'd}{\hbar}\right)^2]
+        \\
+        &= 
+        \frac{1}{\pi^{1/4}}
+        \sqrt{\frac{d}{\hbar}}
+        \exp[-\frac{d^2}{2\hbar^2}p^2]
+        \\
+      \end{split}
+    \end{equation}
+
+    Now that we have expressions for $\psi(x')$ and $\phi(p')$ it's
+    worth taking a moment to consider the gaussian nature of them.  A
+    ``Normal'' or ``Gaussian'' distribution in classical probability
+    theory is expressed as
+
+    \begin{equation}
+      N(\mu, \sigma^2)
+      = \frac{1}{\sigma\sqrt{2\pi}}\exp[-\frac{(x-\mu)^2}{2\sigma^2}]
+    \end{equation}\incite[inside cover]{hogtan}
+
+    Mapping our equations above, we find that
+
+    \begin{equation}
+      \begin{split}
+        P(x')
+        &= \abs{\psi(x')}^2
+        = \frac{1}{d\sqrt{\pi}} \exp[-\frac{x'^{2}}{d^2}]
+        = N(\mu_\psi, \sigma_\psi)
+        \\
+        \mu_\psi &= 0\\
+        \sigma_\psi &= \frac{d}{\sqrt{2}}\\
+        \\
+        P(p')
+        &= \abs{\phi}^2
+        = \frac{1}{\sqrt{\pi}} \frac{d}{\hbar} \exp[-\frac{d^2}{\hbar^2}p^2]
+        = N(\mu_\phi, \sigma_\phi)
+        \\
+        \mu_\phi &= 0\\
+        \sigma_\phi &= \frac{\hbar}{d\sqrt{2}}\\
+      \end{split}
+    \end{equation}
+
+    So, with that parameterization, we see pretty quickly that we have
+    an inverse relationship between $\sigma_\psi$ and $\sigma_\phi$
+    \ldots want to make one small, ya gotta make the other big.  Armed
+    with these expressions, it's time to set up our classical integral
+    for the expectation value and see what happens.  Are you as
+    excited as I am right now?  No?  Well if you don't like it then
+    you can take a hike mister!  Ahheem... moving on.  In a classical
+    expectation-value problem for the fall time ($t_f$), we would set
+    it up as follows
+
+    \begin{equation}
+      \expval{t_f} = \iint_{-\infty}^{\infty} P(x)P(p)t(x, p) dx dp
+    \end{equation}
+
+    Here, we have parameterized the fall-time as a function $t(x, p)$
+    where the $x$ and $p$ are really $x_0$ and $p_0$ respectively.  We
+    already have expressions above for the probabilities so that just
+    leaves the classical-mechanics computation of the fall-time as a
+    function of initial conditions.  So...that leaves computing the
+    fall-time as a function of initial conditions using classical
+    mechanics... well... it turns out to be \emph{quite difficult}.
+    The thing is, I'm here to do two things... solve quantum mechanics
+    problems and chew bubblegum...and I'm all out of minimum-action
+    bubblegum.
+
+    I've seen other solutions to this problem which attempt to solve
+    Close Encounters of the Third Kind... errm... Elliptic Integrals
+    of the First kind with various
+    approximations.\incite{tigersPendulum} Instead of spending another
+    12 days and 12 pages to solve this on my own, I'm going to just
+    let my handy-dandy AI tutor sketch out the class-mech portion for
+    me.  There are going to be a few approximations we take which will
+    limit the accuracy of our expectation value and I'll do my best to
+    evaluate the order of magnitude of the ensuing residual.
+
+%%     We model the ice pick as a point mass $m$ at the end of a massless
+%%     rod of length $L$. Newton's second law for rotation is 
+%%     $\tau = I \ddot{\theta}$. The moment of inertia is $I = mL^2$, and
+%%     the torque from gravity is $\tau = mgL \sin\theta$. This gives the 
+%%     exact equation of motion:
+
+%%     \begin{equation}
+%%       mL^2 \ddot{\theta} = mgL \sin\theta 
+%%       \implies \ddot{\theta} - \frac{g}{L} \sin\theta = 0
+%%     \end{equation}
+
+%%     Because our quantum Gaussian wave packets aggressively constrain the
+%%     initial position to microscopic perturbations, we can safely invoke 
+%%     the small-angle approximation $\sin\theta \approx \theta$. Defining 
+%%     $\gamma \equiv \sqrt{g/L}$, we get a linear second-order ODE:
+
+%%     \begin{equation}
+%%       \ddot{\theta} - \gamma^2 \theta = 0
+%%     \end{equation}
+
+%%     The general solution to this differential equation is a superposition 
+%%     of a growing and a decaying exponential:
+
+%%     \begin{equation}
+%%       \theta(t) = C_1 e^{\gamma t} + C_2 e^{-\gamma t}
+%%     \end{equation}
+
+%%     To find the constants, we apply our initial conditions at $t=0$, where
+%%     $\theta(0) = \theta_0$ and $\dot{\theta}(0) = \omega_0$:
+
+%%     \begin{equation}
+%%       \begin{alignedat}{2}
+%%         \theta_0 &= C_1 + C_2 \\
+%%         \omega_0 &= \gamma C_1 - \gamma C_2 \implies \frac{\omega_0}{\gamma} = C_1 - C_2
+%%       \end{alignedat}
+%%     \end{equation}
+
+%%     Adding the two equations together isolates $C_1$:
+
+%%     \begin{equation}
+%%       C_1 = \frac{1}{2}\left( \theta_0 + \frac{\omega_0}{\gamma} \right)
+%%     \end{equation}
+
+%%     For any macroscopic fall time, the decaying exponential term 
+%%     $e^{-\gamma t}$ vanishes almost instantly. The fall is completely
+%%     dominated by the growing exponential: $\theta(t) \approx C_1 e^{\gamma t}$.
+    
+%%     The ice pick hits the table when the angle reaches $\pi/2$. However,
+%%     if the initial momentum pushes the pick strongly toward the vertical axis,
+%%     $C_1$ can become negative, meaning the pick swings through the axis 
+%%     and falls to $-\pi/2$. We handle both cases gracefully by taking the 
+%%     absolute value:
+
+%%     \begin{equation}
+%%       |C_1| e^{\gamma t_f} = \frac{\pi}{2}
+%%     \end{equation}
+
+%%     Solving for the fall time $t_f$:
+
+%%     \begin{equation}
+%%       \begin{split}
+%%         t_f 
+%%         &= \frac{1}{\gamma} \ln\left( \frac{\pi}{2|C_1|} \right) \\
+%%         &= \sqrt{\frac{L}{g}} \ln\left( \frac{\pi}{\left| \theta_0 + \omega_0\sqrt{\frac{L}{g}} \right|} \right)
+%%       \end{split}
+%%     \end{equation}
+
+%%     Finally, we map our initial angle and angular velocity to our quantum 
+%%     phase-space variables $x'$ (arc length) and $p'$ (linear momentum). 
+%%     Using $\theta_0 = x'/L$ and $\omega_0 = p'/(mL)$, we find:
+
+%%     \begin{equation}
+%%       t_f(x', p') = \sqrt{\frac{L}{g}} \ln\left( \frac{\pi}{\left| \frac{x'}{L} + \frac{p'}{mL}\sqrt{\frac{L}{g}} \right|} \right)
+%%     \end{equation}
+
+
+
+
+
+    
+    
+
+  %%   \begin{equation}
+  %%     \begin{split}
+  %%       \expval{t_f}
+  %%       &= \iint_{-\infty}^{\infty} P(x_0=x') P(p_0=p') t_f(x', p') dx' dp'
+  %%       \\
+  %%       &= \iint_{-\infty}^{\infty}
+  %%       \frac{1}{d\sqrt{\pi}} \exp[-\frac{x'^{2}}{d^2}]
+  %%       \frac{1}{\sqrt{\pi}} \frac{d}{\hbar} \exp[-\frac{d^2}{\hbar^2}p'^2]
+  %%       \sqrt{\frac{L}{g}}\ln( \frac{\pi}{\theta_0 + \omega_0 \sqrt{\frac{L}{g}}})
+  %%       dx' dp'
+  %%       \\
+  %%     \end{split}
+  %%   \end{equation}
+
+  %%   Noting that the fall-time is parameterized for $\theta_0$ and
+  %%   $\omega_0$ instead of $x'$ and $p'$, we first show that
+  %%   relationship.  For the moment, we're only examining situations in
+  %%   which the samll-angle approximation works.
+
+  %%   \begin{equation}
+  %%     \begin{split}
+  %%       \omega_0 &\approx \frac{p_0}{mL} \\
+  %%       \\
+  %%       \theta_0 &\approx \frac{x_0}{L} \\
+  %%     \end{split}
+  %%   \end{equation}
+
+  %%   \begin{equation}
+  %%     \begin{split}
+  %%       \expval{t_f}
+  %%       &= \iint_{-\infty}^{\infty}
+  %%       \frac{1}{d\sqrt{\pi}} \exp[-\frac{x'^{2}}{d^2}]
+  %%       \frac{1}{\sqrt{\pi}} \frac{d}{\hbar} \exp[-\frac{d^2}{\hbar^2}p'^2]
+  %%       \sqrt{\frac{L}{g}}\ln( \frac{\pi}{\theta_0 + \omega_0 \sqrt{\frac{L}{g}}})
+  %%       dx' dp'
+  %%       \\
+  %%       &=
+  %%       \frac{1}{\pi\hbar}
+  %%       \sqrt{\frac{L}{g}}
+  %%       \iint_{-\infty}^{\infty}
+  %%       \exp[-\frac{x'^{2}}{d^2}]
+  %%       \exp[-\frac{d^2}{\hbar^2}p'^2]
+  %%       \ln( \frac{\pi}{\frac{x'}{L} + \frac{p'}{mL} \sqrt{\frac{L}{g}}})
+  %%       dx' dp'
+  %%       \\
+  %%       &=
+  %%       \frac{1}{\pi\hbar}
+  %%       \sqrt{\frac{L}{g}}
+  %%       \iint_{-\infty}^{\infty}
+  %%       \exp[-\frac{x'^{2}}{d^2} - \frac{d^2}{\hbar^2}p'^2]
+  %%       \ln( \frac{\pi}{x'\frac{1}{L} + p' \sqrt{\frac{1}{m^2gL}}})
+  %%       dx' dp'
+  %%       \\
+  %%       &=
+  %%       A
+  %%       \iint_{-\infty}^{\infty}
+  %%       \exp[-X^2 - P^2]
+  %%       \ln( \frac{\pi}{Bx' + Cp'} )
+  %%       dx' dp'
+  %%       \\
+  %%     \end{split}
+  %%   \end{equation}
+  %% \end{answerpart}
+
+    %% I'm here to do two things... solve quantum problems and chew
+    %% bubblegum...and I'm all out of bubblegum.  What I am \emph{not}
+    %% here to do is explore classmech.  It has been quite a while and I
+    %% really want to get through this chapter.  Straight-up, I asked
+    %% Google's AI to solve this one for me.  I'll validate it later when
+    %% I go back through Goldstein (that may be a while, so if someone
+    %% wants to contribute then check out the appendix).  This problem
+    %% has been solved many times and LLMs tend to do a decent job of
+    %% regurgitating solutions.
+
+    %% \begin{equation}
+    %%   t_f =
+    %%   \sqrt{\frac{L}{g}}
+    %%   \ln( \frac{\pi}{\theta_0 + \omega_0 \sqrt{\frac{L}{g}}})
+    %% \end{equation}
+
+    %% We're going to redefine a variable quickly to make it a bit easier
+
+    %% \begin{equation}
+    %%   \text{let }\sqrt{\frac{L}{g}} \equiv k
+    %% \end{equation}
+
+    %% \begin{equation}
+    %%   t_f = k \ln( \frac{\pi}{\theta_0 + \omega_0k})
+    %% \end{equation}
+
+    
+  %% We're going to make one change here and we're going to take an
+  %% absolute value.  If the momentum is towards the normal then it's
+  %% going to lose momentum on the way up, and re-capture it on the way
+  %% down.  In both cases, it ends up barrelling towards the ground with
+  %% the original $\omega_0$.  The one exception, obviously, being that
+  %% it goes to the very top and stays there.
+
+  %% \begin{answerpart}{Quantum Time (Propagation)}
+  %% \end{answerpart}
+
+  %% \begin{answerpart}{How Much Time/Energy Do I Have?}
+  %%   We're also going to approach the problem from a different
+  %%   uncertainty relation: the time/energy uncertainty.  This one is
+  %%   outside the scope of chapter 1...it's just fun...
+
+  %%   \begin{equation}
+  %%     E = \frac{1}{2} I \omega^2
+  %%   \end{equation}
+
+  %%   Using the same relativity logic as above, we can show that a
+  %%   0-energy state (disallowed for other reasons) would be required
+  %%   for it to not fall.  Knowing its rotational kinetic energy and a
+  %%   time-window in which that (average) energy is true implies the
+  %%   ability to compute not only the current $\omega$ but also the
+  %%   initial conditions to satisfy the constraints of the fall-time
+  %%   equation given the time over which the observation is made.
     
   \end{answerpart}
 

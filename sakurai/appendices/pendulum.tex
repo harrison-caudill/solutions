@@ -1,0 +1,63 @@
+
+To determine the expectation value of the fall time, we need to map
+  our quantum uncertainties onto classical initial conditions.  We
+  model the ice pick as a classical inverted pendulum of length $L$
+  and mass $m$.  For small angles ($\sin\theta \approx \theta$), the
+  equation of motion is:
+
+  \begin{equation}
+    \begin{split}
+      I \ddot{\theta} &= m g L \sin\theta \\
+      m L^2 \ddot{\theta} &\approx m g L \theta \\
+      \ddot{\theta} - \frac{g}{L} \theta &= 0
+    \end{split}
+  \end{equation}
+
+  This is a standard second-order linear differential equation.
+  Defining $\gamma = \sqrt{g/L}$, the general solution is:
+
+  \begin{equation}
+    \theta(t) = A e^{\gamma t} + B e^{-\gamma t}
+  \end{equation}
+
+  We determine the constants $A$ and $B$ using our initial starting
+  angle ($\theta_0$) and initial angular velocity ($\omega_0$):
+
+  \begin{equation}
+    \begin{split}
+      \theta(0) &= A + B = \theta_0 \\
+      \dot{\theta}(0) &= \gamma A - \gamma B = \omega_0
+    \end{split}
+  \end{equation}
+
+  Solving this system of two equations yields $A = \frac{1}{2}\left(\theta_0 + \frac{\omega_0}{\gamma}\right)$. 
+  Because we are looking for a macroscopic fall time, the decaying 
+  exponential term ($B e^{-\gamma t}$) vanishes almost instantly, leaving
+  us with:
+
+  \begin{equation}
+    \theta(t) \approx \frac{1}{2}\left(\theta_0 + \frac{\omega_0}{\gamma}\right) e^{\gamma t}
+  \end{equation}
+
+  We define the fall time $t_f$ as the moment the ice pick hits the
+  table (e.g., $\theta(t_f) = \pi/2$).  Solving for $t_f$:
+
+  \begin{equation}
+    \inlabel{classicalFall}
+    \begin{split}
+      \frac{\pi}{2} &= \frac{1}{2}\left(\theta_0 + \omega_0\sqrt{\frac{L}{g}}\right) e^{t_f \sqrt{g/L}} \\
+      t_f &= \sqrt{\frac{L}{g}} \ln\left( \frac{\pi}{\theta_0 + \omega_0 \sqrt{\frac{L}{g}}} \right)
+    \end{split}
+  \end{equation}
+
+  Finally, we map our quantum uncertainties directly to these
+  classical initial conditions. The position uncertainty $\Delta x$
+  becomes our initial angle, and our momentum uncertainty $\Delta p$
+  becomes our initial angular velocity:
+
+  \begin{equation}
+    \begin{split}
+      \theta_0 &\approx \frac{\Delta x}{L} = \frac{d}{L\sqrt{2}} \\
+      \omega_0 &\approx \frac{\Delta p}{mL} = \frac{\hbar}{mLd\sqrt{2}}
+    \end{split}
+  \end{equation}    
