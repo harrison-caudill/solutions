@@ -16,12 +16,19 @@ class BibIt(object):
         self.root = root
 
     def go(self):
-        print(f"Processing figures recursively starting in: {self.base}")
+        print(f"Processing bibliographies recursively starting in: {self.base}")
 
         rxp = '^/([^/\\\]+)/chapters/([1-9][0-9]*)/problems/([1-9][0-9]*)$'
         rcm = re.compile(rxp)
 
         entries = []
+
+        # initialize with the qrf since we always have the option of
+        # referencing those sources (e.g. the integral table)
+        qrf = os.path.join(self.root, 'qrf', 'ref.bib')
+        if os.path.isfile(qrf):
+            with open(qrf, 'r') as fd:
+                entries = list(fd.read().split('\n'))
 
         for cur, dirs, files in os.walk(self.base):
             rel = cur[len(self.base):]
@@ -64,6 +71,7 @@ class BibIt(object):
         with open(fpath, 'r') as fd:
             raw = fd.read()
             for line in raw.split('\n'):
+                if not len(line): continue
                 if '@' in line and line.split()[0].startswith('@'):
                     new = self._annotate_declaration(line, chapter, problem)
                     entry.append(new)

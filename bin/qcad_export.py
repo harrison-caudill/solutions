@@ -50,13 +50,16 @@ class Converter(object):
                 print(f'  Skipping: {relpath}')
                 return
         else:
-            print(f'  Converting: {relpath}')
+            print(f'  Converting: {relpath} from DXF to PNG')
 
         dstdir = os.path.dirname(dstpath)
         if not os.path.isdir(dstdir): os.makedirs(dstdir)
 
         tmpfile = tempfile.NamedTemporaryFile(suffix='.png')
         tmppath = tmpfile.name
+
+        env = os.environ.copy()
+        env['QT_LOGGING_RULES'] = '*.debug=false;*.warning=false'
 
         binpath = os.path.join(self.qcad, 'dwg2bmp')
         cmd = [binpath,
@@ -67,7 +70,10 @@ class Converter(object):
                '-c',
                '-force',
                srcpath]
-        subprocess.call(cmd)
+        res = subprocess.run(cmd, env=env, capture_output=True, text=True)
+        if res.returncode != 0:
+            print(res.stdout)
+            print(res.stderr)
 
         cmd = ['identify',
                '-format', '%w',
@@ -78,11 +84,12 @@ class Converter(object):
         max_width = int(self.dpi * self.linewidth)
 
         if width > max_width:
-            print("Resizing")
-            cmd = ['magick', 'convert',
+            print(f"  Resizing")
+            cmd = ['magick',
+                   tmppath,
                    '-resize', f'{max_width}x',
-                   tmppath, dstpath]
-            subprocess.call(cmd)
+                   dstpath]
+            subprocess.call(cmd, env=env)
         else:
             print("Copying")
             shutil.copy(tmppath, dstpath)
