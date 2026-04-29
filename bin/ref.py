@@ -16,7 +16,7 @@ class BibIt(object):
         self.root = root
 
     def go(self):
-        print(f"Processing figures recursively starting in: {self.base}")
+        print(f"Processing bibliographies recursively starting in: {self.base}")
 
         rxp = '^/([^/\\\]+)/chapters/([1-9][0-9]*)/problems/([1-9][0-9]*)$'
         rcm = re.compile(rxp)

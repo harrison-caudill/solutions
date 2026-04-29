@@ -17,6 +17,10 @@
   uncertainty relation to the real-world.  We can also see this with
   things like entanglement in macro-scale systems (I think they
   mentioned a pendulum somewhere in the book) and Bose condensates.
+  OK... I'm changing my answer here... this problem is a real troll.
+  This is a capstone problem for the chapter.  You get a little bit of
+  everything including disagreement amongst physicists about how to
+  solve it.
 
   There are several concepts which need to come together for this
   problem
@@ -740,12 +744,13 @@
     Mapping our equations above, we find that
 
     \begin{equation}
+      \inlabel{p}
       \begin{split}
         P(x')
         &= \abs{\psi(x')}^2
         = \frac{1}{d\sqrt{\pi}} \exp[-\frac{x'^{2}}{d^2}]
         = N(\mu_\psi, \sigma_\psi)
-        \\
+        \\o
         \mu_\psi &= 0\\
         \sigma_\psi &= \frac{d}{\sqrt{2}}\\
         \\
@@ -770,6 +775,7 @@
     it up as follows
 
     \begin{equation}
+      \inlabel{theForce}
       \expval{t_f} = \iint_{-\infty}^{\infty} P(x)P(p)t(x, p) dx dp
     \end{equation}
 
@@ -789,190 +795,655 @@
     of the First kind with various
     approximations.\incite{tigersPendulum} Instead of spending another
     12 days and 12 pages to solve this on my own, I'm going to just
-    let my handy-dandy AI tutor sketch out the class-mech portion for
-    me.  There are going to be a few approximations we take which will
-    limit the accuracy of our expectation value and I'll do my best to
-    evaluate the order of magnitude of the ensuing residual.
+    let my handy-dandy AI tutor to help me sketch out a solution --
+    unlike the rest of the book, I let it handle the strategy and I
+    did the verification (so the opposite of normal).  There are going
+    to be a few approximations we take which will limit the accuracy
+    of our expectation value and I'll do my best to evaluate the order
+    of magnitude of the ensuing residual.
 
-%%     We model the ice pick as a point mass $m$ at the end of a massless
-%%     rod of length $L$. Newton's second law for rotation is 
-%%     $\tau = I \ddot{\theta}$. The moment of inertia is $I = mL^2$, and
-%%     the torque from gravity is $\tau = mgL \sin\theta$. This gives the 
-%%     exact equation of motion:
+    \begin{figure}
+      \inlabel{fig:icepick}
+      \begin{center}
+        \includegraphics[width=2in]{schrodingersIcepick.png}
+        \caption{\icepick{}: Note that it consists of two massive
+          spheres, each of mass $m$ separated by an infinitely rigid
+          inextensible physics-rod of length $L$.  At the time of this
+          writing, QCAD doesn't support greek letters so I've used
+          $\theta_0 = 0$, $\omega_0 = w$, and $x_0 = x$.}
+      \end{center}
+    \end{figure}
 
-%%     \begin{equation}
-%%       mL^2 \ddot{\theta} = mgL \sin\theta 
-%%       \implies \ddot{\theta} - \frac{g}{L} \sin\theta = 0
-%%     \end{equation}
 
-%%     Because our quantum Gaussian wave packets aggressively constrain the
-%%     initial position to microscopic perturbations, we can safely invoke 
-%%     the small-angle approximation $\sin\theta \approx \theta$. Defining 
-%%     $\gamma \equiv \sqrt{g/L}$, we get a linear second-order ODE:
-
-%%     \begin{equation}
-%%       \ddot{\theta} - \gamma^2 \theta = 0
-%%     \end{equation}
-
-%%     The general solution to this differential equation is a superposition 
-%%     of a growing and a decaying exponential:
-
-%%     \begin{equation}
-%%       \theta(t) = C_1 e^{\gamma t} + C_2 e^{-\gamma t}
-%%     \end{equation}
-
-%%     To find the constants, we apply our initial conditions at $t=0$, where
-%%     $\theta(0) = \theta_0$ and $\dot{\theta}(0) = \omega_0$:
-
-%%     \begin{equation}
-%%       \begin{alignedat}{2}
-%%         \theta_0 &= C_1 + C_2 \\
-%%         \omega_0 &= \gamma C_1 - \gamma C_2 \implies \frac{\omega_0}{\gamma} = C_1 - C_2
-%%       \end{alignedat}
-%%     \end{equation}
-
-%%     Adding the two equations together isolates $C_1$:
-
-%%     \begin{equation}
-%%       C_1 = \frac{1}{2}\left( \theta_0 + \frac{\omega_0}{\gamma} \right)
-%%     \end{equation}
-
-%%     For any macroscopic fall time, the decaying exponential term 
-%%     $e^{-\gamma t}$ vanishes almost instantly. The fall is completely
-%%     dominated by the growing exponential: $\theta(t) \approx C_1 e^{\gamma t}$.
+    Starting with a few basics from figure \inref{fig:icepick}, we see that
     
-%%     The ice pick hits the table when the angle reaches $\pi/2$. However,
-%%     if the initial momentum pushes the pick strongly toward the vertical axis,
-%%     $C_1$ can become negative, meaning the pick swings through the axis 
-%%     and falls to $-\pi/2$. We handle both cases gracefully by taking the 
-%%     absolute value:
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&\tau &= I \ddot{\theta} \\
+        &&&= mL^2 \ddot{\theta} \\
+        &&&= mgL\sin(\theta) \\
+        \implies&& 0 &= \ddot{\theta} - \frac{g}{L}\sin(\theta)
+      \end{alignedat}
+    \end{equation}
 
-%%     \begin{equation}
-%%       |C_1| e^{\gamma t_f} = \frac{\pi}{2}
-%%     \end{equation}
+    Here is where we make the most important approximation of the
+    problem: we're going to use the small angle approximation.  That
+    implies that the ice-pick will be more-or-less vertical.  Doing so
+    ensures that we can get rid of that $\sin(\theta)$ in favor of
+    just $\theta$.  That means that we're assuming we can't maximize
+    the fall-time by considering states where $\theta_0 \approx \pi/2$
+    and $\omega_0 < 0$ (where negative values for $\omega_0$ indicate
+    it's going back towards the normal).  That being said, the problem
+    specifies that \icepick{} is to be ``be balanced on its point''.
+    So, even if we can increase the fall-time by placing it on its
+    edge and kicking it towards the normal, the problem specifies that
+    it should be near the top in the region where the small-angle
+    approximation holds.  So, if $\expval{\theta_0} = 0$ then we're
+    mainly going to care about $P(\theta_0 > 5^\circ)$.  Since we get
+    to choose the value of $\sigma_\psi$ ($d$), then we can just limit
+    the range of values we consider later to ensure that $P(\theta_0 >
+    5^\circ) < 10^{-3}$ or so.  So long as the value doesn't blow up
+    to infinity because of the approximation (unlikely) then we should
+    easily be within ``the rough order of magnitude'' of the right
+    answer.  Employing that approximation, we find that
 
-%%     Solving for the fall time $t_f$:
+    \begin{equation}
+      \begin{alignedat}{2}
+        && 0 &= \ddot{\theta} - \frac{g}{L}\sin(\theta)\\
+        \implies{}&& 0 &\approx \ddot{\theta} - \frac{g}{L}\theta\\
+      \end{alignedat}
+    \end{equation}
 
-%%     \begin{equation}
-%%       \begin{split}
-%%         t_f 
-%%         &= \frac{1}{\gamma} \ln\left( \frac{\pi}{2|C_1|} \right) \\
-%%         &= \sqrt{\frac{L}{g}} \ln\left( \frac{\pi}{\left| \theta_0 + \omega_0\sqrt{\frac{L}{g}} \right|} \right)
-%%       \end{split}
-%%     \end{equation}
+    Making a small substitution of $\gamma \equiv \sqrt{g/L}$ we can
+    rewrite our ODE and solve it
 
-%%     Finally, we map our initial angle and angular velocity to our quantum 
-%%     phase-space variables $x'$ (arc length) and $p'$ (linear momentum). 
-%%     Using $\theta_0 = x'/L$ and $\omega_0 = p'/(mL)$, we find:
+    \begin{equation}
+      \begin{alignedat}{2}
+        && 0 &\approx \ddot{\theta} - \frac{g}{L}\theta\\
+        &&&= \ddot{\theta} - \gamma^2\theta\\
+        \implies{}&& \theta(t) &= A e^{\gamma t} + B e^{-\gamma t}
+      \end{alignedat}
+    \end{equation}
 
-%%     \begin{equation}
-%%       t_f(x', p') = \sqrt{\frac{L}{g}} \ln\left( \frac{\pi}{\left| \frac{x'}{L} + \frac{p'}{mL}\sqrt{\frac{L}{g}} \right|} \right)
-%%     \end{equation}
+    As we can see, we essentially have one term with time moving
+    forward and one term with time moving backwards, or with one
+    exponential growing and one shrinking.  Solving for our constants
+    using initial conditions:
 
+    \begin{equation}
+      \begin{alignedat}{2}
+        && \theta(0) &= A + B = \theta_0\\
+        && \dot{\theta}(0) &= \gamma (A - B) = \omega_0\\
+        \implies&& A - B &= \frac{\omega_0}{\gamma}\\
+        \implies&& (A + B) + (A - B)
+        &= \theta_0 + \frac{\omega_0}{\gamma} = 2A\\
+        \implies&& A &= \frac{1}{2}\left(\theta_0 + \frac{\omega_0}{\gamma}\right)\\
+        \implies&& B &= \frac{1}{2}\left(\theta_0 - \frac{\omega_0}{\gamma}\right)\\
+      \end{alignedat}
+    \end{equation}
 
+    This is a good place to pause for a moment and consider the
+    implications of what the math is telling us.  The two terms there
+    almost feel like a reduced mass, or like you have a balance term
+    or something like that.  Interestingly, this paradigm seems to
+    appear in a number of places including non-linear dynamics,
+    good-ole-classmech, and even some quantum problems later on.  For
+    now, if the $A$ and $B$ terms balance, then \icepick{} will
+    balance forever, otherwise it'll come crashing down eventually.
 
+    So... Skynet is recommending that I disregard the $B$ term, and so
+    is the official solutions manual because ``the exponential decay
+    will become irrelevant quickly''\incite[p9]{napo}.  That leaves us
+    with a final expression for $\theta(t)$
 
+    \begin{equation}
+      \inlabel{theta}
+      \begin{split}
+        \theta(t)
+        &= Ae^{\gamma t}\\
+        &= \frac{1}{2}\left(\theta_0 + \frac{\omega_0}{\gamma}\right)e^{\gamma t}\\
+        &= \frac{1}{2}\left(\theta_0 + \omega_0\sqrt{\frac{L}{g}}\right)\exp[\sqrt{\frac{g}{L}} t]\\
+      \end{split}
+    \end{equation}
+
+    Now that we have an expression for $\theta$, let's find our
+    fall-time.  In a subsequent solution, we're going to exmaine what
+    it means to ``have fallen'' but for now let's just say that it's
+    when our solution for $\theta(t_f) = \pm \pi/2$.  The reason we
+    have that $\pm$ in there is that it's possible for it to lean
+    right and get kicked left (if it leans left and gets kicked-over
+    to the right, though, then it's probably an anti-science Krasnov
+    supporter and doesn't obey the laws of Quantum Mechanics anyway,
+    so we can disregard that case).  If that happens, then
+
+    \begin{equation}
+      \begin{split}
+        A_+e^{\gamma t_f} &= \frac{\pi}{2}\\
+        A_-e^{\gamma t_f} &= -\frac{\pi}{2}\\
+        e^{\gamma t_f} &= \frac{\pi}{2\abs{A}}\\
+      \end{split}
+    \end{equation}
+
+    It seems quite counter-intuitive but for the purposes of computing
+    the fall-time we can just take the absolute value of $A$.
+    Remembering our approximations for $\theta_0$ and $\omega_0$
+    before plugging everything in:
+
+    \begin{equation}
+      \begin{split}
+        \theta_0 &\approx \frac{x'}{L}\\
+        \omega_0 &\approx \frac{p'}{mL}\\
+      \end{split}
+    \end{equation}
+    
+    \begin{equation}
+      \inlabel{classicaltf}
+      \begin{alignedat}{2}
+        &&e^{\gamma t_f} &= \frac{\pi}{2\abs{A}}\\
+        \implies&&\gamma t_f &= \ln(\frac{\pi}{2\abs{A}})\\
+        \implies&&t_f &= \frac{1}{\gamma}\ln(\frac{\pi}{2\abs{A}})\\
+        &&&= \sqrt{\frac{L}{g}}\ln(\frac{\pi}{\cancel{2}\abs{\cancel{\frac{1}{2}}\left(\theta_0 + \frac{\omega_0}{\gamma}\right)}})\\
+        &&&= \sqrt{\frac{L}{g}}\ln(\frac{\pi}{\abs{\frac{x'}{L} + \frac{p'}{mL}\sqrt{\frac{L}{g}}}})\\
+      \end{alignedat}
+    \end{equation}
+
+    If we go back and use \inref{theForce} combined with \inref{p}, we
+    find that
+
+    \begin{equation}
+      \begin{split}
+        \expval{t_f}
+        &= \iint_{-\infty}^{\infty} P(x')P(p')t(x', p') dx' dp'
+        \\
+        &= \iint_{-\infty}^{\infty}
+        \frac{1}{d\sqrt{\pi}} \exp[-\frac{x'^{2}}{d^2}]
+        \frac{1}{\sqrt{\pi}} \frac{d}{\hbar} \exp[-\frac{d^2}{\hbar^2}p'^2]
+        \sqrt{\frac{L}{g}}\ln(\frac{\pi}{\abs{\frac{x'}{L} + \frac{p'}{mL}\sqrt{\frac{L}{g}}}})
+        dx' dp'
+        \\
+        &=
+        \frac{1}{\pi\hbar}
+        \sqrt{\frac{L}{g}}
+        \iint_{-\infty}^{\infty}
+        \exp[-\frac{x'^{2}}{d^2} - \frac{d^2}{\hbar^2}p'^2]
+        \ln(\frac{\pi}{\abs{\frac{x'}{L} + \frac{p'}{mL}\sqrt{\frac{L}{g}}}})
+        dx' dp'
+        \\
+      \end{split}
+    \end{equation}
+
+    Well...nobody said it would be pretty. Since we're restricted to a
+    great circle anyway and our termination conditions are defined by
+    $\theta$ then we might as well switch over to polar coordinates
+    and also make a few substitutions to get us to a cleaner integral.
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        u &= x'\frac{1}{d} &\implies dx' &= d du\\
+        v &= p'\frac{d}{\hbar} &\implies dp' &= \frac{\hbar}{d} dv\\
+      \end{alignedat}
+    \end{equation}
+
+    \begin{equation}
+      \begin{split}
+        \expval{t_f}
+        &=
+        \frac{1}{\pi\hbar\gamma}
+        \iint_{-\infty}^{\infty}
+        \exp[-\frac{x'^{2}}{d^2} - \frac{d^2}{\hbar^2}p'^2]
+        \ln(\frac{\pi}{\abs{\frac{x'}{L} + \frac{p'}{mL}\sqrt{\frac{L}{g}}}})
+        dx' dp'
+        \\
+        &=
+        \frac{1}{\pi\cancel{\hbar}\gamma}
+        \iint_{-\infty}^{\infty}
+        \exp[-u^2 - v^2]
+        \ln(\frac{\pi}{\abs{\frac{ud}{L} + \frac{v\hbar}{dmL}\sqrt{\frac{L}{g}}}})
+        \cancel{d} du
+        \frac{\cancel{\hbar}}{\cancel{d}} dv
+        \\
+        &=
+        \frac{1}{\pi\gamma}
+        \iint_{-\infty}^{\infty}
+        \exp[-u^2 - v^2]
+        \ln(\frac{\pi}{\abs{\frac{ud}{L} + \frac{v\hbar}{dmL}\sqrt{\frac{L}{g}}}})
+        du dv
+        \\
+        &=
+        \frac{1}{\pi\gamma}
+        \iint_{-\infty}^{\infty}
+        \exp[-u^2 - v^2]
+        \ln(\frac{\pi}{\abs{C_1u + C_2v}})
+        du dv
+        \\
+        &=
+        \frac{1}{\pi\gamma}
+        \iint_{-\infty}^{\infty}
+        \exp[-u^2 - v^2]
+        \ln(\pi)
+        du dv
+        - 
+        \frac{1}{\pi\gamma}
+        \iint_{-\infty}^{\infty}
+        \exp[-u^2 - v^2]
+        \ln(\abs{C_1u + C_2v})
+        du dv
+        \\
+      \end{split}
+    \end{equation}
+
+    Going back to our table of integrals, the first term is trivial,
+    allowing us to collapse our equation before the transition to
+    polar coordinates:
 
     
-    
+    \begin{equation}
+      \begin{split}
+        \expval{t_f}
+        &=
+        \frac{1}{\pi\gamma}
+        \iint_{-\infty}^{\infty}
+        \exp[-u^2 - v^2]
+        \ln(\pi)
+        du dv
+        - 
+        \frac{1}{\pi\gamma}
+        \iint_{-\infty}^{\infty}
+        \exp[-u^2 - v^2]
+        \ln(\abs{C_1u + C_2v})
+        du dv
+        \\
+        &=
+        \frac{1}{\cancel{\pi}\gamma}
+        \ln(\pi)
+        \cancel{\sqrt{\pi}\sqrt{\pi}}
+        - 
+        \frac{1}{\pi\gamma}
+        \iint_{-\infty}^{\infty}
+        \exp[-u^2 - v^2]
+        \ln(\abs{C_1u + C_2v})
+        du dv
+        \\
+        &=
+        \frac{\ln(\pi)}{\gamma}
+        - 
+        \frac{1}{\pi\gamma}
+        \iint_{-\infty}^{\infty}
+        \exp[-u^2 - v^2]
+        \ln(\abs{C_1u + C_2v})
+        du dv
+        \\
+      \end{split}
+    \end{equation}
 
-  %%   \begin{equation}
-  %%     \begin{split}
-  %%       \expval{t_f}
-  %%       &= \iint_{-\infty}^{\infty} P(x_0=x') P(p_0=p') t_f(x', p') dx' dp'
-  %%       \\
-  %%       &= \iint_{-\infty}^{\infty}
-  %%       \frac{1}{d\sqrt{\pi}} \exp[-\frac{x'^{2}}{d^2}]
-  %%       \frac{1}{\sqrt{\pi}} \frac{d}{\hbar} \exp[-\frac{d^2}{\hbar^2}p'^2]
-  %%       \sqrt{\frac{L}{g}}\ln( \frac{\pi}{\theta_0 + \omega_0 \sqrt{\frac{L}{g}}})
-  %%       dx' dp'
-  %%       \\
-  %%     \end{split}
-  %%   \end{equation}
+    OK, we're currently integrating over the $u/v$ plane which is just
+    a scaled version of the $x/p$ plane.  I say ``plane'' here, but
+    it's less about a geometric plane and more about an abstract plane
+    in which all possible values of $(x_0, p_0)$ are represented.
+    Switching into polar coordinates within that plane will help with
+    the evaluation of the integral itself.  There is no physical
+    justification for this step -- it is purely mathematical
+    expedience for the purposes of evaluating the integral.  So we're
+    going to define $r$ as the radius within our initial-conditions
+    space and $\varphi$ as the angle with respect to the positive $x$
+    axis.  So mapping back to normal 2D Cartesian that would put
+    $+\hat{x}$ along $\hat{x}$.  We're mapping to $u/v$ remember since
+    we did our change of variables to make the integral cleaner.
 
-  %%   Noting that the fall-time is parameterized for $\theta_0$ and
-  %%   $\omega_0$ instead of $x'$ and $p'$, we first show that
-  %%   relationship.  For the moment, we're only examining situations in
-  %%   which the samll-angle approximation works.
+    \begin{equation}
+      \begin{split}
+        u &= r\cos{\varphi}\\
+        v &= r\sin{\varphi}\\
+        du dv &= r dr d\varphi
+      \end{split}
+    \end{equation}
 
-  %%   \begin{equation}
-  %%     \begin{split}
-  %%       \omega_0 &\approx \frac{p_0}{mL} \\
-  %%       \\
-  %%       \theta_0 &\approx \frac{x_0}{L} \\
-  %%     \end{split}
-  %%   \end{equation}
+    Substituting those into our earlier expression, we have
 
-  %%   \begin{equation}
-  %%     \begin{split}
-  %%       \expval{t_f}
-  %%       &= \iint_{-\infty}^{\infty}
-  %%       \frac{1}{d\sqrt{\pi}} \exp[-\frac{x'^{2}}{d^2}]
-  %%       \frac{1}{\sqrt{\pi}} \frac{d}{\hbar} \exp[-\frac{d^2}{\hbar^2}p'^2]
-  %%       \sqrt{\frac{L}{g}}\ln( \frac{\pi}{\theta_0 + \omega_0 \sqrt{\frac{L}{g}}})
-  %%       dx' dp'
-  %%       \\
-  %%       &=
-  %%       \frac{1}{\pi\hbar}
-  %%       \sqrt{\frac{L}{g}}
-  %%       \iint_{-\infty}^{\infty}
-  %%       \exp[-\frac{x'^{2}}{d^2}]
-  %%       \exp[-\frac{d^2}{\hbar^2}p'^2]
-  %%       \ln( \frac{\pi}{\frac{x'}{L} + \frac{p'}{mL} \sqrt{\frac{L}{g}}})
-  %%       dx' dp'
-  %%       \\
-  %%       &=
-  %%       \frac{1}{\pi\hbar}
-  %%       \sqrt{\frac{L}{g}}
-  %%       \iint_{-\infty}^{\infty}
-  %%       \exp[-\frac{x'^{2}}{d^2} - \frac{d^2}{\hbar^2}p'^2]
-  %%       \ln( \frac{\pi}{x'\frac{1}{L} + p' \sqrt{\frac{1}{m^2gL}}})
-  %%       dx' dp'
-  %%       \\
-  %%       &=
-  %%       A
-  %%       \iint_{-\infty}^{\infty}
-  %%       \exp[-X^2 - P^2]
-  %%       \ln( \frac{\pi}{Bx' + Cp'} )
-  %%       dx' dp'
-  %%       \\
-  %%     \end{split}
-  %%   \end{equation}
-  %% \end{answerpart}
+    \begin{equation}
+      \begin{split}
+        \expval{t_f}
+        &=
+        \frac{\ln(\pi)}{\gamma}
+        - 
+        \frac{1}{\pi\gamma}
+        \iint_{-\infty}^{\infty}
+        \exp[-u^2 - v^2]
+        \ln(\abs{C_1u + C_2v})
+        du dv
+        \\
+        &=
+        \frac{\ln(\pi)}{\gamma}
+        - 
+        \frac{1}{\pi\gamma}
+        \int_{0}^{\infty}
+        \int_{0}^{2\pi}
+        \exp[-r^2]
+        \ln(\abs{C_1r\cos{\varphi} + C_2r\sin{\varphi}})
+        r dr d\varphi
+        \\
+        &=
+        \frac{\ln(\pi)}{\gamma}
+        - 
+        \frac{1}{\pi\gamma}
+        \int_{0}^{\infty}
+        \int_{0}^{2\pi}
+        \exp[-r^2]
+        \ln(r)
+        r dr d\varphi
+        -
+        \frac{1}{\pi\gamma}
+        \int_{0}^{\infty}
+        \int_{0}^{2\pi}
+        \exp[-r^2]
+        \ln(\abs{C_1\cos{\varphi} + C_2\sin{\varphi}})
+        r dr d\varphi
+        \\
+        &=
+        \frac{\ln(\pi)}{\gamma}
+        - 
+        \frac{1}{\pi\gamma}
+        \int_{0}^{2\pi}
+        d\varphi
+        \int_{0}^{\infty}
+        re^{-r^2}
+        \ln(r)
+        dr
+        -
+        \frac{1}{\pi\gamma}
+        \int_{0}^{\infty}
+        re^{-r^2}
+        dr
+        \int_{0}^{2\pi}
+        \ln(\abs{C_1\cos{\varphi} + C_2\sin{\varphi}})
+        d\varphi
+        \\
+        &=
+        \frac{\ln(\pi)}{\gamma}
+        - 
+        \frac{2}{\gamma}
+        \int_{0}^{\infty}
+        re^{-r^2}
+        \ln(r)
+        dr
+        -
+        \frac{1}{\pi\gamma}
+        \int_{0}^{\infty}
+        re^{-r^2}
+        dr
+        \int_{0}^{2\pi}
+        \ln(\abs{C_1\cos{\varphi} + C_2\sin{\varphi}})
+        d\varphi
+        \\
+      \end{split}
+    \end{equation}
 
-    %% I'm here to do two things... solve quantum problems and chew
-    %% bubblegum...and I'm all out of bubblegum.  What I am \emph{not}
-    %% here to do is explore classmech.  It has been quite a while and I
-    %% really want to get through this chapter.  Straight-up, I asked
-    %% Google's AI to solve this one for me.  I'll validate it later when
-    %% I go back through Goldstein (that may be a while, so if someone
-    %% wants to contribute then check out the appendix).  This problem
-    %% has been solved many times and LLMs tend to do a decent job of
-    %% regurgitating solutions.
+    Pulling up G\&R, we find
 
-    %% \begin{equation}
-    %%   t_f =
-    %%   \sqrt{\frac{L}{g}}
-    %%   \ln( \frac{\pi}{\theta_0 + \omega_0 \sqrt{\frac{L}{g}}})
-    %% \end{equation}
+    \begin{equation}
+      \tag{3.321.4}
+      \int_0^uxe^{-q^2x^2} dx = \frac{1}{2q^2} \left[1 - e^{-q^2u^2}\right]
+    \end{equation}\cite[eq 3.321.4]{gr}
 
-    %% We're going to redefine a variable quickly to make it a bit easier
+    That lets us get rid of one integral
 
-    %% \begin{equation}
-    %%   \text{let }\sqrt{\frac{L}{g}} \equiv k
-    %% \end{equation}
+    \begin{equation}
+      \begin{split}
+        \expval{t_f}
+        &=
+        \frac{\ln(\pi)}{\gamma}
+        - 
+        \frac{2}{\gamma}
+        \int_{0}^{\infty}
+        re^{-r^2}
+        \ln(r)
+        dr
+        -
+        \frac{1}{\pi\gamma}
+        \int_{0}^{\infty}
+        re^{-r^2}
+        dr
+        \int_{0}^{2\pi}
+        \ln(\abs{C_1\cos{\varphi} + C_2\sin{\varphi}})
+        d\varphi
+        \\
+        &=
+        \frac{\ln(\pi)}{\gamma}
+        - 
+        \frac{2}{\gamma}
+        \int_{0}^{\infty}
+        re^{-r^2}
+        \ln(r)
+        dr
+        -
+        \frac{1}{\pi\gamma}
+        \eval\ \frac{1}{2}\left[1 - e^{-r^2}\right]|_{r=0}^{\infty}
+        \int_{0}^{2\pi}
+        \ln(\abs{C_1\cos{\varphi} + C_2\sin{\varphi}})
+        d\varphi
+        \\
+        &=
+        \frac{\ln(\pi)}{\gamma}
+        - 
+        \frac{2}{\gamma}
+        \int_{0}^{\infty}
+        re^{-r^2}
+        \ln(r)
+        dr
+        -
+        \frac{1}{2\pi\gamma}
+        \int_{0}^{2\pi}
+        \ln(\abs{C_1\cos{\varphi} + C_2\sin{\varphi}})
+        d\varphi
+        \\
+      \end{split}
+    \end{equation}
 
-    %% \begin{equation}
-    %%   t_f = k \ln( \frac{\pi}{\theta_0 + \omega_0k})
-    %% \end{equation}
+    Pulling up Wolfram Alpha for that $re^{-r^2}\ln(r)$ integral, we
+    find
 
-    
-  %% We're going to make one change here and we're going to take an
-  %% absolute value.  If the momentum is towards the normal then it's
-  %% going to lose momentum on the way up, and re-capture it on the way
-  %% down.  In both cases, it ends up barrelling towards the ground with
-  %% the original $\omega_0$.  The one exception, obviously, being that
-  %% it goes to the very top and stays there.
+    \begin{equation}
+      \int_{0}^{\infty} re^{-r^2} \ln(r) dr = -\frac{\gamma_e}{4}
+    \end{equation}
+
+    where $\gamma_e$ is the Euler-Mascheroni constant.  All told, this
+    evaluates to $\approx -0.144304$ which will be called $k_e$.
+    Chipping away at our integral, we find that
+
+    \begin{equation}
+      \begin{split}
+        \expval{t_f}
+        &=
+        \frac{\ln(\pi)}{\gamma}
+        - 
+        \frac{2}{\gamma}
+        \int_{0}^{\infty}
+        re^{-r^2}
+        \ln(r)
+        dr
+        -
+        \frac{1}{2\pi\gamma}
+        \int_{0}^{2\pi}
+        \ln(\abs{C_1\cos{\varphi} + C_2\sin{\varphi}})
+        d\varphi
+        \\
+        &=
+        \frac{\ln(\pi)}{\gamma}
+        - 
+        \frac{2k_e}{\gamma} 
+       -
+        \frac{1}{2\pi\gamma}
+        \int_{0}^{2\pi}
+        \ln(\abs{C_1\cos{\varphi} + C_2\sin{\varphi}})
+        d\varphi
+        \\
+      \end{split}
+    \end{equation}
+
+    Next up, we use the Harmonic Addition
+    Theorem\incite{msu:harmonicAddition} to simplify the $\varphi$ terms.
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        && f(\theta) &= a\cos(\theta) + b\sin(\theta)\\
+        &&&= c\cos(\theta + \delta)\\
+        \text{where } && c &= \sqrt{a^2 + b^2}\\
+        \text{and } && \delta &= \tan^{-1}(-\frac{a}{b})
+      \end{alignedat}
+    \end{equation}
+
+    Applying that to our earlier equation, we find that
+
+    \begin{equation}
+      \begin{split}
+        a &= C_1\\
+        b &= C_2\\
+        c &= \sqrt{C_1^2 + C_2^2}\\
+        \delta &= \tan^{-1}(-\frac{C_1}{C_2})\\
+      \end{split}
+    \end{equation}
+
+    Substituting into our big nasty expression, we have
+
+    \begin{equation}
+      \begin{split}
+        \expval{t_f}
+        &=
+        \frac{\ln(\pi)}{\gamma}
+        - 
+        \frac{2k_e}{\gamma} 
+       -
+        \frac{1}{2\pi\gamma}
+        \int_{0}^{2\pi}
+        \ln(\abs{C_1\cos{\varphi} + C_2\sin{\varphi}})
+        d\varphi
+        \\
+        &=
+        \frac{\ln(\pi)}{\gamma}
+        - 
+        \frac{2k_e}{\gamma} 
+        -
+        \frac{1}{2\pi\gamma}
+        \int_{0}^{2\pi}
+        \ln(\abs{c\cos(\varphi + \delta)})
+        d\varphi
+        \\
+        &=
+        \frac{\ln(\pi)}{\gamma}
+        - 
+        \frac{2k_e}{\gamma} 
+        -
+        \frac{1}{2\pi\gamma}
+        \int_{0}^{2\pi}
+        \ln(c)
+        d\varphi
+        -
+        \frac{1}{2\pi\gamma}
+        \int_{0}^{2\pi}
+        \ln(\abs{\cos(\varphi + \delta)})
+        d\varphi
+        \\
+        &=
+        \frac{\ln(\pi)}{\gamma}
+        - 
+        \frac{2k_e}{\gamma} 
+        -
+        \frac{\ln(c)}{\gamma}
+        -
+        \frac{1}{2\pi\gamma}
+        \int_{0}^{2\pi}
+        \ln(\abs{\cos(\varphi + \delta)})
+        d\varphi
+        \\
+      \end{split}
+    \end{equation}
+
+    Ladies and Gentlemen, please turn your book of holy scripture to
+    equation 4.224.6
+
+    \begin{equation}
+      \tag{4.224.6}
+      \int_{0}^{\pi/2} \ln(\cos x)dx = -\frac{\pi}{2}\ln(2)
+    \end{equation}\cite[eq4.224.6]{gr}
+
+    There are a couple of things to note here.  Because we're
+    integrating over a whole period of a periodic function, our phase
+    of $\delta$ doesn't actually matter.  However, to get rid of the
+    absolute value issue, we're going to integrate over the positive
+    portion of the $\cos$ to $\pi/2$ and then multiply by 4.
+    Substituting that in, we find that
+
+    \begin{equation}
+      \begin{split}
+        \expval{t_f}
+        &=
+        \frac{\ln(\pi)}{\gamma}
+        - 
+        \frac{2k_e}{\gamma} 
+        -
+        \frac{\ln(c)}{\gamma}
+        -
+        \frac{1}{2\pi\gamma}
+        \int_{0}^{2\pi}
+        \ln(\abs{\cos(\varphi + \delta)})
+        d\varphi
+        \\
+        &=
+        \frac{\ln(\pi)}{\gamma}
+        - 
+        \frac{2k_e}{\gamma} 
+        -
+        \frac{\ln(c)}{\gamma}
+        -
+        \frac{1}{2\pi\gamma}
+        4\left(-\frac{\pi}{2}\ln(2)\right)
+        \\
+        &=
+        \frac{\ln(\pi)}{\gamma}
+        - 
+        \frac{2k_e}{\gamma} 
+        -
+        \frac{\ln(c)}{\gamma}
+        +
+        \frac{\ln(2)}{\gamma}
+        \\
+        &=
+        \frac{1}{\gamma}
+        \left(
+        \ln(2\pi)
+        - 
+        2k_e
+        -
+        \ln(c)
+        \right)
+        \\
+      \end{split}
+    \end{equation}
+
+    OK...we have our integral for our expectation value for fall-time
+    as a function of $d$.  Let's collect a whole crapton of constants
+    and see what we're left with.  Of course, the most important thing
+    to note at this point is that the answer is, of course, equation
+    42.  I'm pretty sure I'm not allowed to go back and add/remove any
+    equations now.  Collecting our constants, we have
+
+    \begin{equation}
+      \begin{split}
+        k_e &\approx -0.144304\\
+        C_1 = \frac{d}{L}\\
+        C_2 = \frac{\hbar}{dmL}\sqrt{\frac{L}{g}}\\
+        c &= \sqrt{C_1^2 + C_2^2}\\
+        \gamma &= \sqrt{g/L}
+      \end{split}
+    \end{equation}
+
+    Just for funsies, let's see what happens when we evaluate this
+    puppy at $d = 10^{-25}m$, $L = 10cm$, and $m = 0.1kg$. Drumroll
+    everyone... My python script comes back with... $2.998s$...  I'm
+    going to sleep now.
+
+  \end{answerpart}
+
 
   %% \begin{answerpart}{Quantum Time (Propagation)}
   %% \end{answerpart}
@@ -994,7 +1465,7 @@
   %%   initial conditions to satisfy the constraints of the fall-time
   %%   equation given the time over which the observation is made.
     
-  \end{answerpart}
+  %% \end{answerpart}
 
   
 \end{answer}
