@@ -36,6 +36,7 @@ class ItFigures(object):
         self.by_log_ratio(outpath)
         self.by_linear_ratio(outpath)
         self.by_log_value(outpath)
+        #self.by_log_energy(outpath)
 
     def c1(self, d):
         return d/self.L
