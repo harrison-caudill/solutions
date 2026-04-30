@@ -13,11 +13,12 @@ import utils
 
 class Converter(object):
 
-    def __init__(self, src, dst, dpi, qcad,
+    def __init__(self, src, base, dst, dpi, qcad,
                  overwrite=False,
                  linewidth=7.5,
                  inc_src_base=True):
         self.src = self._canonicalize(src)
+        self.base = self._canonicalize(base)
         self.dst = self._canonicalize(dst)
         self.dpi = dpi
         self.qcad = self._canonicalize(qcad)
@@ -33,10 +34,10 @@ class Converter(object):
         if self.inc_src_base:
             relpath = os.path.join(os.path.basename(self.src), relpath)
 
-        dstpath = relpath[:-4] + '.png'
-        dstpath = os.path.join(self.dst, dstpath)
-        dstpath = os.path.realpath(dstpath)
-
+        
+        dstpath = os.path.join(self.dst,
+                               parent[len(self.base)+1:],
+                               fname[:-4] + '.png')
         extant = os.path.isfile(dstpath)
 
         if extant:
@@ -164,6 +165,7 @@ if __name__ == '__main__':
     path = utils.Pathfinder(args)
 
     c = Converter(src=path.tgt(),
+                  base=path.base(),
                   dst=args.dst_dir,
                   dpi=args.dpi,
                   qcad=args.qcad_bins,
