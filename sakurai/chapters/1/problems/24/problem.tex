@@ -1,5 +1,4 @@
-
-\newcommand{\icepick}{Schr\"{o}dinger's ice-pick}
+\newcommand{\icepick}{Heisenberg's ice-pick}
 
 \begin{question}
   Estimate the rough order of magnitude of the length of time that an
@@ -730,6 +729,7 @@
     theory is expressed as
 
     \begin{equation}
+      \inlabel{normalHog}
       N(\mu, \sigma^2)
       = \frac{1}{\sigma\sqrt{2\pi}}\exp[-\frac{(x-\mu)^2}{2\sigma^2}]
     \end{equation}\incite[inside cover]{hogtan}
@@ -1553,6 +1553,569 @@
     of those uncertainties so that our fall-time is maximized.  We're
     going to ignore uncertainty in position since it'll have a
     negligible impact upon energy.
+
+    We're getting a little bit ahead of ourselves, but in \S2.1.7, we
+    find
+    
+    \begin{equation}
+      \tag{2.74}
+      \Delta t \Delta E \simeq \hbar
+    \end{equation}
+
+    We're actually going to take that one step further with a more
+    refined version from Wikipedia using the results of the
+    Mandelstam-Tamm theorem resulting in
+
+    \begin{equation}
+      \inlabel{etPhoneTime}
+      \Delta t \Delta E \ge \frac{\hbar}{2}
+    \end{equation}\incite{wikipedia:Uncertainty}
+
+    As mentioned, we're getting a little bit ahead of ourselves, so
+    let's just see what happens...maybe we'll be surprised?  It's
+    worth remembering that the expression we're using for $\theta(t)$
+    is the $Ae^{\gamma t}$ only without the $B$ term, but that should
+    be easy enough to add in if necessary.  Let's start by computing
+    the classical energy amount which we're going to call $E_0$
+
+    \begin{equation}
+      \begin{split}
+        E_0 &= T + V\\
+        &= \frac{1}{2}I\omega_0^2 + mgL\\
+        &= mgL\\
+      \end{split}
+    \end{equation}
+
+    where $I = mL^2$ and $\omega_0 = 0$ since we're looking at the
+    classical energy for a perfectly-placed ice pick.  We're going to
+    assume that the energy at impact is a normal variate.  While
+    \emph{technically} the energy \emph{isn't} a normal variate since
+    it can't be less than $0$, we're also working with quantum
+    mandated uncertainties on the order of $10^{-17}$ as compared with
+    macroscopic energy levels so... I'm gonna allow it.  So, generally
+    speaking, what we're looking for is something form
+
+    \begin{equation}
+      t_f = f(\omega_0) = f(\omega_0(E))
+    \end{equation}
+
+    We already have fall-time as a function of initial momentum, so
+    now we just need to know what that initial momentum is.  We can
+    determine that by looking at a new energy value which we're going
+    to call the kick ($K$)
+
+    \begin{equation}
+      K \equiv \frac{1}{2}I\omega_0^2
+    \end{equation}
+
+    We know that the energy at impact is being modeled as a normal
+    variate, which means we can express it as follows
+
+    \begin{equation}
+      E = N(E_0, \sigma_E)
+    \end{equation}
+
+    So, now we can define our full equation for K
+
+    \begin{equation}
+      K = N(E_0, \sigma_E) - E_0 = N(0, \sigma_E)
+    \end{equation}
+
+    To avoid naming collisions, we're going to go back to calling that
+    $E$.  With a value for the value formerly known as $K$ (now known
+    as $E$) in hand, we can then express our final fall-time as
+
+    \begin{equation}
+      t_f = f(E=N(0, \sigma_E))
+    \end{equation}
+
+    Ultimately, we're still looking for an expectation value which
+    will be of the form
+
+    \begin{equation}
+      \expval{t_f} = \int P(E)t(E) dE
+    \end{equation}
+
+    Interestingly, we aren't really using the $\hbar/2$ limit.  Let's
+    see if that emerges.  Referencing equation \inref{classicaltf} and
+    keeping it in $\omega_0$ form
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&\expval{t_f}
+        &= \int P(E)t(E) dE\\
+        &&&=
+        \int_{-\infty}^{\infty}
+        dE
+        \frac{1}{\sigma_E\sqrt{2\pi}}
+        \exp\left[-\frac{E^2}{2\sigma_E^2}\right]
+        \sqrt{\frac{L}{g}}\ln(\frac{\pi}{\abs{
+        \left(\theta_0 + \frac{\omega_0}{\gamma}\right)}})
+        \\
+        &&&=
+        \frac{1}{\sigma_E\sqrt{2\pi}}
+        \frac{1}{\gamma}
+        \int_{-\infty}^{\infty}
+        dE
+        \exp\left[-\frac{E^2}{2\sigma_E^2}\right]
+        \ln(\frac{\pi}{\abs{\frac{\omega_0}{\gamma}}})
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    Next, we'll draw upon our energy relationship that $E = 1/2 I
+    \omega^2$ and also change our bounds of integration from $-\infty$
+    to $0$ and we'll multiply by 2.  That should allow us to eliminate
+    the absolute value to make our integral easier.
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&\expval{t_f}
+        &= \int P(E)t(E) dE\\
+        &&&=
+        \frac{1}{\sigma_E\sqrt{2\pi}}
+        \frac{1}{\gamma}
+        \int_{-\infty}^{\infty}
+        dE
+        \exp\left[-\frac{E^2}{2\sigma_E^2}\right]
+        \ln(\frac{\pi}{\abs{\frac{\omega_0}{\gamma}}})
+        \\
+        &&&=
+        \frac{1}{\sigma_E\sqrt{2\pi}}
+        \frac{1}{\gamma}
+        2
+        \int_{0}^{\infty}
+        dE
+        \exp\left[-\frac{E^2}{2\sigma_E^2}\right]
+        \ln(\frac{\gamma\pi}{\omega_0})
+        \\
+        &&&=
+        \frac{1}{\sigma_E\sqrt{2\pi}}
+        \frac{1}{\gamma}
+        2
+        \int_{0}^{\infty}
+        dE
+        \exp\left[-\frac{E^2}{2\sigma_E^2}\right]
+        \ln(\frac{\gamma\pi}{\sqrt{\frac{2E}{mL^2}}})
+        \\
+        &&&=
+        \frac{1}{\sigma_E\sqrt{2\pi}}
+        \frac{1}{\gamma}
+        2
+        \int_{0}^{\infty}
+        dE
+        \exp\left[-\frac{E^2}{2\sigma_E^2}\right]
+        \ln(\frac{\gamma \pi L \sqrt{m}}{\sqrt{2E}})
+        \\
+        &&&=
+        \frac{1}{\sigma_E\sqrt{2\pi}}
+        \frac{1}{\gamma}
+        2
+        \int_{0}^{\infty}
+        dE
+        \exp\left[-\frac{E^2}{2\sigma_E^2}\right]
+        \ln(k_tE^{-1/2})
+        \\
+        &&&=
+        \frac{1}{\sigma_E\sqrt{2\pi}}
+        \frac{1}{\gamma}
+        2
+        \left\{
+        \ln(k_t)
+        \int_{0}^{\infty}
+        dE
+        e^{-k_kE^2}
+        +
+        \int_{0}^{\infty}
+        dE
+        e^{-k_kE^2}
+        \ln(E^{-1/2})
+        \right\}
+        \\
+        &&&=
+        \frac{1}{\sigma_E\sqrt{2\pi}}
+        \frac{1}{\gamma}
+        2
+        \left\{
+        \ln(k_t)
+        \frac{1}{2}\sigma_E\sqrt{2\pi}
+        +
+        \int_{0}^{\infty}
+        dE
+        e^{-k_kE^2}
+        \ln(E^{-1/2})
+        \right\}
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    Let's start breaking things apart to get into position to finalize
+    our integral using Wolfram Alpha once again
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&\expval{t_f}
+        &= \int P(E)t(E) dE\\
+        &&&=
+        \frac{1}{\sigma_E\sqrt{2\pi}}
+        \frac{1}{\gamma}
+        2
+        \left\{
+        \ln(k_t)
+        \frac{1}{2}\sigma_E\sqrt{2\pi}
+        +
+        \int_{0}^{\infty}
+        dE
+        e^{-k_kE^2}
+        \ln(E^{-1/2})
+        \right\}
+        \\
+        &&&=
+        \frac{1}{\sigma_E\sqrt{2\pi}}
+        \frac{1}{\gamma}
+        2
+        \left\{
+        \ln(k_t)
+        \frac{1}{2}\sigma_E\sqrt{2\pi}
+        -
+        \frac{1}{2}
+        \frac{1}{\sqrt{k_k}}
+        \int_{0}^{\infty}
+        du
+        e^{-u^2}
+        \ln(\frac{u}{\sqrt{k_k}})
+        \right\}
+        \\
+        &&&=
+        \frac{1}{\sigma_E\sqrt{2\pi}}
+        \frac{1}{\gamma}
+        2
+        \left\{
+        \ln(k_t)
+        \frac{1}{2}\sigma_E\sqrt{2\pi}
+        -
+        \frac{1}{2}
+        \frac{1}{\sqrt{k_k}}
+        \left[
+        \int_{0}^{\infty}
+        du
+        e^{-u^2}
+        \ln(u)
+        -
+        \ln(\sqrt{k_k})
+        \int_{0}^{\infty}
+        du
+        e^{-u^2}
+        \right]
+        \right\}
+        \\
+        &&&=
+        \frac{1}{\sigma_E\sqrt{2\pi}}
+        \frac{1}{\gamma}
+        2
+        \left\{
+        \ln(k_t)
+        \frac{1}{2}\sigma_E\sqrt{2\pi}
+        -
+        \frac{1}{2}
+        \frac{1}{\sqrt{k_k}}
+        \left[
+        \int_{0}^{\infty}
+        du
+        e^{-u^2}
+        \ln(u)
+        -
+        \ln(\sqrt{k_k})
+        \frac{\sqrt{\pi}}{2}
+        \right]
+        \right\}
+        \\
+        &&&=
+        \frac{1}{\sigma_E\sqrt{2\pi}}
+        \frac{1}{\gamma}
+        2
+        \left\{
+        \ln(k_t)
+        \frac{1}{2}\sigma_E\sqrt{2\pi}
+        -
+        \frac{1}{2}
+        \frac{1}{\sqrt{k_k}}
+        \left[
+          \left(
+          -\frac{\sqrt{\pi}}{4}(\gamma_e + 2\ln(2))
+          \right)
+        -
+        \ln(\sqrt{k_k})
+        \frac{\sqrt{\pi}}{2}
+        \right]
+        \right\}
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    Expanding the giant mess to be even bigger and messier
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&\expval{t_f}
+        &= \int P(E)t(E) dE\\
+        &&&=
+        \frac{1}{\sigma_E\sqrt{2\pi}}
+        \frac{1}{\gamma}
+        2
+        \left\{
+        \ln(k_t)
+        \frac{1}{2}\sigma_E\sqrt{2\pi}
+        -
+        \frac{1}{2}
+        \frac{1}{\sqrt{k_k}}
+        \left[
+          \left(
+          -\frac{\sqrt{\pi}}{4}(\gamma_e + 2\ln(2))
+          \right)
+        -
+        \ln(\sqrt{k_k})
+        \frac{\sqrt{\pi}}{2}
+        \right]
+        \right\}
+        \\
+        &&&=
+        \frac{1}{\sigma_E\sqrt{2\pi}}
+        \frac{1}{\gamma}
+        2
+        \left\{
+        \ln(k_t)
+        \frac{1}{2}\sigma_E\sqrt{2\pi}
+        +
+        \frac{1}{2}
+        \frac{1}{\sqrt{k_k}}
+        \frac{\sqrt{\pi}}{4}
+        \gamma_e
+        +
+        \frac{1}{2}
+        \frac{1}{\sqrt{k_k}}
+        \frac{\sqrt{\pi}}{4}
+        2\ln(2)
+        +
+        \frac{1}{2}
+        \frac{1}{\sqrt{k_k}}
+        \ln(\sqrt{k_k})
+        \frac{\sqrt{\pi}}{2}
+        \right\}
+        \\
+      \end{alignedat}
+    \end{equation}
+
+
+    Collecting our constants
+
+    \begin{equation}
+      \begin{split}
+        k_k &= \frac{1}{2\sigma_E^2}\\
+        k_t &= \gamma \pi L \sqrt{\frac{m}{2}}\\
+      \end{split}
+    \end{equation}
+
+    Aaaand plugging them in
+    
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&\expval{t_f}
+        &= \int P(E)t(E) dE\\
+        &&&=
+        \frac{1}{\sigma_E\sqrt{2\pi}}
+        \frac{1}{\gamma}
+        2
+        \left\{
+        \ln(\gamma \pi L \sqrt{\frac{m}{2}})
+        \frac{1}{2}\sigma_E\sqrt{2\pi}
+        +
+        \frac{1}{2}
+        \frac{1}{\sqrt{\frac{1}{2\sigma_E^2}}}
+        \frac{\sqrt{\pi}}{4}
+        \gamma_e
+        +
+        \frac{1}{2}
+        \frac{1}{\sqrt{\frac{1}{2\sigma_E^2}}}
+        \frac{\sqrt{\pi}}{4}
+        2\ln(2)
+        +
+        \frac{1}{2}
+        \frac{1}{\sqrt{\frac{1}{2\sigma_E^2}}}
+        \ln(\sqrt{\frac{1}{2\sigma_E^2}})
+        \frac{\sqrt{\pi}}{2}
+        \right\}
+        \\
+        &&&=
+        \frac{1}{\gamma}
+        \ln(\gamma \pi L \sqrt{\frac{m}{2}})
+        +
+        \frac{\gamma_e}{4\gamma}
+        +
+        \frac{\ln(2)}{2\gamma}
+        +
+        \frac{1}{2\gamma}
+        \ln(\sqrt{\frac{1}{2\sigma_E^2}})
+        \\
+        &&&=
+        \frac{1}{\gamma}
+        \left(
+        \ln(\gamma \pi L \sqrt{\frac{m}{2}})
+        +
+        \frac{\gamma_e}{4}
+        +
+        \frac{\ln(2)}{2}
+        +
+        \frac{1}{2}
+        \ln(\sqrt{\frac{1}{2\sigma_E^2}})
+        \right)
+        \\
+        &&&=
+        \frac{1}{\gamma}
+        \left(
+        \ln(\gamma \pi L \sqrt{\frac{m}{2}})
+        +
+        \frac{\gamma_e}{4}
+        +
+        \frac{\ln(2)}{2}
+        -
+        \frac{1}{4}
+        \ln(2\sigma_E^2)
+        \right)
+        \\
+        &&&=
+        \frac{1}{\gamma}
+        \left(
+        \ln(\gamma \pi L \sqrt{\frac{m}{2}})
+        +
+        \frac{\gamma_e}{4}
+        +
+        \frac{\ln(2)}{2}
+        -
+        \frac{1}{4}
+        (2\ln(\sigma_E) + \ln(2))
+        \right)
+        \\
+        &&&=
+        \frac{1}{\gamma}
+        \left(
+        \ln(\gamma \pi L \sqrt{\frac{m}{2}})
+        +
+        \frac{\gamma_e}{4}
+        +
+        \frac{\ln(2)}{4}
+        -
+        \frac{\ln(\sigma_E)}{2}
+        \right)
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    This leaves us with a final closed-form solution for the
+    expectation value of fall-time as a function of the energy
+    uncertainty
+
+    \begin{equation}
+      \inlabel{exp:tfe}
+      \expval{t_f}
+      =
+      \frac{1}{\gamma}
+      \left(
+      \ln(\gamma \pi L \sqrt{\frac{m}{2}})
+      +
+      \frac{\gamma_e}{4}
+      +
+      \frac{\ln(2)}{4}
+      -
+      \frac{\ln(\sigma_E)}{2}
+      \right)
+    \end{equation}
+    
+    
+    Now that we have a closed-form solution for $\expval{t_f}$ let's
+    take a look back at that missing uncertainty relation and what it
+    means to us.  You'll probabl note that it's monotonic and the less
+    uncertainty in energy you have the higher the fall-time ad
+    infinitum.  So, clearly that can't be right.  Remember earlier
+    when we remarked upon how odd it was that we weren't using the
+    uncertainty relation?  Guess what we're going to do now.
+
+    So if we want to maximize our fall-time then we'll want to
+    minimize our $\sigma_E$.  To minimize $\sigma_E$, we need to
+    constrain it to what is permissible by the uncertainty relation.
+    If we use the statistical interpretation of $\Delta t$ (as opposed
+    to time-until-change or time for an expectation-value of an
+    observable to update by $1\sigma$ or ...)  then we can use our
+    uncertainty relation to show that
+
+    \begin{equation}
+      \sigma_t = \frac{\hbar}{2\sigma_E}
+    \end{equation}
+
+    This allows us to choose a $\sigma_E$ that is as small as possible
+    before we violate the $\Delta E \Delta t$ uncertainty principle.
+    Looking back at our equation for the fall time we see that we can
+    rewrite it to simplify it a bit
+
+    \begin{equation}
+      \inlabel{tfe}
+      \begin{split}
+        t_f
+        &=
+        \frac{1}{\gamma}
+        \ln(\abs{\frac{\gamma\pi}{\omega_0}})
+        \\
+        &=
+        \frac{\ln(\gamma\pi)}{\gamma}
+        -
+        \frac{\ln(\abs{\omega_0})}{\gamma}
+        \\
+        &=
+        \frac{\ln(\gamma\pi)}{\gamma}
+        -
+        \frac{1}{\gamma}
+        \ln(\frac{\sqrt(2E)}{L\sqrt(m)})
+        \\
+        &=
+        \frac{\ln(\gamma\pi)}{\gamma}
+        -
+        \frac{1}{2\gamma}
+        \ln(\frac{2}{L^2m})
+        -
+        \frac{\ln(E)}{2\gamma}
+        \\
+        &=
+        C_t
+        -
+        \frac{\ln(E)}{2\gamma}
+        \\
+      \end{split}
+    \end{equation}
+
+    The variance of $f(x) + C$ is the same as that of $f(x)$ because a
+    constant offset doesn't change how spikey/spready the function is.
+    So we can disregard $C_t$.  That just leaves us with
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&Var(t_f)
+        &= Var(C_t - \frac{\ln(E)}{2\gamma})\\
+        &&&= Var(\frac{\ln(E)}{2\gamma})\\
+        &&&= \frac{Var(\ln(E))}{4\gamma^2}\\
+        &&&= \frac{1}{4\gamma^2}\frac{\pi^2}{8}\\
+        \implies &&\sigma_t
+        &= \sqrt{\frac{1}{4\gamma^2}\frac{\pi^2}{8}}\\
+        &&&= \frac{\pi}{4\sqrt{2}\gamma}\\
+      \end{alignedat}
+    \end{equation}
+
+    Plugging that value of $\sigma_t$ into our uncertainty relation
+    gives us $\sigma_E = \hbar/\sigma_t$.  Plugging that into our
+    fall-time equation gives us...drumroll please... $\approx 3.8s$.
+
+    So yeah... science... it works!  We successfully solved the
+    expectation-value of the fall-time for \icepick{} using the
+    time/energy uncertainty relation.  This calls for scotch!
   \end{answerpart}
-  
+
 \end{answer}

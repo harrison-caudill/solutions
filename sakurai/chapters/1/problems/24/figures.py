@@ -16,6 +16,7 @@ class ItFigures(object):
     def go(self, outpath):
         # Universal mathematical constants
         self.k = -float(sympy.EulerGamma/4)
+        self.C = float(sympy.EulerGamma)
         self.g = scipy.constants.g
         self.h = scipy.constants.hbar
 
@@ -149,3 +150,23 @@ class ItFigures(object):
         fig.tight_layout()
         fig.savefig(os.path.join(outpath, 'by_log_value.pdf'),
                     format='pdf', dpi=self.dpi)
+
+    def tfe(self, s):
+        return (1/self.gamma) * (
+            math.log(self.gamma * math.pi * self.L * (self.m/2)**.5)
+            + self.C/4
+            + math.log(2)/4
+            - math.log(s)/2)
+
+    def by_log_energy(self, outpath):
+        # appropriate value of sigma_t
+        st = math.pi / (4*2**.5*self.gamma)
+        print(st)
+
+        # appropriate value of sigma_e
+        se = self.h/st
+        print(se)
+
+        # expectation value for the fall-time given that energy uncertainty
+        ft = self.tfe(se)
+        print(ft)
