@@ -51,13 +51,6 @@
   \end{questionpart}
 
   \begin{questionpart}
-    In our first solution, we essentially use quantum mechanics to set
-    up the probability distributions for the initial conditions, then
-    we use classical mechanics for time-propagation.  Here, we'll use
-    quantum mechanics to propagate our gaussian wave packet.
-  \end{questionpart}
-
-  \begin{questionpart}
     The next fun way to solve the problem is to leverage the $E/t$
     uncertainty relation to determine the amount of rotational kinetic
     energy in the system.  Using the time expended during the
@@ -1543,27 +1536,23 @@
     about $3.9s$.
   \end{answerpart}
 
-  %% \begin{answerpart}{Quantum Time (Propagation)}
-  %% \end{answerpart}
+  \begin{answerpart}{How Much Time/Energy Do I Have?}
+    We're also going to approach the problem from a different
+    uncertainty relation: the time/energy uncertainty.  This one is
+    outside the scope of chapter 1...it's just fun...
 
-  %% \begin{answerpart}{How Much Time/Energy Do I Have?}
-  %%   We're also going to approach the problem from a different
-  %%   uncertainty relation: the time/energy uncertainty.  This one is
-  %%   outside the scope of chapter 1...it's just fun...
-
-  %%   \begin{equation}
-  %%     E = \frac{1}{2} I \omega^2
-  %%   \end{equation}
-
-  %%   Using the same relativity logic as above, we can show that a
-  %%   0-energy state (disallowed for other reasons) would be required
-  %%   for it to not fall.  Knowing its rotational kinetic energy and a
-  %%   time-window in which that (average) energy is true implies the
-  %%   ability to compute not only the current $\omega$ but also the
-  %%   initial conditions to satisfy the constraints of the fall-time
-  %%   equation given the time over which the observation is made.
-    
-  %% \end{answerpart}
-
+    If we take our observed fall-time (observed in the sense that a
+    bell goes ``DING!'' when it falls) then the observed energy
+    actually tells us something about the initial momentum.  Given
+    that we already have an expression above for the fall time as a
+    function of initial position/momentum, then we can use it to
+    determine an expression for fall-time as a function of uncertainty
+    in the energy.  The selection we're going to make here is how much
+    uncertainty do we want in the fall-time vs how much in the initial
+    energy (read: momentum).  Then we'll try to find the right balance
+    of those uncertainties so that our fall-time is maximized.  We're
+    going to ignore uncertainty in position since it'll have a
+    negligible impact upon energy.
+  \end{answerpart}
   
 \end{answer}
