@@ -743,7 +743,7 @@
         &= \abs{\psi(x')}^2
         = \frac{1}{d\sqrt{\pi}} \exp[-\frac{x'^{2}}{d^2}]
         = N(\mu_\psi, \sigma_\psi)
-        \\o
+        \\
         \mu_\psi &= 0\\
         \sigma_\psi &= \frac{d}{\sqrt{2}}\\
         \\
@@ -2074,7 +2074,7 @@
         \frac{\ln(\gamma\pi)}{\gamma}
         -
         \frac{1}{\gamma}
-        \ln(\frac{\sqrt(2E)}{L\sqrt(m)})
+        \ln(\frac{\sqrt{2E}}{L\sqrt(m)})
         \\
         &=
         \frac{\ln(\gamma\pi)}{\gamma}
@@ -2098,24 +2098,62 @@
 
     \begin{equation}
       \begin{alignedat}{2}
-        &&Var(t_f)
-        &= Var(C_t - \frac{\ln(E)}{2\gamma})\\
-        &&&= Var(\frac{\ln(E)}{2\gamma})\\
+        &&\text{Var}(t_f)
+        &= \text{Var}(C_t - \frac{\ln(E)}{2\gamma})\\
+        &&&= \text{Var}(\frac{\ln(E)}{2\gamma})\\
         &&&= \frac{Var(\ln(E))}{4\gamma^2}\\
-        &&&= \frac{1}{4\gamma^2}\frac{\pi^2}{8}\\
-        \implies &&\sigma_t
-        &= \sqrt{\frac{1}{4\gamma^2}\frac{\pi^2}{8}}\\
-        &&&= \frac{\pi}{4\sqrt{2}\gamma}\\
       \end{alignedat}
     \end{equation}
 
-    Plugging that value of $\sigma_t$ into our uncertainty relation
-    gives us $\sigma_E = \hbar/\sigma_t$.  Plugging that into our
-    fall-time equation gives us...drumroll please... $\approx 3.8s$.
+    Here is where we start deciding what probability distribution
+    we're going to use.  Up to this point we haven't made any
+    assumptions about that distribution.  There are consequences to
+    our choices here.  Let's say, for sake of argument, that we pick a
+    distribution which consists of two delta functions with just the
+    right separation so that we get the desired value of $\sigma$.
+    I'm sure you can see how that would be problematic.  There are two
+    distributions that we're going to explore here.  First, we're
+    going to look at the naive approach where we assume that the
+    energy is a normal vairate.  That actually gets us pretty close
+    with $\expval{t_f} \approx 3.8s$.  Next, we're going to take a cue
+    from our earlier solution in which we found that to maximize
+    $\expval{t_f}$ then we should use a \ac{gwp}.  We will then make
+    momentum be the normal variate which turns the energy into a
+    $\chi^2$ distribution with one degree of freedom.  That selection
+    ends up bringing us up to $\expval{t_f} \approx 3.9$ which is in
+    line with our earlier findings.  Let's get started shall we?
 
-    So yeah... science... it works!  We successfully solved the
-    expectation-value of the fall-time for \icepick{} using the
-    time/energy uncertainty relation.  This calls for scotch!
+
+    \begin{figure}
+      \centering
+      \begin{tabular}{cc}
+        \textbf{Method} & \textbf{Maximum $\expval{t_f}$}\\
+        X/P Uncertainty & 3.8968s\\
+        E/T Uncertainty, P=N(0, $\sigma$) & 3.9051s\\
+        E/T Uncertainty, E=N(0, $\sigma$) & 3.8350s\\
+      \end{tabular}
+      \caption{Fall-time expectation values for different methods of
+        computation.  The difference between the X/P and E/T with
+        $E=N(...)$ method may be small ($\sim .06$) but it's an order
+        of magnitude higher than the difference between X/P and E/T
+        with $P=N(...)$} \inlabel{timesfall}
+    \end{figure}
+
+
+    %%     &&&= \frac{1}{4\gamma^2}\frac{\pi^2}{8}\\
+    %%     \implies &&\sigma_t
+    %%     &= \sqrt{\frac{1}{4\gamma^2}\frac{\pi^2}{8}}\\
+    %%     &&&= \frac{\pi}{4\sqrt{2}\gamma}\\
+    %%   \end{alignedat}
+    %% \end{equation}
+
+    %% Plugging that value of $\sigma_t$ into our uncertainty relation
+    %% gives us $\sigma_E = \hbar/2\sigma_t$.  Plugging that into our
+    %% fall-time equation gives us...drumroll please... $\approx 3.8s$.
+
+    %% So yeah... science... it works!  We successfully solved the
+    %% expectation-value of the fall-time for \icepick{} using the
+    %% time/energy uncertainty relation.  This calls for scotch!
   \end{answerpart}
 
 \end{answer}

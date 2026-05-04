@@ -36,7 +36,7 @@ class ItFigures(object):
         self.by_log_ratio(outpath)
         self.by_linear_ratio(outpath)
         self.by_log_value(outpath)
-        #self.by_log_energy(outpath)
+        self.printables()
 
     def c1(self, d):
         return d/self.L
@@ -159,15 +159,60 @@ class ItFigures(object):
             + math.log(2)/4
             - math.log(s)/2)
 
-    def by_log_energy(self, outpath):
-        # appropriate value of sigma_t
-        st = math.pi / (4*2**.5*self.gamma)
-        print(st)
+    def printables(self):
+
+        print("="*80)
+        print("X/P Method")
+        print("="*80)
+        print("")
 
         # appropriate value of sigma_e
-        se = self.h/st
-        print(se)
+        d = self.d()
+        print(f"d:       {d}")
+
+        # expectation value for the fall-time
+        ft = self.tfc(d)
+        print(f"<tf>:    {ft}")
+        print("")
+        ft_xp = ft
+
+        print("="*80)
+        print("E = N(0, sigma)")
+        print("="*80)
+        print("")
+        # appropriate value of sigma_t
+        st = math.pi / (4*2**.5*self.gamma)
+        print(f"sigma-t: {st}")
+
+        # appropriate value of sigma_e
+        se = self.h/(2*st)
+        print(f"sigma-e: {se}")
 
         # expectation value for the fall-time given that energy uncertainty
         ft = self.tfe(se)
-        print(ft)
+        print(f"<tf>:    {ft}")
+        print("")
+        ft_en = ft
+        
+        print("="*80)
+        print("P = N(0, sigma)")
+        print("="*80)
+        # appropriate value of sigma_t
+        st = math.pi / (2**.5*self.gamma)
+        print(f"sigma-t: {st}")
+
+        # appropriate value of sigma_e
+        se = self.h/(2*st)
+        print(f"sigma-e: {se}")
+
+        # expectation value for the fall-time given that energy uncertainty
+        ft = self.tfe(se)
+        print(f"<tf>:    {ft}")
+        ft_pn = ft
+
+        print("="*80)
+        print("Differences")
+        print("="*80)
+        print("")
+        print(f"X/P vs E=N: {abs(ft_xp - ft_en)}")
+        print(f"X/P vs P=N: {abs(ft_xp - ft_pn)}")
