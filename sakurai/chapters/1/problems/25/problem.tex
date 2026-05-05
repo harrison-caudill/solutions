@@ -1,0 +1,340 @@
+\begin{question}
+  Consider a three-dimensional ket space.  If a certain set of
+  orthonormal kets, say, $\ket{1}$, $\ket{2}$, $\ket{3}$, are used as
+  the base kets, the operators $A$ and $B$ are represented by
+
+  \begin{equation*}
+    \begin{alignedat}{2}
+      &A &\dot{=}
+      \begin{pmatrix}
+        a & 0 & 0\\
+        0 & -a & 0\\
+        0 & 0 & -a\\
+      \end{pmatrix}
+      , &
+      \quad
+      & B& \dot{=}
+      \begin{pmatrix}
+        b & 0 & 0\\
+        0 & 0 & -ib\\
+        0 & ib & 0\\
+      \end{pmatrix}
+    \end{alignedat}
+  \end{equation*}
+
+  with $a$ and $b$ both real.
+
+  \begin{questionpart}
+    Obviously $A$ exhibits a degenerate spectrum.  Does $B$ also
+    exhibit a degenerate spectrum?
+  \end{questionpart}
+
+  \begin{questionpart}
+    Show that $A$ and $B$ commute.
+  \end{questionpart}
+
+  \begin{questionpart}
+    Find a new set of orthonormal kets which are simultaneous
+    eigenkets of both $A$ and $B$.  Specify the eigenvalues of $A$ and
+    $B$ for each of the three eigenkets.  Does your specification of
+    eigenvalues completely characterize each eigenket?
+  \end{questionpart}
+\end{question}
+
+\begin{purpose}
+  Should probably note the anti-diagonal portion of $B$.  We've seen
+  that pattern before with the Pauli spin operators.  The main purpose
+  of this problem seems to be to get some practice with finding
+  eigenvectors in the presence of degeneracy.
+
+  Warning to the reader: I'm hitting some pretty serious senioritis
+  here after having finished problem \ref{1.24:theQuestion} which was
+  the capstone problem for the chapter so... yeah... be a bit patient
+  with me please.
+\end{purpose}
+
+\begin{answer}
+
+  \begin{answerpart}{More degenerates?}
+
+    It's worth noting that $B^{\dagger} = B \implies \lambda \in {R}$
+    and the same is true for $A$.  That means that $\lambda$'s must be
+    real.
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&0 &= \text{Det}(B - \lambda I)\\
+        &&&=
+        \text{Det}
+        \begin{pmatrix}
+          b - \lambda & 0 & 0\\
+          0 & -\lambda & -ib\\
+          0 & ib & -\lambda\\
+        \end{pmatrix}
+        \\
+        &&&=b\
+        \text{Det}
+        \begin{pmatrix}
+          1 - \lambda' & 0 & 0\\
+          0 & -\lambda' & -i\\
+          0 & i & -\lambda'\\
+        \end{pmatrix}
+        \\
+        &&&= b(1 - \lambda')(-\lambda')(-\lambda') - (ib)(-ib)(b - \lambda')\\
+        &&&= b(1 - \lambda')(\lambda'^2 - 1^2)\\
+        &&&= (b - \lambda)(\lambda^2 - b^2)\\
+      \end{alignedat}
+    \end{equation}
+
+    We can easily see that the eigenvalues are $\lambda = \pm b$ with
+    two of them being $b$, ladies and germs, we have ourselves some
+    degeneracy.  When you apply these eigenvalues you'll want to have
+    care to normalize things since $B$ has a factor of $b$ in there.
+  \end{answerpart}
+
+  \begin{answerpart}{Morning Commute}
+
+    \begin{equation}
+      \begin{split}
+        AB
+        &=
+        \begin{pmatrix}
+          a & 0 & 0\\
+          0 & -a & 0\\
+          0 & 0 & -a\\
+        \end{pmatrix}
+        \begin{pmatrix}
+          b & 0 & 0\\
+          0 & 0 & -ib\\
+          0 & ib & 0\\
+        \end{pmatrix}
+        \\
+        &= \begin{pmatrix}
+          ab & 0 & 0\\
+          0 & 0 & iab\\
+          0 & -iab & 0\\
+        \end{pmatrix}
+        \\
+        &= ab\begin{pmatrix}
+          1 & 0 & 0\\
+          0 & 0 & i\\
+          0 & -i & 0\\
+        \end{pmatrix}
+        \\
+      \end{split}
+    \end{equation}
+    \begin{equation}
+      \begin{split}
+        BA
+        &=
+        \begin{pmatrix}
+          b & 0 & 0\\
+          0 & 0 & -ib\\
+          0 & ib & 0\\
+        \end{pmatrix}
+        \begin{pmatrix}
+          a & 0 & 0\\
+          0 & -a & 0\\
+          0 & 0 & -a\\
+        \end{pmatrix}
+        \\
+        &= \begin{pmatrix}
+          ab & 0 & 0\\
+          0 & 0 & iab\\
+          0 & -iab & 0\\
+        \end{pmatrix}
+        \\
+        &= ab\begin{pmatrix}
+          1 & 0 & 0\\
+          0 & 0 & i\\
+          0 & -i & 0\\
+        \end{pmatrix}
+        \\
+      \end{split}
+    \end{equation}
+
+    \begin{equation}
+      AB = BA \Rightarrow [A, B] = 0\qed
+    \end{equation}
+
+    So, if they commute, then there must exist a simultaneous
+    eigenbasis.  We showed that earlier in
+    problem...umm... \ref{1.17:theQuestion}.
+  \end{answerpart}
+
+  \begin{answerpart}{Perfect Union}
+
+    Since we know the two operators commute, the easiest thing to
+    articulate is reference equation \ref{1.17:result} in problem
+    \ref{1.17:theQuestion} and rewrite the product of the operators
+    as:
+
+    \begin{equation}
+      AB
+      = \sum_i \lambda_{a,i}\lambda_{b,i}\Lambda_i
+      = \sum_i \lambda_i\Lambda_i
+    \end{equation}
+
+    So if we just view thew product of the eigenvalues for the
+    individual operators as a single eigenvalue for the product
+    ($\lambda_i \equiv \lambda_{a,i}\lambda_{b,i}$) then we can find a
+    simultaneous eigenbasis by finding the eigenbasis of the product
+    of the operators.  Did you follow that?  No...that's probably
+    because I'm only half paying attention to this one.
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&0
+        &=\text{Det}
+        \left(
+        ab
+        \begin{pmatrix}
+          1-\lambda' & 0 & 0\\
+          0 & -\lambda' & i\\
+          0 & -i & -\lambda'\\
+        \end{pmatrix}
+        \right)
+        \\
+        \implies &&0 &= \text{Det}
+        \begin{pmatrix}
+          1-\lambda' & 0 & 0\\
+          0 & -\lambda' & i\\
+          0 & -i & -\lambda'\\
+        \end{pmatrix}
+        \\
+        &&&= (1-\lambda')(-\lambda')(-\lambda') - (-i)(i)(1-\lambda')\\
+        &&&= (1-\lambda')(\lambda'^2-1^2)\\
+        &&&= (ab-\lambda')(\lambda'^2-(ab)^2)\\
+      \end{alignedat}
+    \end{equation}
+
+    So, we can clearly see that the simultaneous eigenvalues are
+    exactly the same as before (with scaling factors of $a$, $b$, and
+    $ab$ for matrices $A$, $B$, and $AB/BA$ respectively).  With our
+    eigenvalues of $\pm 1$, we can solve for the non-degenerate
+    eigenvectors:
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&
+        \begin{pmatrix}
+          1 & 0 & 0\\
+          0 & 0 & i\\
+          0 & -i & 0\\
+        \end{pmatrix}
+        \begin{pmatrix}
+          x\\ y\\ z\\
+        \end{pmatrix}
+        &= \begin{pmatrix}
+          x\\ y\\ z\\
+        \end{pmatrix}
+        \\
+        \implies
+        &&x &= x\\
+        &&iz &= y\\
+        &&-iy &= z\\
+      \end{alignedat}
+    \end{equation}
+
+    So, let's pick some values.  We can pick anything we want for $x$,
+    so let's go with $0$.  Then we'll pick $1-i$ for $y$.  Then we'll
+    also negate and that leaves us with the \emph{non-normalized}
+    \emph{non-degenerate} eigenkets
+
+    \begin{equation}
+      \ket{1} \dot{=}
+      \begin{bmatrix}
+        0\\ 0\\ 0\\
+      \end{bmatrix}
+      ,\quad
+      \ket{2} \dot{=}
+      \frac{1}{2}
+      \begin{bmatrix}
+        0\\ 1+i\\ 1-i\\
+      \end{bmatrix}
+      ,\quad
+      \ket{3} \dot{=}
+      \frac{1}{2}
+      \begin{bmatrix}
+        0\\ 1-i\\ 1+i\\
+      \end{bmatrix}
+    \end{equation}
+
+    OK, the problem is what to do about that degenerate eigenvalue.
+    The problem asks for \emph{orthogonal} eigenvectors.  It's easy
+    enough to manually construct one that works (like by taking a
+    cross product), but according to my nagging assistant I should
+    probably show the more methodical approach.
+
+    Since we identified that the $x$ value there can be anything we
+    want for the $\pm b$ eigenvalues, then we set it to 0 for those
+    eigenvectors.  For our final eigenvector, we'll just choose a $1$
+    in that spot.  It's also just easier that way so that makes our
+    final set
+
+    \begin{equation}
+      \ket{1} \dot{=}
+      \begin{bmatrix}
+        1\\ 0\\ 0\\
+      \end{bmatrix}
+      ,\quad
+      \ket{2} \dot{=}
+      \frac{1}{2}
+      \begin{bmatrix}
+        0\\ 1+i\\ 1-i\\
+      \end{bmatrix}
+      ,\quad
+      \ket{3} \dot{=}
+      \frac{1}{2}
+      \begin{bmatrix}
+        0\\ 1-i\\ 1+i\\
+      \end{bmatrix}
+    \end{equation}
+
+    Explicitly stating our eigenvalues for the various vectors
+
+    \begin{equation}
+      \begin{split}
+        \lambda_{A,1} &= a\\
+        \lambda_{A,2} &= -a\\
+        \lambda_{A,3} &= -a\\
+        \lambda_{B,1} &= b\\
+        \lambda_{B,2} &= -b\\
+        \lambda_{B,3} &= b\\
+        \lambda_{AB,1} &= ab\\
+        \lambda_{AB,2} &= ab\\
+        \lambda_{AB,3} &= -ab\\
+      \end{split}
+    \end{equation}
+
+    Remember to mind your manners and your normalization constants
+    when you use these.  As for the final part of the question: did
+    the eigenvalues fully specify the eigenvectors the answer they're
+    looking for isn't about the mechanics of finding Eigenvectors,
+    it's about the quantum mechanics of observing the observable.  If
+    you observe the observable $B$ and get $b$ in return, it tells you
+    that you're either in $\ket{1}$ or $\ket{3}$.  To figure out the
+    state of the system, you have to simultaneously measure both $A$
+    and $B$ where you get
+
+    \begin{equation}
+      \begin{split}
+        (\lambda_{A,1}, \lambda_{B,1}) &= (a, b)\\
+        (\lambda_{A,2}, \lambda_{B,2}) &= (-a, -b)\\
+        (\lambda_{A,3}, \lambda_{B,3}) &= (-a, b)\\
+      \end{split}
+    \end{equation}
+
+    Note that you can just as easily pick $-1$ for $\ket{1}$ which
+    gets you exactly the same effective result.  The arbitrary nature
+    of that selection is why you don't see the 4th theoretical state
+    of $(-a, -b)$ above.  In the case of an observable, that's
+    essentially a selection of ``Which way is up?'' or ``Are we going
+    to use a left-handed or right-handed coordinate system?'' or
+    ``Should we use emacs or vim?''.  The answers are ``Up is away
+    from the enemy's gate'', ``right-handed'', and ``If you're a vim
+    user then you are dead to me.'' respectively.
+
+  \end{answerpart}
+
+\end{answer}
