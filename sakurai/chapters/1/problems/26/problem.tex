@@ -4,7 +4,7 @@
     Prove that $(1/\sqrt{2})(1+i\sigma_x)$, where the matrix $\sigma_x$
     is given in (3.50), acting on a two-component spinor can be
     regarded as the matrix representation of the rotation operator
-    about the $x$-axis by angle $-\pi/2$. (The minus sign signifies
+    about the $x$-axis by angle $\pi/2$. (The minus sign signifies
     that the rotation is clockwise.)
   \end{questionpart}
 
@@ -16,34 +16,449 @@
 \end{question}
 
 \begin{purpose}
+  Spin operators have a rule of $720^{\circ}$ in which they have to
+  go around twice to come back to where they started.  Yeah, I know,
+  it's like when we say that there is less than $360^{\circ}$ around
+  the earth because of spatial warping associated with general
+  relativity.  Some things are best appreciated when you start viewing
+  the math.  This and other quirks below.  The trouble with this
+  problem is that it really belongs in chapter 3.  We get a glimpse of
+  some of these things, but chapter 1 really doesn't give us the tools
+  we need to properly analyze the systems under consideration.
 \end{purpose}
 
 \begin{answer}
 
   \begin{answerpart}{The World is Spinoring}
-  And recalling equation 3.50 from the book:
-  
-  \begin{equation*}
-    \tag{3.50}
-    \sigma_1 =
-    \begin{pmatrix}
-      0 & 1 \\
-      1 & 0 \\
-    \end{pmatrix},
-    \sigma_2 =
-    \begin{pmatrix}
-      0 & -i \\
-      i &  0 \\
-    \end{pmatrix},
-    \sigma_3 =
-    \begin{pmatrix}
-      1 &  0 \\
-      0 & -1 \\
-    \end{pmatrix}
-  \end{equation*}
+    And recalling equation 3.50 from the book:
+    
+    \begin{equation*}
+      \tag{3.50}
+      \sigma_1 =
+      \begin{pmatrix}
+        0 & 1 \\
+        1 & 0 \\
+      \end{pmatrix},
+      \sigma_2 =
+      \begin{pmatrix}
+        0 & -i \\
+        i &  0 \\
+      \end{pmatrix},
+      \sigma_3 =
+      \begin{pmatrix}
+        1 &  0 \\
+        0 & -1 \\
+      \end{pmatrix}
+    \end{equation*}
+
+    Recalling equation \ref{1.11:spinAngle} and looking at figure
+    \ref{1.11:spinAxes} we can rotate around the $x$ axis by setting
+    $\beta$ to $-\pi/2$ and setting $\alpha$ to $-\pi/2$ so that our
+    rotation is about the $x$ axis and a negative value for $\beta$
+    results in a clockwise rotation.
+
+    \begin{equation}
+      \begin{split}
+        \ket{\vectorbold{S}\cdot\vectorbold{\hat{n}}; +}
+        &= \cos{\frac{\beta}{2}} \ket{+} + e^{i\alpha}\sin{\frac{\beta}{2}} \ket{-}
+        \\
+        &= \cos{-\frac{\pi}{4}}\ket{+} - i\sin{-\frac{\pi}{4}} \ket{-}
+        \\
+        &= \frac{1}{\sqrt{2}}\ket{+} + i\frac{1}{\sqrt{2}}\ket{-}
+        \\
+        &\dot{=} \frac{1}{\sqrt{2}}
+        \begin{bmatrix}
+          1\\i\\
+        \end{bmatrix}
+        \\
+      \end{split}
+    \end{equation}
+
+    Applying the same equation for a rotation of $\pi+\pi/2=3\pi/2$ to
+    see what we get with $\ket{-}$
+
+    \begin{equation}
+      \begin{split}
+        \ket{\vectorbold{S}\cdot\vectorbold{\hat{n}}; -}
+        &= \cos{\frac{\beta}{2}} \ket{+} + e^{i\alpha}\sin{\frac{\beta}{2}} \ket{-}
+        \\
+        &= \cos{-3\frac{\pi}{4}} \ket{+} - i\sin{-3\frac{\pi}{4}} \ket{-}
+        \\
+        &= -\frac{1}{\sqrt{2}}\ket{+} + i\frac{1}{\sqrt{2}}\ket{-}
+        \\
+        &\dot{=} \frac{1}{\sqrt{2}}
+        \begin{bmatrix}
+          -1\\i\\
+        \end{bmatrix}
+        \\
+      \end{split}
+    \end{equation}
+
+    So we're looking for our operator $O$ to behave as follows
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&\hat{O}
+        \begin{bmatrix}
+          1 & 0\\ 0 & 1\\
+        \end{bmatrix}
+        &=
+        \frac{1}{\sqrt{2}}
+        \begin{bmatrix}
+          1 & -1\\ i & i\\
+        \end{bmatrix}
+        \\
+        \implies&& \hat{O}
+        &=
+        \frac{1}{\sqrt{2}}
+        \begin{bmatrix}
+          1 & -1\\ i & i\\
+        \end{bmatrix}
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    Trying what the they gave us in the problem
+
+    \begin{equation}
+      \begin{split}
+        \hat{O}
+        &= 
+        \frac{1}{\sqrt{2}}
+        \left(
+        1 + i
+        \begin{bmatrix}
+          0 & 1 \\
+          1 & 0 \\
+        \end{bmatrix}
+        \right)
+        \\
+        &= 
+        \frac{1}{\sqrt{2}}
+        \left(
+        \begin{bmatrix}
+          1 & 0 \\
+          0 & 1 \\
+        \end{bmatrix}
+        +
+        \begin{bmatrix}
+          0 & i \\
+          i & 0 \\
+        \end{bmatrix}
+        \right)
+        \\
+        &= 
+        \frac{1}{\sqrt{2}}
+        \begin{bmatrix}
+          1 & i \\
+          i & 1 \\
+        \end{bmatrix}
+      \end{split}
+    \end{equation}
+
+    Clearly...something has gone horribly wrong.  Let's take a look
+    back at our solution from problem \ref{1.11:theQuestion}.  We
+    started out assuming that we could put in any angle we wanted for
+    $\beta$ (and $\alpha$ for that matter).  But consider this, the
+    point in that diagram described by $\beta=\pi/2$ and
+    $\alpha=\pi/2$ (which is the $y$ axis) is equivalent to
+    $\beta=-\pi/2$ and $\alpha=-\pi/2$.  Same point, but anywhere we
+    have a $\sin$ in a formulation, it's going to end up with a
+    negative value owing to the odd nature of the function.  So,
+    instead of targeting $-3\pi/2$, we're instead going to target
+    $\pi/2$ which is geometrically equivalent, but reamins within the
+    $[0,\pi]$ window for which the formula was developed.
+    Interestingly, I don't actually see any specific line in the
+    derivation from problem \ref{1.11:theQuestion} that depends upon
+    this assumption of range, but the sign issue is there nonetheless.
+    Let's see what happens when we correct for that by going $\pi/2$
+    in the other direction instead.
+
+    \begin{equation}
+      \begin{split}
+        \ket{\vectorbold{S}\cdot\vectorbold{\hat{n}}; +}
+        &= \cos{\frac{\beta}{2}} \ket{+} + e^{i\alpha}\sin{\frac{\beta}{2}} \ket{-}
+        \\
+        &= \cos{\frac{\pi}{4}}\ket{+} + (\cos(-\frac{\pi}{2}) + i\sin(-\frac{\pi}{2}))\sin{\frac{\pi}{4}} \ket{-}
+        \\
+        &= \frac{1}{\sqrt{2}}\ket{+} - i\frac{1}{\sqrt{2}}\ket{-}
+        \\
+        &\dot{=} \frac{1}{\sqrt{2}}
+        \begin{bmatrix}
+          1\\-i\\
+        \end{bmatrix}
+        \\
+      \end{split}
+    \end{equation}
+
+    OK...that still doesn't look right.  The whole result is off by a
+    factor of $i$.  Going back to our foundational assumption
+
+    \begin{equation}
+      \inlabel{theAssumption}
+      \ket{\vectorbold{S}\cdot\vectorbold{\hat{n}}; +}
+      =
+      \cos(\frac \beta 2)\ket + + \sin(\frac \beta 2) e^{i\alpha}\ket -
+    \end{equation}
+
+    we see that it's nooot quite right...  Let's see what happens when
+    we use this formula and the geometry provided by the problem to
+    construct $\ket{-}$ from $\ket{+}$.  It doesn't have the ambiguity
+    we discussed above.
+
+    \begin{equation}
+      \begin{split}
+        \ket{-}
+        &= \cos(\frac{\beta}{2})\ket{+}
+        +  e^{i\alpha}\sin(\frac{\beta}{2})\ket{-}
+        \\
+        &= \cos(\frac{\pi}{2})\ket{+}
+        +  e^{0i}\sin(\frac{\pi}{2})\ket{-}
+        \\
+        &= 0\ket{+}
+        +  1\ket{-}
+        \\
+        &= \ket{-}
+        \\
+      \end{split}
+    \end{equation}
+
+    So far so good right?  Watch what happens when we try to do that
+    exact same rotation, but first we rotate about the $z$ axis before
+    doing so.
+    
+    \begin{equation}
+      \begin{split}
+        \ket{-}
+        &= \cos(\frac{\beta}{2})\ket{+}
+        +  e^{i\alpha}\sin(\frac{\beta}{2})\ket{-}
+        \\
+        &= \cos(\frac{\pi}{2})\ket{+}
+        +  e^{i\pi/2}\sin(\frac{\pi}{2})\ket{-}
+        \\
+        &= (\cos(\pi/2) + i\sin(\pi/2))\ket{-}
+        \\
+        &= i\sin(\pi/2)\ket{-}
+        \\
+        &= i\ket{-}
+        \\
+      \end{split}
+    \end{equation}
+
+    Where did that factor of $i$ come from?  This turns out to be
+    pretty closely linked with classical mechanics when we talk about
+    the consequences of going from point $A$ to point $B$ by different
+    rotations.  The meaning and cause of this factor is pretty subtle
+    and really isn't explored in chapter 1.  To be honest, this
+    problem \emph{does not} belong in chapter 1.  When we go back to
+    equation 1.102 in \S 1.4.2 of the book
+
+    \begin{equation}
+      \tag{1.102} \ket{S_x;+} = \frac{1}{\sqrt{2}}\ket{+} +
+      \frac{1}{\sqrt{2}}e^{i\delta_1}\ket{-}
+    \end{equation}
+
+    We find that random phasor in there of $e^{i\delta_1}$.  He also
+    adds in one for $\delta_2$ later.  Right after that equation, he
+    states that ``In writing (1.102) we have used the fact that the
+    \emph{overall} phase (common to both $\ket{+}$ and $\ket{-}$) of a
+    state ket is immaterial; the coefficient of $\ket{+}$ can be
+    chosen to be real and positive by convention.''  This particular
+    section always felt a bit hand-wavey and that's probably because
+    it doesn't really get developed until chapter 3 (where this
+    problem belongs).  So, we can easily draw two conclusions here: 1)
+    there's something semi-arbitrary about the selection and 2) it's
+    really only useful for \emph{relative} phase and that there is
+    some kind of \emph{global} phase that is ignored in this
+    formulation.
+
+    So what can we do?  Well, there are two paths forward that I can
+    see.  One is we can bring in chapter 3 and just abbreviate
+    equation 3.62, plug in $\phi$ and call it a day
+
+    \begin{equation}
+      \tag{3.62.abbrev}
+      \exp(\frac{-i\sigma\cdot\hat{\vb{n}}\phi}{2})
+      = \vb{1}\cos(\frac{\phi}{2})
+      - i\sigma\cdot\hat{\vb{n}}\sin(\frac{\phi}{2})
+    \end{equation}
+
+    ooooor we could do it the hard way...or the really hard way.
+    Let's just do it the hard way.  When we applied our formula above,
+    we actually got our operator just right with the exception that we
+    have a factor of $-i$ for the $\ket{-}$ term.  That factor is a
+    consequence of doing our rotation to $\ket{-}$ through the $yz$
+    plane rather than the $xz$ plane.  So if we correct for that
+    phase, we end up with exactly the right answer.  Let's first see
+    if our phase factor from the extra $\pi$ radians of rotation
+    really is the culprit.  We took $\alpha$ to be $-\pi/2$ so that
+    any negative values of $\beta$ would result in clockwise rotations
+    so let's see what we're introducing by going past $\ket{-}$
+
+    \begin{equation}
+      \begin{split}
+        \ket{-}
+        &= \cos(\frac{\beta}{2})\ket{+}
+        +  e^{i\alpha}\sin(\frac{\beta}{2})\ket{-}
+        \\
+        &= \cos(\frac{\pi}{2})\ket{+}
+        +  e^{-i\pi/2}\sin(\frac{\pi}{2})\ket{-}
+        \\
+        &= (\cos(-\pi/2) + i\sin(-\pi/2))\ket{-}
+        \\
+        &= -i\sin(\pi/2)\ket{-}
+        \\
+        &= -i\ket{-}
+        \\
+      \end{split}
+    \end{equation}
+
+    So, when we applied our formulation earlier, we inadvetently
+    introduced an additional factor of $-i$.  So, let's try putting
+    together our two adjustements: the $\beta=\pi/2$ instead of
+    $-3\pi/2$ and adding in a factor $-1/i = i$ to offset what we
+    introduced by going around $\ket{-}$
+
+    \begin{equation}
+      \begin{split}
+        \hat{O}\ket{-}
+        &= i
+        \left(
+        \cos{\frac{\beta}{2}} \ket{+} + e^{i\alpha}\sin{\frac{\beta}{2}} \ket{-}
+        \right)
+        \\
+        &= i
+        \left(\cos{\frac{\pi}{4}} \ket{+} + \left(\cos(-\frac{\pi}{2}) + i\sin(-\frac{\pi}{2})\right)\sin{\frac{\pi}{4}} \ket{-}
+        \right)
+        \\
+        &= \frac{i}{\sqrt{2}}
+        \left(\ket{+} - i\ket{-}\right)
+        \\
+        &= \frac{1}{\sqrt{2}}
+        \left(i\ket{+} + \ket{-}\right)
+        \\
+        &\dot{=} \frac{1}{\sqrt{2}}
+        \begin{bmatrix}
+          i\\1\\
+        \end{bmatrix}
+        \\
+      \end{split}
+    \end{equation}
+
+    Substituting that into our earlier expression, we find that
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&\hat{O}
+        \begin{bmatrix}
+          1 & 0\\ 0 & 1\\
+        \end{bmatrix}
+        &=
+        \frac{1}{\sqrt{2}}
+        \begin{bmatrix}
+          1 & i\\ i & 1\\
+        \end{bmatrix}
+        \\
+        \implies&& \hat{O}
+        &=
+        \frac{1}{\sqrt{2}}
+        \begin{bmatrix}
+          1 & i\\ i & 1\\
+        \end{bmatrix}\qed
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    Is this answer a bit hand-wavey... yeppers.  I just don't see a
+    better way to do this problem using chapter 1's material.
+
   \end{answerpart}
 
   \begin{answerpart}{\texorpdfstring{Building $Z$'s from $Y$'s}{Building Z's from Y's}}
+    So... yeah... this problem doesn't really seem to provide much
+    value but let's do it anyway.
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&\ket{y\pm} &= \frac{1}{\sqrt{2}} [\ket + \pm i\ket -]\\
+        &&\ket{y+} + \ket{y-} &= \frac{1}{\sqrt{2}} [2\ket{+}]\\
+        \implies&&\ket{+} &= \frac{\sqrt{2}}{2}[\ket{y+} + \ket{y-}]\\
+        \implies&&\bra{+} &= \frac{\sqrt{2}}{2}[\bra{y+} + \bra{y-}]\\
+        &&\ket{y+} - \ket{y-} &= \frac{1}{\sqrt{2}} [2i\ket{-}]\\
+        \implies&&\ket{-} &= -i\frac{\sqrt{2}}{2}[\ket{y+} - \ket{y-}]\\
+        \implies&&\bra{-} &= i\frac{\sqrt{2}}{2}[\bra{y+} - \bra{y-}]\\
+      \end{alignedat}
+    \end{equation}
+
+    \begin{equation}
+      \begin{split}
+        \frac{2S_z}{\hbar}
+        &= \Lambda_+ - \Lambda_-\\
+        &= \dyad{+}{+} - \dyad{-}{-}\\
+        &= \left(\frac{\sqrt{2}}{2}\right)^2
+        \left[
+          (\ket{y+} + \ket{y-})(\bra{y+} + \bra{y-})
+          -
+          (-i)(i)(\ket{y+} - \ket{y-})(\bra{y+} - \bra{y-})
+          \right]
+        \\
+        &= \frac{1}{2}
+        \left[
+          (\ket{y+} + \ket{y-})(\bra{y+} + \bra{y-})
+          -
+          (\ket{y+} - \ket{y-})(\bra{y+} - \bra{y-})
+          \right]
+        \\
+        &= \frac{1}{2}
+        \left[
+          (\cancel{\Lambda_{y+}} + \dyad{y-}{y+} + \dyad{y+}{y-} + \cancel{\Lambda_{y-}})
+          -
+          (\cancel{\Lambda_{y+}} - \dyad{y+}{y-} - \dyad{y-}{y+} + \cancel{\Lambda_{y-}})
+          \right]
+        \\
+        &= \cancel{\frac{1}{2}}
+        \left[
+          \cancel{2}\dyad{y-}{y+}
+          + \cancel{2}\dyad{y+}{y-}
+          \right]
+        \\
+        &= \dyad{y-}{y+} + \dyad{y+}{y-}
+        \\
+      \end{split}
+    \end{equation}
+
+    Referencing equation \ref{1.7:theMatrixHasYouNow} to build our
+    matrix, we have:
+
+    \begin{equation}
+      \begin{split}
+        S_z
+        &\dot{=}
+        \begin{bmatrix}
+          \mel{y+}{S_z}{y+} & \mel{y+}{S_z}{y-}\\
+          \mel{y-}{S_z}{y+} & \mel{y-}{S_z}{y-}\\
+        \end{bmatrix}
+        \\
+        &=
+        \frac{\hbar}{2}
+        \begin{bmatrix}
+          0 & 1\\
+          1 & 0\\
+        \end{bmatrix}
+        \\
+        &=
+        \frac{\hbar}{2}\sigma_1\qed
+      \end{split}
+    \end{equation}
+
+    So, what he's trying to show us here is the cyclic nature of the
+    spin operators.  We've just recreated $\sigma_x$ or $\sigma_1$.  I
+    believe this will all become clear when we dig into the Bloch
+    sphere, but until then I think he just wants you to look at that
+    and say ``oooh shiny''.  Pretty sure Pauli spin operators were in
+    chapter 1 in a previous incarnation and he didn't have a chance to
+    renormalize before he died.  Once again, the world is a lesser
+    place for his premature passing.
   \end{answerpart}
   
 \end{answer}
