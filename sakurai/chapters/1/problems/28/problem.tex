@@ -1,15 +1,172 @@
 \begin{question}
-  Construct the transformation matrix that connects the $S_z$ diagonal
-  basis to the $S_x$ diagonal basis. Show that your result is
-  consistent with the general relation
 
-  \begin{equation*}
-    U = \sum_r \dyad{b^{(r)}}{a^{(r)}}
-  \end{equation*}
+  \begin{questionpart}
+    Construct the transformation matrix that connects the $S_z$
+    diagonal basis to the $S_x$ diagonal basis.
+  \end{questionpart}
+
+  \begin{questionpart}
+    Show that your result is consistent with the general relation
+    \begin{equation*}
+      U = \sum_r \dyad{b^{(r)}}{a^{(r)}}
+    \end{equation*}
+  \end{questionpart}
+
 \end{question}
 
 \begin{purpose}
+  He wants us to feel the connection between matrices and bras and
+  kets.
 \end{purpose}
 
 \begin{answer}
+
+  \begin{answerpart}{With LinAlg}
+    So...the question is ambiguous.  I don't know if it wants $x
+    \rightarrow z$ or $z \rightarrow x$.  So we'll just work it both
+    ways. We'll start with a matrix that we can use in the $x$ basis,
+    to get the $z$ basis. That is to say
+
+    \begin{equation}
+      \begin{split}
+        \hat{O}_z\ket{\alpha_x} &= \ket{\alpha_z}\\
+        \begin{bmatrix}
+          O_{11} & O_{12}\\
+          O_{21} & O_{22}\\
+        \end{bmatrix}
+        \begin{bmatrix}
+          1 & 0\\
+          0 & 1\\
+        \end{bmatrix}
+        &= 
+        \begin{bmatrix}
+          [x_{+,z}] & [x_{-,z}]\\
+        \end{bmatrix}
+      \end{split}
+    \end{equation}
+
+    where $\ket{\alpha_z}$ is $\ket{\alpha}$ expressed in the $z$
+    basis and the same for the $x$ basis.  So, clearly all we have to
+    do is write out the $\ket{x\pm}$ vectors in the $z$ basis and we
+    win.
+
+    \begin{equation}
+      \hat{O}_z
+      =
+      \frac{1}{\sqrt{2}}
+      \begin{bmatrix}
+        1 & 1\\
+        1 & -1\\
+      \end{bmatrix}
+    \end{equation}
+
+    Drawing upon our experience in \ref{1.26:theQuestion}, we can do
+    this one pretty easily too\footnote{Check out equation
+    \ref{1.26:yzExpression} where we do this for y which differs only
+    by a factor of $i$.}
+    
+    \begin{equation}
+      \hat{O}_x
+      =
+      \frac{1}{\sqrt{2}}
+      \begin{bmatrix}
+        1 & 1\\
+        1 & -1\\
+      \end{bmatrix}
+    \end{equation}
+
+    So, it \emph{is} worth drawing our attention to the fact that the
+    matrices are \emph{exactly} the same.  Let's take a look at why
+    that is.
+
+    \begin{equation}
+      \begin{split}
+        \hat{O}_z\ket{\alpha_x} &= \ket{\alpha_z}\\
+        \hat{O}_x\ket{\alpha_z} &= \ket{\alpha_x}\\
+        \hat{O}_z\left(\hat{O}_x\ket{\alpha_z}\right) &= \ket{\alpha_z}\\
+        \hat{O}_z\hat{O}_x &= I\\
+        \hat{O}_z &= \hat{O}_{x}^{-1}\\
+      \end{split}
+    \end{equation}
+
+    Ladies and gentlement, it looks like we have ourselves a
+    party... maybe not a hoppin' party but a party nonetheless.  Next
+    up, let's take a look at the hermiticity of these things.  For the
+    relations above to hold (which we'll show in a minute here) then
+    the above relations also have to hold for $\bra{\alpha_{x/y}}$
+    which means that
+
+    \begin{equation}
+      \begin{split}
+        \bra{\alpha_x}\hat{O}_z^\dagger &= \bra{\alpha_z}\\
+        \mel{\alpha_x}{\hat{O}_z^\dagger\hat{O}_z}{\alpha_x} &= \braket{\alpha_z}{\alpha_z}\\
+        \mel{\alpha_x}{\hat{1}}{\alpha_x} &= \braket{\alpha_z}{\alpha_z}\\
+        \hat{O}_z^\dagger\hat{O}_z &= I\\
+        \hat{O}_x^\dagger\hat{O}_x &= I\\
+        \hat{O}_x^\dagger &= \hat{O}_z\\
+        \hat{O}_z^\dagger &= \hat{O}_x\\
+      \end{split}
+    \end{equation}
+
+    It's worth noting that this relationship is a lot easier to show
+    using bra/ket algebra with
+
+    \begin{equation}
+      \begin{split}
+        \hat{O}_x &= \sum_i \dyad{x_i}{z_i}\\
+        \hat{O}_z &= \sum_i \dyad{z_i}{x_i}\\
+        &= \left(\sum_i \dyad{x_i}{z_i}\right)^\dagger\\
+        &= \hat{O}_x^\dagger\\
+      \end{split}
+    \end{equation}
+
+    In the general case, this is where the story ends.  In the
+    \emph{specific} case, however, it's pretty easy to see that
+    $\hat{O}_z^\dagger = \hat{O}_z = \hat{O}_x$.
+    
+  \end{answerpart}
+
+  \begin{answerpart}{Bring in the Unitarians}
+    Next up is showing compliance with the compliance requirement with
+    bra/ket algebras.
+
+    \begin{equation}
+      \begin{split}
+        O_z
+        &= \sum_i \dyad{z_i}{x_i}\\
+        &= \dyad{z_+}{x_+} + \dyad{z_-}{x_-}\\
+        &\dot{=}
+        \begin{bmatrix}
+          \mel{z+}{O_z}{z+} & \mel{z+}{O_z}{z-}\\
+          \mel{z-}{O_z}{z+} & \mel{z-}{O_z}{z-}\\
+        \end{bmatrix}
+        \\
+        &=
+        \begin{bmatrix}
+          \mel{z+}{(\dyad{z_+}{x_+})}{z+} & \mel{z+}{(\dyad{z_+}{x_+})}{z-}\\
+          \mel{z-}{(\dyad{z_-}{x_-})}{z+} & \mel{z-}{(\dyad{z_-}{x_-})}{z-}\\
+        \end{bmatrix}
+        \\
+        &=
+        \begin{bmatrix}
+          \braket{x_+}{z+} & \braket{x_+}{z-}\\
+          \braket{x_-}{z+} & \braket{x_-}{z-}\\
+        \end{bmatrix}
+        \\
+        &=
+        \frac{1}{\sqrt{2}}
+        \begin{bmatrix}
+          1 & 1\\
+          1 & -1\\
+        \end{bmatrix}
+        \\
+      \end{split}
+    \end{equation}
+
+    Because of the unitarian nature of the matrices we can either
+    repeat that whole block for the other one, or just take it on
+    faith that you can do that yourself...I believe in you...
+    
+  \end{answerpart}
+
 \end{answer}
