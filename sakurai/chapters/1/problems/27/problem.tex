@@ -9,7 +9,66 @@
 \end{question}
 
 \begin{purpose}
+  My trusty cyber-TA says that the purpose of this problem is to drive
+  home that things like ``Hermitian'' are intrinsic to the operator
+  whereas the matrix representations are pretty tightly-coupled to the
+  basis in which they are expressed... because... duh since the
+  definition of those entries includes $\mel{a_i}{\hat{O}}{a_j}$.  I
+  didn't find this one to be terribly deep.  Like and subscribe and
+  leave a comment if you see a better way to handle this one.
 \end{purpose}
 
 \begin{answer}
+  So, this one is pretty trivial to show that the answer is ``No''.
+  Let's just start with a simple counter-example.
+
+  \begin{equation}
+    \begin{alignedat}{3}
+      & x_1 &= \begin{bmatrix}1\\0\end{bmatrix}
+        &
+        \quad
+        & x_2 &= \begin{bmatrix}0\\i\end{bmatrix}
+          \\
+      & y_1 &= \begin{bmatrix}1\\0\end{bmatrix}
+        &
+        \quad
+        & y_2 &= \begin{bmatrix}0\\1\end{bmatrix}
+          \\
+    \end{alignedat}
+  \end{equation}
+
+  Now we consider the following two scenarios, of which only one can
+  be true at a time.
+
+  \begin{equation}
+    \begin{split}
+    \mel{x_1}{A}{x_2} &= \braket{x_1}{x_a} \in \mathbb{R}\\
+    \mel{y_1}{A}{y_2} &= \braket{y_1}{y_a} \in \mathbb{R}\\
+    \end{split}
+  \end{equation}
+
+  For the result to be entirely real, then the operator $A$ must
+  modify $x_2$ to be entirely real when acted upon to become $x_a$.
+  If $A$ does so (and produces a non-negative result) then using $y_1$
+  and $y_2$ will produce a complex result.  He wanted us to talk about
+  the spin operators so, expressing $S_y$ in the $\ket{y\pm}$ basis
+
+  \begin{equation}
+    S_y \dot{=} \frac{\hbar}{2}\begin{pmatrix}1&0\\0&-1\\\end{pmatrix}
+  \end{equation}
+
+  Like I explained to my kid, $10$ is always $N$ in base-N.
+  Expressing it in the $\ket{z\pm}$ basis, gets us a purely imaginary
+  result.  I guess that's what he's looking for with the callback to
+  \ref{1.26:theQuestion}??
+
+  We can also make it unreal pretty easily by application of phasors.
+  Let's say we add a phasor of $e^{i\theta}$ to any of the basis
+  vectors and call it a new basis.  Its presence won't change whether
+  or not the new basis is orthogonal, but it will make one of the
+  members complex.
+
+  I'm not sure what he's going for here, but it's laughably simple to
+  make these things blow up... maybe that's the (very simple)
+  lesson???
 \end{answer}
