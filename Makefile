@@ -49,7 +49,7 @@ params:
 	@$(MAKE) line --no-print-directory -e header="Building parameters file"
 	echo "\def\\\\bookName{$(bookName)}" > $(BUILD)/bookParams.tex
 	echo "\def\\\\chapterNum{$(chapterNum)}" >> $(BUILD)/bookParams.tex
-	echo "\def\\\\problemNum{$(problemNum)}" >> $(BUILD)/bookParams.tex
+	echo "\def\\\\problemNum{$(p)}" >> $(BUILD)/bookParams.tex
 	echo "\def\\\\buildPath{$(BUILD)}" >> $(BUILD)/bookParams.tex
 
 sqrf: .dummy_builddir
@@ -80,28 +80,28 @@ problem:
 	@$(MAKE) --no-print-directory \
 	-e bookName=sakurai \
 	-e chapterNum=1 \
-	-e problemNum=$(problemNum) \
+	-e p=$(p) \
 	fullproblem
 
 fullproblem: .dummy_builddir params
 	@$(MAKE) line --no-print-directory -e header="Building Python-Based Figures"
 	bin/figures.py -b $(bookName) -q
-	bin/figures.py -b $(bookName) -c $(chapterNum) -p $(problemNum)
+	bin/figures.py -b $(bookName) -c $(chapterNum) -p $(p)
 	@$(MAKE) line --no-print-directory -e header="Consolidating References"
 	bin/ref.py -b $(bookName) -q
-	bin/ref.py -b $(bookName) -c $(chapterNum) -p $(problemNum)
+	bin/ref.py -b $(bookName) -c $(chapterNum) -p $(p)
 	@$(MAKE) line --no-print-directory -e header="Exporting CAD Drawings"
 	bin/qcad_export.py -b $(bookName) -q
-	bin/qcad_export.py -b $(bookName) -c $(chapterNum) -p $(problemNum)
+	bin/qcad_export.py -b $(bookName) -c $(chapterNum) -p $(p)
 	@$(MAKE) line --no-print-directory -e header="Building Problem"
 	$(PDFTEX) \
-	-jobname $(bookName)-$(chapterNum)-$(problemNum)-raw \
+	-jobname $(bookName)-$(chapterNum)-$(p)-raw \
 	problem.tex \
-	$(BUILD)/$(bookName)-$(chapterNum)-$(problemNum)-raw.pdf
+	$(BUILD)/$(bookName)-$(chapterNum)-$(p)-raw.pdf
 	gs \
         -sDEVICE=pdfwrite \
         -dNOPAUSE \
         -dBATCH \
         -dFirstPage=2 \
-        -sOutputFile=$(BUILD)/$(bookName)-$(chapterNum)-$(problemNum).pdf \
-	$(BUILD)/$(bookName)-$(chapterNum)-$(problemNum)-raw.pdf
+        -sOutputFile=$(BUILD)/$(bookName)-$(chapterNum)-$(p).pdf \
+	$(BUILD)/$(bookName)-$(chapterNum)-$(p)-raw.pdf
