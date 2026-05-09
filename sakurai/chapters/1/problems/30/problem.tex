@@ -1,4 +1,3 @@
-\newcommand{\Ojog}[1]{\mathscr{J}(#1)}
 \begin{question}
 
   \begin{questionpart}
@@ -32,6 +31,8 @@
 \end{question}
 
 \begin{purpose}
+  We're going to dig deep in the consequences of the jog operator here
+  and try to learn about about how it behaves when employed.
 \end{purpose}
 
 \begin{answer}
@@ -374,16 +375,16 @@
     \begin{equation}
       \begin{alignedat}{2}
         &&[x, \mathscr{J}(\Delta x')]
-        &= x\Ojog{\Delta x'} - \Ojog{\Delta x'}x\\
+        &= x\mathscr{J}(\Delta x') - \mathscr{J}(\Delta x')x\\
         &&&=
         \Delta x'
-        \Ojog{\Delta x'}
+        \mathscr{J}(\Delta x')
         \\
         \implies
-        && x\Ojog{\Delta x'} - \Ojog{\Delta x'}x
+        && x\mathscr{J}(\Delta x') - \mathscr{J}(\Delta x')x
         &= 
         \Delta x'
-        \Ojog{\Delta x'}
+        \mathscr{J}(\Delta x')
         \\
       \end{alignedat}
     \end{equation}
@@ -394,23 +395,23 @@
   \end{answerpart}
 
   \begin{answerpart}{All Together Now}
-    Showing the eigen-nature of $\Ojog{a}$ in the $x$ basis is now much
+    Showing the eigen-nature of $\mathscr{J}(a)$ in the $x$ basis is now much
     simpler.
 
     \begin{equation}
       \begin{alignedat}{2}
-        &&a\Ojog{a}
-        &= x\Ojog{a} - \Ojog{a}x
+        &&a\mathscr{J}(a)
+        &= x\mathscr{J}(a) - \mathscr{J}(a)x
         \\
         \implies
-        &&x\Ojog{a}
-        &= a\Ojog{a} + \Ojog{a}x
+        &&x\mathscr{J}(a)
+        &= a\mathscr{J}(a) + \mathscr{J}(a)x
         \\
         \implies
-        &&x\Ojog{a}\ket{x'}
-        &= (a\Ojog{a} + \Ojog{a}x)\ket{x'}
+        &&x\mathscr{J}(a)\ket{x'}
+        &= (a\mathscr{J}(a) + \mathscr{J}(a)x)\ket{x'}
         \\
-        &&&= (a + x')\Ojog{a}\ket{x'}
+        &&&= (a + x')\mathscr{J}(a)\ket{x'}
         \\
       \end{alignedat}
     \end{equation}
