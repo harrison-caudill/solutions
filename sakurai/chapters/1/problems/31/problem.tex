@@ -3,7 +3,7 @@
   \begin{questionpart}
     On p. 247, Gottfried (1966) states that
     \begin{equation*}
-      [x_i, G(\vb{p})] = -i\hbar \pdv{G}{p_i},
+      [x_i, G(\vb{p})] = i\hbar \pdv{G}{p_i},
       [p_i,F(\vb{x})] = -i\hbar \pdv{F}{x_i}
     \end{equation*}
     can be ``easily derived'' from the fundamental commutation
@@ -18,7 +18,166 @@
 \end{question}
 
 \begin{purpose}
+  Formalize a bit further what we already did in problem
+  \ref{1.30:theQuestion}.  This one might actually be easy... mostly
+  because we've mostly already done it.
 \end{purpose}
 
 \begin{answer}
+
+  \begin{answerpart}{``Easily''}
+
+    See the derivation of equation \ref{1.30:xfp} for
+    \begin{equation}
+      [x_i, G(\vb{p})] = -i\hbar \pdv{G}{p_i}
+    \end{equation}
+
+
+    For the converse, we draw upon our previous finding in equation
+    \ref{1.30:IHaveThePower}
+
+    \begin{equation}
+      [A,B^n]
+      =
+      B^{n-1}[A,B]
+      + \sum_{i=1}^{n-1}B^{i-1}[A,B]B^{n-i}
+    \end{equation}
+
+    Whenever we have a fundamental commutation relationship to draw
+    upon which is a constant, we can refer back to equation
+    \ref{1.30:ConstantPower} and refine it further
+
+    \begin{equation}
+      \inlabel{ABTesting}
+      \begin{split}
+        [A,B^n]
+        &=
+        B^{n-1}[A,B]
+        + \sum_{i=1}^{n-1}B^{i-1}[A,B]B^{n-i}
+        \\
+        &=
+        [A,B]nB^{n-1}
+        \\
+      \end{split}
+    \end{equation}
+
+    Putting that another way
+
+    \begin{equation}
+      [p, x^n] = -i\hbar n x^{n-1} = -i\hbar \pdv{}{x} x^n
+    \end{equation}
+
+    Substituting that back into our taylor series just like we did in
+    equations \ref{1.30:presub} and \ref{1.30:postsub} and we,
+    entirely expectedly, get the same result (just with a negative
+    sign from reversing the order of the canonical commutation and a
+    different variable we're differentiating against).
+
+    So...Is it easily derived?  Yeah...if you've already derived it.
+  \end{answerpart}
+
+  \begin{answerpart}{``Derived''}
+
+    It is tempting to try pulling in equation \inref{ABTesting}
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        && [x^2,p^2]
+        &= [x^2,p]\pdv{}{p}p^2
+        \\
+        &&&= -[p,x^2]\pdv{}{p}p^2\\
+        &&&= -[p,x]\pdv{}{}x^2\pdv{}{p}p^2\\
+        &&&= -i\hbar\pdv{}{x}x^2\pdv{}{p}p^2\\
+        &&&= -i4\hbar x p\\
+      \end{alignedat}
+    \end{equation}
+
+    Buuuuut we can't do that because equation \inref{ABTesting}
+    assumes that $[A,B] = k$ whereas $[x^2, p]$ does \emph{not}
+    produce a constant.  Let's try our canonical commutations instead.
+    Pulling in the right one from the book
+
+    \begin{equation}
+      \tag{1.232e}
+      [A,BC] = [A,B]C + B[A,C]
+    \end{equation}
+
+    \begin{equation}
+      \begin{split}
+        [x^2,p^2]
+        &= [x^2, pp]\\
+        &= [x^2,p]p + p[x^2,p]\\
+        &= -([p,x^2]p + p[p,x^2])\\
+      \end{split}
+    \end{equation}
+
+    Solving for that commutator
+
+    \begin{equation}
+      \begin{split}
+        [p,x^2] &= [p,x]x + x[p,x]\\
+      \end{split}
+    \end{equation}
+
+    and plugging it back in
+    \begin{equation}
+      \begin{split}
+        [x^2,p^2]
+        &= -(([p,x]x + x[p,x])p + p([p,x]x + x[p,x]))\\
+        &= ([x,p]x + x[x,p])p + p([x,p]x + x[x,p])\\
+        &= [x,p]xp + x[x,p]p + p[x,p]x + px[x,p]\\
+        &= [x,p](xp + xp + px + px)\\
+        &= i\hbar(2xp + 2px)\\
+        &= i\hbar2\{x,p\}\qed\\
+      \end{split}
+    \end{equation}
+
+    Pulling in the definition of Poisson brackets from the book
+    
+    \begin{equation}
+      \tag{1.230}
+      [A(q,p),B(q,p)]_{\text{classical}} \equiv
+      \sum_s \left(
+      \pdv{A}{q_s}
+      \pdv{B}{p_s}
+      - 
+      \pdv{A}{p_s}
+      \pdv{B}{q_s}
+      \right)
+    \end{equation}
+
+    and applying it to our scenario
+    
+    \begin{equation}
+      \begin{split}
+        [x^2,p^2]_{\text{classical}}
+        &\equiv
+        \sum_s \left(
+        \pdv{x^2}{x}
+        \pdv{p^2}{p}
+        - 
+        \pdv{x^2}{p}
+        \pdv{p^2}{x}
+        \right)
+        \\
+        &=
+        \pdv{x_i^2}{x_i}
+        \pdv{p_i^2}{p_i}
+        -
+        \underbrace{
+          \pdv{x_i^2}{p_i}
+          \pdv{p_i^2}{x_i}
+        }_{0}
+        \\
+        &= 4x_ip_i
+        \\
+        &= (2x_ip_i + 2x_ip_i)
+        \\
+        &= \frac{1}{i\hbar}[x^2,p^2]_{\text{quantum}}\qed
+        \\
+      \end{split}
+    \end{equation}
+
+  \end{answerpart}
+
 \end{answer}
