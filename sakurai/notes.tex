@@ -1,0 +1,39 @@
+    \begin{equation}
+      \tag{1.247}
+      \begin{split}
+        \left(1 - \frac{ip\Delta x'}{\hbar}\right)
+        &=
+        \int dx'
+        \mathscr{J}(\Delta x')\ket{x'}\braket{x'}{\alpha}
+        \\
+        &=
+        \int dx'
+        \ket{x' + \Delta x'}\braket{x'}{\alpha}
+        \\
+        &=
+        \int dx'
+        \ket{x'}\braket{x' -  \Delta x'}{\alpha}
+        \\
+        &=
+        \int dx'
+        \ket{x'}
+        \left(
+        \braket{x'}{\alpha} - \Delta x' \pdv{}{x'}\braket{x'}{\alpha}
+        \right)
+        \\
+      \end{split}
+    \end{equation}
+
+    What he does there at the end is important.  That last
+    substitution is the result of taking a first-order Taylor series
+    which essentially boils down to
+
+    \begin{equation}
+      f(x + dx) = f(x) + dx\pdv{}{x}f(x)
+    \end{equation}
+
+    Assuming that the function is differentiable, then the principle
+    of local linearity holds and the first-order Taylor series is
+    rigorous and complete.  This version, of course, does \emph{not}
+    hold up under macroscopic translation, so this only works for
+    complete differentials.
