@@ -10,9 +10,73 @@
 \end{question}
 
 \begin{purpose}
-  FIXME: Doesn't he give us this exact derivation in the section where
-  he introduces the jog operator?
+  Getting us comfortable with using the jog operator I guess.
 \end{purpose}
 
 \begin{answer}
+  
+  Recalling those equations
+
+  \begin{equation}
+    \tag{1.207}
+        [\vb{x}, \mathscr{J}(d\vb{x}')] = d\vb{x}'
+  \end{equation}
+
+  \begin{equation}
+    \tag{1.227}
+        [\vb{p}, \mathscr{J}(d\vb{x}')] = 0
+  \end{equation}
+
+  \begin{answerpart}{\texorpdfstring{$\expval{\hat{x}}$}{<x>}}
+    We already showed the expectation-value for $x$ part in
+    \ref{1.32.b:theAnswer} so we'll show the momentum part here.
+  \end{answerpart}
+
+  \begin{answerpart}{\texorpdfstring{$\expval{p}$}{<p>}}
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&0
+        &=
+        [\vb{p}, \mathscr{J}(d\vb{x}')]
+        \\
+        &&&=
+        \vb{p}\mathscr{J}(d\vb{x}') - \mathscr{J}(d\vb{x}')\vb{p}
+        \\
+        \implies&&
+        \vb{p}\mathscr{J}(d\vb{x}')
+        &= \mathscr{J}(d\vb{x}')\vb{p}
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    \begin{equation}
+      \begin{split}
+        \mel{\beta}{\vb{p}}{\beta}
+        &=
+        \bra{\alpha}
+        \mathscr{J}^\dagger(d\vb{x})
+        \vb{p}
+        \mathscr{J}(d\vb{x})
+        \ket{\alpha}
+        \\
+        &=
+        \bra{\alpha}
+        \mathscr{J}^\dagger(d\vb{x})
+        \mathscr{J}(d\vb{x})
+        \vb{p}
+        \ket{\alpha}
+        \\
+        &=
+        \bra{\alpha}
+        \vb{p}
+        \ket{\alpha}
+        \\
+        &=
+        \expval{\vb{p}}\qed
+        \\
+      \end{split}
+    \end{equation}
+  \end{answerpart}
+  
 \end{answer}
