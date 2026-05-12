@@ -40,15 +40,463 @@
 \begin{answer}
 
   \begin{answerpart}{Make it So}
+    Sakurai actually does a lot of the work for this problem.  He
+    spends a solid 10 pages developing the $\mathscr{J}$ operator
+    which is going to play a key role.  Most of that derivation is
+    entirely applicable to this problem.  For example, all of \S1.6.3
+    appears to be directly applicable with the change from $x
+    \rightarrow p$.  Adding two boosts ($dp'$ and $dp''$) should
+    result in $\ket{p + dp' + dp''}$ and the order of those additions
+    shouldn't matter to the final momentum.  Adding then removing
+    momentum should be like it never happened so the inverse is the
+    negative is the hermitian conjugate.  Momentum is differentiable
+    so the first-order linear approximation at infinitesimal distances
+    is still rigorous, etc.  These properties are all prety
+    straight-forward.
+
+    It's worth noting that the form of the operator ansatzed by
+    Sakurai is
+
+    \begin{equation}
+      \tag{1.202}
+      \mathscr{J}(d\vb{x}') = 1 - i\vb{K} \cdot d\vb{x}'
+    \end{equation}
+
+    Pulling in the equation that goes from the infinitesimal boost to
+    the macroscopic boost
+
+    \begin{equation}
+      \inlabel{theKey}
+      \tag{1.218}
+      \begin{split}
+        \mathscr{J}(\Delta x'\vb{\hat{x}})
+        &= \lim_{N \rightarrow \infty}
+        \left(
+        1 - \frac{ip_x\Delta x'}{N\hbar}
+        \right)^N
+        \\
+        &= \exp
+        \left(
+        -\frac{ip_x\Delta x'}{\hbar}
+        \right)
+        \\
+      \end{split}
+    \end{equation}
+
+    Applying those equations to our case, where the existing logic
+    still holds and we get
+
+    \begin{equation}
+      \begin{split}
+        \mathscr{B}(\Delta p'\vb{\hat{p}})
+        &= \lim_{N \rightarrow \infty}
+        \left(
+        1 - \frac{i\vb{k}\Delta p'}{N}
+        \right)^N
+        \\
+        &= \exp
+        \left(
+        -i\vb{k}\Delta p'
+        \right)
+        \\
+      \end{split}
+    \end{equation}
+
+    So, we've ansatz'd the form and now we're looking for a way to
+    solve for $k$, then we're going to have to use the established
+    relationship between position and momentum.  The development of
+    the momentum operator comes from use of momentum as a generator of
+    translation and isn't even fully derived here, but rather calls
+    out to Goldstein (see equation 1.211).  Obviously, that isn't
+    going to work for us.  We're probably going to have to use
+    uncertainty relations, so let's see wht happens.
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&[\vb{p}, \mathscr{B}(\dd{\vb{p}''})]\ket{\alpha}
+        &= (\vb{p}\mathscr{B}(\dd{\vb{p}''}) - \mathscr{B}(\dd{\vb{p}''})\vb{p})\ket{\alpha}\\
+        &&&= \vb{p}\mathscr{B}(\dd{\vb{p}''})\ket{\alpha} - \mathscr{B}(\dd{\vb{p}''})\vb{p}\ket{\alpha}\\
+        &&&=
+        \int \dd{\vb{p}'} \vb{p}\mathscr{B}(\dd{\vb{p}''})\ket{\vb{p}'}\braket{\vb{p}'}{\alpha}
+        - \mathscr{B}(\dd{\vb{p'}})\vb{p}\ket{\vb{p}'}\braket{\vb{p}'}{\alpha}
+        \\
+        &&&=
+        \int \dd{\vb{p}'} \vb{p}\ket{\vb{p}' + \dd{\vb{p}''}}\braket{\vb{p}'}{\alpha}
+        - \vb{p}'\mathscr{B}(\dd{\vb{p}''})\ket{\vb{p}'}\braket{\vb{p}'}{\alpha}
+        \\
+        &&&=
+        \int \dd{\vb{p}'} (\vb{p}' + \dd{\vb{p}''})\ket{\vb{p}' + \dd{\vb{p}''}}\braket{\vb{p}'}{\alpha}
+        - \vb{p}'\ket{\vb{p}' + \dd{\vb{p}''}}\braket{\vb{p}'}{\alpha}
+        \\
+        &&&=
+        \int \dd{\vb{p}'}
+        ((\vb{p}' + \dd{\vb{p}''}) - \vb{p}')
+        \ket{\vb{p}' + \dd{\vb{p}''}}
+        \braket{\vb{p}'}{\alpha}
+        \\
+        &&&=
+        \int \dd{\vb{p}'}
+        \dd{\vb{p}''}
+        \ket{\vb{p}' + \dd{\vb{p}''}}
+        \braket{\vb{p}'}{\alpha}
+        \\
+        &&&=
+        \dd{\vb{p}''}
+        \int \dd{\vb{p}'}
+        \mathscr{B}(\dd{\vb{p''}})
+        \ket{\vb{p}'}
+        \braket{\vb{p}'}{\alpha}
+        \\
+        &&&=
+        \dd{\vb{p}''}
+        \mathscr{B}(\dd{\vb{p''}})\ket{\alpha}
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    OK, so now we've found a difference between what we did and what
+    the book does.  Unlike equation 1.207 from the book, we see that
+
+    \begin{equation}
+      [\vb{p}, \mathscr{B}(\dd{\vb{p'}})] =
+      \dd{\vb{p'}}\mathscr{B}(\dd{\vb{p'}})
+    \end{equation}
+
+    So where did we go off the rails?  well... it turns out that we
+    didn't.  The book is... well... the book is
+    wrong.\footnote{Teeeechhnically it's kinda right...}  So let's dig
+    into this one shall we?  The book says this:
+
+    \begin{equation}
+      \tag{1.207}
+      [\vb{x}, \mathscr{J}(\dd{\vb{x}'})] = \dd{\vb{x}'}
+    \end{equation}
+
+    But, exactly the same logic and mechanism applies.  If you really
+    want, you can copy/paste and s/p/x/g\footnote{If you don't know
+    sed then we probably won't be friends.} if you want, but I don't
+    think that's worth taking up valuable space in this manual which
+    was clearly written to be constrained to a maximum page-count (he
+    writes, sarcastically).  So why does Sakurai do this?  Look at
+    equation 1.201
+
+    \begin{equation}
+      \tag{1.201}
+      \lim_{d\vb{x}' \rightarrow 0}\mathscr{J}(d\vb{x}') = 1
+    \end{equation}
+
+    He's relying upon the usage of the jog operator with a complete
+    differential vs when employing it on a more macroscopic $\Delta
+    \vb{x}'$.  It's worth noting that the exact same logic applies to
+    the $\mathscr{B}$ operator since it, too, is constructed with $1 -
+    \vb{k}\cdot\vb{\dd{p}}'$ so the same limitting process applies.
+    OK, back to our regularly-scheduled pain.
+
+    We worked out the commutation, but that didn't really get us
+    anywhere so let's abandon that line of reasoning and try something
+    else.  Let's see what happens when we try to work out the $[x,B]$
+    commutation.  We'll start by working out the $xB\ket{\alpha}$
+    part
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        && \vb{x}\mathscr{B}(\Delta \vb{p}')\ket{\alpha}
+        &=
+        \iiint \dd{\vb{x}'} \dd{\vb{x}''} \dd{\vb{p}'}
+        \vb{x}
+        \Lambda_{x'}
+        \mathscr{B}(\dd{\vb{p}}) \Lambda_{p'}
+        \Lambda_{x''}
+        \ket{\alpha}
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    So, all we've done so far is to multiply by $\hat{1}$ a few times
+    using the completeness relation.
+    
+    \begin{equation}
+      \begin{alignedat}{2}
+        && \vb{x}\mathscr{B}(\Delta \vb{p}')\ket{\alpha}
+        &=
+        \iiint \dd{\vb{x}'} \dd{\vb{x}''} \dd{\vb{p}'}
+        \vb{x}
+        \Lambda_{x'}
+        \mathscr{B}(\Delta \vb{p}') \Lambda_{p'}
+        \Lambda_{x''}
+        \ket{\alpha}
+        \\
+        &&&=
+        \iiint \dd{\vb{x}'} \dd{\vb{x}''} \dd{\vb{p}'}
+        \vb{x}
+        \ket{\vb{x}'}
+        \underbrace{\braket{\vb{x}'}{p' + \Delta \vb{p}'}}_{\text{eq 1.264}}
+        \underbrace{\braket{p'}{\vb{x}''}}_{\text{eq 1.264}^{*}}
+        \braket{\vb{x}''}{\alpha}
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    Pulling in equation 1.264 which was developed using the formalism
+    of the $\mathscr{J}$ operator and not the $\mathscr{B}$ operator
+
+    \begin{equation}
+      \inlabel{xp}
+      \tag{1.264}
+      \braket{x'}{p'} =
+      \frac{1}{\sqrt{2\pi\hbar}}
+      \exp(\frac{ip'x'}{\hbar})
+    \end{equation}
+
+    Applying that equation to our double integral
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        && \vb{x}\mathscr{B}(\Delta \vb{p}')\ket{\alpha}
+        &=
+        \iiint \dd{\vb{x}'} \dd{\vb{x}''} \dd{\vb{p}'}
+        \vb{x}
+        \ket{\vb{x}'}
+        \underbrace{\braket{\vb{x}'}{p' + \Delta \vb{p}'}}_{\text{eq 1.264}}
+        \underbrace{\braket{p'}{\vb{x}''}}_{\text{eq 1.264}^{*}}
+        \braket{\vb{x}''}{\alpha}
+        \\
+        &&&=
+        \iiint \dd{\vb{x}'} \dd{\vb{x}''} \dd{\vb{p}'}
+        \vb{x}
+        \ket{\vb{x}'}
+        \underbrace{\left(\frac{1}{2\pi\hbar}\right)^3}_{\text{3 dimensions}}
+        \exp(\frac{i(\vb{p}' + \Delta \vb{p}')\cdot \vb{x}'}{\hbar})
+        \exp(\frac{-i(\vb{p}') \cdot \vb{x}''}{\hbar})
+        \braket{\vb{x}''}{\alpha}
+        \\
+        &&&=
+        \iiint \dd{\vb{x}'} \dd{\vb{x}''} \dd{\vb{p}'}
+        \vb{x}
+        \ket{\vb{x}'}
+        \left(
+        \left(\frac{1}{2\pi\hbar}\right)^3
+        \exp(\frac{i(\vb{p}' \cdot (\vb{x}'-\vb{x}'') + \Delta \vb{p}' \cdot \vb{x}')}{\hbar})
+        \right)
+        \braket{\vb{x}''}{\alpha}
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    Hang on a minute, oh wait, Heisenberg was German, so I guess it
+    would be Ein Minuten, bitte!\footnote{Here's to you, Eddie
+    Izzard.}  That exponential expression looks familiar doesn't it.
+    Take a look above at equation \inref{theKey}.  So, what happens if
+    we try to isolate that form of it.  Let's pull in another
+    handy-dandy identity from the book.
+
+    \begin{equation}
+      \tag{1.263}
+      \begin{split}
+        \delta(x' - x'')
+        &= \abs{N}^2 \int \dd{p'} \exp[\frac{ip'(x' - x'')}{\hbar}]\\
+        &= 2\pi\hbar\abs{N^2}\delta(x' - x'')
+      \end{split}
+    \end{equation}
+
+    If you look a couple of lines above there in the book, you'll see
+    the derivation which should make it immediately
+    obvious.\footnote{If not, drop the class... or... submit a pull
+    request to make it more clear.}  Adjusting that equation to
+    account for 3 dimensions ($\dd{p'} \rightarrow \dd{\vb{p}'}$ and
+    $2\pi\hbar \rightarrow (2\pi\hbar)^3$) then substituting it into
+    our expression above
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        && \vb{x}\mathscr{B}(\Delta \vb{p}')\ket{\alpha}
+        &=
+        \iiint \dd{\vb{x}'} \dd{\vb{x}''} \dd{\vb{p}'}
+        \vb{x}
+        \ket{\vb{x}'}
+        \left(
+        \left(\frac{1}{2\pi\hbar}\right)^3
+        \exp(\frac{i(\vb{p}' \cdot (\vb{x}'-\vb{x}'') + \Delta \vb{p}'\vb{x}')}{\hbar})
+        \right)
+        \braket{\vb{x}''}{\alpha}
+        \\
+        &&&=
+        \int \dd{\vb{x}'}
+        \vb{x}
+        \exp(\frac{i\Delta \vb{p}' \cdot \vb{x}'}{\hbar})
+        \dyad{\vb{x}'}{\vb{x}'}
+        \ket{\alpha}
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    Note that when we pulled out the $\delta$ function, we also
+    removed the integral over $p'$.  If you'll note, the equality
+    involves that integral so that's how we removed it.  Finally, we
+    need to get rid of that pesky $x'$ so that we can eliminate our
+    final integral.  Thankfully, if you're in operator-land, you can
+    replace that variable with the operator itself.
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        && \vb{x}\mathscr{B}(\Delta \vb{p}')\ket{\alpha}
+        &=
+        \int \dd{\vb{x}'}
+        \vb{x}
+        \exp(\frac{i\Delta \vb{p}' \cdot \vb{x}'}{\hbar})
+        \dyad{\vb{x}'}{\vb{x}'}
+        \ket{\alpha}
+        \\
+        &&&=
+        \vb{x}
+        \exp(\frac{i\Delta \vb{p}' \cdot \vb{x}}{\hbar})
+        \ket{\alpha}
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    So, in the end, we didn't need the commutator or the $\vb{x}$
+    operator at all did we?  It's tempting (in fact, I \emph{did} try
+    this and was \emph{rudely} reminded that I was on crack) to assume
+    that if $AB = AC$ then $B = C$.  Unfortunately, it doesn't work
+    that way (just consider something like $Ax = Ay$ when $A = 0$).
+    To be totally rigorous, we'd have to apply $\vb{x}^-1$ on the left
+    on both sides.  Without getting into that mess, it's easier just
+    to note that all the above derivation holds true if you just
+    remove the $\vb{x}$ entirely.  Putting it all together by
+    referencing equation \inref{theKey} again, we see that
+
+    \begin{equation}
+      \inlabel{solidBooster}
+      \mathscr{B}(\dd{\vb{p}'}) = 1 + \frac{i\vb{x} \cdot \dd{p}'}{\hbar}
+    \end{equation}
   \end{answerpart}
 
   \begin{answerpart}{\texorpdfstring{Make it \emph{Just} So}{Make it Just So}}
+    \begin{itemize}
+    \item \textbf{Inverse/Unitary:} See equation 1.203
+      ($\mathscr{J}^\dagger\mathscr{J} \approx 1$)
+
+    \item \textbf{Associative:} See equation 1.204
+      ($\mathscr{J}(dp')\mathscr{J}(dp'') = \mathscr{J}(dp' + dp'')$).
+    \end{itemize}
   \end{answerpart}
 
   \begin{answerpart}{Dimensional Analysis (no, really)}
+    It has the same dimensionless dimensions as the $\mathscr{J}$
+    operator.
   \end{answerpart}
 
   \begin{answerpart}{The Matrix Has [Your Operator]}
+
+    Heh, this is the last part of the last problem for me.  I
+    \emph{had} this in the notes section because I felt like it needed
+    to be listed somwehere but I didn't see a good place for it.
+    Turns out I \emph{do} have a good place for it.
+
+    \begin{equation}
+      \tag{1.247}
+      \begin{split}
+        \left(1 - \frac{ip\Delta x'}{\hbar}\right)
+        &=
+        \int \dd{x'}
+        \mathscr{J}(\Delta x')\ket{x'}\braket{x'}{\alpha}
+        \\
+        &=
+        \int \dd{x'}
+        \ket{x' + \Delta x'}\braket{x'}{\alpha}
+        \\
+        &=
+        \int \dd{x'}
+        \ket{x'}\braket{x' -  \Delta x'}{\alpha}
+        \\
+        &=
+        \int \dd{x'}
+        \ket{x'}
+        \left(
+        \braket{x'}{\alpha} - \Delta x' \pdv{}{x'}\braket{x'}{\alpha}
+        \right)
+        \\
+      \end{split}
+    \end{equation}
+
+    What he does there at the end is important.  That last
+    substitution is the result of taking a first-order Taylor series
+    which essentially boils down to
+
+    \begin{equation}
+      f(x + dx) = f(x) + dx\pdv{}{x}f(x)
+    \end{equation}
+
+    Assuming that the function is differentiable, then the principle
+    of local linearity holds and the first-order Taylor series is
+    rigorous and complete.  This version, of course, does \emph{not}
+    hold up under macroscopic translation, so this only works for
+    complete differentials.  The analogous equation for $\mathscr{B}$
+    becomes
+
+    \begin{equation}
+      \begin{split}
+        \left(1 + \frac{ix\dd{p'}}{\hbar}\right)\ket{\alpha}
+        &=
+        \int \dd{p'}
+        \mathscr{B}(\dd{p'})\ket{p'}\braket{p'}{\alpha}
+        \\
+        &=
+        \int \dd{p'}
+        \ket{p' + \dd{p'}}\braket{p'}{\alpha}
+        \\
+        &=
+        \int \dd{p'}
+        \ket{p'}\braket{p' -  \dd{p'}}{\alpha}
+        \\
+        &=
+        \int \dd{p'}
+        \ket{p'}
+        \left(
+        \braket{p'}{\alpha} - \dd{p'} \pdv{}{p'}\braket{p'}{\alpha}
+        \right)
+        \\
+      \end{split}
+    \end{equation}
+
+    Moving down one equation we find that
+
+    \begin{equation}
+      \begin{split}
+        x\ket{\alpha}
+        &= \int \dd{p'} x \ket{p'}\braket{p'}{\alpha}\\
+        &= \int \dd{p'} \ket{p'}
+        \left(i\hbar\pdv{}{p'}
+        \braket{p'}{\alpha}
+        \right)
+        \\
+      \end{split}
+    \end{equation}
+
+    Acting $\bra{\vb{p}'}$ on the left side we get
+    
+    \begin{equation}
+      \begin{split}
+        \mel{\vb{p}'}{\vb{x}}{\alpha}
+        &= \int \dd{\vb{p}''} \braket{\vb{p}'}{\vb{p}''}
+        \left(i\hbar\pdv{}{\vb{p}''}
+        \braket{\vb{p}''}{\alpha}
+        \right)
+        \\
+        &= \int \dd{\vb{p}''}
+        \delta(\vb{p}'-\vb{p}'')
+        \left(i\hbar\pdv{}{\vb{p}''}
+        \braket{\vb{p}''}{\alpha}
+        \right)
+        \\
+        &= 
+        i\hbar\pdv{}{\vb{p}'}
+        \braket{\vb{p}'}{\alpha}
+        \\
+      \end{split}
+    \end{equation}
+
   \end{answerpart}
 
 \end{answer}
