@@ -9,6 +9,11 @@ see $\ket{a'} \Rightarrow \ket{a_i}$ and $\ket{a''} \Rightarrow
 
 \section{General Purpose}
 
+\begin{equation}
+  \qlabel{taylor}
+  f(A) \equiv \sum_{k=0}^{\infty} \frac{1}{k!} A^k
+\end{equation}
+
 \subsection{Core Concepts}
 
 \begin{equation}
@@ -131,7 +136,7 @@ see $\ket{a'} \Rightarrow \ket{a_i}$ and $\ket{a''} \Rightarrow
 \subsection{\acf{gwp}}
 \qlabel{wavey:gwp}
     \begin{equation}
-      \inlabel{gwp:exp}
+      \qlabel{gwp:exp}
       \begin{alignedat}{2}
         \expval{X}^2 &= 0 & \quad{} &\text{(eq \ref{1.24:exp:x1})}\\
         \expval{X^2} &= \frac{d^2}{2} & &\text{(eq \ref{1.24:exp:x2})}\\
@@ -154,7 +159,7 @@ see $\ket{a'} \Rightarrow \ket{a_i}$ and $\ket{a''} \Rightarrow
       \psi(x')
       = \braket{x'}{\alpha}
       = \frac{1}{\pi^{1/4}}\sqrt{\frac{1}{d}}
-      \exp[-\frac{1}{2d^2}x'^{2}]
+      \exp[ikx'-\frac{x'^2}{2d^2}]
     \end{equation}
 
     \begin{equation}
@@ -166,6 +171,5 @@ see $\ket{a'} \Rightarrow \ket{a_i}$ and $\ket{a''} \Rightarrow
       = 
       \frac{1}{\pi^{1/4}}
       \sqrt{\frac{d}{\hbar}}
-      \exp[-\frac{d^2}{2\hbar^2}p^2]
+      \exp[-\frac{d^2}{2\hbar^2}(p' - \hbar k)^2]
     \end{equation}
-    

@@ -1,0 +1,199 @@
+\begin{question}
+  \begin{questionpart}
+    Verify (1.271a) and (1.271b) for the expectation value of $p$ and
+    $p^2$ from the Gaussian wave packet (1.267).
+  \end{questionpart}
+
+  \begin{questionpart}
+    Evaluate the expectation value of $p$, and $p^2$ using the
+    momentum-space wave function (1.274).
+  \end{questionpart}
+\end{question}
+
+\begin{purpose}
+  I guess the problem is meant to help you get to know the Gaussian
+  Wave Packet.  I kiiinda already did half of this one in problem
+  \ref{1.24:theQuestion} and the rest is just grinding it out.
+\end{purpose}
+
+\begin{answer}
+  \begin{answerpart}{Proving P}
+    \begin{equation}
+      \tag{1.271a}
+      \expval{p} = \hbar k
+    \end{equation}
+
+    Reference problem \ref{1.24:theQuestion} equation
+    \ref{1.24:exp:p1}.
+    
+    \begin{equation}
+      \tag{1.271b}
+      \expval{p^2} = \frac{\hbar^2}{2d^2} + \hbar^2k^2
+    \end{equation}
+
+    Reference problem \ref{1.24:theQuestion} equation
+    \ref{1.24:exp:p2}.
+  \end{answerpart}
+
+  \begin{answerpart}{Fourier Was Right}
+
+    Reference problem \ref{1.24:theQuestion} equations
+    \ref{1.24:exp:p1} and \ref{1.24:exp:p2} for the right answers.
+    Also the QRF at \ref{q:gwp:exp}.
+
+    \begin{equation}
+      \tag{1.274}
+      \begin{split}
+        \braket{p'}{\alpha}
+        &=
+        \left(\frac{1}{\sqrt{2\pi\hbar}}\right)
+        \left(\frac{1}{\pi^{1/4}\sqrt{d}}\right)
+        \int_{-\infty}^{\infty} dx'\
+        \exp(\frac{-ip'x'}{\hbar} + ikx' - \frac{x^2}{2d^2})
+        \\
+        &= \sqrt{\frac{d}{\hbar\sqrt{\pi}}}
+        \exp[\frac{-(p' - \hbar k)^2d^2}{2\hbar^2}]
+        \\
+      \end{split}
+    \end{equation}
+
+    \begin{equation}
+      \begin{split}
+        \expval{p}
+        &= \mel{\alpha}{p}{\alpha}\\
+        &= \int_{-\infty}^{\infty} dp' p' \braket{\alpha}{p'}\braket{p'}{\alpha}\\
+        &= \int_{-\infty}^{\infty} dp' p' \braket{p'}{\alpha}^{*}\braket{p'}{\alpha}
+        \\
+        &=
+        \frac{d}{\hbar\sqrt{\pi}}
+        \int_{-\infty}^{\infty} dp' p'
+        \exp[\frac{-(p' - \hbar k)^2d^2}{\hbar^2}]
+        \\
+      \end{split}
+    \end{equation}
+
+    \begin{equation}
+      \begin{split}
+        u &\equiv p' - \hbar k\\
+        du &= \sum_i \pdv{}{x_i}u\ dx_i = \pdv{}{p'}u\ dp' = dp'\\
+        p' &= u + \hbar k\\
+      \end{split}
+    \end{equation}
+
+    \begin{equation}
+      \begin{split}
+        \expval{p}
+        &=
+        \frac{d}{\hbar\sqrt{\pi}}
+        \int_{-\infty}^{\infty} dp' p'
+        \exp[\frac{-(p' - \hbar k)^2d^2}{\hbar^2}]
+        \\
+        &=
+        \frac{d}{\hbar\sqrt{\pi}}
+        \int_{-\infty}^{\infty} du (u + \hbar k)
+        \exp[-\frac{d^2}{\hbar^2}u^2]
+        \\
+        &=
+        \frac{d}{\hbar\sqrt{\pi}}
+        \hbar k
+        \int_{-\infty}^{\infty} du
+        \exp[-\frac{d^2}{\hbar^2}u^2]
+        +
+        \underbrace{
+        \frac{d}{\hbar\sqrt{\pi}}
+        \int_{-\infty}^{\infty} du\ u
+        \exp[-\frac{d^2}{\hbar^2}u^2]
+        }_{\text{Odd integral from -$\infty$ to $\infty$ goes to 0}}
+        \\
+        &=
+        \frac{\cancel{d}}{\cancel{\hbar}\cancel{\sqrt{\pi}}}
+        \hbar k
+        \frac{\cancel{\hbar}}{\cancel{d}}\cancel{\sqrt{\pi}}
+        \\
+        &=
+        \hbar k\qed{}
+        \\
+      \end{split}
+    \end{equation}
+
+    \begin{equation}
+      \begin{split}
+        \expval{p^2}
+        &= \mel{\alpha}{p^2}{\alpha}\\
+        &= \mel{\alpha}{pp}{\alpha}\\
+        &= \int_{-\infty}^{\infty} dp' p'^2 \braket{\alpha}{p'}\braket{p'}{\alpha}\\
+        &= \int_{-\infty}^{\infty} dp' p'^2 \braket{p'}{\alpha}^{*}\braket{p'}{\alpha}
+        \\
+        &=
+        \frac{d}{\hbar\sqrt{\pi}}
+        \int_{-\infty}^{\infty} dp' p'^2
+        \exp[\frac{-(p' - \hbar k)^2d^2}{\hbar^2}]
+        \\
+      \end{split}
+    \end{equation}
+
+    \begin{equation}
+      \begin{split}
+        u &\equiv p' - \hbar k\\
+        du &= \sum_i \pdv{}{x_i}u\ dx_i = \pdv{}{p'}u\ dp' = dp'\\
+        p' &= u + \hbar k\\
+      \end{split}
+    \end{equation}
+
+    \begin{equation}
+      \begin{split}
+        \expval{p^2}
+        &=
+        \frac{d}{\hbar\sqrt{\pi}}
+        \int_{-\infty}^{\infty} dp' p'^2
+        \exp[\frac{-(p' - \hbar k)^2d^2}{\hbar^2}]
+        \\
+        &=
+        \frac{d}{\hbar\sqrt{\pi}}
+        \int_{-\infty}^{\infty} du (u + \hbar k)^2
+        \exp[-\frac{d^2}{\hbar^2}u^2]
+        \\
+        &=
+        \frac{d}{\hbar\sqrt{\pi}}
+        \int_{-\infty}^{\infty} du (u^2 + 2\hbar k u + \hbar^2 k^2)
+        \exp[-\frac{d^2}{\hbar^2}u^2]
+        \\
+        &=
+        \frac{d}{\hbar\sqrt{\pi}}
+        \int_{-\infty}^{\infty} du\ u^2
+        \exp[-\frac{d^2}{\hbar^2}u^2]
+        +
+        \underbrace{
+        \frac{d}{\hbar\sqrt{\pi}}
+        2\hbar k
+        \int_{-\infty}^{\infty} du\ u
+        \exp[-\frac{d^2}{\hbar^2}u^2]
+        }_{\text{Odd integral from -$\infty$ to $\infty$ goes to 0}}
+        +
+        \frac{d}{\hbar\sqrt{\pi}}
+        \hbar^2 k^2
+        \int_{-\infty}^{\infty} du
+        \exp[-\frac{d^2}{\hbar^2}u^2]
+        \\
+        &=
+        \frac{d}{\hbar\sqrt{\pi}}
+        \left\{
+        \frac{\hbar^2}{2d^2}
+        \frac{\hbar}{d}\sqrt{\pi}
+        +
+        \hbar^2 k^2
+        \frac{\hbar}{d}\sqrt{\pi}
+        \right\}
+        \\
+        &=
+        \frac{\hbar^2}{2d^2}
+        +
+        \hbar^2 k^2\qed
+        \\
+      \end{split}
+    \end{equation}
+    
+
+  \end{answerpart}
+
+\end{answer}

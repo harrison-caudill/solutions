@@ -1,0 +1,82 @@
+\begin{question}
+  In the main text we discussed the effect of $\mathscr{J}(d\vb{x}')$
+  on the position and momentum eigenkets and on a more general state
+  ket $\ket{\alpha}$. We can also study the behavior of expectation
+  values $\expval{\vb{x}}$ and $\expval{\vb{p}}$ under infinitesimal
+  translation. Using (1.207), (1.227), and $\ket{\alpha} \rightarrow
+  \mathscr{J}(d\vb{x}') \ket{\alpha}$ only, prove $\expval{\vb{x}}
+  \rightarrow \expval{\vb{x}} + d\vb{x}'$, $\expval{\vb{p}}
+  \rightarrow \expval{\vb{p}}$ under infinitesimal translation.
+\end{question}
+
+\begin{purpose}
+  Getting us comfortable with using the jog operator I guess.
+\end{purpose}
+
+\begin{answer}
+  
+  Recalling those equations
+
+  \begin{equation}
+    \tag{1.207}
+        [\vb{x}, \mathscr{J}(d\vb{x}')] = d\vb{x}'
+  \end{equation}
+
+  \begin{equation}
+    \tag{1.227}
+        [\vb{p}, \mathscr{J}(d\vb{x}')] = 0
+  \end{equation}
+
+  \begin{answerpart}{\texorpdfstring{$\expval{x}$}{<x>}}
+    We already showed the expectation-value for $x$ part in
+    \ref{1.32.b:theAnswer} so we'll show the momentum part here.
+  \end{answerpart}
+
+  \begin{answerpart}{\texorpdfstring{$\expval{p}$}{<p>}}
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&0
+        &=
+        [\vb{p}, \mathscr{J}(d\vb{x}')]
+        \\
+        &&&=
+        \vb{p}\mathscr{J}(d\vb{x}') - \mathscr{J}(d\vb{x}')\vb{p}
+        \\
+        \implies&&
+        \vb{p}\mathscr{J}(d\vb{x}')
+        &= \mathscr{J}(d\vb{x}')\vb{p}
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    \begin{equation}
+      \begin{split}
+        \mel{\beta}{\vb{p}}{\beta}
+        &=
+        \bra{\alpha}
+        \mathscr{J}^\dagger(d\vb{x})
+        \vb{p}
+        \mathscr{J}(d\vb{x})
+        \ket{\alpha}
+        \\
+        &=
+        \bra{\alpha}
+        \mathscr{J}^\dagger(d\vb{x})
+        \mathscr{J}(d\vb{x})
+        \vb{p}
+        \ket{\alpha}
+        \\
+        &=
+        \bra{\alpha}
+        \vb{p}
+        \ket{\alpha}
+        \\
+        &=
+        \expval{\vb{p}}\qed
+        \\
+      \end{split}
+    \end{equation}
+  \end{answerpart}
+  
+\end{answer}

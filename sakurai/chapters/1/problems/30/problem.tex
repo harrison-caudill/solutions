@@ -1,0 +1,427 @@
+\begin{question}
+
+  \begin{questionpart}
+    Let $x$ and $p_x$ be the coordinate and linear momentum in one
+    dimension.  Evaluate the classical Poisson bracket
+    \begin{equation*}
+      \left[
+        x,F(p_x)
+        \right]_{\text{classical}}
+    \end{equation*}
+  \end{questionpart}
+
+  \begin{questionpart}
+    Let $x$ and $p_x$ be the corresponding quantum-mechanical
+    operators this time.  Evaluate the commutator,
+    \begin{equation*}
+      \left[
+        x,\exp(\frac{ip_xa}{\hbar})
+        \right]
+    \end{equation*}
+  \end{questionpart}
+
+  \begin{questionpart}
+    Using the result obtained in (b), prove that
+    \begin{equation*}
+      \exp(\frac{ip_xa}{\hbar})\ket{x'} (x\ket{x'} = x'\ket{x'})
+    \end{equation*}
+    is an eigennstate of the coordinate operator x.  What is the
+    corresponding eigenvalue?
+  \end{questionpart}
+\end{question}
+
+\begin{purpose}
+  We're going to dig deep in the consequences of the jog operator here
+  and try to learn about about how it behaves when employed.
+\end{purpose}
+
+\begin{answer}
+
+  \begin{answerpart}{Classical}
+    Pulling in the definition of Poisson brackets from the book
+    
+    \begin{equation}
+      \tag{1.230}
+      [A(q,p),B(q,p)]_{\text{classical}} \equiv
+      \sum_s \left(
+      \pdv{A}{q_s}
+      \pdv{B}{p_s}
+      - 
+      \pdv{A}{p_s}
+      \pdv{B}{q_s}
+      \right)
+    \end{equation}
+
+    $s$ appears to be the dimensionality which is specified to be $1$
+    in the problem so we can rewrite that for our particular problem
+    as follows
+
+    \begin{equation}
+      \begin{split}
+        [x,F(p)]_{\text{classical}}
+        &\equiv
+        \pdv{x}{x}
+        \pdv{F(p)}{p}
+        - 
+        \underbrace{
+          \pdv{x}{p}
+          \pdv{F(p)}{x}
+          }_{0}
+        \\
+        &= \pdv{F(p)}{p}
+      \end{split}
+    \end{equation}
+
+    Note that you can also make that negative if you want just by
+    changing the order of the parameters even if you keep the order of
+    the operators the same.  Hamiltonians require this order to get
+    the right result without scratching your head.
+  \end{answerpart}
+
+  \begin{answerpart}{Quantum}
+
+    There are three ways to solve this problem.  The first is, by far,
+    the easisest which is to just employ Dirac's trick listed in the book
+
+    \begin{equation}
+      \tag{1.229}
+      [\ ,\ ]_{\text{classical}} \rightarrow \frac{[\ ,\ ]}{\hbar}
+    \end{equation}
+
+    But...that's no fun...  Let's recall our exponentiation definition
+    and dig in
+ 
+    \begin{equation}
+      e^{A} \equiv \sum_{k=0}^{\infty} \frac{1}{k!} A^k
+    \end{equation}
+
+    Apply to the problem
+    
+    \begin{equation}
+      \begin{split}
+        \left[x, \exp(\frac{i\hat{p}_xa}{\hbar})\right]
+        &=
+        x\exp(\frac{i\hat{p}_xa}{\hbar})
+        -
+        \exp(\frac{i\hat{p}_xa}{\hbar})x
+        \\
+        &=
+          \left[x,
+            \sum_{k=0}^\infty\frac{1}{k!}
+            \left(\frac{i}{\hbar}a\hat{p}\right)^k
+            \right]
+        \\
+        &=
+        x
+        \sum_{k=0}^\infty\frac{1}{k!}
+        \left(\frac{i}{\hbar}a\hat{p}\right)^k
+        -
+        \sum_{k=0}^\infty\frac{1}{k!}
+        \left(\frac{i}{\hbar}a\hat{p}\right)^k
+        x
+        \\
+        &=
+        \sum_{k=0}^\infty
+        \frac{1}{k!}
+        a^k
+        \left(\frac{i}{\hbar}\right)^k
+        \left(
+        x\hat{p}^k
+        -
+        \hat{p}^kx
+        \right)
+        \\
+      \end{split}
+    \end{equation}
+
+    \begin{equation}
+      \begin{split}
+        \left[x, \exp(\frac{i\hat{p}_xa}{\hbar})\right]
+        &=
+          \left[x,
+            \sum_{k=0}^\infty\frac{1}{k!}
+            \left(\frac{i}{\hbar}a\hat{p}_x\right)^k
+            \right]
+        \\
+        &=
+        \sum_{k=0}^{\infty}\frac{1}{k!}
+        \left[
+          x,\ 
+          \left(\frac{i}{\hbar}a\hat{p}_x\right)^k
+          \right]
+        \\
+        &=
+        \sum_{k=0}^{\infty}\frac{1}{k!}
+        \left(\frac{ia}{\hbar}\right)^k
+        \left[
+          x,\ 
+          \hat{p}_x^k
+          \right]
+        \\
+      \end{split}
+    \end{equation}
+
+    We then pull out and recursively apply a commutation relation from
+    the book
+
+    \begin{equation}
+      \tag{1.232e}
+      [A,BC] = [A,B]C + B[A,C]
+    \end{equation}
+
+    Which for us, becomes
+    
+    \begin{equation}
+      [x,\hat{p}_x\hat{p}_x] = [x,\hat{p}_x]\hat{p}_x + \hat{p}_x[x,\hat{p}_x]
+    \end{equation}
+
+    Applied for powers of $n$
+
+    \begin{equation}
+      \inlabel{IHaveThePower}
+      \begin{split}
+        [x,\hat{p}_x^4]
+        &= [x,\hat{p}_x\hat{p}_x^{3}]\\
+        &= [x,\hat{p}_x]\hat{p}_x^{3} + \hat{p}_x[x,\hat{p}_x^{3}]\\
+        &= [x,\hat{p}_x]\hat{p}_x^{3} + \hat{p}_x([x,\hat{p}_x]\hat{p}_x^{2} + \hat{p}_x[x,\hat{p}_x^{2}])\\
+        &= [x,\hat{p}_x]\hat{p}_x^{3} + \hat{p}_x[x,\hat{p}_x]\hat{p}_x^{2} + \hat{p}_x^2[x,\hat{p}_x^{2}]\\
+        &= [x,\hat{p}_x]\hat{p}_x^{3} + \hat{p}_x[x,\hat{p}_x]\hat{p}_x^{2} + \hat{p}_x^2([x,\hat{p}_x]\hat{p}_x + \hat{p}_x[x,\hat{p}_x])\\
+        &= [x,\hat{p}_x]\hat{p}_x^{3} + \hat{p}_x[x,\hat{p}_x]\hat{p}_x^{2} + \hat{p}_x^2[x,\hat{p}_x]\hat{p}_x + \hat{p}_x^3[x,\hat{p}_x]\\
+        &= \hat{p}_x^3[x,\hat{p}_x] + [x,\hat{p}_x]\hat{p}_x^{3} + \hat{p}_x[x,\hat{p}_x]\hat{p}_x^{2} + \hat{p}_x^2[x,\hat{p}_x]\hat{p}_x\\
+        &= \hat{p}_x^{n-1}[x,\hat{p}_x] + \sum_{i=1}^{n-1}\hat{p}_x^{i-1}[x,\hat{p}_x]\hat{p}_x^{n-i}
+      \end{split}
+    \end{equation}
+
+    Making use of the commutation of $[x,\hat{p}_x]$
+
+    \begin{equation}
+      \tag{1.228}
+      [x_i,x_j] = 0,\quad[p_i,p_j] = 0,\quad[x_i,p_j] = i\hbar\delta_{ij}
+    \end{equation}
+
+    \begin{equation}
+      \inlabel{ConstantPower}
+      \begin{split}
+        [x,\hat{p}_x^n]
+        &= \hat{p}_x^{n-1}[x,\hat{p}_x] + \sum_{i=1}^{n-1}\hat{p}_x^{i-1}[x,\hat{p}_x]\hat{p}_x^{n-i}\\
+        &= i\hbar \hat{p}_x^{n-1} + \sum_{i=1}^{n-1}i\hbar \hat{p}_x^{i-1}\hat{p}_x^{n-i}\\
+        &= i\hbar
+        \left(
+        \hat{p}_x^{n-1} + \sum_{i=1}^{n-1} \hat{p}_x^{\cancel{i} - 1 + n - \cancel{i}}
+        \right)
+        \\
+        &= i\hbar
+        \left(
+        \hat{p}_x^{n-1} + (n-1)\hat{p}_x^{n-1}
+        \right)
+        \\
+        &= i \hbar n\hat{p}_x^{n-1}
+      \end{split}
+    \end{equation}
+
+    Substituting that into our above expression
+
+    \begin{equation}
+      \inlabel{presub}
+      \begin{split}
+        \left[x, \exp(\frac{i\hat{p}_xa}{\hbar})\right]
+        &=
+        \sum_{k=0}^{\infty}\frac{1}{k!}
+        \left(\frac{ia}{\hbar}\right)^k
+        \left[
+          x,\ 
+          \hat{p}_x^k
+          \right]
+        \\
+        &=
+        \sum_{k=0}^{\infty}\frac{1}{k!}
+        \left(\frac{ia}{\hbar}\right)^k
+        \left(
+        i \hbar k\hat{p}_x^{k-1}
+        \right)
+        \\
+        &=
+        i \hbar
+        \sum_{k=0}^{\infty}
+        \frac{k}{k!}
+        \left(\frac{ia}{\hbar}\right)^k
+        \left(
+        \hat{p}_x^{k-1}
+        \right)
+        \\
+        &=
+        i \hbar
+        \frac{ia}{\hbar}
+        \underbrace{\sum_{k=1}^{\infty}\frac{1}{(k-1)!}}_{\text{0/0! = 0}}
+        \left(\frac{ia}{\hbar}\hat{p}_x\right)^{k-1}
+        \\
+        &=
+        -a
+        \sum_{k=1}^{\infty}\frac{1}{(k-1)!}
+        \left(\frac{ia}{\hbar}\hat{p}_x\right)^{k-1}
+        \\
+      \end{split}
+    \end{equation}
+
+    Doing a quick substitution for $k' = k-1$
+
+    \begin{equation}
+      \inlabel{postsub}
+      \begin{split}
+        \left[x, \exp(\frac{i\hat{p}_xa}{\hbar})\right]
+        &=
+        -a
+        \sum_{k'=0}^{\infty}\frac{1}{k'!}
+        \left(\frac{ia}{\hbar}\hat{p}_x\right)^{k'}
+        \\
+        &=
+        -a
+        \exp(\frac{ia}{\hbar}\hat{p}_x)
+        \\
+        &=
+        \left(i\hbar\right)
+        \left(
+        \frac{ia}{\hbar}
+        \exp(\frac{ia}{\hbar}\hat{p}_x)
+        \right)
+        \\
+        &=
+        \left(i\hbar\right)
+        \left(
+        \pdv{}{p}
+        \exp(\frac{ia}{\hbar}\hat{p}_x)
+        \right)
+        \\
+        &=
+        i\hbar
+        \pdv{}{p}
+        \exp(\frac{ia}{\hbar}\hat{p}_x)
+        \\
+      \end{split}
+    \end{equation}
+
+    So, in the end
+
+    \begin{equation}
+      \inlabel{xfp}
+      \begin{split}
+        [x, F(\hat{p}_x)]
+        &= \left[x, \exp(\frac{i\hat{p}_xa}{\hbar})\right]\\
+        &= 
+        i\hbar
+        \pdv{}{p}
+        \exp(\frac{ia}{\hbar}\hat{p}_x)
+        \\
+        &=
+        i\hbar
+        \pdv{}{p_x}
+        F(\hat{p}_x)\qed
+        \\
+      \end{split}
+    \end{equation}
+
+    Pulling in the definition of the jog operator
+
+    \begin{equation}
+      \tag{1.218}
+      \mathscr{J}(\Delta x' \vu{x}) = \exp(- \frac{ip_x\Delta x'}{\hbar})
+    \end{equation}
+
+    We see that this is exactly our result with $a=-\Delta x'$.
+    Evaluating that derivative, we find that
+
+    \begin{equation}
+      \begin{split}
+        [x, \mathscr{J}(\Delta x')]
+        &=
+        i\hbar
+        \pdv{}{p_x}
+        \mathscr{J}(\Delta x')
+        \\
+        &=
+        \left( i\hbar \right)
+        \left( \frac{-i\Delta x'}{\hbar} \right)
+        \mathscr{J}(\Delta x')
+        \\
+        &=
+        \Delta x'
+        \mathscr{J}(\Delta x')
+        \\
+      \end{split}
+    \end{equation}
+
+    Now we take a look at a very similar equation in the book which is
+
+    \begin{equation}
+      \tag{1.207}
+      [\vb{x}, \mathscr{J}(d\vb{x}')] = d\vb{x}'
+    \end{equation}
+
+    This was a bit alarming to me when I noticed the lack of jog
+    operator on the right hand side, but $d\vb{x}'$ implies an
+    infinitesimal jog which implies that the exponential is
+    approximately $1$.  On the other hand, when we apply the operator
+    at the macroscopic scale with $\Delta x'$, we get a result of
+    scaling the operator by that same jog amount.  What does it mean
+    to scale the operator like that?  If you look in section 1.6.4,
+    you'll find a whole discussion about jogging $x$ then $y$ vs
+    jogging $y$ then $x$ and how they're equivalent.  Given the
+    exponential nature of the operator, it's pretty easy to see how a
+    multiplicative factor outside becomes an additive factor
+    inside\footnote{Technically a factor of $\ln(\Delta x').$} and how
+    jogging up then right becomes equivalent to jogging right then up.
+
+    There are other observations to be made from this result such as
+    the consequences of observing then jogging vs jogging then
+    observing.  If we take to heart this concept that a multiplicative
+    factor outside the exponential is equivalent to an additive factor
+    in the system, we see that
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&[x, \mathscr{J}(\Delta x')]
+        &= x\mathscr{J}(\Delta x') - \mathscr{J}(\Delta x')x\\
+        &&&=
+        \Delta x'
+        \mathscr{J}(\Delta x')
+        \\
+        \implies
+        && x\mathscr{J}(\Delta x') - \mathscr{J}(\Delta x')x
+        &= 
+        \Delta x'
+        \mathscr{J}(\Delta x')
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    If we interpret that as ``The difference between observing then
+    jogging vs jogging then observing is $\Delta x'$'' then it starts
+    to make some amount of sense.
+  \end{answerpart}
+
+  \begin{answerpart}{All Together Now}
+    Showing the eigen-nature of $\mathscr{J}(a)$ in the $x$ basis is now much
+    simpler.
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&a\mathscr{J}(a)
+        &= x\mathscr{J}(a) - \mathscr{J}(a)x
+        \\
+        \implies
+        &&x\mathscr{J}(a)
+        &= a\mathscr{J}(a) + \mathscr{J}(a)x
+        \\
+        \implies
+        &&x\mathscr{J}(a)\ket{x'}
+        &= (a\mathscr{J}(a) + \mathscr{J}(a)x)\ket{x'}
+        \\
+        &&&= (a + x')\mathscr{J}(a)\ket{x'}
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    implying an eigenvalue of $a + x'$.
+  \end{answerpart}
+
+\end{answer}

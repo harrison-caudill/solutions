@@ -1,0 +1,506 @@
+\begin{question}
+
+  \begin{questionpart}
+    Suppose that $f(A)$ is a function of a Hermitian operator $A$ with
+    the property $A\ket{a'} = a'\ket{a'}$.  Evaluate
+    $\mel{b''}{f(A)}{b'}$ when the transformation matrix from the $a'$
+    basis to the $b'$ basis is known.
+  \end{questionpart}
+
+  \begin{questionpart}
+    Using the continuum analogue of the result obtained in (a),
+    evaluate
+    \begin{equation*}
+      \mel{p''}{F(r)}{p'}
+    \end{equation*}
+    Simplify your expression as far as you can.  Note that $r$ is
+    $\sqrt{x^2 + y^2 + z^2}$, where $x$, $y$, and $z$ are operators.
+  \end{questionpart}
+\end{question}
+
+\begin{purpose}
+  This one seems to be intended to get you to think about clever ways
+  to employ unitary operators.  It's actually fun.  I'm feeling the
+  get-there-itis\footnote{Always thought this was a dumb name.} pretty
+  strongly right now but this one is actually kinda fun.  It's a good
+  exploration of a tool and the nuts-and-bolts mechanics of switching
+  to/from discrete/continuous spectra.
+\end{purpose}
+
+\begin{answer}
+
+  \begin{answerpart}{Unitarius Containus}
+
+    \begin{equation}
+      \begin{split}
+        \mel{b_i}{f(A)}{b_j}
+        &= \bra{a_i}U^\dagger f(A)U\ket{a_j}\\
+      \end{split}
+    \end{equation}
+
+  Given what we're given in the problem that's pretty much where it
+  ends.  We don't know anything about $f(A)$.  Take a look at problem
+  \ref{1.6:theQuestion} equation \ref{1.6:kittens}.  Buuut, just like
+  we did back in \ref{1.6:theQuestion}, we're going to assume that it
+  can be written as a Taylor series.  If that's the case, then we can
+  pull in equation \ref{q:taylor} and show that
+
+  \begin{equation}
+    \inlabel{mainPoint}
+    \begin{alignedat}{2}
+      &&f(A)
+      &\equiv \sum_{k=0}^{\infty} \frac{1}{k!} A^k
+      \\
+      \implies &&
+      \mel{b_i}{f(A)}{b_j}
+      &= \bra{b_i}f(A)\ket{b_j}
+      \\
+      &&&=
+      \sum_{k=0}^{\infty} \frac{1}{k!} \bra{b_i}A^k\ket{b_j}
+      \\
+      &&&=
+      \sum_{k=0}^{\infty} \frac{1}{k!} \bra{a_i} U^\dagger A^k U \ket{a_j}
+      \\
+    \end{alignedat}
+  \end{equation}
+
+  So...what to do what to do what to do about that inner part...
+
+  \begin{equation}
+    \begin{alignedat}{2}
+      &&A\ket{b_j}
+      &= \left(\sum_i a_i\dyad{a_i}{a_i}\right)\ket{b_j}\\
+      &&&= \sum_i a_i\braket{a_i}{b_j}\ket{a_i}\\
+    \end{alignedat}
+  \end{equation}
+
+  So, we know that there exists some unitary operator $U$ such that
+  $U\ket{a_i} = \ket{b_i}$.\footnote{Yeah, I know, earlier we said
+  that $U$ would turn $\ket{b_i}$ into $\ket{a_i}$, now I'm saying
+  it's the other way around, get off my back already.}  Those whacky
+  unitarians...always turning one ket into another.\footnote{You
+  should see the Unitarian where $U_j\ket{\text{water}} =
+  \ket{\text{wine}}$.}  That operator will look like this
+
+  \begin{equation}
+    U \dot{=}
+    \begin{pmatrix}
+      \braket{a_1}{b_1} & \braket{a_2}{b_2} & \ldots\\
+      \braket{a_2}{b_1} & \braket{a_2}{b_2} & \ldots\\
+      \vdots & \vdots & \ddots\\
+    \end{pmatrix}
+  \end{equation}
+
+  If we pull in those constants above, let's see what we get
+  
+  \begin{equation}
+    \begin{alignedat}{2}
+      &&\mel{b_i}{A}{b_j}
+      &= \bra{b_i}\left(\sum_k a_k\dyad{a_k}{a_k}\right)\ket{b_j}\\
+      &&&= \bra{b_i}\sum_k a_k\braket{a_k}{b_j}\ket{a_k}\\
+      &&&= \sum_k a_kU_{kj}\braket{b_i}{a_k}\\
+      &&&= \sum_k a_kU_{kj}U_{ki}^{*}\\
+    \end{alignedat}
+  \end{equation}
+
+  If we applied A more than once, we'd find that
+  
+  \begin{equation}
+    \begin{alignedat}{2}
+      &&\mel{b_i}{A^N}{b_j}
+      &= \bra{b_i}A^{N-1}\left(\sum_k a_k\dyad{a_k}{a_k}\right)\ket{b_j}\\
+      &&&= \bra{b_i}A^{N-1}\left(\sum_k a_kU_{kj}\ket{a_k}\right)\\
+      &&&= \bra{b_i}\left(\sum_k a_k^N U_{kj}\ket{a_k}\right)\\
+      &&&= \sum_k a_k^N U_{kj}\braket{b_i}{a_k}\\
+      &&&= \sum_k a_k^N U_{kj}U_{ki}^{*}\\
+    \end{alignedat}
+  \end{equation}
+
+  Armed with this expression, we revisit equation \inref{mainPoint}.
+  We're going to make a slight change of counter variable from $k$ to
+  $n$
+
+  \begin{equation}
+    \begin{alignedat}{2}
+      &&\mel{b_i}{f(A)}{b_j}
+      &=
+      \sum_{n=0}^{\infty} \frac{1}{n!} \bra{b_i} A^n \ket{b_j}
+      \\
+      &&&=
+      \sum_{n=0}^{\infty} \frac{1}{n!} \sum_k a_k^n U_{kj}U_{ki}^{*}
+      \\
+      &&&=
+      \sum_k U_{kj}U_{ki}^{*} \sum_{n=0}^{\infty} \frac{1}{n!}a_k^n
+      \\
+      &&&=
+      \sum_k U_{kj}U_{ki}^{*}f(a_k)\qed
+      \\
+    \end{alignedat}
+  \end{equation}
+
+  That's about as far as I can take it.  Because of the nature of
+  having the $\bra{b_i}$ and $\ket{b_j}$ on the outside, it seems like
+  you're stuck with a term on the inside for each of those and you'll
+  have to sweep the entire basis at least once, so you aren't getting
+  rid of the sum.
+  \end{answerpart}
+
+  \begin{answerpart}{Unitarius Continuous}
+
+    As we transition from discrete to continuous and from a
+    generalized $U$ to a specific $U$ (the momentum operator) we find
+    that we can use our above expression as a guide.  We're going to
+    start with our original expression and replace one term at a time.
+    Because I'm replacing one thing at a time, many of these
+    intermediate expressions will be nonsensical when fully evaluated.
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&\underbrace{\mel{p_i}{F(r)}{p_j}}_{\text{New target expression.}}
+        &=
+        \sum_k U_{kj}U_{ki}^{*}f(a_k)
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    Next up, we'll replace the terms from the unitary transformation
+    matrix with their BraKet definitions.
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&\mel{p_i}{F(r)}{p_j}
+        &=
+        \sum_k \underbrace{\braket{a_k}{b_j}\braket{b_i}{a_k}}_{\text{The terms in the unitary matrix are just BraKets}}f(a_k)
+        \\
+      \end{alignedat}
+    \end{equation}
+    
+    Time for us to transition from discrete to continuous spectra.
+    You have to be a little bit careful here.  Typically definitions
+    will employ language like ``This represents the froomba of the
+    gworplick when evaluated between a Santa value of $j$ and
+    $j+\delta j$ jollies''.  That's typically where you look for
+    finding the right scaling factors on your differential (either
+    that or you're using the fundamental relation $dX = \sum
+    \pdv{}{x_i}X dx_i$).  In this case, I believe it's pretty
+    straight-forward.  Don't make the same mistake I did at first, and
+    note that the index in the sum is $k$ and that the $k's$ are on
+    the $a$'s which is the basis in the function call, not the basis
+    of the Bra/Ket giving it a hug.
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&\mel{p_i}{F(r)}{p_j}
+        &= \underbrace{\int_{-\infty}^{\infty} \dd{x}}_{\text{Switch to integral}}
+        \braket{a_k}{b_j}\braket{b_i}{a_k}f(a_k)
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    Next up, we'll replace our function of $a_k$ with our new function
+    of $r$.
+    
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&\mel{p_i}{F(r)}{p_j}
+        &= \int_{-\infty}^{\infty} dx\ 
+        \braket{a_k}{b_j}\braket{b_i}{a_k}\underbrace{F(r)}_{\text{New function}}
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    We're also going to formalize something quickly to avoid any
+    confusion.  $F(r)$ is really $F(f(\hat{x}, \hat{y}, \hat{z}))$
+    where $f(\hat{x}, \hat{y}, \hat{z}) = \sqrt{\hat{x}^2 + \hat{y}^2
+      + \hat{z}^2}$.  We learned in part a that when you have
+    functions like that in here, you include your unitary matrix
+    elements (the BraKets), loop over all possible eigenstates, and
+    you get to replace the operators with eigenvalues.  Next we
+    replace the variables in our unitary entries in Dirac form with
+    the new variables for this problem.
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&\mel{p_i}{F(r)}{p_j}
+        &= \int_{-\infty}^{\infty} dx\ 
+        \underbrace{\braket{x}{p_j}\braket{p_i}{x}}_{\text{New Variables}}F(r)
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    Before we move further, it's worth pausing to consider our
+    variables.  We have $x$ and $p$ and $r$.  So we have 3 position
+    variables in $r$ and only 1 in in our integral.  So we really have
+    a generalized 3D position and a generalized 3D momentum.  So let's
+    fix our formalism real quick here, just a small change.
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&\mel{p_i}{F(r)}{p_j}
+        &= \underbrace{\iiint_{-\infty}^{\infty} \dd[3]{\vb{x}}}_{\text{Triple the pleasure}}
+        \braket{\vb{x}}{\vb{p_j}}\braket{\vb{p_i}}{\vb{x}}F(r)
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    So, given that the only unknown is a function of $r$ only, this
+    problem is clearly screaming for spherical coordinates.
+    
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&\mel{p_i}{F(r)}{p_j}
+        &= \int_{0}^{\infty} \int_{0}^{\pi} \int_{0}^{2\pi}
+        \braket{\vb{x}}{\vb{p_j}}\braket{\vb{p_i}}{\vb{x}}F(r)
+        \underbrace{r^2 \sin(\theta) \dd{r}\dd{\theta}\dd{\varphi}}
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    Now we're down to evaluating those BraKets written using a
+    generalized $\vb{x}$ to indicate position.  Before getting into
+    those nuts-and-bolts mechanics, let's first pull in a utility
+    definition from the book
+
+    \begin{equation}
+      \tag{1.282}
+      \braket{\vb{x}'}{\vb{p}'} = \frac{1}{(2\pi\hbar)^{3/2}} \exp(\frac{i\vb{p}'\vb{x}'}{\hbar})
+    \end{equation}
+
+    Substituting that in, we find that
+    
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&\mel{p_i}{F(r)}{p_j}
+        &=
+        \frac{1}{(2\pi\hbar)^3}
+        \int_{0}^{\infty} \int_{0}^{\pi} \int_{0}^{2\pi}
+        \underbrace{
+          \exp(\frac{i\vb{p_j}\cdot\vb{x}}{\hbar})
+          \exp(-\frac{i\vb{p_i}\cdot\vb{x}}{\hbar})}_{
+          \text{Explicit expressions for BraKets}}
+        F(r)
+        r^2 \sin(\theta) \dd{r}\dd{\theta}\dd{\varphi}
+        \\
+        &&&= \frac{1}{(2\pi\hbar)^3}\int_{0}^{\infty} \int_{0}^{\pi} \int_{0}^{2\pi}
+        \exp(\frac{i\vb{x}\cdot(\vb{p_j}-\vb{p_i})}{\hbar})
+        F(r)
+        r^2 \sin(\theta) \dd{r}\dd{\theta}\dd{\varphi}
+        \\
+        &&&= \frac{1}{(2\pi\hbar)^3}\int_{0}^{\infty} \int_{0}^{\pi} \int_{0}^{2\pi}
+        \exp(\frac{i\vb{x}\cdot\vb{\delta_p}}{\hbar})
+        F(r)
+        r^2 \sin(\theta) \dd{r}\dd{\theta}\dd{\varphi}
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    The inner product is the defined as $\vb{a}\cdot\vb{b} =
+    \abs{a}\abs{b}\cos(\theta)$ where $\theta$ is the angle between
+    the two vectors.  We'll rename that angle to be $\gamma$
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&\mel{p_i}{F(r)}{p_j}
+        &= \frac{1}{(2\pi\hbar)^3}\int_{0}^{\infty} \int_{0}^{\pi} \int_{0}^{2\pi}
+        \exp(\frac{i}{\hbar}r\abs{\delta_p}\cos(\gamma))
+        F(r)
+        r^2 \sin(\theta) \dd{r}\dd{\theta}\dd{\varphi}
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    Because $F(r)$ is a function \emph{only} of radius, we can choose
+    any arbitrary orientation of our $x$, $y$, and $z$ axes that we
+    want.  So, if we were to choose our $z$ axis such that it is
+    colinear with $+\delta_p$ then the angle between them is exactly
+    $\theta$ (irrespective of radius and azimuth).
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&\mel{p_i}{F(r)}{p_j}
+        &= \frac{1}{(2\pi\hbar)^3}\int_{0}^{\infty} \int_{0}^{\pi} \int_{0}^{2\pi}
+        \exp(\frac{i}{\hbar}r\abs{\delta_p}\cos(\gamma))
+        F(r)
+        r^2 \sin(\theta) \dd{r}\dd{\theta}\dd{\varphi}
+        \\
+        &&&= \frac{1}{(2\pi\hbar)^3}\int_{0}^{\infty} \int_{0}^{\pi} \int_{0}^{2\pi}
+        \exp(\frac{i}{\hbar}r\abs{\delta_p}\cos(\theta))
+        F(r)
+        r^2 \sin(\theta) \dd{r}\dd{\theta}\dd{\varphi}
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    We have now removed any azimuthal dependence in the intgral so
+    let's pull out our $\varphi$
+    
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&\mel{p_i}{F(r)}{p_j}
+        &= \frac{1}{(2\pi\hbar)^3}\int_{0}^{\infty} \int_{0}^{\pi} \int_{0}^{2\pi}
+        \exp(\frac{i}{\hbar}r\abs{\delta_p}\cos(\theta))
+        F(r)
+        r^2 \sin(\theta) \dd{r}\dd{\theta}\dd{\varphi}
+        \\
+        &&&= \frac{1}{(2\pi\hbar)^3}
+        \left(\int_{0}^{2\pi} \dd{\varphi}\right)
+        \int_{0}^{\infty} \int_{0}^{\pi}
+        \exp(\frac{i}{\hbar}r\abs{\delta_p}\cos(\theta))
+        F(r)
+        r^2 \sin(\theta) \dd{r}\dd{\theta}
+        \\
+        &&&= 2\pi \frac{1}{(2\pi\hbar)^3}
+        \int_{0}^{\infty} \int_{0}^{\pi}
+        \exp(\frac{i}{\hbar}r\abs{\delta_p}\cos(\theta))
+        F(r)
+        r^2 \sin(\theta) \dd{r}\dd{\theta}
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    Shuffling things around a bit and then doing a quick substitution
+    of $k \equiv r\abs{\delta_p}/\hbar$ we have
+    
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&\mel{p_i}{F(r)}{p_j}
+        &= 2\pi \frac{1}{(2\pi\hbar)^3}
+        \int_{0}^{\infty} \int_{0}^{\pi}
+        \exp(\frac{i}{\hbar}r\abs{\delta_p}\cos(\theta))
+        F(r)
+        r^2 \sin(\theta) \dd{r}\dd{\theta}
+        \\
+        &&&= 2\pi \frac{1}{(2\pi\hbar)^3}
+        \int_{0}^{\infty}
+        r^2 F(r)
+        \left(
+        \int_{0}^{\pi}
+        \exp(ik\cos(\theta))
+        \sin(\theta)
+        \dd{\theta}
+        \right)
+        \dd{r}
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    Employing $u$ substitution with $u = \cos(\theta)$ and $du =
+    \pdv{}{\theta}\cos(\theta) = -\sin(\theta)$ where the bounds are
+    now from $cos(0)=1$ to $cos(pi)=-1$
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&\mel{p_i}{F(r)}{p_j}
+        &= 2\pi \frac{1}{(2\pi\hbar)^3}
+        \int_{0}^{\infty}
+        r^2 F(r)
+        \left(
+        \int_{0}^{\pi}
+        \exp(ik\cos(\theta))
+        \sin(\theta)
+        \dd{\theta}
+        \right)
+        \dd{r}
+        \\
+        &&&= 2\pi \frac{1}{(2\pi\hbar)^3}
+        \int_{0}^{\infty}
+        r^2 F(r)
+        \left(
+        \int_{1}^{-1}
+        -
+        \exp(iku)
+        \dd{u}
+        \right)
+        \dd{r}
+        \\
+        &&&= 2\pi \frac{1}{(2\pi\hbar)^3}
+        \int_{0}^{\infty}
+        r^2 F(r)
+        \left(
+        \int_{-1}^{1}
+        \exp(iku)
+        \dd{u}
+        \right)
+        \dd{r}
+        \\
+        &&&= 2\pi \frac{1}{(2\pi\hbar)^3}
+        \int_{0}^{\infty}
+        r^2 F(r)
+        \eval{[\frac{1}{ik}e^{iku}]}_{-1}^{1}
+        \dd{r}
+        \\
+        &&&= 2\pi \frac{1}{(2\pi\hbar)^3}
+        \int_{0}^{\infty}
+        r^2 F(r)
+        (\frac{1}{ik}(e^{ik} - e^{-ik}))
+        \dd{r}
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    Here, we're going to note that $e^{ik} - e^{-ik} = 2isin(k)$ and
+    substitute that in.
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&\mel{p_i}{F(r)}{p_j}
+        &= 2\pi \frac{1}{(2\pi\hbar)^3}
+        \int_{0}^{\infty}
+        r^2 F(r)
+        (\frac{1}{ik}(e^{ik} - e^{-ik}))
+        \dd{r}
+        \\
+        &&&= 2\pi \frac{1}{(2\pi\hbar)^3}
+        \int_{0}^{\infty}
+        r^2 F(r)
+        \frac{1}{ik}
+        2i\sin(k)
+        \dd{r}
+        \\
+        &&&= 2\pi \frac{1}{(2\pi\hbar)^3}
+        \int_{0}^{\infty}
+        r^2 F(r)
+        \frac{\hbar}{ir\abs{\delta_p}}
+        2i\sin(k)
+        \dd{r}
+        \\
+        &&&=
+        \frac{2\hbar}{\abs{\delta_p}}
+        2\pi \frac{1}{(2\pi\hbar)^3}
+        \int_{0}^{\infty}
+        r F(r)
+        \sin(r\frac{\abs{\delta_p}}{\hbar})
+        \dd{r}
+        \\
+        &&&=
+        \frac{1}{2\abs{\delta_p}}
+        \frac{1}{(\pi\hbar)^2}
+        \int_{0}^{\infty}
+        r F(r)
+        \sin(r\frac{\abs{\delta_p}}{\hbar})
+        \dd{r}
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    This is the end of the solution, but not the end of my
+    pontifications.  I took issue with my own result, even though it
+    corresponds to the answer in the official solutions manual, I
+    don't see any mistakes, and my AI sycophant says I'm a brilliant
+    ray of sunshine.  I didn't like this notion of a dimensionless
+    value in that sin that isn't a trigonometric ratio of something.
+    It turns out to be related to the wave number (according to the
+    aforementioned AI sycophant).
+
+    It sounds like this is one of those cases where if I push too
+    hard, I'm going to end up in the Zee book trying to learn
+    \ac{qft}.  With $p = k\hbar \implies k = p/\hbar$ we know that
+    we're taking the $\sin(r\abs{\vb{k_2} - \vb{k_1}})$ -- so that's the
+    radius times the difference in the wave vectors.  I'd love to
+    explore more, but I'm guessing that if I pull too hard on that
+    thread, I'm going to end up in chapter 6 (Scattering Theory) which
+    (according to a buddy of mine who has already been through two
+    semesters of it) is the heart and soul of \ac{qft}.
+
+  \end{answerpart}
+\end{answer}

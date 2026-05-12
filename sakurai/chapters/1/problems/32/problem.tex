@@ -1,0 +1,126 @@
+\begin{question}
+  The translation operator for a finite (spatial) displacement is given by
+
+  \begin{equation*}
+    \mathscr{J}(\vb{l}) = \exp(\frac{-i\vb{p}\cdot\vb{l}}{\hbar})
+    \end{equation*}
+
+  where $\vb{p}$ is the momentum \emph{operator}.\footnote{Because of
+  course...why would we want a hat for an operator when instead we
+  could have a mish-mash of either plain-text or vector-bold... makes
+  total sense to me... quit your whining.}
+  
+  \begin{questionpart}
+    Evaluate
+    \begin{equation*}
+      [x_i, \mathscr{J}(\vb{l})]
+    \end{equation*}
+  \end{questionpart}
+
+  \begin{questionpart}
+    Using (a) (or otherwise), demonstrate how the expectation value of
+    $\expval{\vb{x}}$ changes under translation.
+  \end{questionpart}
+\end{question}
+
+\begin{purpose}
+  We're really just generalizing problem \ref{1.32:theQuestion} into 3
+  dimensions.  Reference that answer for details.
+\end{purpose}
+
+\begin{answer}
+
+  \begin{answerpart}{Basic 3D}
+
+    \begin{equation}
+      \begin{split}
+        \mathscr{J}(\vb{l})
+        &= \exp(\frac{-i\vb{p}\cdot\vb{l}}{\hbar})
+        \\
+        &= \exp(\frac{-i(\hat{p}_xl_x + \hat{p}_yl_y + \hat{p}_zl_z)}{\hbar})
+        \\
+        &=
+        \exp(\frac{-i\hat{p}_xl_x}{\hbar})
+        \exp(\frac{-i\hat{p}_yl_y}{\hbar})
+        \exp(\frac{-i\hat{p}_zl_z}{\hbar})
+        \\
+        &=
+        \mathscr{J}_x{l_x}
+        \mathscr{J}_y{l_y}
+        \mathscr{J}_z{l_z}
+        \\
+      \end{split}
+    \end{equation}
+
+    \begin{equation}
+      \begin{split}
+        [x_i, \mathscr{J}(\vb{l})]
+        &= l_i\mathscr{J}(\vb{l})\\
+      \end{split}
+    \end{equation}
+  \end{answerpart}
+
+  \begin{answerpart}{What to Expect when Expectationing}
+
+    Letting our states be $\ket{\beta} =
+    \mathscr{J}(\vb{l}\ket{\alpha}$, our expectation value changes by
+    an amount equal to
+
+    \begin{equation}
+      \begin{split}
+        \mel{\beta}{x}{\beta} - \mel{\alpha}{x}{\alpha}
+        &=
+        \bra{\alpha} \mathscr{J}^\dagger(\vb{l})
+        x
+        \mathscr{J}(\vb{l})\ket{\alpha}
+        - \expval{\vb{x}}
+        \\
+        &=
+        \bra{\alpha}
+        \mathscr{J}^\dagger(\vb{l})
+        \left(
+        \vb{l}\mathscr{J}(\vb{l})
+        + \mathscr{J}(\vb{l})x
+        \right)
+        \ket{\alpha}
+        - \expval{\vb{x}}
+        \\
+        &=
+        \vb{l}
+        \mel
+            {\alpha}
+            {
+              \mathscr{J}^\dagger(\vb{l})
+              \mathscr{J}(\vb{l})
+            }
+            {\alpha}
+        +
+        \mel
+            {\alpha}
+            {
+              \mathscr{J}^\dagger(\vb{l})
+              \mathscr{J}(\vb{l})
+              x
+            }
+            {\alpha}
+        - \expval{\vb{x}}
+        \\
+        &=
+        \vb{l}
+        +
+        \expval{\vb{x}}
+        - \expval{\vb{x}}
+        \\
+        &=
+        \vb{l}\qed
+        \\
+      \end{split}
+    \end{equation}
+    
+    So, I expect that you expected that while we were expectationing
+    then we would get an expectation of $\vb{l} + \vb{x}$.
+
+  \end{answerpart}
+
+
+\end{answer}

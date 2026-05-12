@@ -83,16 +83,20 @@
 
 \newenvironment{answer}{%
 \setcounter{qpart}{0}
+\inlabel{theAnswer}
+\subsection*{Answer to the Problem}
 }{%
 }%
 
 \newenvironment{answerpart}[1]{%
     \renewcommand{\theHqpart}{A.\thesection.\arabic{qpart}}
     \setcounter{qspart}{0}
+    \renewcommand{\theqpart}{\thesection.\alph{qpart}}
     \refstepcounter{qpart}
     \renewcommand{\thesubsection}{\thesection.\alph{qpart}}
     \phantomsection
     \subsection*{\thesubsection: #1}
+    \label{\theqpart:theAnswer}
     \addcontentsline{toc}{subsection}{%
         \texorpdfstring{\thesubsection:\ #1}{\thesubsection:\ #1}%
     }%
