@@ -16,7 +16,7 @@
   agreed-upon method of computing it and you'll be forced to take
   several approximations (including modeling the system as two point
   particles connected by an infinitely thin piece of Hyle).  That
-  being said, this is kindof a capstone problem.  I'm pretty sure it's
+  being said, this is kind of a capstone problem.  I'm pretty sure it's
   the hardest problem in the chapter.  It has a little bit of
   everything with a lot of connections to the outside world.  Buckle
   up and enjoy.  Note that I actually solved this problem out of
@@ -54,7 +54,7 @@
     uncertainty relation to determine the amount of rotational kinetic
     energy in the system.  Using the time expended during the
     observation of energy, we then reverse-engineer the presumed
-    initial conditions and compute the expecation value just as we did
+    initial conditions and compute the expectation value just as we did
     in the previous part.
   \end{questionpart}
 
@@ -178,10 +178,10 @@
         \expval{\hat{X}}
         &= \mel{\psi}{\hat{X}}{\psi}\\
         &= \mel{\psi}{\hat{X}\hat{1}}{\psi}\\
-        &= \int dx' (\bra{\psi})(\hat{X}\dyad{x'})(\ket{\psi})\\
-        &= \int dx' \mel{\psi}{\hat{X}}{x'}\braket{x'}{\psi}\\
-        &= \int dx' x'\braket{\psi}{x'}\braket{x'}{\psi}\\
-        &= \int dx' x'\braket{x'}{\psi}^{*}\braket{x'}{\psi}\\
+        &= \int \dd{x'} (\bra{\psi})(\hat{X}\dyad{x'})(\ket{\psi})\\
+        &= \int \dd{x'} \mel{\psi}{\hat{X}}{x'}\braket{x'}{\psi}\\
+        &= \int \dd{x'} x'\braket{\psi}{x'}\braket{x'}{\psi}\\
+        &= \int \dd{x'} x'\braket{x'}{\psi}^{*}\braket{x'}{\psi}\\
       \end{split}
     \end{equation}
 
@@ -192,16 +192,16 @@
       \inlabel{exp:x1}
       \begin{split}
         \expval{\hat{X}}
-        &= \int dx' x'\braket{x'}{\psi}^{*}\braket{x'}{\psi}\\
+        &= \int \dd{x'} x'\braket{x'}{\psi}^{*}\braket{x'}{\psi}\\
         &= \left[\frac{1}{\pi^{1/4}\sqrt{d}}\right]^2
-        \int dx' x'
+        \int \dd{x'} x'
         \exp[\cancel{-ikx'} - \frac{x'^{2}}{2d^2}]
         \exp[\cancel{ikx'} - \frac{x'^{2}}{2d^2}]\\
         &= \frac{1}{\sqrt{\pi}d}
-        \int dx' x'
+        \int \dd{x'} x'
         \exp[- \cancel{2}\frac{x'^{2}}{\cancel{2}d^2}]\\
         &= \frac{1}{\sqrt{\pi}d}
-        \int dx' x'
+        \int \dd{x'} x'
         \exp[- \frac{x'^{2}}{d^2}]\\
         &= 0\\
       \end{split}
@@ -213,7 +213,7 @@
     expectation value of a symmetric function centerd about $0$
     is... well... $0$.  You can also shortcut the integral by noting
     that you're integrating an odd function with symmetrical bounds
-    which is always $0$ ($\int_{-a}^a dx x \cdot \text{symmetric}(x) =
+    which is always $0$ ($\int_{-a}^a \dd{x} x \cdot \text{symmetric}(x) =
     0$).  Let's next look at the expectation value of the square.
     We're only going to get a second $x'$ in that integral but let's
     do it anyway for completeness.
@@ -224,10 +224,10 @@
         &= \expval{\hat{X}\hat{X}}\\
         &= \mel{\psi}{\hat{X}\hat{X}}{\psi}\\
         &= \mel{\psi}{\hat{X}\hat{1}\hat{X}}{\psi}\\
-        &= \int dx' (\bra{\psi})(\hat{X}\dyad{x'}\hat{X})(\ket{\psi})\\
-        &= \int dx' \mel{\psi}{\hat{X}}{x'}\mel{x'}{\hat{X}}{\psi}\\
-        &= \int dx' x'^2\braket{\psi}{x'}\braket{x'}{\psi}\\
-        &= \int dx' x'^2\braket{x'}{\psi}^{*}\braket{x'}{\psi}\\
+        &= \int \dd{x'} (\bra{\psi})(\hat{X}\dyad{x'}\hat{X})(\ket{\psi})\\
+        &= \int \dd{x'} \mel{\psi}{\hat{X}}{x'}\mel{x'}{\hat{X}}{\psi}\\
+        &= \int \dd{x'} x'^2\braket{\psi}{x'}\braket{x'}{\psi}\\
+        &= \int \dd{x'} x'^2\braket{x'}{\psi}^{*}\braket{x'}{\psi}\\
       \end{split}
     \end{equation}
 
@@ -238,11 +238,11 @@
       \inlabel{exp:x2}
       \begin{alignedat}{2}
         & &
-        \int_{-\infty}^{\infty} dx\ x^2e^{-\alpha x^2}
+        \int_{-\infty}^{\infty} \dd{x} x^2e^{-\alpha x^2}
         &= \frac{1}{2\alpha}\sqrt{\frac{\pi}{\alpha}}\\
         \implies & &
         \frac{1}{\sqrt{\pi}d}
-        \int_{-\infty}^{\infty} dx\ x^2\exp(-\frac{x^2}{d^2})
+        \int_{-\infty}^{\infty} \dd{x} x^2\exp(-\frac{x^2}{d^2})
         &= \cancel{\frac{1}{\sqrt{\pi}d}}\frac{d^2}{2}\cancel{\sqrt{d^2\pi}}\\
         &&&= \frac{d^2}{2}\\
       \end{alignedat}
@@ -255,8 +255,8 @@
         \expval{\hat{P}}
         &= \mel{\psi}{\hat{P}}{\psi}\\
         &= \mel{\psi}{\hat{1}\hat{P}}{\psi}\\
-        &= \int dx' (\bra{\psi})(\dyad{x'}\hat{P})(\ket{\psi})\\
-        &= \int dx' \braket{\psi}{x'}\mel{x'}{\hat{P}}{\psi}\\
+        &= \int \dd{x'} (\bra{\psi})(\dyad{x'}\hat{P})(\ket{\psi})\\
+        &= \int \dd{x'} \braket{\psi}{x'}\mel{x'}{\hat{P}}{\psi}\\
       \end{split}
     \end{equation}
 
@@ -270,20 +270,20 @@
     \begin{equation}
       \begin{split}
         \expval{\hat{P}}
-        &= \int dx'
+        &= \int \dd{x'}
         \braket{\psi}{x'}
         \mel{x'}{\hat{P}}{\psi}\\
-        &= \int dx'
+        &= \int \dd{x'}
         \braket{x'}{\psi}^{*}
         \left(-i \hbar \pdv{x'}\right)
         \braket{x'}{\psi}\\
         &= \left[\frac{1}{\pi^{1/4}\sqrt{d}}\right]^2
-        \int dx'
+        \int \dd{x'}
         \exp[-ikx' - \frac{x'^{2}}{2d^2}]
         \left(-i \hbar \pdv{x'}\right)
         \exp[ikx' - \frac{x'^{2}}{2d^2}]\\
         &= \frac{1}{d\sqrt{\pi}}
-        \int dx'
+        \int \dd{x'}
         \exp[-ikx' - \frac{x'^{2}}{2d^2}]
         (-i \hbar)
         \left(
@@ -291,21 +291,21 @@
         \right)
         \exp[ikx' - \frac{x'^{2}}{2d^2}]\\
         &= \frac{\hbar}{d\sqrt{\pi}}
-        \int dx'
+        \int \dd{x'}
         \exp[-ikx' - \frac{x'^{2}}{2d^2}]
         \left(
         k + i\frac{x'}{d^2}
         \right)
         \exp[ikx' - \frac{x'^{2}}{2d^2}]\\
         &= \frac{\hbar}{d\sqrt{\pi}}
-        \int dx'
+        \int \dd{x'}
         \left(k + i\frac{x'}{d^2}\right)
         \exp[- \frac{x'^{2}}{d^2}]\\
         &= \frac{\hbar}{d\sqrt{\pi}}
         \left\{
-        k\int dx'
+        k\int \dd{x'}
         \exp[- \frac{x'^{2}}{d^2}]
-        + i\int dx'
+        + i\int \dd{x'}
         \frac{x'}{d^2}\exp[- \frac{x'^{2}}{d^2}]
         \right\}\\
       \end{split}
@@ -319,20 +319,20 @@
       \inlabel{exp:p1}
       \begin{split}
         \expval{\hat{P}}
-        &= \int dx'
+        &= \int \dd{x'}
         \braket{\psi}{x'}
         \mel{x'}{\hat{P}}{\psi}
         \\
         &= \frac{\hbar}{d\sqrt{\pi}}
         \left\{
-        k\int dx'
+        k\int \dd{x'}
         \exp[- \frac{x'^{2}}{d^2}]
-        + i\int dx'
+        + i\int \dd{x'}
         \frac{x'}{d^2}\exp[- \frac{x'^{2}}{d^2}]
         \right\}
         \\
         &= \frac{k\hbar}{d\sqrt{\pi}}
-        \int dx'
+        \int \dd{x'}
         \exp[- \frac{x'^{2}}{d^2}]
         \\
         &= \frac{k\hbar}{d\sqrt{\pi}}
@@ -357,11 +357,11 @@
         \expval{\hat{P}^2}
         &= \mel{\psi}{\hat{P}\hat{P}}{\psi}\\
         &= \mel{\psi}{\hat{P}\hat{1}\hat{P}}{\psi}\\
-        &= \int dx' (\bra{\psi})(\hat{P}\dyad{x'}\hat{P})(\ket{\psi})\\
-        &= \int dx' \mel{\psi}{\hat{P}}{x'}\mel{x'}{\hat{P}}{\psi}\\
-        &= \int dx' \mel{x'}{\hat{P}}{\psi}^{*}\mel{x'}{\hat{P}}{\psi}\\
+        &= \int \dd{x'} (\bra{\psi})(\hat{P}\dyad{x'}\hat{P})(\ket{\psi})\\
+        &= \int \dd{x'} \mel{\psi}{\hat{P}}{x'}\mel{x'}{\hat{P}}{\psi}\\
+        &= \int \dd{x'} \mel{x'}{\hat{P}}{\psi}^{*}\mel{x'}{\hat{P}}{\psi}\\
         &=
-        \int dx'
+        \int \dd{x'}
         \left(i \hbar \pdv{x'}\right)
         \braket{x'}{\psi}^{*}
         \left(-i \hbar \pdv{x'}\right)
@@ -369,7 +369,7 @@
         \\
         &=
         \left[\frac{1}{\pi^{1/4}\sqrt{d}}\right]^2
-        \int dx'
+        \int \dd{x'}
         \left\{
         \left(i \hbar \pdv{x'}\right)
         \exp[-ikx' - \frac{x'^{2}}{2d^2}]
@@ -390,7 +390,7 @@
         \expval{\hat{P}^2}
         &=
         \left[\frac{1}{\pi^{1/4}\sqrt{d}}\right]^2
-        \int dx'
+        \int \dd{x'}
         \left\{
         \left(i \hbar \pdv{x'}\right)
         \exp[-ikx' - \frac{x'^{2}}{2d^2}]
@@ -402,7 +402,7 @@
         \\
         &=
         \frac{1}{d\sqrt{\pi}}
-        \int dx'
+        \int \dd{x'}
         (i \hbar)
         \left(
         -ik - \frac{\cancel{2}x'}{\cancel{2}d^2}
@@ -416,7 +416,7 @@
         \\
         &=
         \frac{\hbar^2}{d\sqrt{\pi}}
-        \int dx'
+        \int \dd{x'}
         \left(
         k - i\frac{x'}{d^2}
         \right)
@@ -427,7 +427,7 @@
         \\
         &=
         \frac{\hbar^2}{d\sqrt{\pi}}
-        \int dx'
+        \int \dd{x'}
         \left(
         k^2 + \frac{x'^2}{d^4}
         \right)
@@ -437,10 +437,10 @@
         \frac{\hbar^2}{d\sqrt{\pi}}
         \left[
         k^2
-        \int dx'
+        \int \dd{x'}
         \exp[-\frac{x'^{2}}{d^2}]
         +
-        \int dx'
+        \int \dd{x'}
         \frac{x'^2}{d^4}
         \exp[-\frac{x'^{2}}{d^2}]
         \right]
@@ -458,10 +458,10 @@
         \frac{\hbar^2}{d\sqrt{\pi}}
         \left[
         k^2
-        \int dx'
+        \int \dd{x'}
         \exp[-\frac{x'^{2}}{d^2}]
         +
-        \int dx'
+        \int \dd{x'}
         \frac{x'^2}{d^4}
         \exp[-\frac{x'^{2}}{d^2}]
         \right]
@@ -515,10 +515,11 @@
     
     recalling our definition of the variance
 
-    \begin{equation*}
+    \begin{equation}
+      \inlabel{dispersion}
       \tag{1.144}
       \dispersion{A} = \expval{A^2} - \expval{A}^2
-    \end{equation*}
+    \end{equation}
 
     \begin{equation}
       \begin{split}
@@ -599,15 +600,15 @@
 
     Starting with the statistical interpretation from the text just
     after eq 1.256, ``the probability that a measurement of $p$ gives
-    eigenvalue $p'$ within a narrow interval $dp'$ is
-    $\abs{\braket{p'}{\alpha}}^2dp'$.  It is customary to call
+    eigenvalue $p'$ within a narrow interval $\dd{p'}$ is
+    $\abs{\braket{p'}{\alpha}}^2\dd{p'}$.  It is customary to call
     $\braket{p'}{\alpha}$ the \textbf{momentum-space wave function};
     the notation $\phi_{\alpha}(p')$ is often used''.  So, if we have
     an expression for $\phi_{\alpha}(p')$ then we can find the
     probability:
 
     \begin{equation}
-      P(p = p' \pm dp'/2) = \abs{\phi_{\alpha}(p')}^2dp'
+      P(p = p' \pm \dd{p'}/2) = \abs{\phi_{\alpha}(p')}^2\dd{p'}
     \end{equation}
 
     Later, Sakurai provides us with that exact equation:
@@ -616,14 +617,14 @@
       \tag{1.266a}
       \psi_{\alpha}(x')
       = \left[ \frac{1}{\sqrt{2\pi\hbar}} \right]
-      \int dp' \exp(\frac{ip'x'}{\hbar})\phi_{\alpha}(p')
+      \int \dd{p'} \exp(\frac{ip'x'}{\hbar})\phi_{\alpha}(p')
     \end{equation}
 
     \begin{equation}
       \tag{1.266b}
       \phi_{\alpha}(p')
       = \left[ \frac{1}{\sqrt{2\pi\hbar}} \right]
-      \int dx' \exp(\frac{-ip'x'}{\hbar})\psi_{\alpha}(x')
+      \int \dd{x'} \exp(\frac{-ip'x'}{\hbar})\psi_{\alpha}(x')
     \end{equation}
 
     Let's use those equations to get ourselves a referenceable
@@ -651,19 +652,19 @@
         \phi(p')
         &= 
         \left[ \frac{1}{\sqrt{2\pi\hbar}} \right]
-        \int dx' \exp(\frac{-ip'x'}{\hbar})\psi(x')
+        \int \dd{x'} \exp(\frac{-ip'x'}{\hbar})\psi(x')
         \\
         &= 
         \left[ \frac{1}{\sqrt{2\pi\hbar}} \right]
         \left[\frac{1}{\pi^{1/4}\sqrt{d}}\right]
-        \int dx'
+        \int \dd{x'}
         \exp(\frac{-ip'x'}{\hbar})
         \exp[-\frac{x'^{2}}{2d^2}]
         \\
         &= 
         \left[ \frac{1}{\sqrt{2\pi\hbar}} \right]
         \left[\frac{1}{\pi^{1/4}\sqrt{d}}\right]
-        \int dx'
+        \int \dd{x'}
         \exp(\frac{-ip'x'}{\hbar}
         - \frac{x'^{2}}{2d^2})
         \\
@@ -675,7 +676,7 @@
 
     \begin{equation}
       \tag{3.323.2}
-      \int_{-\infty}^{\infty} \exp\left(-p^2x^2 \pm qx\right) dx
+      \int_{-\infty}^{\infty} \exp\left(-p^2x^2 \pm qx\right) \dd{x}
       = \exp\left(\frac{q^2}{4p^2}\right)\frac{\sqrt{\pi}}{p}
     \end{equation}
 
@@ -689,12 +690,12 @@
         \phi(p')
         &= 
         \left[ \frac{1}{\sqrt{2\pi\hbar}} \right]
-        \int dx' \exp(\frac{-ip'x'}{\hbar})\psi(x')
+        \int \dd{x'} \exp(\frac{-ip'x'}{\hbar})\psi(x')
         \\
         &= 
         \left[ \frac{1}{\sqrt{2\pi\hbar}} \right]
         \left[\frac{1}{\pi^{1/4}\sqrt{d}}\right]
-        \int dx'
+        \int \dd{x'}
         \exp(\frac{-ip'x'}{\hbar}
         - \frac{x'^{2}}{2d^2})
         \\
@@ -743,7 +744,7 @@
         &= \abs{\psi(x')}^2
         = \frac{1}{d\sqrt{\pi}} \exp[-\frac{x'^{2}}{d^2}]
         = N(\mu_\psi, \sigma_\psi)
-        \\o
+        \\
         \mu_\psi &= 0\\
         \sigma_\psi &= \frac{d}{\sqrt{2}}\\
         \\
@@ -769,7 +770,7 @@
 
     \begin{equation}
       \inlabel{theForce}
-      \expval{t_f} = \iint_{-\infty}^{\infty} P(x)P(p)t(x, p) dx dp
+      \expval{t_f} = \iint_{-\infty}^{\infty} P(x)P(p)t(x, p) \dd{x} \dd{p}
     \end{equation}
 
     Here, we have parameterized the fall-time as a function $t(x, p)$
@@ -946,13 +947,13 @@
     \begin{equation}
       \begin{split}
         \expval{t_f}
-        &= \iint_{-\infty}^{\infty} P(x')P(p')t(x', p') dx' dp'
+        &= \iint_{-\infty}^{\infty} P(x')P(p')t(x', p') \dd{x'} \dd{p'}
         \\
         &= \iint_{-\infty}^{\infty}
         \frac{1}{d\sqrt{\pi}} \exp[-\frac{x'^{2}}{d^2}]
         \frac{1}{\sqrt{\pi}} \frac{d}{\hbar} \exp[-\frac{d^2}{\hbar^2}p'^2]
         \sqrt{\frac{L}{g}}\ln(\frac{\pi}{\abs{\frac{x'}{L} + \frac{p'}{mL}\sqrt{\frac{L}{g}}}})
-        dx' dp'
+        \dd{x'} \dd{p'}
         \\
         &=
         \frac{1}{\pi\hbar}
@@ -960,7 +961,7 @@
         \iint_{-\infty}^{\infty}
         \exp[-\frac{x'^{2}}{d^2} - \frac{d^2}{\hbar^2}p'^2]
         \ln(\frac{\pi}{\abs{\frac{x'}{L} + \frac{p'}{mL}\sqrt{\frac{L}{g}}}})
-        dx' dp'
+        \dd{x'} \dd{p'}
         \\
       \end{split}
     \end{equation}
@@ -972,8 +973,8 @@
 
     \begin{equation}
       \begin{alignedat}{2}
-        u &= x'\frac{1}{d} &\implies dx' &= d du\\
-        v &= p'\frac{d}{\hbar} &\implies dp' &= \frac{\hbar}{d} dv\\
+        u &= x'\frac{1}{d} &\implies \dd{x'} &= d \dd{u}\\
+        v &= p'\frac{d}{\hbar} &\implies \dd{p'} &= \frac{\hbar}{d} \dd{v}\\
       \end{alignedat}
     \end{equation}
 
@@ -985,42 +986,42 @@
         \iint_{-\infty}^{\infty}
         \exp[-\frac{x'^{2}}{d^2} - \frac{d^2}{\hbar^2}p'^2]
         \ln(\frac{\pi}{\abs{\frac{x'}{L} + \frac{p'}{mL}\sqrt{\frac{L}{g}}}})
-        dx' dp'
+        \dd{x'} \dd{p'}
         \\
         &=
         \frac{1}{\pi\cancel{\hbar}\gamma}
         \iint_{-\infty}^{\infty}
         \exp[-u^2 - v^2]
         \ln(\frac{\pi}{\abs{\frac{ud}{L} + \frac{v\hbar}{dmL}\sqrt{\frac{L}{g}}}})
-        \cancel{d} du
-        \frac{\cancel{\hbar}}{\cancel{d}} dv
+        \cancel{d} \dd{u}
+        \frac{\cancel{\hbar}}{\cancel{d}} \dd{v}
         \\
         &=
         \frac{1}{\pi\gamma}
         \iint_{-\infty}^{\infty}
         \exp[-u^2 - v^2]
         \ln(\frac{\pi}{\abs{\frac{ud}{L} + \frac{v\hbar}{dmL}\sqrt{\frac{L}{g}}}})
-        du dv
+        \dd{u} \dd{v}
         \\
         &=
         \frac{1}{\pi\gamma}
         \iint_{-\infty}^{\infty}
         \exp[-u^2 - v^2]
         \ln(\frac{\pi}{\abs{C_1u + C_2v}})
-        du dv
+        \dd{u} \dd{v}
         \\
         &=
         \frac{1}{\pi\gamma}
         \iint_{-\infty}^{\infty}
         \exp[-u^2 - v^2]
         \ln(\pi)
-        du dv
+        \dd{u} \dd{v}
         - 
         \frac{1}{\pi\gamma}
         \iint_{-\infty}^{\infty}
         \exp[-u^2 - v^2]
         \ln(\abs{C_1u + C_2v})
-        du dv
+        \dd{u} \dd{v}
         \\
       \end{split}
     \end{equation}
@@ -1038,13 +1039,13 @@
         \iint_{-\infty}^{\infty}
         \exp[-u^2 - v^2]
         \ln(\pi)
-        du dv
+        \dd{u} \dd{v}
         - 
         \frac{1}{\pi\gamma}
         \iint_{-\infty}^{\infty}
         \exp[-u^2 - v^2]
         \ln(\abs{C_1u + C_2v})
-        du dv
+        \dd{u} \dd{v}
         \\
         &=
         \frac{1}{\cancel{\pi}\gamma}
@@ -1055,7 +1056,7 @@
         \iint_{-\infty}^{\infty}
         \exp[-u^2 - v^2]
         \ln(\abs{C_1u + C_2v})
-        du dv
+        \dd{u} \dd{v}
         \\
         &=
         \frac{\ln(\pi)}{\gamma}
@@ -1064,7 +1065,7 @@
         \iint_{-\infty}^{\infty}
         \exp[-u^2 - v^2]
         \ln(\abs{C_1u + C_2v})
-        du dv
+        \dd{u} \dd{v}
         \\
       \end{split}
     \end{equation}
@@ -1087,7 +1088,7 @@
       \begin{split}
         u &= r\cos{\varphi}\\
         v &= r\sin{\varphi}\\
-        du dv &= r dr d\varphi
+        \dd{u} \dd{v} &= r dr d\varphi
       \end{split}
     \end{equation}
 
@@ -1103,7 +1104,7 @@
         \iint_{-\infty}^{\infty}
         \exp[-u^2 - v^2]
         \ln(\abs{C_1u + C_2v})
-        du dv
+        \dd{u} \dd{v}
         \\
         &=
         \frac{\ln(\pi)}{\gamma}
@@ -1175,7 +1176,7 @@
 
     \begin{equation}
       \tag{3.321.4}
-      \int_0^uxe^{-q^2x^2} dx = \frac{1}{2q^2} \left[1 - e^{-q^2u^2}\right]
+      \int_0^uxe^{-q^2x^2} \dd{x} = \frac{1}{2q^2} \left[1 - e^{-q^2u^2}\right]
     \end{equation}\cite[eq 3.321.4]{gr}
 
     That lets us get rid of one integral
@@ -1356,7 +1357,7 @@
 
     \begin{equation}
       \tag{4.224.6}
-      \int_{0}^{\pi/2} \ln(\cos x)dx = -\frac{\pi}{2}\ln(2)
+      \int_{0}^{\pi/2} \ln(\cos x)\dd{x} = -\frac{\pi}{2}\ln(2)
     \end{equation}\cite[eq4.224.6]{gr}
 
     There are a couple of things to note here.  Because we're
@@ -1633,7 +1634,7 @@
     will be of the form
 
     \begin{equation}
-      \expval{t_f} = \int P(E)t(E) dE
+      \expval{t_f} = \int P(E)t(E) \dd{E}
     \end{equation}
 
     Interestingly, we aren't really using the $\hbar/2$ limit.  Let's
@@ -1643,10 +1644,10 @@
     \begin{equation}
       \begin{alignedat}{2}
         &&\expval{t_f}
-        &= \int P(E)t(E) dE\\
+        &= \int P(E)t(E) \dd{E}\\
         &&&=
         \int_{-\infty}^{\infty}
-        dE
+        \dd{E}
         \frac{1}{\sigma_E\sqrt{2\pi}}
         \exp\left[-\frac{E^2}{2\sigma_E^2}\right]
         \sqrt{\frac{L}{g}}\ln(\frac{\pi}{\abs{
@@ -1656,7 +1657,7 @@
         \frac{1}{\sigma_E\sqrt{2\pi}}
         \frac{1}{\gamma}
         \int_{-\infty}^{\infty}
-        dE
+        \dd{E}
         \exp\left[-\frac{E^2}{2\sigma_E^2}\right]
         \ln(\frac{\pi}{\abs{\frac{\omega_0}{\gamma}}})
         \\
@@ -1666,17 +1667,20 @@
     Next, we'll draw upon our energy relationship that $E = 1/2 I
     \omega^2$ and also change our bounds of integration from $-\infty$
     to $0$ and we'll multiply by 2.  That should allow us to eliminate
-    the absolute value to make our integral easier.
+    the absolute value to make our integral easier.  We'll make a
+    couple of quick substitutions in there also with $k_k \equiv
+    \frac{1}{2\sigma_E^2}$ and $k_t \equiv \gamma \pi L
+    \sqrt{\frac{m}{2}}$
 
     \begin{equation}
       \begin{alignedat}{2}
         &&\expval{t_f}
-        &= \int P(E)t(E) dE\\
+        &= \int P(E)t(E) \dd{E}\\
         &&&=
         \frac{1}{\sigma_E\sqrt{2\pi}}
         \frac{1}{\gamma}
         \int_{-\infty}^{\infty}
-        dE
+        \dd{E}
         \exp\left[-\frac{E^2}{2\sigma_E^2}\right]
         \ln(\frac{\pi}{\abs{\frac{\omega_0}{\gamma}}})
         \\
@@ -1685,7 +1689,7 @@
         \frac{1}{\gamma}
         2
         \int_{0}^{\infty}
-        dE
+        \dd{E}
         \exp\left[-\frac{E^2}{2\sigma_E^2}\right]
         \ln(\frac{\gamma\pi}{\omega_0})
         \\
@@ -1694,7 +1698,7 @@
         \frac{1}{\gamma}
         2
         \int_{0}^{\infty}
-        dE
+        \dd{E}
         \exp\left[-\frac{E^2}{2\sigma_E^2}\right]
         \ln(\frac{\gamma\pi}{\sqrt{\frac{2E}{mL^2}}})
         \\
@@ -1703,7 +1707,7 @@
         \frac{1}{\gamma}
         2
         \int_{0}^{\infty}
-        dE
+        \dd{E}
         \exp\left[-\frac{E^2}{2\sigma_E^2}\right]
         \ln(\frac{\gamma \pi L \sqrt{m}}{\sqrt{2E}})
         \\
@@ -1712,7 +1716,7 @@
         \frac{1}{\gamma}
         2
         \int_{0}^{\infty}
-        dE
+        \dd{E}
         \exp\left[-\frac{E^2}{2\sigma_E^2}\right]
         \ln(k_tE^{-1/2})
         \\
@@ -1723,11 +1727,11 @@
         \left\{
         \ln(k_t)
         \int_{0}^{\infty}
-        dE
+        \dd{E}
         e^{-k_kE^2}
         +
         \int_{0}^{\infty}
-        dE
+        \dd{E}
         e^{-k_kE^2}
         \ln(E^{-1/2})
         \right\}
@@ -1741,7 +1745,7 @@
         \frac{1}{2}\sigma_E\sqrt{2\pi}
         +
         \int_{0}^{\infty}
-        dE
+        \dd{E}
         e^{-k_kE^2}
         \ln(E^{-1/2})
         \right\}
@@ -1755,7 +1759,7 @@
     \begin{equation}
       \begin{alignedat}{2}
         &&\expval{t_f}
-        &= \int P(E)t(E) dE\\
+        &= \int P(E)t(E) \dd{E}\\
         &&&=
         \frac{1}{\sigma_E\sqrt{2\pi}}
         \frac{1}{\gamma}
@@ -1765,7 +1769,7 @@
         \frac{1}{2}\sigma_E\sqrt{2\pi}
         +
         \int_{0}^{\infty}
-        dE
+        \dd{E}
         e^{-k_kE^2}
         \ln(E^{-1/2})
         \right\}
@@ -1781,7 +1785,7 @@
         \frac{1}{2}
         \frac{1}{\sqrt{k_k}}
         \int_{0}^{\infty}
-        du
+        \dd{u}
         e^{-u^2}
         \ln(\frac{u}{\sqrt{k_k}})
         \right\}
@@ -1798,13 +1802,13 @@
         \frac{1}{\sqrt{k_k}}
         \left[
         \int_{0}^{\infty}
-        du
+        \dd{u}
         e^{-u^2}
         \ln(u)
         -
         \ln(\sqrt{k_k})
         \int_{0}^{\infty}
-        du
+        \dd{u}
         e^{-u^2}
         \right]
         \right\}
@@ -1821,7 +1825,7 @@
         \frac{1}{\sqrt{k_k}}
         \left[
         \int_{0}^{\infty}
-        du
+        \dd{u}
         e^{-u^2}
         \ln(u)
         -
@@ -1858,7 +1862,7 @@
     \begin{equation}
       \begin{alignedat}{2}
         &&\expval{t_f}
-        &= \int P(E)t(E) dE\\
+        &= \int P(E)t(E) \dd{E}\\
         &&&=
         \frac{1}{\sigma_E\sqrt{2\pi}}
         \frac{1}{\gamma}
@@ -1906,7 +1910,6 @@
       \end{alignedat}
     \end{equation}
 
-
     Collecting our constants
 
     \begin{equation}
@@ -1921,7 +1924,7 @@
     \begin{equation}
       \begin{alignedat}{2}
         &&\expval{t_f}
-        &= \int P(E)t(E) dE\\
+        &= \int P(E)t(E) \dd{E}\\
         &&&=
         \frac{1}{\sigma_E\sqrt{2\pi}}
         \frac{1}{\gamma}
@@ -2034,7 +2037,7 @@
     
     Now that we have a closed-form solution for $\expval{t_f}$ let's
     take a look back at that missing uncertainty relation and what it
-    means to us.  You'll probabl note that it's monotonic and the less
+    means to us.  You'll probably note that it's monotonic and the less
     uncertainty in energy you have the higher the fall-time ad
     infinitum.  So, clearly that can't be right.  Remember earlier
     when we remarked upon how odd it was that we weren't using the
@@ -2052,10 +2055,16 @@
       \sigma_t = \frac{\hbar}{2\sigma_E}
     \end{equation}
 
-    This allows us to choose a $\sigma_E$ that is as small as possible
-    before we violate the $\Delta E \Delta t$ uncertainty principle.
-    Looking back at our equation for the fall time we see that we can
-    rewrite it to simplify it a bit
+    A quick note about the statistical interpretation here.  There are
+    many interpretations about what this ``means''.  For example, one
+    way to think of it is that knowing the energy means being able to
+    fully take a Fourier transform of the system which requires an
+    infinite amount of time to ensure you get down to the $0^{th}$
+    mode.\incite{wikipedia:Uncertainty} However you look at it, this
+    approach allows us to choose a $\sigma_E$ that is as small as
+    possible before we violate the $\Delta E \Delta t$ uncertainty
+    principle.  Looking back at our equation for the fall time we see
+    that we can rewrite it to simplify it a bit
 
     \begin{equation}
       \inlabel{tfe}
@@ -2074,7 +2083,7 @@
         \frac{\ln(\gamma\pi)}{\gamma}
         -
         \frac{1}{\gamma}
-        \ln(\frac{\sqrt(2E)}{L\sqrt(m)})
+        \ln(\frac{\sqrt{2E}}{L\sqrt(m)})
         \\
         &=
         \frac{\ln(\gamma\pi)}{\gamma}
@@ -2098,24 +2107,551 @@
 
     \begin{equation}
       \begin{alignedat}{2}
-        &&Var(t_f)
-        &= Var(C_t - \frac{\ln(E)}{2\gamma})\\
-        &&&= Var(\frac{\ln(E)}{2\gamma})\\
+        &&\mathrm{Var}(t_f)
+        &= \mathrm{Var}(C_t - \frac{\ln(E)}{2\gamma})\\
+        &&&= \mathrm{Var}(\frac{\ln(E)}{2\gamma})\\
         &&&= \frac{Var(\ln(E))}{4\gamma^2}\\
-        &&&= \frac{1}{4\gamma^2}\frac{\pi^2}{8}\\
-        \implies &&\sigma_t
-        &= \sqrt{\frac{1}{4\gamma^2}\frac{\pi^2}{8}}\\
-        &&&= \frac{\pi}{4\sqrt{2}\gamma}\\
       \end{alignedat}
     \end{equation}
 
-    Plugging that value of $\sigma_t$ into our uncertainty relation
-    gives us $\sigma_E = \hbar/\sigma_t$.  Plugging that into our
-    fall-time equation gives us...drumroll please... $\approx 3.8s$.
+    Here is where we start deciding what probability distribution
+    we're going to use.  Up to this point we haven't made any
+    assumptions about that distribution.  There are consequences to
+    our choices here.  Let's say, for sake of argument, that we pick a
+    distribution which consists of two delta functions with just the
+    right separation so that we get the desired value of $\sigma$.
+    I'm sure you can see how that would be problematic.  There are two
+    distributions that we're going to explore here.  First, we're
+    going to look at the naive approach where we assume that the
+    energy is a normal vairate.  That actually gets us pretty close
+    with $\expval{t_f} \approx 3.8s$.  Next, we're going to take a cue
+    from our earlier solution in which we found that to maximize
+    $\expval{t_f}$ then we should use a \ac{gwp}.  We will then make
+    momentum be the normal variate which turns the energy into a
+    $\chi^2$ distribution with one degree of freedom.  That selection
+    ends up bringing us up to $\expval{t_f} \approx 3.9$ which is in
+    line with our earlier findings.  Let's get started shall we?
 
-    So yeah... science... it works!  We successfully solved the
-    expectation-value of the fall-time for \icepick{} using the
-    time/energy uncertainty relation.  This calls for scotch!
+    As advertised, we're going to start by (na\"{i}vely) assuming that
+
+    \begin{equation}
+      E = N(\mu_E=0, \sigma_E)
+    \end{equation}
+
+    If that's the case, then we're ultimately looking for an
+    expression of the form
+
+    \begin{equation}
+      \mathrm{Var}(\ln(E)) = \mathrm{Var}(\ln(N(\mu_E=0, \sigma_E)))
+    \end{equation}
+
+    This is the classical case of the Variance of a function of a
+    random variable.  If we open our hymnals to the ``Arbitrary
+    functions'' section of Wikipedia's Variance article\incite[\S
+      Arbitrary functions]{wikipedia:Variance}
+
+    \begin{equation}
+      \mathrm{Var}[f(X)] \approx (f'(E[X]))^2\mathrm{Var}[X]
+    \end{equation}
+
+    Applying that to our current system, and we have
+    
+    \begin{equation}
+      \begin{split}
+        \frac{1}{4\gamma^2}\mathrm{Var}[\ln(N(\mu=0, \sigma=\sigma_E))]
+        &\approx \frac{1}{\expval{N(\mu=0, \sigma=\sigma_E)}^2}
+        \mathrm{Var}[N(\mu=0, \sigma=\sigma_E)]\\
+        &= \frac{\sigma_E^2}{\mu^2}\\
+        &= \frac{\sigma_E^2}{0}\\
+      \end{split}
+    \end{equation}
+
+    So clearly that didn't work.  This approximation method is
+    essentially a first-order Taylor series (you'll find people's
+    derivations sprinkled throughout the interwebs on places like
+    StackExchange).  The trouble is that our function ($\ln(E)$) is
+    singular around $E=0$ (where that is defined as the total kinetic
+    energy of the system).  You can try redefining $E$ to be $T + V$
+    but you'll hit the same singular wall -- $t_f \propto \ln(E)$
+    which means that $\lim_{E \rightarrow 0} t_f = \infty$ which will
+    always trap you.  Circling back to equation \inref{dispersion}
+    
+    \begin{equation}
+      \begin{split}
+        \dispersion{\ln(E)}
+        &=
+        \expval{\ln^2(E)}
+        - \expval{\ln(E)}^2
+        \\
+      \end{split}
+    \end{equation}
+
+    Welp, no time like the present, let's start setting up integrals.
+    First off, let's look at the square of the expectation
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&\expval{f(X)} &= \int \dd{x'} P(x')f(x')
+        \\
+        \implies && \expval{\ln(E)}
+        &=
+        \int_{-\infty}^{\infty} \dd{e'}
+        P(e')\ln(e')
+        \\
+        &&&=
+        \underbrace{2\int_{0}^{\infty}}_{E \ge 0} \dd{e'}
+        P(e')\ln(e')
+        \\
+        &&&=
+        2\int_0^\infty \dd{e'}
+        N_{0,\sigma_E}(e')\ln(e')
+        \\
+        &&&=
+        2\int_0^\infty \dd{e'}
+        \frac{1}{\sigma_E\sqrt{2\pi}}
+        \exp(-\frac{e'^2}{2\sigma_E^2})
+        \ln(e')
+        \\
+        &&&=
+        \frac{2}{\sigma_E\sqrt{2\pi}}
+        \int_0^\infty \dd{e'}
+        \exp(-\frac{e'^2}{2\sigma_E^2})
+        \ln(e')
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    Does that look familiar?  It should.  That's because we saw it
+    earlier when computing the expectation-value for $t_f$, but it's
+    going to require a little bit of massaging to make sure we get the
+    constants right while robbing the general form of the solution.
+    Ooooor we could just pull up the equation from G\&R
+
+    \begin{equation}
+      \tag{4.333}
+      \inlabel{gr:4.333}
+      \int_0^\infty e^{-\mu x^2}\ln x \dd{x}
+      = - \frac{1}{4}
+      (C + \ln 4\mu)\sqrt{\frac{\pi}{\mu}}
+    \end{equation}\cite[eq4.333]{gr}
+
+    where $C$ is the Euler-Mascheroni constant.  This equation gives
+    us a blueprint for easily solving that part so let's turn our
+    attention to the strategy for solving the next part.
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&\expval{f^2(X)} &= \int \dd{x'} P(x')f^2(x')
+        \\
+        \implies && \expval{\ln^2(E)}
+        &=
+        \int_{-\infty}^\infty \dd{e'}
+        P(e')\ln^2(e')
+        \\
+        &&&=
+        \underbrace{2\int_{0}^\infty}_{E \ge 0} \dd{e'}
+        P(e')\ln^2(e')
+        \\
+        &&&=
+        2\int_0^\infty \dd{e'}
+        N_{0,\sigma_E}(e')\ln^2(e')
+        \\
+        &&&=
+        2\int_0^\infty \dd{e'}
+        \frac{1}{\sigma_E\sqrt{2\pi}}
+        \exp(-\frac{e'^2}{2\sigma_E^2})
+        \ln^2(e')
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    Unfortunately, G\&R doesn't have an equation to help us
+    there... or does it.  They don't have one with the generic $\mu$
+    in the exponent, but it \emph{does} have one that's plain.  We can
+    use a change of variables to move the $\mu$ from the exponent to
+    the $\ln$.  That we can go from $\ln(e') \rightarrow \ln(ke')
+    \rightarrow \ln(k) + \ln(e')$.
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        && u^2 &= \frac{e'^2}{2\sigma_E^2}\\
+        \implies && u &= \frac{e'}{\sigma_E\sqrt{2}}\\
+        &&&= \frac{e'}k_u\\
+        \implies && e' &= \sigma_E\sqrt{2}u\\
+        &&&= k_uu\\
+        \implies && \ln(e')^2 &= \ln(k_uu)^2\\
+        \implies && \exp(-\frac{e'^2}{2\sigma_E^2})
+        &= \exp(-u^2)\\
+        \implies && \dd{e'}
+        &= \sum_i \pdv{}{x_i}e' \dd{x_i}\\
+        &&&= \pdv{e'}{u}\dd{u}\\
+        &&&= \sigma_E\sqrt{2}\dd{u}\\
+      \end{alignedat}
+    \end{equation}
+
+    Yes,  I know  this is  a little  bit on  the ploddingly-methodical
+    side, but have you looked at the last 20 or whatever pages?  There
+    are so  many constants floating  around that I'm  going cross-eyed
+    even with this  methodology so get off my back  okay!  Plugging in
+    our $u$ substitution,  we find that
+    
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&\expval{\ln^2(E)}
+        &=
+        2\int_0^\infty \dd{e'}
+        \frac{1}{\sigma_E\sqrt{2\pi}}
+        \exp(-\frac{e'^2}{2\sigma_E^2})
+        \ln^2(e')
+        \\
+        &&&=
+        2\underbrace{\int_0^\infty}_{k*0=0\ k*\infty=\infty}
+        \sigma_E\sqrt{2}\dd{u}
+        \frac{1}{\sigma_E\sqrt{2\pi}}
+        \exp(-u^2)
+        \ln^2(\sigma_E\sqrt{2}u)
+        \\
+        &&&=
+        \frac{2}{\sqrt{\pi}}
+        \int_0^\infty
+        \dd{u}
+        \exp(-u^2)
+        \left(\ln(k_u) + \ln(u)\right)^2
+        \\
+        &&&=
+        \frac{2}{\sqrt{\pi}}
+        \int_0^\infty
+        \dd{u}
+        \exp(-u^2)
+        \left(\ln(k_u)^2 + 2\ln(k_u)\ln(u) + \ln(u)^2\right)
+        \\
+        &&&=
+        \frac{2\ln(k_u)^2}{\sqrt{\pi}}
+        \int_0^\infty
+        \dd{u}
+        \exp(-u^2)
+        +
+        \frac{4\ln(k_u)}{\sqrt{\pi}}
+        \int_0^\infty
+        \dd{u}
+        \exp(-u^2)
+        \ln(u)
+        +
+        \frac{2}{\sqrt{\pi}}
+        \int_0^\infty
+        \dd{u}
+        \exp(-u^2)
+        \ln(u)^2
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    So, it seems like a lot of what you do in this field is to massage
+    integrals and series and sums to look more like what you find in
+    integral tables.  We have an expression in G\&R for all four of
+    the integrals above allowing us to analytically solve for
+    $\sigma_t^2$ (aka the $\mathrm{Var}(t)$), which will allow us to
+    select the uncertainty-minimizing value of $\sigma_e$ which will
+    allow us to evaluate our expression for $\expval{t_f}$ which will
+    allow us to turn this homework problem in and get an A, which will
+    allow us to continue to grad school where we can get a PhD in
+    horribleness which will allow us to address the fact that the
+    status is \emph{not} quo which will allow us to rule the world
+    which will allow us to take control and fix things because
+    otherwise the terrorists win... you don't want that to
+    happen... think of the children!!  Ahhemm... so... as I was
+    saying... we have 2 expressions to compute to get to our variance.
+
+    \begin{equation}
+      \inlabel{eN:st:guide}
+      \begin{alignedat}{2}
+        &&\sigma_t^2
+        &= \frac{1}{4\gamma^2} \mathrm{Var}[\ln(E)]\\
+        &&&= \frac{1}{4\gamma^2}
+        \left(
+        \expval{\ln^2(E)} - \expval{\ln(E)}^2
+        \right)
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    The beginning is a good place to begin.  Doing the first one with
+    the help of \inref{gr:4.333} where $\mu = 1/2\sigma_E^2$
+
+    \begin{equation}
+      \inlabel{eN:exp:lnE}
+      \begin{alignedat}{2}
+        &&\expval{\ln(E)}
+        &= \frac{2}{\sigma_E\sqrt{2\pi}}
+        \int_0^\infty \dd{e'}
+        \exp(-\frac{e'^2}{2\sigma_E^2})
+        \ln(e')
+        \\
+        &&&=
+        -
+        \frac{2}{\cancel{\sigma_E\sqrt{2\pi}}}
+        \frac{1}{4}\left(\gamma_e + \ln(\frac{4}{2\sigma_E^2})\right)
+        \cancel{\sigma_E\sqrt{2\pi}}
+        \\
+        &&&=
+        -\frac{1}{2}
+        \left(\gamma_e + \ln(\frac{2}{\sigma_E^2})\right)
+        \\
+        \implies && \expval{\ln(E)}^2
+        &=
+        \frac{1}{4}
+        \left(\gamma_e + \ln(\frac{2}{\sigma_E^2})\right)^2
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    Let's pull up a couple of remaining identities from our book of
+    common prayer before moving on
+
+    \begin{equation}
+      \tag{3.321.3}
+      \inlabel{gr:3.321.3}
+      \int_0^{\infty} e^{-q^2x^2}\dd{x} = \frac{\sqrt{\pi}}{2q}
+    \end{equation}\cite[eq3.321.3]{gr}
+
+    \begin{equation}
+      \tag{4.335.2}
+      \inlabel{gr:4.335.2}
+      \int_0^{\infty} e^{-x^2}(\ln x)^2\dd{x}
+      = \frac{\sqrt{\pi}}{8}
+      \left[
+        (C + 2\ln 2)^2
+        + \frac{\pi^2}{2}
+        \right]
+    \end{equation}\cite[eq4.335.2]{gr}
+    
+    Next up, we're going to leverage equations \inref{gr:3.321.3}
+    (standard Gaussian), \inref{gr:4.333}, and \inref{gr:4.335.2} in
+    that order.  Remembering also that $u = e'/\sigma_E\sqrt{2}$ or
+    $e' = k_uu$.
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&\expval{\ln^2(E)}
+        &=
+        \frac{2\ln(k_u)^2}{\sqrt{\pi}}
+        \int_0^\infty
+        \dd{u}
+        \exp(-u^2)
+        +
+        \frac{4\ln(k_u)}{\sqrt{\pi}}
+        \int_0^\infty
+        \dd{u}
+        \exp(-u^2)
+        \ln(u)
+        +
+        \frac{2}{\sqrt{\pi}}
+        \int_0^\infty
+        \dd{u}
+        \exp(-u^2)
+        \ln(u)^2
+        \\
+        &&&=
+        \frac{\cancel{2}\ln(k_u)^2}{\cancel{\sqrt{\pi}}}
+        \cancel{\frac{\sqrt{\pi}}{2}}
+        -
+        \frac{\cancel{4}\ln(k_u)}{\cancel{\sqrt{\pi}}}
+        \frac{\cancel{\sqrt{\pi}}}{\cancel{4}}(\gamma_e + \ln 4)
+        +
+        \frac{2}{\cancel{\sqrt{\pi}}}
+        \frac{\cancel{\sqrt{\pi}}}{8}
+        \left[
+        (\gamma_e + 2\ln 2)^2
+          + \frac{\pi^2}{2}
+          \right]
+        \\
+        &&&=
+        \ln(\sigma_E\sqrt{2})^2
+        -
+        \ln(\sigma_E\sqrt{2})
+        (\gamma_e + \ln 4)
+        +
+        \frac{(\gamma_e + 2\ln 2)^2}{4}
+        +
+        \frac{\pi^2}{8}
+        \\
+      \end{alignedat}
+    \end{equation}
+
+    Plugging that mess into our expression for the thing we actually
+    care about.  Let's break out the red pen and watch things cancel
+    out.
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&4\gamma^2\sigma_t^2
+        &= \mathrm{Var}[\ln(E)]\\
+        &&&=
+        \expval{\ln^2(E)} - \expval{\ln(E)}^2
+        \\
+        &&&=
+        \ln(\sigma_E\sqrt{2})^2
+        -
+        \ln(\sigma_E\sqrt{2})
+        (\gamma_e + \ln 4)
+        +
+        \frac{(\gamma_e + 2\ln 2)^2}{4}
+        +
+        \frac{\pi^2}{8}
+        -
+        \frac{1}{4}
+        \left(\gamma_e + \ln(\frac{2}{\sigma_E^2})\right)^2        
+        \\
+        &&&=
+        \left(\ln(\sigma_E)+\frac{\ln(2)}{2}\right)^2
+        -
+        \left(\ln(\sigma_E)+\frac{\ln(2)}{2}\right)
+        (\gamma_e + 2\ln(2))
+        +
+        \frac{(\gamma_e + 2\ln(2))^2}{4}
+        +
+        \frac{\pi^2}{8}
+        -
+        \frac{1}{4}
+        \left(\gamma_e + \ln(2) - 2\ln(\sigma_E)\right)^2
+        \\
+        \\
+        &&&=
+        \ln^2(\sigma_E)
+        + \frac{\ln^2(2)}{4}
+        + \ln(\sigma_E)\ln(2)
+        - \gamma_e\ln(\sigma_E)
+        - 2\ln(2)\ln(\sigma_E)
+        - \frac{\ln(2)}{2}\gamma_e
+        - \ln^2(2)
+        + \frac{\gamma_e^2}{4}
+        + \ln^2(2)
+        \\
+        &&&
+        + \gamma_e\ln(2)
+        + \frac{\pi^2}{8}
+        - \frac{\gamma_e^2}{4}
+        - \frac{\ln^2(2)}{4}
+        - \ln^2(\sigma_E)
+        - \frac{\gamma_e\ln(2)}{2}
+        + \gamma_e\ln(\sigma_E)
+        + \ln(2)\ln(\sigma_E)
+        \\
+        \\
+        &&&=
+        \cancel{\ln^2(\sigma_E)}
+        + \cancel{\frac{\ln^2(2)}{4}}
+        + \cancel{\ln(\sigma_E)\ln(2)}
+        - \cancel{\gamma_e\ln(\sigma_E)}
+        - \cancel{2\ln(2)\ln(\sigma_E)}
+        - \cancel{\frac{\ln(2)}{2}\gamma_e}
+        - \cancel{\ln^2(2)}
+        + \cancel{\frac{\gamma_e^2}{4}}
+        + \cancel{\ln^2(2)}
+        \\
+        &&&
+        + \cancel{\gamma_e\ln(2)}
+        + \frac{\pi^2}{8}
+        - \cancel{\frac{\gamma_e^2}{4}}
+        - \cancel{\frac{\ln^2(2)}{4}}
+        - \cancel{\ln^2(\sigma_E)}
+        - \cancel{\frac{\gamma_e\ln(2)}{2}}
+        + \cancel{\gamma_e\ln(\sigma_E)}
+        + \cancel{\ln(2)\ln(\sigma_E)}
+        \\
+        \\
+        &&&= \frac{\pi^2}{8}
+      \end{alignedat}
+    \end{equation}
+
+    After that glorious cancellation-fest, we're left with
+
+    \begin{equation}
+      \sigma_t = \frac{\pi}{4\gamma\sqrt{2}}
+    \end{equation}
+
+    Leveraging our uncertainty relation, that makes
+
+    \begin{equation}
+      \begin{split}
+        \sigma_E
+        &= \frac{\hbar}{2\sigma_t}\\
+        &= \frac{4\gamma\sqrt{2}\hbar}{2\pi}\\
+        &= \frac{2\sqrt{2}\gamma\hbar}{\pi}\\
+      \end{split}
+    \end{equation}
+
+    Now that we've been through all of that pain, it's worth noting
+    that there's a trick available that would have drastically reduced
+    the number of terms.  If you do a change-of-variables first then
+    you can move from $E = N(\mu=0, \sigma=\sigma_E)$ to $E = N(\mu=0,
+    \sigma=1)$ which will make your life much easier.  No, I'm not
+    going to go back and redo it... I'm going to, and I've always
+    wanted to say this, leave that as an exercise for the reader.
+
+    Plugging in our resulting value we get... drumroll
+    please... $\approx 3.8s$.  So yeah... science... it works!  We
+    successfully solved the expectation-value of the fall-time for
+    \icepick{} using the time/energy uncertainty relation.  Almost,
+    anyway.  We assumed that the energy was a normal variate, whereas
+    we know from part a that we need to assume the \emph{momentum} is
+    a normal variate if we want to maximize our expected fall-time.
+    That means we'll need to re-solve for $\sigma_t$ where we assume
+    that $f(e) = \ln(N^2/2m)$ instead of $\ln(N)$.  Thankfully, it's
+    pretty easy to do
+
+    \begin{equation}
+      \begin{alignedat}{2}
+        &&\ln(E)
+        &= \ln(\frac{p^2}{2I})\\
+        &&&= \ln(\frac{N^2}{2I})\\
+        &&&= 2\ln(\abs{N}) - \ln(2I)\\
+        && \mathrm{Var}[\ln(E)]
+        &= \mathrm{Var}[2\ln(\abs{N}) - \underbrace{\ln(2I)}_{\text{Var ignores constants}}]\\
+        &&&= \mathrm{Var}[2\ln(\abs{N})]\\
+        &&&= 4\mathrm{Var}[\ln(\abs{N})]\\
+      \end{alignedat}
+    \end{equation}
+
+    Since we've already computed that variance, we can easily plug in
+    the factor of $4$ which gets us $\pi^2/2$.  When we use that
+    variance to then compute our $\expval{t_f}$ we get... drumroll
+    please... $\approx 3.9s$ which is perfectly in keeping with our
+    computation using $X/P$ uncertainty.
+
+    \begin{figure}
+      \centering
+      \begin{tabular}{cc}
+        \textbf{Method} & \textbf{Maximum $\expval{t_f}$}\\
+        X/P Uncertainty & 3.8968s\\
+        E/T Uncertainty, P=N(0, $\sigma$) & 3.9051s\\
+        E/T Uncertainty, E=N(0, $\sigma$) & 3.8350s\\
+      \end{tabular}
+      \caption{Fall-time expectation values for different methods of
+        computation.  The difference between the X/P and E/T with
+        $E=N(...)$ method may be small ($\sim .06$) but it's an order
+        of magnitude higher than the difference between X/P and E/T
+        with $P=N(...)$} \inlabel{timesfall}
+      \inlabel{result}
+    \end{figure}
+
+    We have now solved for \icepick{} three different ways.  Figure
+    \inref{result} breaks down all of them.  As you can see, they're
+    remarkably consistent.  The right way to think about the result
+    and why we had to switch to a $\chi^2$ distribution is to consider
+    that reality has two sets of applicable constraints: $X/P$
+    uncertainty and $E/t$ uncertainty.  Both of those constraints must
+    be met in any solution.  As a result, when we picked a probability
+    distribution in the $\chi^2$ solution, we also had to make sure we
+    were following the rules for maximized fall-time set forth in the
+    $X/P$ solution.  A question that is going to be reserved for
+    \ac{qft} is: ``Why do both of those restrictions produce the same
+    result?  Are they really multiple expressions of the same
+    theoretical underpinning?''  I don't \emph{know} the answer, but
+    I'm guessing that it's a very clear ``yes''.
+
+    Time for scotch!
+    
   \end{answerpart}
 
 \end{answer}
