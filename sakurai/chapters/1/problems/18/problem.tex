@@ -18,26 +18,54 @@
 
 \begin{answer}
 
-  Let's start by decomposing the operator into its eigenvectors.
-  
-  Drawing upon equation \outref{1}{17}{result}, we see that whenever
-  there \emph{is} a simultaneous Eigenbasis, then
+  Drawing upon equation \outref{1}{17}{result}, we know that if the
+  eigenbasis is fully-shared and non-degenerate then they commute (and
+  hence an't anti-commute).  However, the problem (so I just realized
+  only after completing literally every other problem in the chapter)
+  asks about a \emph{single} shared eigenket.
 
   \begin{equation}
-    AB = BA
+    \begin{split}
+      AB
+      &=
+      \left(\sum_{i} a_i\Lambda_{a,i}\right)
+      \left(\sum_{j} b_j\Lambda_{b,j}\right)\\
+    \end{split}
   \end{equation}
 
-  So, if we apply that here, we would have:
+  If we assume a single shared eigenket, then
 
   \begin{equation}
     \begin{split}
       0
       &= AB + BA\\
-      &= AB + AB\\
-      &= 2AB\\
+      &=
+      \left(a_s\Lambda_s + \sum_{i} a_i\Lambda_{a,i}\right)
+      \left(b_s\Lambda_s + \sum_{j} b_j\Lambda_{b,j}\right)
+      +
+      \left(b_s\Lambda_s + \sum_{j} b_j\Lambda_{b,j}\right)
+      \left(a_s\Lambda_s + \sum_{i} a_i\Lambda_{a,i}\right)
+      \\
     \end{split}
   \end{equation}
 
-  For this equation to hold, either $A$ or $B$ (or both) must be $0$.
+  Really all we need to show is what those $a_s$ and $b_s$ and
+  $\Lambda_s$ values are up to since we can safely assume that the
+  rest take care of themselves.  We know that the shared basis is
+  orthogonal to the other bases, which means that we also know that
+
+  \begin{equation}
+    \begin{alignedat}{2}
+      &&0
+      &= AB + BA\\
+      &&&= a_sb_s\Lambda_s + b_sa_s\Lambda_s + \ldots\\
+      &&&= 2a_sb_s\Lambda_s + \ldots\\
+      \implies && a_sb_s = 0\\
+    \end{alignedat}
+  \end{equation}
+
+  So, for our shared eigenket to be consistent with anticommutation,
+  clearly one (or both) of the eigenvalues for that shared ket will
+  need to be $0$.
 
 \end{answer}

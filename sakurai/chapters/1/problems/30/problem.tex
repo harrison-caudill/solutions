@@ -25,7 +25,7 @@
     \begin{equation*}
       \exp(\frac{ip_xa}{\hbar})\ket{x'} (x\ket{x'} = x'\ket{x'})
     \end{equation*}
-    is an eigennstate of the coordinate operator x.  What is the
+    is an eigenstate of the coordinate operator x.  What is the
     corresponding eigenvalue?
   \end{questionpart}
 \end{question}
@@ -400,28 +400,33 @@
   \end{answerpart}
 
   \begin{answerpart}{All Together Now}
-    Showing the eigen-nature of $\mathscr{J}(a)$ in the $x$ basis is now much
-    simpler.
+    Showing the eigen-nature of $\mathscr{J}(-a)$ in the $x$ basis is
+    now much simpler. \textbf{WARNING:} The problem gives us an
+    exponential form of the jog operator with a \emph{negative} jog.
+    That's why you see a $-a$ there instead of $a$.  This is a giant
+    pain that was discovered at the $22^{\text{nd}}$ hour and I'm paging this
+    back in dealing with tracing a sign error because Sakurai put a
+    negative in there.
 
     \begin{equation}
       \begin{alignedat}{2}
-        &&a\mathscr{J}(a)
-        &= x\mathscr{J}(a) - \mathscr{J}(a)x
+        &&-a\mathscr{J}(-a)
+        &= x\mathscr{J}(-a) - \mathscr{J}(-a)x
         \\
         \implies
-        &&x\mathscr{J}(a)
-        &= a\mathscr{J}(a) + \mathscr{J}(a)x
+        &&x\mathscr{J}(-a)
+        &= \mathscr{J}(-a)x - a\mathscr{J}(-a)
         \\
         \implies
-        &&x\mathscr{J}(a)\ket{x'}
-        &= (a\mathscr{J}(a) + \mathscr{J}(a)x)\ket{x'}
+        &&x\mathscr{J}(-a)\ket{x'}
+        &= (\mathscr{J}(-a)x - a\mathscr{J}(-a))\ket{x'}
         \\
-        &&&= (a + x')\mathscr{J}(a)\ket{x'}
+        &&&= (x' - a)\mathscr{J}(-a)\ket{x'}
         \\
       \end{alignedat}
     \end{equation}
 
-    implying an eigenvalue of $a + x'$.
+    implying an eigenvalue of $x' - a$.
   \end{answerpart}
 
 \end{answer}

@@ -1533,8 +1533,8 @@
     let the momentum uncertainty approach $0$, then your starting
     position is probably halfway through the ground to China.  The
     maximum fall-time occurs when (because of the alignment of other
-    unit-fixing constants) $d \approx \sqrt{\hbar}$ which works out to
-    about $3.9s$.
+    unit-fixing constants) $d \approx \sqrt{\hbar}$, $m=0.1kg$, and
+    $l=0.1m$, works out to about $3.9s$.
   \end{answerpart}
 
   \begin{answerpart}{How Much Time/Energy Do I Have?}
@@ -2589,16 +2589,17 @@
     going to go back and redo it... I'm going to, and I've always
     wanted to say this, leave that as an exercise for the reader.
 
-    Plugging in our resulting value we get... drumroll
-    please... $\approx 3.8s$.  So yeah... science... it works!  We
-    successfully solved the expectation-value of the fall-time for
-    \icepick{} using the time/energy uncertainty relation.  Almost,
-    anyway.  We assumed that the energy was a normal variate, whereas
-    we know from part a that we need to assume the \emph{momentum} is
-    a normal variate if we want to maximize our expected fall-time.
-    That means we'll need to re-solve for $\sigma_t$ where we assume
-    that $f(e) = \ln(N^2/2m)$ instead of $\ln(N)$.  Thankfully, it's
-    pretty easy to do
+    Plugging in our resulting value with the same $m=0.1kg$ and
+    $l=0.1m$, we get... drumroll please... $\approx 3.8s$.  So
+    yeah... science... it works!  We successfully solved the
+    expectation-value of the fall-time for \icepick{} using the
+    time/energy uncertainty relation.  Almost, anyway.  We assumed
+    that the energy was a normal variate, whereas we know from part a
+    that we need to assume the \emph{momentum} is a normal variate if
+    we want to maximize our expected fall-time.  That means we'll need
+    to re-solve for $\sigma_t$ where we assume that $f(e) =
+    \ln(N^2/2m)$ instead of $\ln(N)$.  Thankfully, it's pretty easy to
+    do
 
     \begin{equation}
       \begin{alignedat}{2}
@@ -2615,9 +2616,10 @@
 
     Since we've already computed that variance, we can easily plug in
     the factor of $4$ which gets us $\pi^2/2$.  When we use that
-    variance to then compute our $\expval{t_f}$ we get... drumroll
-    please... $\approx 3.9s$ which is perfectly in keeping with our
-    computation using $X/P$ uncertainty.
+    variance to then compute our $\expval{t_f}$ with the same
+    $m=0.1kg$ and $l=0.1m$ we get... drumroll please... $\approx 3.9s$
+    which is perfectly in keeping with our computation using $X/P$
+    uncertainty.
 
     \begin{figure}
       \centering
@@ -2631,7 +2633,8 @@
         computation.  The difference between the X/P and E/T with
         $E=N(...)$ method may be small ($\sim .06$) but it's an order
         of magnitude higher than the difference between X/P and E/T
-        with $P=N(...)$} \inlabel{timesfall}
+        with $P=N(...)$.  As with the official solutions manual, we
+        assume $l=0.1m$ and $m=0.1kg$} \inlabel{timesfall}
       \inlabel{result}
     \end{figure}
 
