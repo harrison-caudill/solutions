@@ -180,8 +180,13 @@
 
     \begin{equation}
       \inlabel{taylor}
-      \sum_{0}^{\infty}{\frac{1}{k!}\left(\frac{i\sigma_z\phi}{2}\right)^k}
-      = \cos(\frac \phi 2) + i \sigma_z \sin(\frac \phi 2)
+      \begin{split}
+        \exp(\frac{i\sigma_z\phi}{2})
+        &= \sum_{0}^{\infty}{\frac{1}{k!}\left(\frac{i\sigma_z\phi}{2}\right)^k}
+        \\
+        &= \cos(\frac \phi 2) + i \sigma_z \sin(\frac \phi 2)
+        \\
+      \end{split}
     \end{equation}
 
     Substituting that back into our initial equation (\inref{b-characteristic})
