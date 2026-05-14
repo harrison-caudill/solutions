@@ -1,175 +1,477 @@
-\renewcommand{\thechapter}{Q}
-\chapter{Quick Reference}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Quick Reference Guide (QRF) Infrastructure                                %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Because the $'$ and $''$ and $'''$ and so on gets really annoying, I
-switch from primed Eigenvectors/Eigenvalues to subscripts.  So you'll
-see $\ket{a'} \Rightarrow \ket{a_i}$ and $\ket{a''} \Rightarrow
-\ket{a_j}$ and so on.
-
-
-\section{General Purpose}
-
-\begin{equation}
-  \qlabel{taylor}
-  f(A) \equiv \sum_{k=0}^{\infty} \frac{1}{k!} A^k
-\end{equation}
-
-\subsection{Core Concepts}
-
-\begin{equation}
-  \tag{1.210}
-  \vectorbold{x}_{new}
-  \equiv \vectorbold{X}
-  = \vectorbold{x} + d\vectorbold{x},
-  \vectorbold{p}_{new}
-  \equiv \vectorbold{P}
-  = \vectorbold{p}
-\end{equation}
-
-\begin{equation}
-  \tag{1.211}
-  F(\vectorbold{x}, \vectorbold{P})
-  = \vectorbold{x} \cdot \vectorbold{P}
-  + \vectorbold{p} \cdot d\vectorbold{x}
-\end{equation}
-
-
-\subsection{Trig Identities}
-
-\begin{equation}
-  \sin{2\alpha} = 2\sin{\alpha}\cos{\alpha}
-\end{equation}
-
-\begin{equation}
-  \begin{split}
-    \qlabel{trigCos2A}
-    \cos{2\alpha}
-    &= \cos^2{\alpha} - \sin^2{\alpha}\\
-    &= 2\cos^2{\alpha} - 1\\
-    &= 1 - 2\sin^2{\alpha}\\
-  \end{split}
-\end{equation}
-
-\begin{equation}
-  \cos{\frac \alpha 2} = \pm \sqrt{\frac{1 + \cos{\alpha}}{2}}
-\end{equation}
-
-\begin{equation}
-  \sin{\frac \alpha 2} = \pm \sqrt{\frac{1 - \cos{\alpha}}{2}}
-\end{equation}
-
-\section{Pauli Spin}
-
-\begin{equation*}
-  \tag{1.110a}
-  \ket{x\pm} = \frac{1}{\sqrt{2}} [\ket + \pm \ket -]
-\end{equation*}
-
-\begin{equation*}
-  \tag{1.110b}
-  \ket{y\pm} = \frac{1}{\sqrt{2}} [\ket + \pm i\ket -]
-\end{equation*}
-
-\begin{equation*}
-  \tag{1.111a}
-  S_x = \frac{\hbar}{2} [\ket - \bra + + \ket + \bra - ]
-\end{equation*}
-
-\begin{equation*}
-  \tag{1.111b}
-  S_y = i \frac{\hbar}{2} [\ket - \bra + - \ket + \bra - ]
-\end{equation*}
-
-\begin{equation*}
-  \tag{3.50}
-  \sigma_x =
-  \begin{pmatrix}
-    0 & 1 \\
-    1 & 0 \\
-  \end{pmatrix},
-  \sigma_y =
-  \begin{pmatrix}
-    0 & -i \\
-    i &  0 \\
-  \end{pmatrix},
-  \sigma_z =
-  \begin{pmatrix}
-    1 &  0 \\
-    0 & -1 \\
-  \end{pmatrix}
-\end{equation*}
-
-\begin{figure}
+% --- Compact QRF Main Title ---
+\NewDocumentCommand{\qrfTitle}{m}{%
+  \clearpage           % Start on a fresh page
+  \phantomsection      % Anchor for hyperref/TOC
+  \addcontentsline{toc}{chapter}{#1} % Add to Table of Contents
+  \markboth{#1}{#1}    % Set the header on the left/right pages
+  
   \begin{center}
-    \qlabel{spinAxes}
-    \includegraphics[width=2in]{qrf/spin_axes.png}
-    \caption{Spin axis definitions.  Please note that due to font
-      limitations in QCad at the time of this writing, $\alpha$ and
-      $\beta$ are represented as $a$ and $b$ respectively.}
+      \Large \bfseries #1 % Compact, centered title
   \end{center}
-\end{figure}
+  \vspace{-1ex} % Pull the columns up slightly closer to the title
+}
 
-\begin{equation}
-  \qlabel{spinAngle}
-  \cos(\frac \beta 2)\ket + + \sin(\frac \beta 2) e^{i\alpha}\ket -
-\end{equation}
+% --- 1. Configurable Parameters ---
 
-\subsection{Integral Table}
+% Column and Equation Spacing (Absolute lengths)
+\newlength{\qrfColumnSep}
+\setlength{\qrfColumnSep}{0.5cm}       % Gap between the two columns
+\newlength{\qrfEqSkip}
+\setlength{\qrfEqSkip}{4pt}          % Vertical space above/below equations
+\newlength{\qrfHeaderPadding}
+\setlength{\qrfHeaderPadding}{1em}   % Space between the header text and the whiskers
 
-\begin{equation}
-  \qlabel{integral:gaussian}
-  \int_{-\infty}^{\infty} \dd{x} e^{-\alpha x^2} = \sqrt{\frac{\pi}{\alpha}}
-\end{equation}
+% Header Whisker & Vertical Spacing (Font-relative sizes)
+\newcommand{\qrfHeaderSpaceAbove}{1.5ex}
+\newcommand{\qrfHeaderSpaceBelow}{1ex}
+\newcommand{\qrfWhiskerHeight}{0.65ex}
+\newcommand{\qrfWhiskerDepth}{-0.55ex}
 
-\begin{equation}
-  \qlabel{integral:xgaussian}
-  \int_{-\infty}^{\infty} \dd{x} xe^{-\alpha x^2} = 0
-\end{equation}\cite[eq 3.321.3]{gr}
 
-\begin{equation}
-  \qlabel{integral:xxgaussian}
-  \int_{-\infty}^{\infty} \dd{x} x^2e^{-\alpha x^2} = \frac{1}{2\alpha}\sqrt{\frac{\pi}{\alpha}}
-\end{equation}
+% --- 2. Counters ---
+\newcounter{qrfEq}
+\renewcommand{\theqrfEq}{Q.\arabic{qrfEq}}
+\renewcommand{\theHqrfEq}{Q.\arabic{qrfEq}} % Prevents hyperref collisions
 
-\section{Wave Functions}
 
-\subsection{\acf{gwp}}
-\qlabel{wavey:gwp}
-    \begin{equation}
-      \qlabel{gwp:exp}
-      \begin{alignedat}{2}
-        \expval{X}^2 &= 0 & \quad{} &\text{(eq \ref{1.24:exp:x1})}\\
-        \expval{X^2} &= \frac{d^2}{2} & &\text{(eq \ref{1.24:exp:x2})}\\
-        \expval{P}^2 &= \hbar^2k^2 & &\text{(eq \ref{1.24:exp:p1})}\\
-        \expval{P^2} &= \hbar^2\left(k^2+\frac{1}{2d^2}\right)
-        & &\text{(eq \ref{1.24:exp:p2})}\\
-      \end{alignedat}
-    \end{equation}
+% --- 3. Macros ---
 
-    \begin{equation}
-      \dispersion{X}\dispersion{P}
-      =
-      \left(\expval{\hat{X}^2} - \expval{\hat{X}}^2\right)
-      \left(\expval{\hat{P}^2} - \expval{\hat{P}}^2\right)
-      = \frac{\hbar^2}{4}
-    \end{equation}
+% Usage: \qrfeq[label]{math}{citation}
+\NewDocumentCommand{\qrfeq}{o m m}{%
+  \refstepcounter{qrfEq}%
+  \IfValueT{#1}{\label{#1}}%
+  \begin{equation*}
+    #2 \tag*{(\theqrfEq)\quad{\footnotesize #3}}
+  \end{equation*}%
+}
 
-    \begin{equation}
-      \qlabel{wavey:gwp:psi}
-      \psi(x')
-      = \braket{x'}{\alpha}
-      = \frac{1}{\pi^{1/4}}\sqrt{\frac{1}{d}}
-      \exp[ikx'-\frac{x'^2}{2d^2}]
-    \end{equation}
+% Centered QRF header with dynamic "whisker" lines
+\NewDocumentCommand{\qrfheader}{m}{%
+  \par\vspace{\qrfHeaderSpaceAbove}
+  \noindent
+  \leavevmode
+  % Left whisker
+  \leaders\hrule height \qrfWhiskerHeight depth \qrfWhiskerDepth\hfill
+  % Centered Text
+  \hspace{\qrfHeaderPadding} \textbf{\large #1} \hspace{\qrfHeaderPadding}
+  % Right whisker
+  \leaders\hrule height \qrfWhiskerHeight depth \qrfWhiskerDepth\hfill
+  \null
+  \par\vspace{\qrfHeaderSpaceBelow}
+}
 
-    \begin{equation}
-      \qlabel{wavey:gwp:phi}
-      \phi(p')
-      =
-      \left[ \frac{1}{\sqrt{2\pi\hbar}} \right]
-      \int \dd{x'} \exp(\frac{-ip'x'}{\hbar})\psi_{\alpha}(x')
-      = 
-      \frac{1}{\pi^{1/4}}
-      \sqrt{\frac{d}{\hbar}}
-      \exp[-\frac{d^2}{2\hbar^2}(p' - \hbar k)^2]
-    \end{equation}
+
+% --- 4. The Main Layout Environment ---
+% This safely applies the column widths and equation spacing ONLY to the QRF
+\newenvironment{qrfLayout}{%
+    \setlength{\columnsep}{\qrfColumnSep}
+    % \setlength{\columnseprule}{0.4pt} % Uncomment for a vertical divider line!
+    \begin{multicols}{2}
+    \setlength{\abovedisplayskip}{\qrfEqSkip}
+    \setlength{\belowdisplayskip}{\qrfEqSkip}
+}{%
+    \end{multicols}
+}
+
+
+
+
+\qrfTitle{Quick Reference Guide}
+\addcontentsline{toc}{chapter}{Quick Reference Guide}
+\markboth{Quick Reference Guide}{Quick Reference Guide}
+
+\begin{qrfLayout}
+
+\qrfheader{Commutation Relations}
+
+\qrfeq[qrf:momentum]{
+    [x, p] = i\hbar
+}{\cite{1.19:wikipediaVirial}}
+
+\qrfeq{
+    [S_x, S_y] = i\hbar S_z
+}{[Prob \inref{some_label}]}
+\qrfeq[qrf:momentum]{
+    [x, p] = i\hbar
+}{\cite{1.19:wikipediaVirial}}
+
+\qrfeq{
+    [S_x, S_y] = i\hbar S_z
+}{[Prob \inref{some_label}]}
+\qrfeq[qrf:momentum]{
+    [x, p] = i\hbar
+}{\cite{1.19:wikipediaVirial}}
+
+\qrfeq{
+    [S_x, S_y] = i\hbar S_z
+}{[Prob \inref{some_label}]}
+
+
+\qrfheader{Uncertainty Principles}
+
+\qrfeq[qrf:generalized_uncertainty]{
+    \Delta A \Delta B \ge \frac{1}{2} \abs{\ev{[A, B]}}
+}{\cite{1.20:wikipedia:StrongerUncertaintyRelations}}
+\qrfeq[qrf:generalized_uncertainty]{
+    \Delta A \Delta B \ge \frac{1}{2} \abs{\ev{[A, B]}}
+}{\cite{1.20:wikipedia:StrongerUncertaintyRelations}}
+\qrfeq[qrf:generalized_uncertainty]{
+    \Delta A \Delta B \ge \frac{1}{2} \abs{\ev{[A, B]}}
+}{\cite{1.20:wikipedia:StrongerUncertaintyRelations}}
+\qrfeq[qrf:generalized_uncertainty]{
+    \Delta A \Delta B \ge \frac{1}{2} \abs{\ev{[A, B]}}
+}{\cite{1.20:wikipedia:StrongerUncertaintyRelations}}
+\qrfeq[qrf:generalized_uncertainty]{
+    \Delta A \Delta B \ge \frac{1}{2} \abs{\ev{[A, B]}}
+}{\cite{1.20:wikipedia:StrongerUncertaintyRelations}}
+\qrfeq[qrf:generalized_uncertainty]{
+    \Delta A \Delta B \ge \frac{1}{2} \abs{\ev{[A, B]}}
+}{\cite{1.20:wikipedia:StrongerUncertaintyRelations}}
+\qrfeq[qrf:foo]{
+    \Delta A \Delta B \ge \frac{1}{2} \abs{\ev{[A, B]}}
+}{\cite{1.20:wikipedia:StrongerUncertaintyRelations}}
+
+\end{qrfLayout}
+
+
+
+
+%% % Configurable spacing for the Quick Reference columns
+%% \newlength{\qrfColumnSep}
+%% \setlength{\qrfColumnSep}{1cm}
+
+%% % --- Quick Reference Counters & Macros ---
+%% \newcounter{qrfEq}
+%% \renewcommand{\theqrfEq}{Q.\arabic{qrfEq}}
+%% \renewcommand{\theHqrfEq}{Q.\arabic{qrfEq}} % Prevents hyperref anchor collisions
+
+%% % Usage: \qrfeq[label]{math}{citation}
+%% \NewDocumentCommand{\qrfeq}{o m m}{%
+%%   % Step the counter and drop the label outside the equation
+%%   % so that \ref{} strictly captures "Q.n" and not the citation text.
+%%   \refstepcounter{qrfEq}%
+%%   \IfValueT{#1}{\label{#1}}%
+%%   \begin{equation*}
+%%     #2 \tag*{(\theqrfEq)\quad{\footnotesize #3}}
+%%   \end{equation*}%
+%% }
+
+%% % Centered QRF header with "whisker" lines
+%% \NewDocumentCommand{\qrfheader}{m}{%
+%%   \par\vspace{1.5ex} % Space above
+%%   \noindent
+%%   \leavevmode
+%%   % Left whisker
+%%   \leaders\hrule height 0.65ex depth -0.55ex\hfill
+%%   % Centered Text
+%%   \quad \textbf{\large #1} \quad 
+%%   % Right whisker
+%%   \leaders\hrule height 0.65ex depth -0.55ex\hfill
+%%   %
+%%   \null % <--- THIS IS THE MAGIC FIX
+%%   \par\vspace{1ex} % Space below
+%% }
+
+%% \chapter*{Quick Reference Guide}
+%% \addcontentsline{toc}{chapter}{Quick Reference Guide}
+%% \markboth{Quick Reference Guide}{Quick Reference Guide}
+
+%% % Reduces vertical whitespace to pack the two columns tightly
+%% \setlength{\abovedisplayskip}{4pt}
+%% \setlength{\belowdisplayskip}{4pt}
+
+%% \begin{multicols}{2}
+
+%% \qrfheader{Commutation Relations}
+
+%% % Example with a label! You can now use \ref{qrf:momentum} anywhere else
+%% % in your manual and it will correctly print "Q.1"
+%% \qrfeq[qrf:momentum]{
+%%     [x, p] = i\hbar
+%% }{\cite{1.19:wikipediaVirial}}
+
+%% % Example without a label
+%% \qrfeq{
+%%     [S_x, S_y] = i\hbar S_z
+%% }{[Prob \inref{some_label}]}
+
+%% \qrfeq[qrf:product_rule]{
+%%   [A,BC] = [A,B]C + B[A,C]
+%% }{[Prob \inref{another_label}]}
+
+
+%% \qrfheader{Uncertainty Principles}
+
+%% \qrfeq[qrf:generalized_uncertainty]{
+%%     \Delta A \Delta B \ge \frac{1}{2} \abs{\ev{[A, B]}}
+%% }{\cite{1.20:wikipedia:StrongerUncertaintyRelations}}
+
+%% \end{multicols}
+
+%% % Restore normal spacing for the rest of the book
+%% \setlength{\abovedisplayskip}{10pt}
+%% \setlength{\belowdisplayskip}{10pt}
+
+
+%% \renewcommand{\thechapter}{Q}
+%% \chapter{Quick Reference}
+
+%% Because the $'$ and $''$ and $'''$ and so on gets really annoying, I
+%% switch from primed Eigenvectors/Eigenvalues to subscripts.  So you'll
+%% see $\ket{a'} \Rightarrow \ket{a_i}$ and $\ket{a''} \Rightarrow
+%% \ket{a_j}$ and so on.
+
+%% \begin{equation}
+%%   \qlabel{taylor:exponential}
+%%   e^{A} \equiv \sum_{k=0}^{\infty} \frac{1}{k!} A^k
+%% \end{equation}
+
+%% Not sure about including this one.
+%% \begin{equation}
+%%   \inlabel{taylor:rotation}
+%%   \begin{split}
+%%     \exp(\frac{i\sigma_z\phi}{2})
+%%     &= \sum_{0}^{\infty}{\frac{1}{k!}\left(\frac{i\sigma_z\phi}{2}\right)^k}
+%%     \\
+%%     &= \cos(\frac \phi 2) + i \sigma_z \sin(\frac \phi 2)
+%%     \\
+%%   \end{split}
+%% \end{equation}\outref{1}{5}{fixme}
+
+%% \section{Pauli Spin}
+
+%% \begin{equation*}
+%%   \tag{1.110a}
+%%   \qlabel{spin:x}
+%%   \ket{x\pm} = \frac{1}{\sqrt{2}} [\ket + \pm \ket -]
+%% \end{equation*}
+
+%% \begin{equation*}
+%%   \tag{1.110b}
+%%   \qlabel{spin:y}
+%%   \ket{y\pm} = \frac{1}{\sqrt{2}} [\ket + \pm i\ket -]
+%% \end{equation*}
+
+%% \begin{equation*}
+%%   \tag{1.111a}
+%%   \qlabel{spin:sx}
+%%   S_x = \frac{\hbar}{2} [\ket - \bra + + \ket + \bra - ]
+%% \end{equation*}
+
+%% \begin{equation*}
+%%   \tag{1.111b}
+%%   \qlabel{spin:sy}
+%%   S_y = i \frac{\hbar}{2} [\ket - \bra + - \ket + \bra - ]
+%% \end{equation*}
+
+%% \begin{equation*}
+%%   \tag{3.50}
+%%   \qlabel{spin:matrices}
+%%   \sigma_x =
+%%   \begin{pmatrix}
+%%     0 & 1 \\
+%%     1 & 0 \\
+%%   \end{pmatrix},
+%%   \sigma_y =
+%%   \begin{pmatrix}
+%%     0 & -i \\
+%%     i &  0 \\
+%%   \end{pmatrix},
+%%   \sigma_z =
+%%   \begin{pmatrix}
+%%     1 &  0 \\
+%%     0 & -1 \\
+%%   \end{pmatrix}
+%% \end{equation*}
+
+%% \begin{figure}
+%%   \begin{center}
+%%     \qlabel{spinAxes}
+%%     \includegraphics[width=2in]{qrf/spin_axes.png}
+%%     \caption{Spin axis definitions.  Please note that due to font
+%%       limitations in QCad at the time of this writing, $\alpha$ and
+%%       $\beta$ are represented as $a$ and $b$ respectively.}
+%%   \end{center}
+%% \end{figure}
+
+%% \begin{equation}
+%%   \qlabel{spinAngle}
+%%   \ket{\alpha} =
+%%   \cos(\frac{\beta}{2})\ket{+} + \sin(\frac{\beta}{2}) e^{i\alpha}\ket{-}
+%% \end{equation}\outref{1}{11}{spinAngle}
+
+%% \subsection{Integral Table}
+
+%% \begin{equation}
+%%   \qlabel{integral:gaussian}
+%%   \int_{-\infty}^{\infty} \dd{x} e^{-\alpha x^2} = \sqrt{\frac{\pi}{\alpha}}
+%% \end{equation}\cite[eq 3.321.3]{gr}
+
+%% \begin{equation}
+%%   \qlabel{uncertain:full}
+%% \dispersion{A}\dispersion{B} \ge \frac{1}{4} \abs{\expval{[A, B]}}^2 + \frac{1}{4} \abs{\expval{{A, B} - 2\expval{A}\expval{B}}}^2
+%% \end{equation}\outref{1}{20}{theQuestion}
+
+%% \begin{equation}
+%%   \qlabel{integral:xgaussian}
+%%   \int_{-\infty}^{\infty} \dd{x} xe^{-\alpha x^2} = 0
+%% \end{equation}\cite[eq 3.321.3]{gr}
+
+%% \begin{equation}
+%%   \qlabel{integral:xxgaussian}
+%%   \int_{-\infty}^{\infty} \dd{x} x^2e^{-\alpha x^2} = \frac{1}{2\alpha}\sqrt{\frac{\pi}{\alpha}}
+%% \end{equation}\cite[fixme]{gr}
+
+%% \section{Wave Functions}
+
+%% \subsection{\acf{gwp}}
+%% \qlabel{wavey:gwp}
+%%     \begin{equation}
+%%       \qlabel{gwp:exp}
+%%       \begin{alignedat}{2}
+%%         \expval{X}^2 &= 0 & \quad{} &\text{(eq \ref{1.24:exp:x1})}\\
+%%         \expval{X^2} &= \frac{d^2}{2} & &\text{(eq \ref{1.24:exp:x2})}\\
+%%         \expval{P}^2 &= \hbar^2k^2 & &\text{(eq \ref{1.24:exp:p1})}\\
+%%         \expval{P^2} &= \hbar^2\left(k^2+\frac{1}{2d^2}\right)
+%%         & &\text{(eq \ref{1.24:exp:p2})}\\
+%%       \end{alignedat}
+%%     \end{equation}
+
+%%     \begin{equation}
+%%       \qlabel{uncertain:xp}
+%%       \dispersion{X}\dispersion{P}
+%%       =
+%%       \left(\expval{\hat{X}^2} - \expval{\hat{X}}^2\right)
+%%       \left(\expval{\hat{P}^2} - \expval{\hat{P}}^2\right)
+%%       = \frac{\hbar^2}{4}
+%%     \end{equation}
+
+%%     \begin{equation}
+%%       \qlabel{uncertain:et}
+%%       \dispersion{E}\dispersion{T}
+%%       =
+%%       FIXME
+%%     \end{equation}FIXME: Cite wikipedia like I did in problem 24
+
+%%     \begin{equation}
+%%       \qlabel{wavey:gwp:psi}
+%%       \psi(x')
+%%       = \braket{x'}{\alpha}
+%%       = \frac{1}{\pi^{1/4}}\sqrt{\frac{1}{d}}
+%%       \exp[ikx'-\frac{x'^2}{2d^2}]
+%%     \end{equation}
+
+%%     \begin{equation}
+%%       \qlabel{wavey:gwp:phi}
+%%       \phi(p')
+%%       =
+%%       \left[ \frac{1}{\sqrt{2\pi\hbar}} \right]
+%%       \int \dd{x'} \exp(\frac{-ip'x'}{\hbar})\psi_{\alpha}(x')
+%%       = 
+%%       \frac{1}{\pi^{1/4}}
+%%       \sqrt{\frac{d}{\hbar}}
+%%       \exp[-\frac{d^2}{2\hbar^2}(p' - \hbar k)^2]
+%%     \end{equation}
+
+%%     \begin{equation}
+%%       \qlabel{comms:chain}
+%%       \tag{FIXME}
+%%       [A,BC] = [A,B]C + B[A,C]
+%%     \end{equation}
+
+%%     \begin{equation}
+%%       \qlabel{comms:power}
+%%       \begin{split}
+%%         [A,B^n] &= n B^{n-1}[A,B]\\
+%%         [A,B] &= C(\text{onstant})\\
+%%       \end{split}
+%%     \end{equation}\outref{1}{30}{ConstantPower}
+    
+%%     \begin{equation}
+%%       \qlabel{comms:func}
+%%       [x, F(p)] = i\hbar \pdv{F}{p}, \quad [p, F(x)] = -i\hbar \pdv{F}{x}
+%%     \end{equation}\outref{1}{30}{xfp}
+
+%%     \begin{equation}
+%%       \qlabel{misc:realeig}
+%%       A = A^{\dagger} \implies \forall i, \lambda_i \in \mathscr{R}
+%%     \end{equation}
+
+%%     \begin{equation}
+%%       \qlabel{misc:unitary}
+%%       U^{\dagger}U = I \implies \text{U is Unitary}
+%%     \end{equation}
+
+%%     \begin{equation}
+%%       \qlabel{decomp:func}
+%%       f(A) = \int \dd{a'} f(a') \Lambda_{a'}
+%%     \end{equation}\outref{1}{29}{mainPoint}
+
+%%     \begin{equation}
+%%       \qlabel{decomp:ident}
+%%       I = \sum_i \Lambda_i \implies I = \int \dd{a'} \Lambda_{a'}
+%%     \end{equation}
+
+%%   \begin{equation}
+%%       \qlabel{op:p}
+%%     \mel{x'}{\hat{p}}{\alpha} = -i\hbar\pdv{}{x'}\braket{x'}{\alpha}
+%%   \end{equation}
+
+%%   \begin{equation}
+%%       \qlabel{op:x}
+%%     \mel{p'}{\hat{x}}{\alpha} = i\hbar\pdv{}{p'}\braket{p'}{\alpha}
+%%   \end{equation}
+
+%%   \begin{equation}
+%%       \qlabel{stats:var:minus}
+%%     \dispersion{A} = \expval{A^2} - \expval{A}^2
+%%   \end{equation}
+
+%%   \begin{equation}
+%%       \qlabel{stats:var:func}
+%%     \dispersion{f(X)} \approx \left(f'(\expval{X})\right)^2 \dispersion{X}
+%%   \end{equation}
+
+
+%% \subsection{Trig Identities}
+
+%% \begin{equation}
+%%       \qlabel{trig:sin2a}
+%%   \sin{2\alpha} = 2\sin{\alpha}\cos{\alpha}
+%% \end{equation}
+
+%% \begin{equation}
+%%   \qlabel{trig:cos2a}
+%%   \begin{split}
+%%     \qlabel{trigCos2A}
+%%     \cos{2\alpha}
+%%     &= \cos^2{\alpha} - \sin^2{\alpha}\\
+%%     &= 2\cos^2{\alpha} - 1\\
+%%     &= 1 - 2\sin^2{\alpha}\\
+%%   \end{split}
+%% \end{equation}
+
+%% \begin{equation}
+%%   \qlabel{trig:coshalf}
+%%   \cos{\frac \alpha 2} = \pm \sqrt{\frac{1 + \cos{\alpha}}{2}}
+%% \end{equation}
+
+%% \begin{equation}
+%%   \qlabel{trig:sinhalf}
+%%   \sin{\frac \alpha 2} = \pm \sqrt{\frac{1 - \cos{\alpha}}{2}}
+%% \end{equation}
+
+%% \begin{equation}
+%%   \qlabel{trig:harmonic}
+%%   \begin{alignedat}{2}
+%%     && f(\theta) &= a\cos(\theta) + b\sin(\theta)\\
+%%     &&&= c\cos(\theta + \delta)\\
+%%     \text{where } && c &= \sqrt{a^2 + b^2}\\
+%%     \text{and } && \delta &= \tan^{-1}(-\frac{a}{b})
+%%   \end{alignedat}
+%% \end{equation}
+%% \cite{msu:harmonicAddition}
