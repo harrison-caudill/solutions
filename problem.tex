@@ -1,12 +1,16 @@
 \documentclass[fleqn, oneside]{book}
 
 \input{BUILD/bookParams}
+\usepackage[pdftitle={\bookName-\chapterNum-\problemNum},
+  colorlinks=false,
+  bookmarksopen=true,
+  bookmarksopenlevel=2]{hyperref}
+
 \input{packages}
+
 \input{\bookName/acronyms}
 \input{\bookName/commands}
 
-
-\usepackage[pdftitle={\bookName-\chapterNum-\problemNum},colorlinks=false]{hyperref}
 
 \input{preamble}
 \input{commands}

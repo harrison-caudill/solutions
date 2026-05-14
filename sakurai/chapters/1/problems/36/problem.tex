@@ -11,7 +11,7 @@
 
     \begin{questionsubpart}
       \begin{equation*}
-        \mel{\beta}{x}{\alpha} = \int dp' \phi_{\beta}^{*}(p')i \hbar \pdv{}{p'} \phi_{\alpha}(p')
+        \mel{\beta}{x}{\alpha} = \int \dd{p'} \phi_{\beta}^{*}(p')i \hbar \pdv{}{p'} \phi_{\alpha}(p')
       \end{equation*}
     \end{questionsubpart}
 
@@ -158,8 +158,8 @@
       \begin{equation}
         \begin{split}
           \mel{\beta}{x}{\alpha}
-          &= \int dp' (\bra{\beta})(\dyad{p'})(x\ket{\alpha})\\
-          &= \int dp' \braket{\beta}{p'}\mel{p'}{x}{\alpha}\\
+          &= \int \dd{p'} (\bra{\beta})(\dyad{p'})(x\ket{\alpha})\\
+          &= \int \dd{p'} \braket{\beta}{p'}\mel{p'}{x}{\alpha}\\
         \end{split}
       \end{equation}
 
@@ -171,9 +171,9 @@
       \begin{equation}
         \begin{split}
           \mel{\beta}{x}{\alpha}
-          &= \int dp' \braket{\beta}{p'}\mel{p'}{x}{\alpha}\\
-          &= \int dp' \braket{\beta}{p'}\left(i\hbar \pdv{}{p'}\right)\braket{p'}{\alpha}\\
-          &= \int dp' \braket{\beta}{p'}\left(i\hbar \pdv{}{p'}\right)\braket{p'}{\alpha}\\
+          &= \int \dd{p'} \braket{\beta}{p'}\mel{p'}{x}{\alpha}\\
+          &= \int \dd{p'} \braket{\beta}{p'}\left(i\hbar \pdv{}{p'}\right)\braket{p'}{\alpha}\\
+          &= \int \dd{p'} \braket{\beta}{p'}\left(i\hbar \pdv{}{p'}\right)\braket{p'}{\alpha}\\
         \end{split}
       \end{equation}
 
@@ -191,8 +191,8 @@
       \begin{equation}
         \begin{split}
           \mel{\beta}{x}{\alpha}
-          &= \int dp' \braket{\beta}{p'}\left(i\hbar \pdv{}{p'}\right)\braket{p'}{\alpha}\\          
-          &= \int dp' \phi_{\beta}^{*}(p')
+          &= \int \dd{p'} \braket{\beta}{p'}\left(i\hbar \pdv{}{p'}\right)\braket{p'}{\alpha}\\          
+          &= \int \dd{p'} \phi_{\beta}^{*}(p')
           \left(i\hbar \pdv{}{p'}\right)
           \phi_{\alpha}(p')\qed\\
         \end{split}

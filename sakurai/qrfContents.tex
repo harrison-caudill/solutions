@@ -118,17 +118,17 @@ see $\ket{a'} \Rightarrow \ket{a_i}$ and $\ket{a''} \Rightarrow
 
 \begin{equation}
   \qlabel{integral:gaussian}
-  \int_{-\infty}^{\infty} dx\  e^{-\alpha x^2} = \sqrt{\frac{\pi}{\alpha}}
+  \int_{-\infty}^{\infty} \dd{x} e^{-\alpha x^2} = \sqrt{\frac{\pi}{\alpha}}
 \end{equation}
 
 \begin{equation}
   \qlabel{integral:xgaussian}
-  \int_{-\infty}^{\infty} dx\  xe^{-\alpha x^2} = 0
+  \int_{-\infty}^{\infty} \dd{x} xe^{-\alpha x^2} = 0
 \end{equation}\cite[eq 3.321.3]{gr}
 
 \begin{equation}
   \qlabel{integral:xxgaussian}
-  \int_{-\infty}^{\infty} dx\  x^2e^{-\alpha x^2} = \frac{1}{2\alpha}\sqrt{\frac{\pi}{\alpha}}
+  \int_{-\infty}^{\infty} \dd{x} x^2e^{-\alpha x^2} = \frac{1}{2\alpha}\sqrt{\frac{\pi}{\alpha}}
 \end{equation}
 
 \section{Wave Functions}
@@ -167,7 +167,7 @@ see $\ket{a'} \Rightarrow \ket{a_i}$ and $\ket{a''} \Rightarrow
       \phi(p')
       =
       \left[ \frac{1}{\sqrt{2\pi\hbar}} \right]
-      \int dx' \exp(\frac{-ip'x'}{\hbar})\psi_{\alpha}(x')
+      \int \dd{x'} \exp(\frac{-ip'x'}{\hbar})\psi_{\alpha}(x')
       = 
       \frac{1}{\pi^{1/4}}
       \sqrt{\frac{d}{\hbar}}

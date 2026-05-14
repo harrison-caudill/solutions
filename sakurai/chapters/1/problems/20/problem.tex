@@ -668,9 +668,9 @@
     \begin{equation}
       \begin{split}
         \expval{x^2}
-        &= \int dx' x'^2 P(x')\\
-        &= \int dx' x'^2 \abs{\braket{x'}{\alpha}}^2\\
-        &= \int dx' x'^2 \abs{
+        &= \int \dd{x'} x'^2 P(x')\\
+        &= \int \dd{x'} x'^2 \abs{\braket{x'}{\alpha}}^2\\
+        &= \int \dd{x'} x'^2 \abs{
           \frac{1}{\sqrt[4]{2}}
           \left[
             \frac{1}{\pi^{1/4}\sqrt{d}}\right]
@@ -682,7 +682,7 @@
         &=
         \frac{1}{\sqrt{2}}
         \frac{1}{\pi^{1/2}d}
-        \int dx' x'^2
+        \int \dd{x'} x'^2
         \left\{
           \exp[
             ikx'
@@ -697,7 +697,7 @@
         &=
         \frac{1}{\sqrt{2}}
         \frac{1}{\pi^{1/2}d}
-        \int dx' x'^2
+        \int \dd{x'} x'^2
           \exp[- \frac{\left(x' - x_0\right)^2}{2d^2}]
           \\
       \end{split}
@@ -725,9 +725,9 @@
         \expval{p}
         &= p_0\\
         &= \mel{\alpha}{\hat{p}}{\alpha}\\
-        &= \int dx' \bra{\alpha} \left(\dyad{x'}\right) \hat{p}\ket{\alpha}\\
-        &= \int dx' \braket{\alpha}{x'} \mel{x'}{\hat{p}}{\alpha}\\
-        &= \int dx' \braket{\alpha}{x'} (-i \hbar \pdv{x'})\braket{x'}{\alpha}\\
+        &= \int \dd{x'} \bra{\alpha} \left(\dyad{x'}\right) \hat{p}\ket{\alpha}\\
+        &= \int \dd{x'} \braket{\alpha}{x'} \mel{x'}{\hat{p}}{\alpha}\\
+        &= \int \dd{x'} \braket{\alpha}{x'} (-i \hbar \pdv{x'})\braket{x'}{\alpha}\\
       \end{split}
     \end{equation}
 
@@ -738,11 +738,11 @@
       \begin{split}
         \expval{p^2}
         &= \mel{\alpha}{\hat{p}^2}{\alpha}\\
-        &= \int dx' \braket{\alpha}{x'} \mel{x'}{\hat{p}^2}{\alpha}\\
-        &= \int dx' \braket{\alpha}{x'}
+        &= \int \dd{x'} \braket{\alpha}{x'} \mel{x'}{\hat{p}^2}{\alpha}\\
+        &= \int \dd{x'} \braket{\alpha}{x'}
         (-i \hbar \pdv{x'})^2
         \braket{x'}{\alpha}\\
-        &= \int dx'
+        &= \int \dd{x'}
         \frac{1}{\sqrt[4]{2}}
         \left[\frac{1}{\pi^{1/4}\sqrt{d}}\right]
         \exp[
@@ -758,7 +758,7 @@
         ]\\
         &=
         \frac{1}{d\sqrt{2\pi}}
-        \int dx'
+        \int \dd{x'}
         \exp[
           - ikx'
           - \frac{1}{2}\frac{\left(x' - x_0\right)^2}{2d^2}

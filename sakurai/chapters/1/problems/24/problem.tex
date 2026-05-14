@@ -1088,7 +1088,7 @@
       \begin{split}
         u &= r\cos{\varphi}\\
         v &= r\sin{\varphi}\\
-        \dd{u} \dd{v} &= r dr d\varphi
+        \dd{u} \dd{v} &= r \dd{r} \dd{\varphi}
       \end{split}
     \end{equation}
 
@@ -1114,7 +1114,7 @@
         \int_{0}^{2\pi}
         \exp[-r^2]
         \ln(\abs{C_1r\cos{\varphi} + C_2r\sin{\varphi}})
-        r dr d\varphi
+        r \dd{r} \dd{\varphi}
         \\
         &=
         \frac{\ln(\pi)}{\gamma}
@@ -1124,33 +1124,33 @@
         \int_{0}^{2\pi}
         \exp[-r^2]
         \ln(r)
-        r dr d\varphi
+        r \dd{r} \dd{\varphi}
         -
         \frac{1}{\pi\gamma}
         \int_{0}^{\infty}
         \int_{0}^{2\pi}
         \exp[-r^2]
         \ln(\abs{C_1\cos{\varphi} + C_2\sin{\varphi}})
-        r dr d\varphi
+        r \dd{r} \dd{\varphi}
         \\
         &=
         \frac{\ln(\pi)}{\gamma}
         - 
         \frac{1}{\pi\gamma}
         \int_{0}^{2\pi}
-        d\varphi
+        \dd{\varphi}
         \int_{0}^{\infty}
         re^{-r^2}
         \ln(r)
-        dr
+        \dd{r}
         -
         \frac{1}{\pi\gamma}
         \int_{0}^{\infty}
         re^{-r^2}
-        dr
+        \dd{r}
         \int_{0}^{2\pi}
         \ln(\abs{C_1\cos{\varphi} + C_2\sin{\varphi}})
-        d\varphi
+        \dd{\varphi}
         \\
         &=
         \frac{\ln(\pi)}{\gamma}
@@ -1159,15 +1159,15 @@
         \int_{0}^{\infty}
         re^{-r^2}
         \ln(r)
-        dr
+        \dd{r}
         -
         \frac{1}{\pi\gamma}
         \int_{0}^{\infty}
         re^{-r^2}
-        dr
+        \dd{r}
         \int_{0}^{2\pi}
         \ln(\abs{C_1\cos{\varphi} + C_2\sin{\varphi}})
-        d\varphi
+        \dd{\varphi}
         \\
       \end{split}
     \end{equation}
@@ -1191,15 +1191,15 @@
         \int_{0}^{\infty}
         re^{-r^2}
         \ln(r)
-        dr
+        \dd{r}
         -
         \frac{1}{\pi\gamma}
         \int_{0}^{\infty}
         re^{-r^2}
-        dr
+        \dd{r}
         \int_{0}^{2\pi}
         \ln(\abs{C_1\cos{\varphi} + C_2\sin{\varphi}})
-        d\varphi
+        \dd{\varphi}
         \\
         &=
         \frac{\ln(\pi)}{\gamma}
@@ -1208,13 +1208,13 @@
         \int_{0}^{\infty}
         re^{-r^2}
         \ln(r)
-        dr
+        \dd{r}
         -
         \frac{1}{\pi\gamma}
         \eval\ \frac{1}{2}\left[1 - e^{-r^2}\right]|_{r=0}^{\infty}
         \int_{0}^{2\pi}
         \ln(\abs{C_1\cos{\varphi} + C_2\sin{\varphi}})
-        d\varphi
+        \dd{\varphi}
         \\
         &=
         \frac{\ln(\pi)}{\gamma}
@@ -1223,12 +1223,12 @@
         \int_{0}^{\infty}
         re^{-r^2}
         \ln(r)
-        dr
+        \dd{r}
         -
         \frac{1}{2\pi\gamma}
         \int_{0}^{2\pi}
         \ln(\abs{C_1\cos{\varphi} + C_2\sin{\varphi}})
-        d\varphi
+        \dd{\varphi}
         \\
       \end{split}
     \end{equation}
@@ -1237,7 +1237,7 @@
     find
 
     \begin{equation}
-      \int_{0}^{\infty} re^{-r^2} \ln(r) dr = -\frac{\gamma_e}{4}
+      \int_{0}^{\infty} re^{-r^2} \ln(r) \dd{r} = -\frac{\gamma_e}{4}
     \end{equation}
 
     where $\gamma_e$ is the Euler-Mascheroni constant.  All told, this
@@ -1254,12 +1254,12 @@
         \int_{0}^{\infty}
         re^{-r^2}
         \ln(r)
-        dr
+        \dd{r}
         -
         \frac{1}{2\pi\gamma}
         \int_{0}^{2\pi}
         \ln(\abs{C_1\cos{\varphi} + C_2\sin{\varphi}})
-        d\varphi
+        \dd{\varphi}
         \\
         &=
         \frac{\ln(\pi)}{\gamma}
@@ -1269,7 +1269,7 @@
         \frac{1}{2\pi\gamma}
         \int_{0}^{2\pi}
         \ln(\abs{C_1\cos{\varphi} + C_2\sin{\varphi}})
-        d\varphi
+        \dd{\varphi}
         \\
       \end{split}
     \end{equation}
@@ -1310,7 +1310,7 @@
         \frac{1}{2\pi\gamma}
         \int_{0}^{2\pi}
         \ln(\abs{C_1\cos{\varphi} + C_2\sin{\varphi}})
-        d\varphi
+        \dd{\varphi}
         \\
         &=
         \frac{\ln(\pi)}{\gamma}
@@ -1320,7 +1320,7 @@
         \frac{1}{2\pi\gamma}
         \int_{0}^{2\pi}
         \ln(\abs{c\cos(\varphi + \delta)})
-        d\varphi
+        \dd{\varphi}
         \\
         &=
         \frac{\ln(\pi)}{\gamma}
@@ -1330,12 +1330,12 @@
         \frac{1}{2\pi\gamma}
         \int_{0}^{2\pi}
         \ln(c)
-        d\varphi
+        \dd{\varphi}
         -
         \frac{1}{2\pi\gamma}
         \int_{0}^{2\pi}
         \ln(\abs{\cos(\varphi + \delta)})
-        d\varphi
+        \dd{\varphi}
         \\
         &=
         \frac{\ln(\pi)}{\gamma}
@@ -1347,7 +1347,7 @@
         \frac{1}{2\pi\gamma}
         \int_{0}^{2\pi}
         \ln(\abs{\cos(\varphi + \delta)})
-        d\varphi
+        \dd{\varphi}
         \\
       \end{split}
     \end{equation}
@@ -1381,7 +1381,7 @@
         \frac{1}{2\pi\gamma}
         \int_{0}^{2\pi}
         \ln(\abs{\cos(\varphi + \delta)})
-        d\varphi
+        \dd{\varphi}
         \\
         &=
         \frac{\ln(\pi)}{\gamma}
