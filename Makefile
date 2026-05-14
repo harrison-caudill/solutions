@@ -74,7 +74,18 @@ manual: .dummy_builddir
 	@$(MAKE) line --no-print-directory -e header="Consolidating References"
 	bin/ref.py -b $(bookName)
 	@$(MAKE) --no-print-directory $(bookName)/manual.pdf
-	mv $(BUILD)/manual.pdf $(BUILD)/$(bookName).pdf
+	cp $(BUILD)/manual.pdf $(BUILD)/$(bookName).pdf
+
+encrypt:
+	qpdf \
+	--encrypt "" "$(pw)" 256 \
+	--annotate=y \
+	--assemble=y \
+	--extract=n \
+	--print=full \
+	-- \
+	$(BUILD)/manual.pdf \
+	$(BUILD)/$(bookName).pdf
 
 problem:
 	@$(MAKE) --no-print-directory \

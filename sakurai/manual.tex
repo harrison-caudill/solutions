@@ -6,12 +6,12 @@
 %% fleqn left-aligns the equations
 \documentclass[fleqn, oneside]{book}
 
-\input{packages}
-
 \usepackage[pdftitle={Solutions Manual: Sakurai (3rd ed)},
   colorlinks=false,
   bookmarksopen=true,
   bookmarksopenlevel=2]{hyperref}
+
+\input{packages}
 
 \input{preamble}
 \input{commands}
@@ -27,14 +27,22 @@
 
 %% Tell hyperref not to count the title page as page 1 to avoid a collision
 \hypersetup{pageanchor=false}
-\maketitle
+
+\begin{titlepage}
+    \centering%
+    \vspace*{5cm}%
+    {\Large \bfseries \thetitle \par}%
+    \vspace{1.5cm}%
+    {\large \theauthor \par}%
+    \vfill%
+    \doclicenseThis%
+\end{titlepage}
 \hypersetup{pageanchor=true}
 
 \input{BUILD/bookParams}
 \input{\bookName/acronyms}
 \input{\bookName/commands}
 \graphicspath{{\buildPath/\bookName}}
-
 
 \input{\bookName/foreward}
 \input{\bookName/qrfContents}
