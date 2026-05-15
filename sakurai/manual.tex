@@ -3,6 +3,11 @@
   oneside %% otherwise you'd have page numbers on left then right
 ]{book}
 
+%% The build system has to tell us where to find the build directory.
+%% Yes, I recognize the irony.  If it ever matters, now there's only
+%% one place you need to care about properly passing it in.
+\input{BUILD/bookParams}
+
 \usepackage[
   pdftitle={Solutions Manual: Sakurai (3rd ed)},
   colorlinks=false,
@@ -46,11 +51,6 @@
 
 %% This common hack prevents hyperref from complaining about duplicated pg i
 \hypersetup{pageanchor=true}
-
-%% The build system has to tell us where to find the build directory.
-%% Yes, I recognize the irony.  If it ever matters, now there's only
-%% one place you need to care about properly passing it in.
-\input{BUILD/bookParams}
 
 %% Even though this is for the sakurai book, I wanted the
 %% infrastructure to be as shared as I reasonably could make it
