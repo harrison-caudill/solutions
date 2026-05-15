@@ -77,12 +77,31 @@
       \begin{split}
         [S_x, S_y]
         &= S_xS_y - S_yS_x \\
-        &= [\frac \hbar 2 (\ket - \bra + + \ket + \bra -)][i \frac \hbar 2 (\ket - \bra + - \ket + \bra -)] - [i \frac \hbar 2 (\ket - \bra + - \ket + \bra -)][\frac \hbar 2 (\ket - \bra + + \ket + \bra -)] \\
-        &= i \frac{\hbar^2}{4} \{ [(\ket - \bra + + \ket + \bra -)][(\ket - \bra + - \ket + \bra -)] - [(\ket - \bra + - \ket + \bra -)][(\ket - \bra + + \ket + \bra -)]\}\\
-        &= i \frac{\hbar^2}{4} \{ (-\Lambda_- + \Lambda_+) - (\Lambda_- - \Lambda_+) \} \\
-        &= i \frac{\hbar^2}{4} \{ (-\Lambda_- + \Lambda_+) + (-\Lambda_- + \Lambda_+) \} \\
-        &= i \frac{\hbar^2}{4} \{ 2 (\Lambda_+ - \Lambda_-) \} \\
-        &= i \hbar \{ \frac{\hbar}{2} (\Lambda_+ - \Lambda_-) \} \\
+        &=
+        \left[\frac \hbar 2 (\ket - \bra + + \ket + \bra -)\right]
+        \left[i \frac \hbar 2 (\ket - \bra + - \ket + \bra -)\right]
+        -
+        \left[i \frac \hbar 2 (\ket - \bra + - \ket + \bra -)\right]
+        \left[\frac \hbar 2 (\ket - \bra + + \ket + \bra -)\right]
+        \\
+        &=
+        i \frac{\hbar^2}{4}
+        \left(
+        [(\ket - \bra + + \ket + \bra -)]
+        [(\ket - \bra + - \ket + \bra -)]
+        -
+        [(\ket - \bra + - \ket + \bra -)]
+        [(\ket - \bra + + \ket + \bra -)]
+        \right)
+        \\
+        &=
+        i \frac{\hbar^2}{4}
+        \left( (-\Lambda_- + \Lambda_+) - (\Lambda_- - \Lambda_+) \right)
+        \\
+        &= i \frac{\hbar^2}{4}
+        \left( (-\Lambda_- + \Lambda_+) + (-\Lambda_- + \Lambda_+) \right) \\
+        &= i \frac{\hbar^2}{4} \left( 2 (\Lambda_+ - \Lambda_-) \right) \\
+        &= i \hbar \left( \frac{\hbar}{2} (\Lambda_+ - \Lambda_-) \right) \\
         &= i \hbar S_z \qed{}\\
       \end{split}
     \end{equation}
@@ -93,12 +112,44 @@
       \begin{split}
         [S_y, S_z]
         &= S_yS_z - S_zS_y \\
-        &= [i \frac \hbar 2 (\ket - \bra + - \ket + \bra -)][\frac \hbar 2 (\Lambda_+ - \Lambda_-)] - [\frac \hbar 2 (\Lambda_+ - \Lambda_-)][i \frac \hbar 2 (\ket - \bra + - \ket + \bra -)]\\
-        &= i \frac{\hbar^2}{4} \{ [(\ket - \bra + - \ket + \bra -)][(\Lambda_+ - \Lambda_-)] - [(\Lambda_+ - \Lambda_-)][(\ket - \bra + - \ket + \bra -)] \}\\
-        &= i \frac{\hbar^2}{4} \{ (\ket - \bra + + \ket + \bra -) - (-\ket - \bra + - \ket + \bra -) \}\\
-        &= i \frac{\hbar^2}{4} \{ (\ket - \bra + + \ket + \bra -) + (\ket - \bra + + \ket + \bra -) \}\\
-        &= i \frac{\hbar^2}{4} \{ 2(\ket - \bra + + \ket + \bra -) \}\\
-        &= i \hbar \{ \frac{\hbar}{2} (\ket - \bra + + \ket + \bra -) \}\\
+        &=
+        \left[i \frac \hbar 2 (\ket - \bra + - \ket + \bra -)\right]
+        \left[\frac \hbar 2 (\Lambda_+ - \Lambda_-)\right]
+        -
+        \left[\frac \hbar 2 (\Lambda_+ - \Lambda_-)\right]
+        \left[i \frac \hbar 2 (\ket - \bra + - \ket + \bra -)\right]
+        \\
+        &= i \frac{\hbar^2}{4}
+        \left(
+        [(\ket - \bra + - \ket + \bra -)]
+        [(\Lambda_+ - \Lambda_-)]
+        -
+        [(\Lambda_+ - \Lambda_-)]
+        [(\ket - \bra + - \ket + \bra -)]
+        \right)
+        \\
+        &= i \frac{\hbar^2}{4}
+        \left(
+        (\ket - \bra + + \ket + \bra -)
+        -
+        (-\ket - \bra + - \ket + \bra -)
+        \right)
+        \\
+        &= i \frac{\hbar^2}{4}
+        \left(
+        (\ket - \bra + + \ket + \bra -)
+        +
+        (\ket - \bra + + \ket + \bra -)
+        \right)
+        \\
+        &= i \frac{\hbar^2}{4}
+        \left( 2(\ket - \bra + + \ket + \bra -) \right)
+        \\
+        &= i \hbar
+        \left(
+        \frac{\hbar}{2} (\ket - \bra + + \ket + \bra -)
+        \right)
+        \\
         &= i \hbar S_x \qed\\
       \end{split}
     \end{equation}
@@ -109,12 +160,33 @@
       \begin{split}
         [S_z, S_x]
         &= S_zS_x - S_xS_z \\
-        &= [\frac \hbar 2 (\Lambda_+ - \Lambda_-)][\frac \hbar 2 (\ket - \bra + + \ket + \bra -)] - [\frac \hbar 2 (\ket - \bra + + \ket + \bra -)][\frac \hbar 2 (\Lambda_+ - \Lambda_-)]\\
-        &= \frac{\hbar^2}{4} \{ [(\Lambda_+ - \Lambda_-)][(\ket - \bra + + \ket + \bra -)] - [(\ket - \bra + + \ket + \bra -)][(\Lambda_+ - \Lambda_-)]\\
-        &= \frac{\hbar^2}{4} \{ (-\ket - \bra + + \ket + \bra -) - (\ket - \bra + - \ket + \bra -) \}\\
+        &=
+        \left[\frac \hbar 2 (\Lambda_+ - \Lambda_-)\right]
+        \left[\frac \hbar 2 (\ket - \bra + + \ket + \bra -)\right]
+        -
+        \left[\frac \hbar 2 (\ket - \bra + + \ket + \bra -)\right]
+        \left[\frac \hbar 2 (\Lambda_+ - \Lambda_-)\right]
+        \\
+        &=
+        \frac{\hbar^2}{4}
+        \left(
+        [(\Lambda_+ - \Lambda_-)][(\ket - \bra + + \ket + \bra -)]
+        -
+        [(\ket - \bra + + \ket + \bra -)][(\Lambda_+ - \Lambda_-)]
+        \right)
+        \\
+        &=
+        \frac{\hbar^2}{4}
+        \left(
+        (-\ket - \bra + + \ket + \bra -)
+        -
+        (\ket - \bra + - \ket + \bra -)
+        \right)
+        \\
         &= \frac{\hbar^2}{4} \{ 2(-\ket - \bra + + \ket + \bra -) \}\\
-        &= \hbar \{ \frac{-1}{i}S_y \}\\
-        &= i \hbar S_y \qed\\
+        &= \hbar \left( \frac{-1}{i}S_y \right)\\
+        &= i \hbar S_y \qed
+        \\
       \end{split}
     \end{equation}
 

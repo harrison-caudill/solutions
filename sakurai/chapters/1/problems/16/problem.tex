@@ -250,26 +250,21 @@ representation as follows:
     Eigenvectors.
 
     Since the book asks us to normalize, let's do that and also bring
-    back our $c_0$ as part of it.  So we're going to normalize our
-    eigenvector to have magnitude  trivially adding a
-    constant out front
-
-    \begin{equation}
-      c = \frac{1}{c_0\abs{a}} = \frac{1}{2c_0} = \frac{\sqrt{2}}{2}
-    \end{equation}
-
-    This constant ensures that the Eigenvectors we found are
-    normalized for the scaled matrix $c_0A$ specified in the problem.
-    Pull out the $\frac{1}{c_0}$ or leave it in depending upon whether
-    you want the vectors from before or after (respectively) the $c_0$
-    is applied.
+    back our $c_0$ as part of it.  We're going to distinguish, now,
+    between the scaled and unscaled eigenvalues.  So while $\lambda =
+    \pm \sqrt{2}$ for the eigenvalues whose existences are unsullied
+    by $c_0$ we'll assume that $\lambda' = \pm c_0\sqrt{2} = \pm 1$.
+    
+    You're a big (statistically-speaking) boy now and you can go and
+    get a scaling factor of $c_0$ on your own if you need one.
+    Solving for the unscaled eigenvectors using $\lambda$
 
     \begin{equation}
       \vec{a_{1,3}} =
-      \frac{\sqrt{2}}{2}
+      \frac{1}{2}
       \begin{pmatrix}
         1\\
-        \lambda\\
+        \pm \sqrt{2}\\
         1\\
       \end{pmatrix}\\
     \end{equation}
@@ -278,15 +273,15 @@ representation as follows:
 
     \begin{equation}
       \vec{a_{2}} =
-      \frac{\sqrt{2}}{2}
+      \frac{1}{\sqrt{2}}
       \begin{pmatrix}
         1\\
-        \lambda\\
+        0\\
         -1\\
       \end{pmatrix}\\
     \end{equation}
   \end{answerpart}
-  
+
   \begin{answerpart}{Physical Interpretation}
     There are a few cases where I can intuit this being useful, such
     as with raising and lowering.  There's also clearly something to
