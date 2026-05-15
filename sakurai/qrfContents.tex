@@ -1,175 +1,236 @@
-\renewcommand{\thechapter}{Q}
-\chapter{Quick Reference}
+\qrfTitle{Quick Reference}
 
-Because the $'$ and $''$ and $'''$ and so on gets really annoying, I
-switch from primed Eigenvectors/Eigenvalues to subscripts.  So you'll
-see $\ket{a'} \Rightarrow \ket{a_i}$ and $\ket{a''} \Rightarrow
-\ket{a_j}$ and so on.
+\begin{qrfLayout}
 
+  \qrfheader{Eigen Decomposition}
 
-\section{General Purpose}
+  \qrfeq[decomp:ident]{
+    I = \sum_i \Lambda_i \implies I = \int \dd{a'} \Lambda_{a'}
+  }{\cite[1.184]{sakurai}}
 
-\begin{equation}
-  \qlabel{taylor}
-  f(A) \equiv \sum_{k=0}^{\infty} \frac{1}{k!} A^k
-\end{equation}
-
-\subsection{Core Concepts}
-
-\begin{equation}
-  \tag{1.210}
-  \vectorbold{x}_{new}
-  \equiv \vectorbold{X}
-  = \vectorbold{x} + d\vectorbold{x},
-  \vectorbold{p}_{new}
-  \equiv \vectorbold{P}
-  = \vectorbold{p}
-\end{equation}
-
-\begin{equation}
-  \tag{1.211}
-  F(\vectorbold{x}, \vectorbold{P})
-  = \vectorbold{x} \cdot \vectorbold{P}
-  + \vectorbold{p} \cdot d\vectorbold{x}
-\end{equation}
+  \qrfeq[decomp:func]{
+    f(A) = \int \dd{a'} f(a') \Lambda_{a'}
+  }{\outref{1}{29}{mainPoint}}
 
 
-\subsection{Trig Identities}
+  
+  \qrfheader{General}
 
-\begin{equation}
-  \sin{2\alpha} = 2\sin{\alpha}\cos{\alpha}
-\end{equation}
+  \qrfeq[taylor:exponential]{
+    e^{A} \equiv \sum_{k=0}^{\infty} \frac{1}{k!} A^k
+  }{\cite[1.219]{sakurai}}
 
-\begin{equation}
-  \begin{split}
-    \qlabel{trigCos2A}
-    \cos{2\alpha}
-    &= \cos^2{\alpha} - \sin^2{\alpha}\\
-    &= 2\cos^2{\alpha} - 1\\
-    &= 1 - 2\sin^2{\alpha}\\
-  \end{split}
-\end{equation}
+  \qrfeq[stats:var:minus]{
+    \dispersion{A} = \expval{A^2} - \expval{A}^2
+  }{\cite[1.144]{sakurai}}
 
-\begin{equation}
-  \cos{\frac \alpha 2} = \pm \sqrt{\frac{1 + \cos{\alpha}}{2}}
-\end{equation}
+  \qrfeq[stats:var:func]{
+    \dispersion{f(X)} \approx \left(f'(\expval{X})\right)^2 \dispersion{X}
+  }{\cite{1.24:wikipedia:Variance}}
 
-\begin{equation}
-  \sin{\frac \alpha 2} = \pm \sqrt{\frac{1 - \cos{\alpha}}{2}}
-\end{equation}
 
-\section{Pauli Spin}
+  \qrfheader{Uncertainty Relations}
 
-\begin{equation*}
-  \tag{1.110a}
-  \ket{x\pm} = \frac{1}{\sqrt{2}} [\ket + \pm \ket -]
-\end{equation*}
+  \qrfeq[uncertain:general]{
+    \dispersion{A}\dispersion{B} \ge \frac{1}{4} \abs{\expval{[A,B]}}^2
+  }{\cite[1.146]{sakurai}}
 
-\begin{equation*}
-  \tag{1.110b}
-  \ket{y\pm} = \frac{1}{\sqrt{2}} [\ket + \pm i\ket -]
-\end{equation*}
+  \qrfeq[uncertain:xp]{
+    [x,p] = i\hbar
+  }{\cite[1.215]{sakurai}}
 
-\begin{equation*}
-  \tag{1.111a}
-  S_x = \frac{\hbar}{2} [\ket - \bra + + \ket + \bra - ]
-\end{equation*}
+  \qrfeq[uncertain:et]{
+    \Delta E \Delta t \gtrsim \hbar/2
+  }{\cite{1.24:wikipedia:Uncertainty}}
 
-\begin{equation*}
-  \tag{1.111b}
-  S_y = i \frac{\hbar}{2} [\ket - \bra + - \ket + \bra - ]
-\end{equation*}
+  \qrfheader{Pauli Spin}
 
-\begin{equation*}
-  \tag{3.50}
-  \sigma_x =
-  \begin{pmatrix}
-    0 & 1 \\
-    1 & 0 \\
-  \end{pmatrix},
-  \sigma_y =
-  \begin{pmatrix}
-    0 & -i \\
-    i &  0 \\
-  \end{pmatrix},
-  \sigma_z =
-  \begin{pmatrix}
-    1 &  0 \\
-    0 & -1 \\
-  \end{pmatrix}
-\end{equation*}
+  \qrfeq[spin:kets]{
+    \begin{split}
+      \ket{x\pm} &= \frac{1}{\sqrt{2}} [\ket + \pm \ket -]\\
+      \ket{y\pm} &= \frac{1}{\sqrt{2}} [\ket + \pm i\ket -]\\
+    \end{split}
+  }{\cite[1.110]{sakurai}}
 
-\begin{figure}
+  \qrfeq[spin:sxy]{
+    \begin{split}
+      S_x &= \frac{\hbar}{2} [\ket - \bra + + \ket + \bra - ]\\
+      S_y &= i \frac{\hbar}{2} [\ket - \bra + - \ket + \bra - ]\\
+    \end{split}
+  }{\cite[1.111]{sakurai}}
+
+  \qrfeq[spin:matrices]{
+    \begin{split}
+      \sigma_x &=
+      \begin{pmatrix}
+        0 & 1 \\
+        1 & 0 \\
+      \end{pmatrix},
+      \\
+      \sigma_y &=
+      \begin{pmatrix}
+        0 & -i \\
+        i &  0 \\
+      \end{pmatrix},
+      \\
+      \sigma_z &=
+      \begin{pmatrix}
+        1 &  0 \\
+        0 & -1 \\
+      \end{pmatrix}
+      \\
+    \end{split}
+  }{\cite[3.50]{sakurai}}
+
+  \qrfeq[spin:angle]{
+    \ket{\alpha} =
+    \cos(\frac{\beta}{2})\ket{+} + \sin(\frac{\beta}{2}) e^{i\alpha}\ket{-}
+  }{\outref{1}{11}{spinAngle}}
+
   \begin{center}
-    \qlabel{spinAxes}
-    \includegraphics[width=2in]{qrf/spin_axes.png}
-    \caption{Spin axis definitions.  Please note that due to font
+    \includegraphics[width=0.7\linewidth]{qrf/spin_axes.png}
+    \captionsetup{type=figure, hypcap=false}    
+    \captionof{figure}{Spin axis definitions. Please note that due to font
       limitations in QCad at the time of this writing, $\alpha$ and
       $\beta$ are represented as $a$ and $b$ respectively.}
+    \label{qrf:spinAxes}
   \end{center}
-\end{figure}
+  
+  \qrfheader{Table of Integrals}
 
-\begin{equation}
-  \qlabel{spinAngle}
-  \cos(\frac \beta 2)\ket + + \sin(\frac \beta 2) e^{i\alpha}\ket -
-\end{equation}
+  \qrfeq[integral:gaussian]{
+    \int_{-\infty}^{\infty} \dd{x} e^{-\alpha x^2} = \sqrt{\frac{\pi}{\alpha}}
+  }{\cite[eq 3.321.3]{gr}}
 
-\subsection{Integral Table}
+  \qrfeq[integral:xgaussian]{
+    \int_{-\infty}^{\infty} \dd{x} xe^{-\alpha x^2} = 0
+  }{\cite[eq 3.321.4]{gr}}
 
-\begin{equation}
-  \qlabel{integral:gaussian}
-  \int_{-\infty}^{\infty} dx\  e^{-\alpha x^2} = \sqrt{\frac{\pi}{\alpha}}
-\end{equation}
+  \qrfeq[integral:xxgaussian]{
+    \int_{-\infty}^{\infty} \dd{x} x^2e^{-\alpha x^2}
+    = \frac{1}{2\alpha}\sqrt{\frac{\pi}{\alpha}}
+  }{\cite[eq FIXME]{gr}}
 
-\begin{equation}
-  \qlabel{integral:xgaussian}
-  \int_{-\infty}^{\infty} dx\  xe^{-\alpha x^2} = 0
-\end{equation}\cite[eq 3.321.3]{gr}
 
-\begin{equation}
-  \qlabel{integral:xxgaussian}
-  \int_{-\infty}^{\infty} dx\  x^2e^{-\alpha x^2} = \frac{1}{2\alpha}\sqrt{\frac{\pi}{\alpha}}
-\end{equation}
+  \qrfheader{Commutations}
 
-\section{Wave Functions}
+  \qrfeq[comms:basic]{
+    \begin{split}
+      [A,A] &= 0\\
+      [A,B] &= -[B,A]\\
+      [A,c] &= 0 \text{ (c is just a number)}\\
+      [A+B,C] &= [A,C] + [B,C]\\
+      [A,BC] &= [A,B]C + B[A,C]\\
+    \end{split}
+  }{\cite[1.232]{sakurai}}
 
-\subsection{\acf{gwp}}
-\qlabel{wavey:gwp}
-    \begin{equation}
-      \qlabel{gwp:exp}
-      \begin{alignedat}{2}
-        \expval{X}^2 &= 0 & \quad{} &\text{(eq \ref{1.24:exp:x1})}\\
-        \expval{X^2} &= \frac{d^2}{2} & &\text{(eq \ref{1.24:exp:x2})}\\
-        \expval{P}^2 &= \hbar^2k^2 & &\text{(eq \ref{1.24:exp:p1})}\\
-        \expval{P^2} &= \hbar^2\left(k^2+\frac{1}{2d^2}\right)
-        & &\text{(eq \ref{1.24:exp:p2})}\\
-      \end{alignedat}
-    \end{equation}
+  \qrfeq[comms:power]{
+    [A,B^n] = n B^{n-1}\underbrace{[A,B]}_{[A,B] \in \mathbb{C}}
+  }{\outref{1}{30}{ConstantPower}}
 
-    \begin{equation}
-      \dispersion{X}\dispersion{P}
-      =
-      \left(\expval{\hat{X}^2} - \expval{\hat{X}}^2\right)
-      \left(\expval{\hat{P}^2} - \expval{\hat{P}}^2\right)
-      = \frac{\hbar^2}{4}
-    \end{equation}
+  \qrfeq[comms:func]{
+    [x, F(p)] = i\hbar \pdv{F}{p}, \quad [p, F(x)] = -i\hbar \pdv{F}{x}
+  }{\outref{1}{30}{xfp}}
 
-    \begin{equation}
-      \qlabel{wavey:gwp:psi}
+
+  
+  \qrfheader{Gaussian Wave Packets}
+  \qrfeq[wavey:gwp:exp]{
+    \begin{alignedat}{2}
+      \expval{X}^2 &= 0\\
+      \expval{X^2} &= \frac{d^2}{2}\\
+      \expval{P}^2 &= \hbar^2k^2\\
+      \expval{P^2} &= \hbar^2\left(k^2+\frac{1}{2d^2}\right)\\
+    \end{alignedat}
+  }{\outref{1}{24}{exp:x1},
+    \outref{1}{24}{exp:x2},
+    \outref{1}{24}{exp:p1},
+    \outref{1}{24}{exp:p2}}
+
+
+  \qrfeq[wavey:gwp:psi]{
+    \begin{split}
       \psi(x')
-      = \braket{x'}{\alpha}
-      = \frac{1}{\pi^{1/4}}\sqrt{\frac{1}{d}}
-      \exp[ikx'-\frac{x'^2}{2d^2}]
-    \end{equation}
+      &= \braket{x'}{\alpha}\\
+      &= \frac{1}{\pi^{1/4}}\sqrt{\frac{1}{d}}
+      \exp[ikx'-\frac{x'^2}{2d^2}]\\
+    \end{split}
+  }{\cite[eq 1.267]{sakurai}}
 
-    \begin{equation}
-      \qlabel{wavey:gwp:phi}
+  \qrfeq[wavey:gwp:phi]{
+    \begin{split}
       \phi(p')
-      =
+      &=
       \left[ \frac{1}{\sqrt{2\pi\hbar}} \right]
-      \int dx' \exp(\frac{-ip'x'}{\hbar})\psi_{\alpha}(x')
-      = 
+      \int \dd{x'} \exp(\frac{-ip'x'}{\hbar})\psi_{\alpha}(x')
+      \\
+      &= 
       \frac{1}{\pi^{1/4}}
       \sqrt{\frac{d}{\hbar}}
-      \exp[-\frac{d^2}{2\hbar^2}(p' - \hbar k)^2]
-    \end{equation}
+      \exp[-\frac{d^2}{2\hbar^2}(p' - \hbar k)^2]\\
+    \end{split}
+  }{\cite[eq 1.274]{sakurai}}
+
+
+
+  \qrfheader{Trig Identities}
+  
+  \qrfeq[trig:sin2a]{
+    \sin{2\alpha} = 2\sin{\alpha}\cos{\alpha}
+  }{}
+
+  \qrfeq[trig:cos2a]{
+    \begin{split}
+      \cos{2\alpha}
+      &= \cos^2{\alpha} - \sin^2{\alpha}\\
+      &= 2\cos^2{\alpha} - 1\\
+      &= 1 - 2\sin^2{\alpha}\\
+    \end{split}
+  }{}
+
+  \qrfeq[trig:coshalf]{
+    \cos{\frac \alpha 2} = \pm \sqrt{\frac{1 + \cos{\alpha}}{2}}
+  }{}
+
+  \qrfeq[trig:sinhalf]{
+    \sin{\frac \alpha 2} = \pm \sqrt{\frac{1 - \cos{\alpha}}{2}}
+  }{}
+
+  \qrfeq[trig:harmonic]{
+    \begin{alignedat}{2}
+      && f(\theta) &= a\cos(\theta) + b\sin(\theta)\\
+      &&&= c\cos(\theta + \delta)\\
+      \text{where } && c &= \sqrt{a^2 + b^2}\\
+      \text{and } && \delta &= \tan^{-1}(-\frac{a}{b})
+    \end{alignedat}
+  }{\cite{1.24:msu:harmonicAddition}}
+
+
+
+  \qrfheader{Operators}
+    \qrfeq[misc:realeig]{
+      A = A^{\dagger} \implies \forall i, \lambda_i \in \mathscr{R}
+    }{\cite[p16]{sakurai}}
+
+    \qrfeq[misc:unitary]{
+      U^{\dagger}U = I \implies \text{U is Unitary}
+    }{\cite[eq 1.158]{sakurai}}
+
+  \qrfeq[op:p]{
+    \mel{x'}{\hat{p}}{\alpha} = -i\hbar\pdv{}{x'}\braket{x'}{\alpha}
+  }{\cite[eq 1.249]{sakurai}}
+
+  \qrfeq[op:x]{
+    \mel{p'}{\hat{x}}{\alpha} = i\hbar\pdv{}{p'}\braket{p'}{\alpha}
+  }{\outref{1}{36}{theQuestion}}
+
+  \qrfeq[op:matrix]{
+    X \dot{=}
+    \begin{pmatrix}
+      \mel{\alpha^{(1)}}{X}{\alpha^{(1)}} & \mel{\alpha^{(1)}}{X}{\alpha^{(2)}} & \ldots \\
+      \mel{\alpha^{(2)}}{X}{\alpha^{(1)}} & \mel{\alpha^{(2)}}{X}{\alpha^{(2)}} & \ldots \\
+      \vdots & \vdots & \ddots\\
+    \end{pmatrix}
+  }{\cite[eq 1.73]{sakurai}}
+
+\end{qrfLayout}

@@ -22,6 +22,13 @@
 \end{question}
 
 \begin{purpose}
+  We're connecting wave mechanics with Bra/Ket algebras and ensuring
+  the restrictions of the uncertainty relations hold.  You probably
+  see a trend here, where Sakurai introduces a tool, has us practice
+  with the tool, then connects it to another tool, then to reality or
+  to a new concept etc.  You're probably also thinking about the $n^2$
+  growth of node-connections as you add more nodes...  In the words of
+  a friend: ``Don't worry, it's worse than you think.''
 \end{purpose}
 
 \begin{answer}
@@ -51,11 +58,11 @@
       \inlabel{exp:p}
       \begin{split}
         \mel{\beta}{p}{\alpha}
-        &= \int_0^a dx' \braket{\beta}{x'}
+        &= \int_0^a \dd{x'} \braket{\beta}{x'}
         \left(
         -i \hbar \pdv{}{x'} \braket{x'}{a}
         \right)\\
-        &= \int_0^a dx'
+        &= \int_0^a \dd{x'}
         \psi_{\beta}^{*}(x')
         \operatorP{x'}
         \psi_{\alpha}(x')\\
@@ -69,19 +76,19 @@
       \begin{split}
         \mel{\psi_n}{\hat{p}}{\psi_n}
         &=
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         \psi_{n}^{*}(x')
         \operatorP{x'}
         \psi_{n}(x')\\
         &=
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         \sqrt{\frac{2}{a}}\sin{\frac{n\pi}{a}x'}
         \operatorP{x'}
         \sqrt{\frac{2}{a}}\sin{\frac{n\pi}{a}x'}
         \\
         &=
         -i \hbar \frac{2}{a}
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         \sin{\frac{n\pi}{a}x'}
         \frac{n\pi}{a}
         \cos{\frac{n\pi}{a}x'}
@@ -89,14 +96,14 @@
         &=
         -i \hbar \frac{2}{a}
         \frac{n\pi}{a}
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         \sin{\frac{n\pi}{a}x'}
         \cos{\frac{n\pi}{a}x'}
         \\
         &=
         -i \hbar
         \frac{n\pi}{a^2}
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         \sin{\frac{2n\pi}{a}x'}
         \\
         &=
@@ -144,14 +151,14 @@
       \begin{split}
         \mel{\psi_n}{\hat{p}^2}{\psi_n}
         &=
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         \psi_{n}^{*}(x')
         \left(
         (-1)^2i^2\hbar^2\frac{\partial^2}{\partial x^{\prime 2}}
         \right)
         \psi_{n}(x')\\
         &=
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         \sqrt{\frac{2}{a}}\sin{\frac{n\pi}{a}x'}
         \left(
         (-1)^2i^2\hbar^2\frac{\partial^2}{\partial x^{\prime 2}}
@@ -161,7 +168,7 @@
         &=
         -\hbar^2
         \frac{2}{a}
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         \sin{\frac{n\pi}{a}x'}
         \left(
         \frac{\partial^2}{\partial x^{\prime 2}}
@@ -172,7 +179,7 @@
         -\hbar^2
         \frac{2}{a}
         \frac{n\pi}{a}
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         \sin{\frac{n\pi}{a}x'}
         \left(
         \pdv{}{x'}
@@ -183,7 +190,7 @@
         \hbar^2
         \frac{2}{a}
         \frac{n^2\pi^2}{a^2}
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         \sin{\frac{n\pi}{a}x'}
         \sin{\frac{n\pi}{a}x'}
         \\
@@ -191,13 +198,13 @@
         \hbar^2
         \frac{2}{a}
         \frac{n^2\pi^2}{a^2}
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         \sin^2{\frac{n\pi}{a}x'}
         \\
       \end{split}
     \end{equation}
 
-    Recalling our trig identity from equation \qref{trigCos2A}
+    Recalling our trig identity from equation \qref{trig:cos2a}
 
     \begin{equation}
       \begin{alignedat}{2}
@@ -219,14 +226,14 @@
         \hbar^2
         \frac{2}{a}
         \frac{n^2\pi^2}{a^2}
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         \sin^2{\frac{n\pi}{a}x'}
         \\
         &=
         \hbar^2
         \frac{2}{a}
         \frac{n^2\pi^2}{a^2}
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         \frac{1 - \cos{\frac{2n\pi}{a}x'}}{2}
         \\
         &=
@@ -237,7 +244,7 @@
         \frac{a}{2}
         -
         \frac{1}{2}
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         \cos{\frac{2n\pi}{a}x'}
         \right)
         \\
@@ -299,19 +306,19 @@
       \begin{split}
         \mel{\psi_n}{\hat{x}}{\psi_n}
         &=
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         \psi_{n}^{*}(x')
         \operatorP{x'}
         \psi_{n}(x')\\
         &=
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         \sqrt{\frac{2}{a}}\sin{\frac{n\pi}{a}x'}
         x'
         \sqrt{\frac{2}{a}}\sin{\frac{n\pi}{a}x'}
         \\
         &=
         \frac{2}{a}
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         x'
         \sin^2{\frac{n\pi}{a}x'}
         \\
@@ -327,23 +334,23 @@
         \mel{\psi_n}{\hat{x}}{\psi_n}
         &=
         \frac{2}{a}
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         x'
         \sin^2{\frac{n\pi}{a}x'}
         \\
         &=
         \frac{2}{a}
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         x'
         \left(\frac{1 - \cos{\frac{2n\pi}{a}x'}}{2}\right)
         \\
         &=
         \frac{1}{a}
         \left\{
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         x'
         -
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         x'
         \cos{\frac{2n\pi}{a}x'}
         \right\}
@@ -353,7 +360,7 @@
         \left\{
         \eval{\frac{x^2}{2}}_0^a
         -
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         x'
         \cos{\frac{2n\pi}{a}x'}
         \right\}
@@ -362,7 +369,7 @@
         \frac{a}{2}
         -
         \frac{1}{a}
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         x'
         \cos{\frac{2n\pi}{a}x'}
         \\
@@ -390,7 +397,7 @@
         \frac{a}{2}
         -
         \frac{1}{a}
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         x'
         \cos{\frac{2n\pi}{a}x'}
         \\
@@ -444,19 +451,19 @@
       \begin{split}
         \mel{\psi_n}{\hat{x}^2}{\psi_n}
         &=
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         \psi_{n}^{*}(x')
         \operatorP{x'}
         \psi_{n}(x')\\
         &=
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         \sqrt{\frac{2}{a}}\sin{\frac{n\pi}{a}x'}
         x^{'2}
         \sqrt{\frac{2}{a}}\sin{\frac{n\pi}{a}x'}
         \\
         &=
         \frac{2}{a}
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         x^{'2}
         \sin^2{\frac{n\pi}{a}x'}
         \\
@@ -470,23 +477,23 @@
         \mel{\psi_n}{\hat{x}^2}{\psi_n}
         &=
         \frac{2}{a}
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         x^{'2}
         \sin^2{\frac{n\pi}{a}x'}
         \\
         &=
         \frac{2}{a}
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         x^{'2}
         \left(\frac{1 - \cos{\frac{2n\pi}{a}x'}}{2}\right)
         \\
         &=
         \frac{1}{a}
         \left\{
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         x^{'2}
         -
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         x^{'2}
         \cos{\frac{2n\pi}{a}x'}
         \right\}
@@ -496,7 +503,7 @@
         \left\{
         \eval{\frac{x^3}{3}}_0^a
         -
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         x^{'2}
         \cos{\frac{2n\pi}{a}x'}
         \right\}
@@ -505,7 +512,7 @@
         \frac{a^2}{3}
         -
         \frac{1}{a}
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         x^{'2}
         \cos{\frac{2n\pi}{a}x'}
         \\
@@ -533,7 +540,7 @@
         \frac{a^2}{3}
         -
         \frac{1}{a}
-        \int_0^a dx'
+        \int_0^a \dd{x'}
         x^{'2}
         \cos{\frac{2n\pi}{a}x'}
         \\

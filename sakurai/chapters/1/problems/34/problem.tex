@@ -33,12 +33,11 @@
 
 \begin{purpose}
   We actually saw (what I call) the ``Jerk'' operator way back in
-  problem \ref{1.36.b:theAnswer}, but he wants us to fully explore the
-  derivation, usage, and properties of it which seems like fun.
+  problem \outref{1}{36}{theAnswer}, but he wants us to fully explore
+  the derivation, usage, and properties of it which seems like fun.
 \end{purpose}
 
 \begin{answer}
-
   \begin{answerpart}{Make it So}
     Sakurai actually does a lot of the work for this problem.  He
     spends a solid 10 pages developing the $\mathscr{J}$ operator
@@ -164,8 +163,9 @@
 
     So where did we go off the rails?  well... it turns out that we
     didn't.  The book is... well... the book is
-    wrong.\footnote{Teeeechhnically it's kinda right...}  So let's dig
-    into this one shall we?  The book says this:
+    wrong... OK... teeeechhnically it's right... he just plays it a
+    little fast-and-loose with a couple of worthy details.  So let's
+    dig into this one shall we?  The book says this:
 
     \begin{equation}
       \tag{1.207}
@@ -370,6 +370,11 @@
       \inlabel{solidBooster}
       \mathscr{B}(\dd{\vb{p}'}) = 1 + \frac{i\vb{x} \cdot \dd{p}'}{\hbar}
     \end{equation}
+
+    So, in fairness, technically I think the problem only wanted us to
+    get to the ansatz we started with (and didn't even use)... but
+    hey, anything worth doing is worth \emph{way} over-doing right?
+    (angry face) \emph{Right!?}
   \end{answerpart}
 
   \begin{answerpart}{\texorpdfstring{Make it \emph{Just} So}{Make it Just So}}
@@ -380,11 +385,141 @@
     \item \textbf{Associative:} See equation 1.204
       ($\mathscr{J}(dp')\mathscr{J}(dp'') = \mathscr{J}(dp' + dp'')$).
     \end{itemize}
+
+    So... if there hadn't been that \emph{hold-my-coffee} moment
+    earlier when \emph{we} decided (yes, ``we'', you're in just as
+    much hot water as I am) to do the whole doggone problem without
+    making use of any of the machinery it wanted us to, we'd probably
+    still have more-or-less the same answer.  So let's copy those
+    equations from the book with positive rather than negative values.
+    Starting with 1.203
+
+    \begin{equation}
+      \begin{split}
+        \mathscr{B}^{\dagger}(\dd{\vb{p}'})\mathscr{B}(\dd{\vb{p}'})
+        &=
+        (1 - i\vb{W}^{\dagger}\cdot\dd{\vb{p}'})
+        (1 + i\vb{W}\cdot\dd{\vb{p}'})
+        \\
+        &=
+        1 + i(\vb{W} - \vb{W}^{\dagger})\cdot\dd{\vb{p}'} + 0[(\dd{\vb{p}'})^2]
+        \\
+        &\approx 1
+        \\
+      \end{split}
+    \end{equation}
+
+    and 1.204
+
+    \begin{equation}
+      \begin{split}
+        \mathscr{B}(\dd{\vb{p}''})\mathscr{B}(\dd{\vb{p}'})
+        &=
+        (1 + i\vb{W}\cdot\dd{\vb{p}''})
+        (1 + i\vb{W}\cdot\dd{\vb{p}'})
+        \\
+        &=
+        1 + i\vb{W}\cdot(\dd{\vb{p}''} + \dd{\vb{p}'})
+        \\
+        &= \mathscr{B}(\dd{\vb{p}''} + \dd{\vb{p}'})
+        \\
+      \end{split}
+    \end{equation}
   \end{answerpart}
 
   \begin{answerpart}{Dimensional Analysis (no, really)}
     It has the same dimensionless dimensions as the $\mathscr{J}$
-    operator.
+    operator.  That being said, if we're operating under the
+    ansatz-and-prove method (the way we do in problem
+    \outref{1}{36}{theQuestion}) then we'd have to do our dimensional
+    analysis here.  The standard way that I found externally (I still
+    think our way is better) is to start with the basic operation on a
+    momentum ket
+    
+    \begin{equation}
+      \begin{split}
+        \mathscr{B}^{\dagger}\vb{p}\mathscr{B}\ket{\vb{p}'}
+        &= \mathscr{B}^{\dagger}\vb{p}\ket{\vb{p}' + \dd{\vb{p}'}}\\
+        &= (\vb{p}' + \dd{\vb{p}'})\mathscr{B}^{\dagger}\ket{\vb{p}' + \dd{\vb{p}'}}\\
+        &= (\vb{p}' + \dd{\vb{p}'})\ket{\vb{p}'}\\
+      \end{split}
+    \end{equation}
+
+    Using our ansatz'd form, and disregarding our ket
+
+    \begin{equation}
+      \begin{split}
+        \vb{p} + \dd{\vb{p}'}
+        &= \mathscr{B}^{\dagger}\vb{p}\mathscr{B}
+        \\
+        &= (1 - i\vb{W}^{\dagger}\cdot\dd{\vb{p}'})
+        \vb{p}
+        (1 + i\vb{W}\cdot\dd{\vb{p}'})
+        \\
+        &= (1 - i\vb{W}^{\dagger}\cdot\dd{\vb{p}'})
+        (\vb{p} + i\vb{p}\vb{W}\cdot\dd{\vb{p}'})
+        \\
+        &=
+        (\vb{p} + i\vb{p}\vb{W}\cdot\dd{\vb{p}'})
+        - i\vb{W}^{\dagger}\cdot\dd{\vb{p}'}(\vb{p} + i\vb{p}\vb{W}\cdot\dd{\vb{p}'})
+        \\
+        &=
+        \vb{p}
+        + i\vb{p}\vb{W}\cdot\dd{\vb{p}'}
+        - i\vb{W}^{\dagger}\cdot\dd{\vb{p}'}\vb{p}
+        + \underbrace{\dd[2]{\vb{p}'}\ldots}_{\approx 0}
+        \\
+        &=
+        \vb{p}
+        + i\vb{p}\vb{W}\cdot\dd{\vb{p}'}
+        - i\vb{W}^{\dagger}\cdot\dd{\vb{p}'}\vb{p}
+        \\
+      \end{split}
+    \end{equation}
+
+    Because $\vb{W}^{\dagger}=\vb{W}$ we can change that up a bit
+
+    \begin{equation}
+      \begin{split}
+        \vb{p} + \dd{\vb{p}'}
+        &=
+        \vb{p}
+        + i\vb{p}\vb{W}\cdot\dd{\vb{p}'}
+        - i\vb{W}^{\dagger}\cdot\dd{\vb{p}'}\vb{p}
+        \\
+        &=
+        \vb{p}
+        + i\vb{p}\vb{W}\cdot\dd{\vb{p}'}
+        - i\vb{W}\cdot\dd{\vb{p}'}\vb{p}
+        \\
+        &= \vb{p} + i[\vb{p},\vb{W}\cdot\dd{\vb{p}'}]\\
+      \end{split}
+    \end{equation}
+
+    That brings us to our fundamental commutation for the
+    $\vb{W}\cdot\dd{\vb{p}'}$ part of the boost operator and the
+    momentum operator.  Oh... gee... it's the same as for the operator
+    itself... imagine my surprise...
+
+    \begin{equation}
+      \begin{split}
+        \dd{\vb{p}'}
+        &= i[\vb{p},\vb{W}\cdot\dd{\vb{p}'}]\\
+        &= -i[\vb{W}\cdot\dd{\vb{p}'},\vb{p}]\\
+      \end{split}
+    \end{equation}
+    
+    OK, so if we compare this to our commutation for $[x, p] = i\hbar$
+    which has units of $A_{pples}$, then a commutation relation
+    showing $[W, p] = i$ has to have units of $A_{pples}\hbar$.  So,
+    you \emph{can} build that with $x/\hbar$, but you can also build
+    that with $p/m\hbar$.  So... dimensional analysis has its place,
+    and it can help, but it really just helps to inform your future
+    analyses.  Our way is definitely cooler.
+
+    It is with great joy and relief that I hereby proclaim that I am
+    {\huge \bfseries DONE!}  That's the last substantive addition.
+    It's just cleanup and polishing now.
   \end{answerpart}
 
   \begin{answerpart}{The Matrix Has [Your Operator]}

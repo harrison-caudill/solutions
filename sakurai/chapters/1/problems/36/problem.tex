@@ -11,7 +11,7 @@
 
     \begin{questionsubpart}
       \begin{equation*}
-        \mel{\beta}{x}{\alpha} = \int dp' \phi_{\beta}^{*}(p')i \hbar \pdv{}{p'} \phi_{\alpha}(p')
+        \mel{\beta}{x}{\alpha} = \int \dd{p'} \phi_{\beta}^{*}(p')i \hbar \pdv{}{p'} \phi_{\alpha}(p')
       \end{equation*}
     \end{questionsubpart}
 
@@ -30,6 +30,11 @@
 \end{question}
 
 \begin{purpose}
+  This one is actually pretty cool.  The process of hypothesizing the
+  existence of something, and then using the desired properties to end
+  up deriving the form it must take is instructive both in terms of
+  why it has the form it does but also because that process is itself
+  a \emph{very} useful tool.
 \end{purpose}
 
 \begin{answer}
@@ -158,8 +163,8 @@
       \begin{equation}
         \begin{split}
           \mel{\beta}{x}{\alpha}
-          &= \int dp' (\bra{\beta})(\dyad{p'})(x\ket{\alpha})\\
-          &= \int dp' \braket{\beta}{p'}\mel{p'}{x}{\alpha}\\
+          &= \int \dd{p'} (\bra{\beta})(\dyad{p'})(x\ket{\alpha})\\
+          &= \int \dd{p'} \braket{\beta}{p'}\mel{p'}{x}{\alpha}\\
         \end{split}
       \end{equation}
 
@@ -171,9 +176,9 @@
       \begin{equation}
         \begin{split}
           \mel{\beta}{x}{\alpha}
-          &= \int dp' \braket{\beta}{p'}\mel{p'}{x}{\alpha}\\
-          &= \int dp' \braket{\beta}{p'}\left(i\hbar \pdv{}{p'}\right)\braket{p'}{\alpha}\\
-          &= \int dp' \braket{\beta}{p'}\left(i\hbar \pdv{}{p'}\right)\braket{p'}{\alpha}\\
+          &= \int \dd{p'} \braket{\beta}{p'}\mel{p'}{x}{\alpha}\\
+          &= \int \dd{p'} \braket{\beta}{p'}\left(i\hbar \pdv{}{p'}\right)\braket{p'}{\alpha}\\
+          &= \int \dd{p'} \braket{\beta}{p'}\left(i\hbar \pdv{}{p'}\right)\braket{p'}{\alpha}\\
         \end{split}
       \end{equation}
 
@@ -191,8 +196,8 @@
       \begin{equation}
         \begin{split}
           \mel{\beta}{x}{\alpha}
-          &= \int dp' \braket{\beta}{p'}\left(i\hbar \pdv{}{p'}\right)\braket{p'}{\alpha}\\          
-          &= \int dp' \phi_{\beta}^{*}(p')
+          &= \int \dd{p'} \braket{\beta}{p'}\left(i\hbar \pdv{}{p'}\right)\braket{p'}{\alpha}\\          
+          &= \int \dd{p'} \phi_{\beta}^{*}(p')
           \left(i\hbar \pdv{}{p'}\right)
           \phi_{\alpha}(p')\qed\\
         \end{split}
@@ -252,7 +257,8 @@
 
   So...I woooouuullld celebrate the end of the chapter at this point,
   \emph{but}, if you've been reading along then you know that I solved
-  this problem \emph{before} solving problem \ref{1.24:theQuestion},
-  so look somewhere else for a celebration.
+  this problem \emph{before} solving problem
+  \outref{1}{24}{theQuestion}, so look somewhere else for a
+  celebration.
 
 \end{answer}

@@ -40,10 +40,11 @@
 
   Given what we're given in the problem that's pretty much where it
   ends.  We don't know anything about $f(A)$.  Take a look at problem
-  \ref{1.6:theQuestion} equation \ref{1.6:kittens}.  Buuut, just like
-  we did back in \ref{1.6:theQuestion}, we're going to assume that it
-  can be written as a Taylor series.  If that's the case, then we can
-  pull in equation \ref{q:taylor} and show that
+  \outref{1}{6}{theQuestion} equation \outref{1}{6}{kittens}.  Buuut,
+  just like we did back in \outref{1}{6}{theQuestion}, we're going to
+  assume that it can be written as a Taylor series.  If that's the
+  case, then we can pull in equation \qref{taylor:exponential} and
+  show that
 
   \begin{equation}
     \inlabel{mainPoint}
@@ -181,8 +182,8 @@
     gworplick when evaluated between a Santa value of $j$ and
     $j+\delta j$ jollies''.  That's typically where you look for
     finding the right scaling factors on your differential (either
-    that or you're using the fundamental relation $dX = \sum
-    \pdv{}{x_i}X dx_i$).  In this case, I believe it's pretty
+    that or you're using the fundamental relation $\dd{X} = \sum
+    \pdv{}{x_i}X \dd{x_i}$).  In this case, I believe it's pretty
     straight-forward.  Don't make the same mistake I did at first, and
     note that the index in the sum is $k$ and that the $k's$ are on
     the $a$'s which is the basis in the function call, not the basis
@@ -203,7 +204,7 @@
     \begin{equation}
       \begin{alignedat}{2}
         &&\mel{p_i}{F(r)}{p_j}
-        &= \int_{-\infty}^{\infty} dx\ 
+        &= \int_{-\infty}^{\infty} \dd{x}
         \braket{a_k}{b_j}\braket{b_i}{a_k}\underbrace{F(r)}_{\text{New function}}
         \\
       \end{alignedat}
@@ -222,7 +223,7 @@
     \begin{equation}
       \begin{alignedat}{2}
         &&\mel{p_i}{F(r)}{p_j}
-        &= \int_{-\infty}^{\infty} dx\ 
+        &= \int_{-\infty}^{\infty} \dd{x}
         \underbrace{\braket{x}{p_j}\braket{p_i}{x}}_{\text{New Variables}}F(r)
         \\
       \end{alignedat}

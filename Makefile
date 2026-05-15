@@ -14,6 +14,7 @@ BIBTEX  = docker run -ti \
 PSPDF   = ps2pdf
 CONVERT = convert
 BUILD   = BUILD
+PAPER   = letter
 
 %.pdf: %.tex
 	@$(MAKE) line --no-print-directory -e header="Pass 1: Generate the initial .aux file"
@@ -51,6 +52,7 @@ params:
 	echo "\def\\\\chapterNum{$(chapterNum)}" >> $(BUILD)/bookParams.tex
 	echo "\def\\\\problemNum{$(p)}" >> $(BUILD)/bookParams.tex
 	echo "\def\\\\buildPath{$(BUILD)}" >> $(BUILD)/bookParams.tex
+	echo "\def\\\\papersize{$(PAPER)paper}" >> $(BUILD)/bookParams.tex
 
 sqrf: .dummy_builddir
 	@$(MAKE) --no-print-directory -e bookName=sakurai params
@@ -74,7 +76,18 @@ manual: .dummy_builddir
 	@$(MAKE) line --no-print-directory -e header="Consolidating References"
 	bin/ref.py -b $(bookName)
 	@$(MAKE) --no-print-directory $(bookName)/manual.pdf
-	mv $(BUILD)/manual.pdf $(BUILD)/$(bookName).pdf
+	cp $(BUILD)/manual.pdf $(BUILD)/$(bookName).pdf
+
+encrypt:
+	qpdf \
+	--encrypt "" "$(pw)" 256 \
+	--annotate=y \
+	--assemble=y \
+	--extract=n \
+	--print=full \
+	-- \
+	$(BUILD)/manual.pdf \
+	$(BUILD)/$(bookName).pdf
 
 problem:
 	@$(MAKE) --no-print-directory \
@@ -82,6 +95,16 @@ problem:
 	-e chapterNum=1 \
 	-e p=$(p) \
 	fullproblem
+
+purpose:
+	@$(MAKE) --no-print-directory \
+	-e bookName=sakurai \
+	-e chapterNum=1 \
+	fullpurpose
+
+fullpurpose: .dummy_builddir params
+	bin/purpose.sh > BUILD/purpose.tex
+	@$(PDFTEX) BUILD/purpose.tex >/dev/null 2>&1 && echo "Success" || $(PDFTEX) BUILD/purpose.tex
 
 fullproblem: .dummy_builddir params
 	@$(MAKE) line --no-print-directory -e header="Building Python-Based Figures"

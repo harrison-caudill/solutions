@@ -1,21 +1,21 @@
     \begin{equation}
       \tag{1.247}
       \begin{split}
-        \left(1 - \frac{ip\Delta x'}{\hbar}\right)
+        \left(1 - \frac{ip\Delta x'}{\hbar}\right)\ket{\alpha}
         &=
-        \int dx'
+        \int \dd{x'}
         \mathscr{J}(\Delta x')\ket{x'}\braket{x'}{\alpha}
         \\
         &=
-        \int dx'
+        \int \dd{x'}
         \ket{x' + \Delta x'}\braket{x'}{\alpha}
         \\
         &=
-        \int dx'
+        \int \dd{x'}
         \ket{x'}\braket{x' -  \Delta x'}{\alpha}
         \\
         &=
-        \int dx'
+        \int \dd{x'}
         \ket{x'}
         \left(
         \braket{x'}{\alpha} - \Delta x' \pdv{}{x'}\braket{x'}{\alpha}
