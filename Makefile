@@ -94,6 +94,16 @@ problem:
 	-e p=$(p) \
 	fullproblem
 
+purpose:
+	@$(MAKE) --no-print-directory \
+	-e bookName=sakurai \
+	-e chapterNum=1 \
+	fullpurpose
+
+fullpurpose: .dummy_builddir params
+	bin/purpose.sh > BUILD/purpose.tex
+	@$(PDFTEX) BUILD/purpose.tex >/dev/null 2>&1 && echo "Success" || $(PDFTEX) BUILD/purpose.tex
+
 fullproblem: .dummy_builddir params
 	@$(MAKE) line --no-print-directory -e header="Building Python-Based Figures"
 	bin/figures.py -b $(bookName) -q

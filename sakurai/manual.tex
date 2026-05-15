@@ -1,20 +1,25 @@
+\documentclass[
+  fleqn,  %% left-aligns the equations
+  oneside %% otherwise you'd have page numbers on left then right
+]{book}
 
-%% oneside means that it prints more like an article than a book, so
-%% you don't get, for example, page numbers that alternate between the
-%% left and the right.
-
-%% fleqn left-aligns the equations
-\documentclass[fleqn, oneside]{book}
-
-\usepackage[pdftitle={Solutions Manual: Sakurai (3rd ed)},
+\usepackage[
+  pdftitle={Solutions Manual: Sakurai (3rd ed)},
   colorlinks=false,
   bookmarksopen=true,
-  bookmarksopenlevel=2]{hyperref}
+  bookmarksopenlevel=2 % gives a hint to the pdf viewer to show the ToC open
+]{hyperref}
 
 \input{packages}
 
 \input{preamble}
+
+%% FIXME: I should break out the infrastructure into a sub directory
+%%        and make the files smaller.  I've started that process with
+%%        qrfCommands but I should do more...and also maybe call it
+%%        something other than "commands".
 \input{commands}
+\input{qrfCommands}
 
 \title{Sakurai 3rd ed Solutions}
 \author{Harrison Caudill (harrison@hypersphere.org)}
@@ -28,6 +33,7 @@
 %% Tell hyperref not to count the title page as page 1 to avoid a collision
 \hypersetup{pageanchor=false}
 
+%% We have our own titlepage format so the copyright can be at the bottom.
 \begin{titlepage}
     \centering%
     \vspace*{5cm}%
@@ -37,15 +43,23 @@
     \vfill%
     \doclicenseThis%
 \end{titlepage}
+
+%% This common hack prevents hyperref from complaining about duplicated pg i
 \hypersetup{pageanchor=true}
 
+%% The build system has to tell us where to find the build directory.
+%% Yes, I recognize the irony.  If it ever matters, now there's only
+%% one place you need to care about properly passing it in.
 \input{BUILD/bookParams}
+
+%% Even though this is for the sakurai book, I wanted the
+%% infrastructure to be as shared as I reasonably could make it
+%% without getting derailed, hence the \bookName's here.
 \input{\bookName/acronyms}
 \input{\bookName/commands}
 \graphicspath{{\buildPath/\bookName}}
 
 \input{\bookName/foreward}
-\input{qrfCommands}
 \input{\bookName/qrfContents}
 
 \clearpage
