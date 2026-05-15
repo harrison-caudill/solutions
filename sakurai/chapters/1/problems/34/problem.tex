@@ -360,7 +360,7 @@
     this and was \emph{rudely} reminded that I was on crack) to assume
     that if $AB = AC$ then $B = C$.  Unfortunately, it doesn't work
     that way (just consider something like $Ax = Ay$ when $A = 0$).
-    To be totally rigorous, we'd have to apply $\vb{x}^-1$ on the left
+    To be totally rigorous, we'd have to apply $\vb{x}^{-1}$ on the left
     on both sides.  Without getting into that mess, it's easier just
     to note that all the above derivation holds true if you just
     remove the $\vb{x}$ entirely.  Putting it all together by
@@ -402,7 +402,10 @@
         (1 + i\vb{W}\cdot\dd{\vb{p}'})
         \\
         &=
-        1 + i(\vb{W} - \vb{W}^{\dagger})\cdot\dd{\vb{p}'} + 0[(\dd{\vb{p}'})^2]
+        1
+        + i(\vb{W}
+        - \vb{W}^{\dagger})\cdot\dd{\vb{p}'}
+        + \mathcal{O}[(\dd{\vb{p}'})^2]
         \\
         &\approx 1
         \\
