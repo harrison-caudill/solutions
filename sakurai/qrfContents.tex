@@ -28,6 +28,10 @@
     \dispersion{f(X)} \approx \left(f'(\expval{X})\right)^2 \dispersion{X}
   }{\cite{1.24:wikipedia:Variance}}
 
+  \qrfeq[differential]{
+    \dd{X} \equiv \sum_i \pdv{X}{x_i}\dd{x_i}
+  }{}
+
 
   \qrfheader{Uncertainty Relations}
 
@@ -60,31 +64,35 @@
   }{\cite[1.111]{sakurai}}
 
   \qrfeq[spin:matrices]{
-    \begin{split}
-      \sigma_x &=
-      \begin{pmatrix}
+    \begin{tabular}{ccc}
+      $\sigma_x$
+      & $\sigma_y$
+      & $\sigma_z$
+      \\
+      $\begin{pmatrix}
         0 & 1 \\
         1 & 0 \\
-      \end{pmatrix},
-      \\
-      \sigma_y &=
-      \begin{pmatrix}
+      \end{pmatrix}$
+      &
+      $\begin{pmatrix}
         0 & -i \\
         i &  0 \\
-      \end{pmatrix},
-      \\
-      \sigma_z &=
-      \begin{pmatrix}
+      \end{pmatrix}$
+      &
+      $\begin{pmatrix}
         1 &  0 \\
         0 & -1 \\
-      \end{pmatrix}
-      \\
-    \end{split}
+      \end{pmatrix}$
+    \end{tabular}
   }{\cite[3.50]{sakurai}}
 
   \qrfeq[spin:angle]{
-    \ket{\alpha} =
+  \begin{split}
+    &\ket{\alpha'} =
     \cos(\frac{\beta}{2})\ket{+} + \sin(\frac{\beta}{2}) e^{i\alpha}\ket{-}
+    \\
+    &\ket{\alpha'}\text{ is $\ket{+}$ rotated by $\alpha$ and $\beta$}
+  \end{split}
   }{\outref{1}{11}{spinAngle}}
 
   \begin{center}
@@ -109,7 +117,7 @@
   \qrfeq[integral:xxgaussian]{
     \int_{-\infty}^{\infty} \dd{x} x^2e^{-\alpha x^2}
     = \frac{1}{2\alpha}\sqrt{\frac{\pi}{\alpha}}
-  }{\cite[eq FIXME]{gr}}
+  }{\cite[eq 3.461.2]{gr}}
 
 
   \qrfheader{Commutations}
@@ -198,10 +206,10 @@
 
   \qrfeq[trig:harmonic]{
     \begin{alignedat}{2}
-      && f(\theta) &= a\cos(\theta) + b\sin(\theta)\\
-      &&&= c\cos(\theta + \delta)\\
-      \text{where } && c &= \sqrt{a^2 + b^2}\\
-      \text{and } && \delta &= \tan^{-1}(-\frac{a}{b})
+      && A\cos(\theta) + B\sin(\theta)
+      &= C\cos(\theta + \delta)\\
+      \text{where } && C &= \sqrt{A^2 + B^2}\\
+      \text{and } && \delta &= \tan^{-1}(-\frac{A}{B})
     \end{alignedat}
   }{\cite{1.24:msu:harmonicAddition}}
 
@@ -209,7 +217,7 @@
 
   \qrfheader{Operators}
     \qrfeq[misc:realeig]{
-      A = A^{\dagger} \implies \forall i, \lambda_i \in \mathscr{R}
+      A = A^{\dagger} \implies \forall i, \lambda_i \in \mathbb{R}
     }{\cite[p16]{sakurai}}
 
     \qrfeq[misc:unitary]{

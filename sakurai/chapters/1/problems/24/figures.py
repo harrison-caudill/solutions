@@ -15,7 +15,6 @@ class ItFigures(object):
 
     def go(self, outpath):
         # Universal mathematical constants
-        self.k = -float(sympy.EulerGamma/4)
         self.C = float(sympy.EulerGamma)
         self.g = scipy.constants.g
         self.h = scipy.constants.hbar
@@ -61,7 +60,7 @@ class ItFigures(object):
         return ((1/self.gamma)
                 * (0
                    + math.log(2*math.pi)
-                   - 2*self.k
+                   + self.C/2
                    - math.log(self.c(d))))
 
     def by_log_ratio(self, outpath):
