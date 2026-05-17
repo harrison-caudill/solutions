@@ -1233,16 +1233,43 @@
       \end{split}
     \end{equation}
 
-    Pulling up Wolfram Alpha for that $re^{-r^2}\ln(r)$ integral, we
-    find
+    Doing  a  quick  $u$  substitution  where $u  =  r^2$  and  $du  =
+    \pdv{r}{u}\sqrt{u}\dd{u} =  1/(2\sqrt{u})\dd{u}$, then turning to
+    equation 4.331.1 in the Book of Common Prayer, we find that
 
     \begin{equation}
-      \int_{0}^{\infty} re^{-r^2} \ln(r) \dd{r} = -\frac{\gamma_e}{4}
+      \begin{alignedat}{3}
+        &&\int_{0}^{\infty} re^{-r^2} \ln(r) \dd{r}
+        &=
+        \int_{0}^{\infty}
+        \frac{1}{2\cancel{\sqrt{u}}}
+        \dd{u}
+        e^{-u}
+        \cancel{\sqrt{u}}
+        \ln(u^{\frac{1}{2}})
+        \\
+        &&&=
+        \frac{1}{4}
+        \int_{0}^{\infty}
+        e^{-u}
+        \ln(u)
+        \dd{u}
+        \\
+        &&\int_{0}^{\infty}
+        e^{-u}
+        \ln(u)
+        \dd{u}
+        &=-\gamma_e
+        && \cite[eq 4.331.1]{gr}
+        \\
+        \implies
+        &&\int_{0}^{\infty} re^{-r^2} \ln(r) \dd{r}
+        &=-\frac{\gamma_e}{4}
+        \\
+      \end{alignedat}
     \end{equation}
 
-    where $\gamma_e$ is the Euler-Mascheroni constant.  All told, this
-    evaluates to $\approx -0.144304$ which will be called $k_e$.
-    Chipping away at our integral, we find that
+    where $\gamma_e$ is the Euler-Mascheroni constant.
 
     \begin{equation}
       \begin{split}
@@ -1263,9 +1290,9 @@
         \\
         &=
         \frac{\ln(\pi)}{\gamma}
-        - 
-        \frac{2k_e}{\gamma} 
-       -
+        +
+        \frac{\gamma_e}{2\gamma}
+        -
         \frac{1}{2\pi\gamma}
         \int_{0}^{2\pi}
         \ln(\abs{C_1\cos{\varphi} + C_2\sin{\varphi}})
@@ -1304,9 +1331,9 @@
         \expval{t_f}
         &=
         \frac{\ln(\pi)}{\gamma}
-        - 
-        \frac{2k_e}{\gamma} 
-       -
+        +
+        \frac{\gamma_e}{2\gamma}
+        -
         \frac{1}{2\pi\gamma}
         \int_{0}^{2\pi}
         \ln(\abs{C_1\cos{\varphi} + C_2\sin{\varphi}})
@@ -1314,8 +1341,8 @@
         \\
         &=
         \frac{\ln(\pi)}{\gamma}
-        - 
-        \frac{2k_e}{\gamma} 
+        +
+        \frac{\gamma_e}{2\gamma}
         -
         \frac{1}{2\pi\gamma}
         \int_{0}^{2\pi}
@@ -1324,8 +1351,8 @@
         \\
         &=
         \frac{\ln(\pi)}{\gamma}
-        - 
-        \frac{2k_e}{\gamma} 
+        +
+        \frac{\gamma_e}{2\gamma}
         -
         \frac{1}{2\pi\gamma}
         \int_{0}^{2\pi}
@@ -1339,8 +1366,8 @@
         \\
         &=
         \frac{\ln(\pi)}{\gamma}
-        - 
-        \frac{2k_e}{\gamma} 
+        +
+        \frac{\gamma_e}{2\gamma}
         -
         \frac{\ln(c)}{\gamma}
         -
@@ -1373,8 +1400,8 @@
         \expval{t_f}
         &=
         \frac{\ln(\pi)}{\gamma}
-        - 
-        \frac{2k_e}{\gamma} 
+        +
+        \frac{\gamma_e}{2\gamma}
         -
         \frac{\ln(c)}{\gamma}
         -
@@ -1385,8 +1412,8 @@
         \\
         &=
         \frac{\ln(\pi)}{\gamma}
-        - 
-        \frac{2k_e}{\gamma} 
+        +
+        \frac{\gamma_e}{2\gamma}
         -
         \frac{\ln(c)}{\gamma}
         -
@@ -1395,8 +1422,8 @@
         \\
         &=
         \frac{\ln(\pi)}{\gamma}
-        - 
-        \frac{2k_e}{\gamma} 
+        +
+        \frac{\gamma_e}{2\gamma}
         -
         \frac{\ln(c)}{\gamma}
         +
@@ -1406,8 +1433,8 @@
         \frac{1}{\gamma}
         \left(
         \ln(2\pi)
-        - 
-        2k_e
+        +
+        \frac{\gamma_e}{2}
         -
         \ln(c)
         \right)
@@ -1424,7 +1451,6 @@
 
     \begin{equation}
       \begin{split}
-        k_e &\approx -0.144304\\
         C_1 &= \frac{d}{L}\\
         C_2 &= \frac{\hbar}{dmL}\sqrt{\frac{L}{g}}\\
         c &= \sqrt{C_1^2 + C_2^2}\\
@@ -1446,8 +1472,8 @@
         \frac{1}{\gamma}
         \left(
         \ln(2\pi)
-        - 
-        2k_e
+        +
+        \frac{\gamma_e}{2}
         -
         \ln(c)
         \right)
@@ -1754,7 +1780,7 @@
     \end{equation}
 
     Let's start breaking things apart to get into position to finalize
-    our integral using Wolfram Alpha once again
+    our integral using G\&R
 
     \begin{equation}
       \begin{alignedat}{2}
