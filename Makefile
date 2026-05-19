@@ -15,6 +15,7 @@ PSPDF   = ps2pdf
 CONVERT = convert
 BUILD   = BUILD
 PAPER   = letter
+VERSION = $(shell git describe 2>/dev/null || git rev-parse --short HEAD)
 
 %.pdf: %.tex
 	@$(MAKE) line --no-print-directory -e header="Pass 1: Generate the initial .aux file"
@@ -53,6 +54,7 @@ params:
 	echo "\def\\\\problemNum{$(p)}" >> $(BUILD)/bookParams.tex
 	echo "\def\\\\buildPath{$(BUILD)}" >> $(BUILD)/bookParams.tex
 	echo "\def\\\\papersize{$(PAPER)paper}" >> $(BUILD)/bookParams.tex
+	echo "\def\\\\gitRev{$(VERSION)}" >> $(BUILD)/bookParams.tex
 
 sqrf: .dummy_builddir
 	@$(MAKE) --no-print-directory -e bookName=sakurai params
